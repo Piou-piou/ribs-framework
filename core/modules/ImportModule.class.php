@@ -14,6 +14,10 @@
 		public function __construct($url_module=null) {
 			$dbc= App::getDb();
 
+			//On test si dossier temporaire + modules a la racines existes bien sinon on les crées
+			if (!file_exists(ROOT."temp")) mkdir(ROOT."temp");
+			if (!file_exists(ROOT."modules")) mkdir(ROOT."modules");
+
 			if ($url_module != null) {
 				//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
 				$explode = explode("/", $url_module);
