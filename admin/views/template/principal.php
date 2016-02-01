@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+	<head>
+		<title><?=$titre_page?></title>
+		<meta charset="utf-8">
+		<meta name="description" content="<?=$description_page?>">
+		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/animate.css">
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>reset_css/reset.css">
+		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
+		<script src="<?=LIBSWEBROOT?>jquery/jquery2.js"></script>
+		<script src="<?=WEBROOT?>admin/views/template/js/menu.js"></script>
+		<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
+		<script src="<?=WEBROOT?>admin/views/template/js/effet_input.js"></script>
+	</head>
+	<?=\core\HTML\flashmessage\FlashMessage::getFlash();?>
+	<body>
+		<nav class="menu active">
+			<div class="titre">
+				<h1>Ribs V1.5</h1>
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul>
+				<li><i class="fa fa-user"></i><a href="<?=ADMROOT?>gestion-comptes/mon-compte">Mon compte</a></li>
+
+				<!-- Pour avoir accès à la gestion des autres comptes -->
+				<?php if($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
+					<li><i class="fa fa-users"></i><a href="<?=ADMROOT?>gestion-comptes/index">Gestion des comptes</a></li>
+				<?php endif;?>
+
+				<!-- Pour avoir accès à la gestion des autres comptes -->
+				<?php if($droit_acces->getDroitAccesPage("gestion-droits-acces/index") == true):?>
+					<li><i class="fa fa-lock"></i><a href="<?=ADMROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
+				<?php endif;?>
+
+				<!-- Pour avoir accès à la gestion des autres comptes -->
+				<?php if($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
+					<li><i class="fa fa-file-text"></i><a href="<?=ADMROOT?>gestion-contenus/index">Gestion des contenus</a></li>
+				<?php endif;?>
+
+				<!-- pour afficher le menu des modules -->
+				<?php for ($i=0 ; $i<count($gestion_module->getUrl()) ; $i++):?>
+					<?php if((\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true) && ($droit_acces->getDroitAccesPage($gestion_module->getUrl()[$i]."index") == true)):?>
+						<li><i class="fa <?=$gestion_module->getIcone()[$i]?>"></i><a href="<?=MODULEADMWEBROOT.$gestion_module->getUrl()[$i]?>index">Gestion <?=$gestion_module->getNom()[$i]?></a></li>
+					<?php endif;?>
+				<?php endfor;?>
+
+				<?php if($droit_acces->getSuperAdmin() == 1):?>
+					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMROOT?>configuration/index">Configuration</a></li>
+				<?php endif;?>
+				<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMROOT?>contacter-support">Contacter le support</a></li>
+				<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/logout">Déconexion</a></li>
+			</ul>
+		</nav>
+		<div class="clear"></div>
+
+		<?php require("admin/views/".$page.".php"); ?>
+
+		<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+		<script src="<?=WEBROOT?>libs/input_file/js/input_file.js"></script>
+	</body>
+</html>

@@ -1,0 +1,77 @@
+<header>
+	<div class="inner">
+		<h1>Gestion des contenus : </h1>
+		<h2>Création d'une page</h2>
+	</div>
+</header>
+<?php include("header.php");?>
+<?php include("admin/controller/ckeditor.php");?>
+
+<form action="<?=ADMROOT?>controller/core/admin/contenus/creer_page" method="post">
+	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
+
+	<div class="inner">
+		<section class="contenu modifier-contenu">
+			<h2>Partie concernant le référencement SEO</h2>
+			<div class="colonne">
+				<div class="bloc">
+					<label class="label" for="balise_title" data-error="Le titre pour le navigateur doit être entre 10 et 70 caractères">Titre pour le navigateur</label>
+					<input type="text" name="balise_title" type-val="string" min="10" max="70" value="<?=$balise_title?>" required=""/>
+				</div>
+			</div>
+			<div class="colonne">
+				<div class="bloc">
+					<label class="label" for="url" data-error="L'url doit être comprise entre 3 et 92 caractères">Url affichée dans le navigateur</label>
+					<input type="text" name="url" type-val="string" min="3" max="92" value="<?=$url?>" <?php if($id_page_courante==1): ?>disabled<?php endif;?> required=""/>
+				</div>
+			</div>
+
+			<div class="bloc no-input">
+				<label class="label label-textarea" for="meta_description" data-error="La description doit être comprise entre 10 et 158 caractères">Description de votre site pour le navigateur (maximum 160 caractères)</label>
+				<textarea name="meta_description" type-val="string" min="10" max="158" required=""><?=$meta_description?></textarea>
+			</div>
+		</section>
+
+		<section class="contenu modifier-contenu">
+			<h2>Partie concernant l'affichage dans la navigation</h2>
+			<div class="colonne">
+				<div class="bloc">
+					<label class="label" for="titre_page"  data-error="Le titre de la page doit être entre 4 et 20 caractères">Titre de la page (utilisée pour le menu)</label>
+					<input type="text" name="titre_page" type-val="string" min="4" max="20" value="<?=$titre_courant?>" required=""/>
+				</div>
+			</div>
+			<div class="colonne">
+				<div class="bloc">
+					<label class="label" for="parent">Parent de la page</label>
+					<input liste-deroulante="true" multi="false" type="text" name="parent" value="<?=$parent_courant?>"/>
+				</div>
+				<div class="liste-deroulante">
+					<li>test
+						<ul>
+							<li>tedgf</li>
+						</ul>
+					</li>
+					<li>test 1</li>
+				</div>
+			</div>
+		</section>
+
+		<section class="contenu modifier-contenu">
+			<h2>Partie concernant l'affichage dans le navigateur</h2>
+			<div class="bloc">
+				<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1){ ?>
+					<?php $ckeditor->editor('contenu', $contenu_page); ?>
+				<?php } else {?>
+					<p>Vous n'êtes pas autorisé à créer / modifier des contenus sur ce site internet</p>
+					<p>Pour y avoir accès, contactez votre administrateur</p>
+				<?php }?>
+			</div>
+		</section>
+	</div>
+</form>
+
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
+	});
+</script>

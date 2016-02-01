@@ -1,0 +1,106 @@
+/*-------------- CHECKBOX PERSONNALISEE -----------------*/
+$color-lien-hover-page: #217ED3;
+$color-lien-page: #2196F3;
+$bg-lien-supprimer: #F34336;
+
+.checkbox-perso {
+	input {
+		display: none;
+	}
+
+	/*pour la inut de type checkbox*/
+	&.rounded {
+		input {
+			&:checked + span {
+				border-color: $color-lien-hover-page;
+				transition-duration: 0.3s;
+			}
+
+			&:checked + span:after {
+				content: '';
+				display: block;
+				width: 5px;
+				height: 5px;
+				background-color: $color-lien-hover-page;
+				position: absolute;
+				top: 2px;
+				left: 2px;
+				-webkit-border-radius: 2px;
+				-moz-border-radius: 2px;
+				border-radius: 2px;
+			}
+		}
+
+		span {
+			background-color: #FFF;
+			border: 3px solid $color-lien-page;
+			width: 9px;
+			height: 9px;
+			display: inline-block;
+			vertical-align: middle;
+			-webkit-border-radius: 8px;
+			-moz-border-radius: 8px;
+			border-radius: 8px;
+			position: relative;
+		}
+	}
+
+	/*pour le switch*/
+	.switch {
+		width: 79px;
+		display: inline-block;
+		vertical-align: middle;
+		overflow: hidden;
+
+		.switch-container {
+			display: inline-block;
+			width: 130px;
+			margin-left: -51px;
+			transition-duration: 0.3s;
+		}
+
+		.on, .off {
+			display: inline-block;
+			float: left;
+			background-color: $color-lien-page;
+			width: 50%;
+			height: 20px;
+			padding: 4px 0;
+			text-align: center;
+			color: #FFF;
+			font-size: 15px;
+			z-index: 1;
+			position: relative;
+		}
+
+		.off {
+			background-color: $bg-lien-supprimer;
+		}
+
+		.mid {
+			display: inline-block;
+			float: left;
+			width: 20px;
+			height: 20px;
+			background-color: #FFF;
+			margin-left: -14px;
+			margin-right: -14px;
+			z-index: 2;
+			position: relative;
+			border: 4px solid $bg-lien-supprimer;
+			transition-duration: 0.3s;
+		}
+
+		input:checked + .switch-container {
+			margin: 0;
+
+			.mid {
+				border-color: $color-lien-page;
+			}
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+}

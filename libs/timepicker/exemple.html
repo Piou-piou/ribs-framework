@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="<?=LIBSWEBROOT?>timepicker/css/clockpicker.css">
+<script src="<?=LIBSWEBROOT?>timepicker/js/clockpicker.js"></script>
+
+<div class="input-group clockpicker">
+	<input type="text" class="form-control" value="09:30">
+	<span class="input-group-addon">
+		<span class="glyphicon glyphicon-time"></span>
+	</span>
+</div>
+
+<script type="text/javascript">
+	$('.clockpicker').clockpicker({autoclose: true});
+
+	if (/Mobile/.test(navigator.userAgent)) {
+		$('input').prop('readOnly', true);
+	}
+</script>

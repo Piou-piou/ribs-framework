@@ -1,0 +1,25 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} 404$
+RewriteRule 404 app/views/template/error_pages/404.php [L,QSA]
+
+#page admin/controller/*** ---> pour les pages liees a l'admin juste de ce site
+RewriteCond %{REQUEST_URI} administrator/controller/(.*)
+RewriteRule administrator/([a-zA-Z0-9\-\_\/]*) admin.php?page=$1 [L,QSA]
+
+#page admin
+RewriteCond %{REQUEST_URI} administrator$
+RewriteRule ([a-zA-Z0-9\-\_\/]*)$ admin.php?page=index [L,QSA]
+
+#page admin/qqch
+RewriteCond %{REQUEST_URI} administrator/(.*)$
+RewriteRule administrator/([a-zA-Z0-9\-\_\/]*) admin.php?page=$1 [L,QSA]
+
+
+#--------------------------- PARTIE FRONT --------------------------------------#
+RewriteCond %{REQUEST_URI} controller/(.*)
+RewriteRule ([a-zA-Z0-9\-\_\/]*) index.php?page=$1 [L,QSA]
+
+RewriteCond %{REQUEST_URI} ^([a-zA-Z0-9\-\_\/]*)$
+RewriteRule ^([a-zA-Z0-9\-\_\/]*) index.php?page=$1 [L,QSA]

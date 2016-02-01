@@ -1,0 +1,37 @@
+/*@font-face {
+	font-family: Impact;
+	src: url('../police/impact.ttf');
+}*/
+
+$bg-general: #222;
+$bg-lien: #ff6600;
+$bg-lien-hover: #1090e2;
+$color-lien: #fff;
+
+body {
+	font-family: verdana;
+}
+
+.inner {
+	width: 1180px;
+	margin: auto;
+}
+
+.colonne {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.clear {
+	clear: both;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.separation {
+	width: 100%;
+	height: 20px;
+}

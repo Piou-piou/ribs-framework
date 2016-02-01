@@ -1,0 +1,53 @@
+.js .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	display: none;
+
+	&+ label {
+		width: 510px;
+		max-width: 100%;
+		font-size: 1.25rem;
+		font-weight: 700;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		cursor: pointer;
+		display: inline-block;
+		overflow: hidden;
+		padding: 0.625rem 1.25rem;
+		margin-top: -40px;
+
+		svg {
+			width: 1em;
+			height: 1em;
+			vertical-align: middle;
+			fill: currentColor;
+			margin-top: -0.25em;
+			margin-right: 0.25em;
+		}
+	}
+
+	&:focus, &.has-focus {
+		outline: 1px dotted #000;
+		outline: -webkit-focus-ring-color auto 5px;
+	}
+}
+
+.inputfile-2 {
+
+	&+ label {
+		color: $clr-label-input-file;
+		border: 2px solid currentColor;
+
+		&:hover {
+			color: $clr-label-input-file-hover;
+		}
+	}
+
+	&:focus, &.has-focus {
+		color: $clr-label-input-file-hover;
+	}
+}
