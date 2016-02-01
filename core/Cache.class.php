@@ -14,6 +14,13 @@
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($page, $admin=null) {
+			//on crée les dossier du cache si ils n'existent pas deja
+			if (!file_exists(ROOT."cache")) {
+				mkdir(ROOT."cache");
+				mkdir(ROOT."cache/admin");
+				mkdir(ROOT."cache/app");
+			}
+
 			if ($admin == null) {
 				$this->dossier_cache =  ROOT."cache/app/";
 			}

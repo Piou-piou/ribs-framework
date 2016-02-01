@@ -1,2 +1,6 @@
 *.txt
 .idea/*
+bdd_backup/*
+temp/*
+cache/*
+modules/*
