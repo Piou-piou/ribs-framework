@@ -9,16 +9,28 @@
 		private $page; //nom de la page a chercher ou a mettre en cache
 		private $chemin_cache; //chemin du fichier dans le dossier cache
 		private $no_cache; //definit dans get cache pour dire que cette page ne doit jamais etre en cache
+
+		private $cache_active; //si == 1 le cache est actif sur le site
 		
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($page, $admin=null) {
-			//on crée les dossier du cache si ils n'existent pas deja
-			if (!file_exists(ROOT."cache")) {
-				mkdir(ROOT."cache");
-				mkdir(ROOT."cache/admin");
-				mkdir(ROOT."cache/app");
+			$config = new Configuration();
+
+			//on test si le cache est bien active
+			if ($config->getCache() == 1) {
+				$this->cache_active = 1;
+
+				//on crée les dossier du cache si ils n'existent pas deja
+				if (!file_exists(ROOT."cache")) {
+					mkdir(ROOT."cache");
+					mkdir(ROOT."cache/admin");
+					mkdir(ROOT."cache/app");
+				}
+			}
+			else {
+				$this->cache_active = 0;
 			}
 
 			if ($admin == null) {
@@ -84,9 +96,7 @@
 		 * sinon on lance un ob_start
 		 */
 		public function setStart() {
-			$config = new Configuration();
-
-			if ($config->getCache() == 1) {
+			if ($this->cache_active == 1) {
 				if ($this->getCache() == true) {
 					require_once($this->chemin_cache);
 
@@ -110,9 +120,7 @@
 		 * une fois mis en cache on affiche la page
 		 */
 		public function setEnd() {
-			$config = new Configuration();
-
-			if ($config->getCache() == 1) {
+			if ($this->cache_active == 1) {
 				if (($this->getCache() != true) && ($this->no_cache == null)) {
 					$contenu = ob_get_clean();
 
