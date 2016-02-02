@@ -18,7 +18,6 @@
 
 
 
-	<?php
 		//pour le blog
 		$pages_blog = array("index", "article", "rechercher");
 
@@ -51,4 +50,3 @@
 			\core\HTML\flashmessage\FlashMessage::setFlash("L'accès à ce module n'est pas configurer ou ne fais pas partie de votre offre, contactez votre administrateur pour résoudre ce problème", "info");
 			header("location:".WEBROOT);
 		}
-	?>
