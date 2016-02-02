@@ -16,7 +16,8 @@
 	* uninstall.php
 
 
-    $pages_blog = array("index", "article", "rechercher");
+```php
+$pages_blog = array("index", "article", "rechercher");
 
     if (\core\modules\GestionModule::getModuleActiver("blog")) {
     	$blog = new \modules\blog\app\controller\Blog();
@@ -47,3 +48,4 @@
     	\core\HTML\flashmessage\FlashMessage::setFlash("L'accès à ce module n'est pas configurer ou ne fais pas partie de votre offre, contactez votre administrateur pour résoudre ce problème", "info");
     	header("location:".WEBROOT);
     }
+```
