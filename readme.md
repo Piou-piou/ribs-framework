@@ -1,6 +1,6 @@
-Ribs Framework
+# Ribs Framework
 
-Ribs is a framework which allow you to create fully personalisable and administrable pages !
+**Ribs is a framework which allow you to create fully personalisable and administrable pages !**
 
 In this framework you can add an illimited number of modules created by you or the community :)
 
