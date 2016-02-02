@@ -16,7 +16,6 @@
 	* uninstall.php
 
 
-	//pour le blog
     $pages_blog = array("index", "article", "rechercher");
 
     if (\core\modules\GestionModule::getModuleActiver("blog")) {
