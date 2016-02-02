@@ -69,3 +69,20 @@ else {
    	header("location:".WEBROOT);
 }
 ```
+
+
+###File : router/config.php
+
+This file contain a lots constants that can facilitate your development.
+
+I use it just for define my roots for calling some files.
+
+Example for blog module
+
+```php
+//pour le dossier racine du blog
+define("BLOGWEBROOT", str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."modules/blog/app/views/");
+
+//pour le dossier racine du blog -> for include and require
+define('BLOGROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."modules/blog/app/views/");
+```
