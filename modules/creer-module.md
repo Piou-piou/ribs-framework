@@ -1,1 +1,10 @@
-Coming soon : the instruction to create a module for ribs
+#Create a module for Ribs framework
+
+##Tree
+
+* module_name
+	* admin
+	* app
+	* router
+	* install.php
+	* uninstall.php
