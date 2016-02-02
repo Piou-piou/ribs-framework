@@ -17,6 +17,19 @@
 
 ##Explication of files
 
+
+
+###File : install.php
+
+This file contain only one variable, and this variable contain all the sql request which are needed for creating all the tables
+for using the module.
+
+In all those requests, one must be an insert into the table 'module', tanks to this, the module will be incremented by the system.
+
+the request for the table module is something such as : 'INSERT INTO module (url, nom_module, installer, icone) VALUES ('url_olf_my_module/', 'name_of_mymodule', '1', 'an incon in font awesome')';
+
+
+
 ###File : router/routes.php
 
 First of all, you must create an array which contain all the front pages of the module.
@@ -69,6 +82,7 @@ else {
    	header("location:".WEBROOT);
 }
 ```
+
 
 
 ###File : router/config.php
