@@ -1,6 +1,6 @@
 #Create a module for Ribs framework
 
-##Tree
+##Tree of a module
 
 * module_name
 	* admin
