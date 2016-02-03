@@ -1,5 +1,5 @@
 #Create a module for Ribs framework
-test
+
 ##Tree
 
 * module_name
@@ -271,4 +271,30 @@ if (isset($page_module)) {
 		require_once(MODULEROOT."blog/admin/controller/initialise/gestion_commentaire.php");
 	}
 }
+```
+
+### Other pages and controllers
+
+For the other pages, you can create it like you want.
+
+#### Front Controllers
+
+To call a controller in the front of your website in a module, the url is like : 
+
+The number of sub-directory is unlimited into controller directory.
+
+
+```php
+<?=WEBROOT?>controller/modules/name_of_your_module/directory_in_controller/name_of_controller.php
+```
+
+#### Admin Controllers
+
+To call a controller in the admin of your website in a module, the url is like : 
+
+The number of sub-directory is unlimited into controller directory.
+
+
+```php
+<?=ADMROOT?>controller/modules/name_of_your_module/directory_in_controller/name_of_controller
 ```
