@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/animate.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
-		<script src="<?=LIBSWEBROOT?>jquery/jquery2.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/effet_input.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/login.js"></script>
 	</head>

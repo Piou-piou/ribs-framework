@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="app/views/template/css/404.css">
-		<script src="libs/jquery/jquery2.js"></script>
-		<script src="libs/jquery/tweenmax.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
 		<script src="app/views/template/js/404.js"></script>
 		<meta charset="UTF-8">
 		<title>404 not found</title>
