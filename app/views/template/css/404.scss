@@ -1,0 +1,80 @@
+body {
+	padding: 0;
+	font-family: 'Oswald', sans-serif;
+
+	nav.navbar {
+		position: inherit;
+		margin: 0;
+	}
+
+	.row.hiring {
+		margin: 0;
+		margin-top: 0 ;
+		position: inherit;
+	}
+
+	#svg {
+		width: 100%;
+		height: auto;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: -1;
+
+		@media (max-width: 1200px) {
+			width: 160%;
+			left: -20%;
+		}
+		@media (max-width: 800px) {
+			width: 180%;
+			left: -26%;
+		}
+		@media (max-width: 600px) {
+			width: 210%;
+			left: -23%;
+		}
+		@media (max-width: 400px) {
+			width: 320%;
+			left: -36%;
+		}
+	}
+
+	.a404holder {
+		color: white;
+		width: 100%;
+		display: block;
+		width: 310px;
+		margin: 100px auto;
+
+		h1 {
+			font-size: 9em;
+			margin: -40px 0;
+			padding: 0;
+			color: white;
+			line-height: 1.4;
+			text-align: center;
+		}
+
+		h2 {
+			font-size: 2em;
+			margin-bottom: 0;
+			text-align: center;
+			letter-spacing: 1px;
+			color: white;
+		}
+	}
+}
+
+html.ie9 {
+	body {
+		background-color: #815123 !important;
+	}
+}
+
+// IE (10-11)
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+	body {
+		background-color: #815123 !important;
+	}
+}
