@@ -188,19 +188,19 @@ Example :
 			<li><a href="">Articles</a>
 				<ul>
 					<?php if ($droit_acces->getDroitAccesAction("AJOUTER ARTICLE BLOG") == true):?>
-						<li><a href="<?=ADMROOT?>modules/blog/ajouter-article">Ajouter un article</a></li>
+						<li><a href="<?=ADMWEBROOT?>modules/blog/ajouter-article">Ajouter un article</a></li>
 					<?php endif;?>
 					<?php if ($droit_acces->getDroitAccesAction("MODIFIER ARTICLE BLOG") == true):?>
-						<li><a href="<?=ADMROOT?>modules/blog/liste-article">Modifier un article</a></li>
+						<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Modifier un article</a></li>
 					<?php endif;?>
-					<li><a href="<?=ADMROOT?>modules/blog/liste-article">Liste des articles</a></li>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Liste des articles</a></li>
 				</ul>
 			</li>
 			<li><a href="">Catégories</a>
 				<ul>
-					<li><a href="<?=ADMROOT?>modules/blog/categorie/ajouter-categorie">Ajouter une catégorie</a></li>
-					<li><a href="<?=ADMROOT?>modules/blog/categorie/liste-categorie">Modifier une catégorie</a></li>
-					<li><a href="<?=ADMROOT?>modules/blog/categorie/liste-categorie">Liste des catégoriese</a></li>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/categorie/ajouter-categorie">Ajouter une catégorie</a></li>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/categorie/liste-categorie">Modifier une catégorie</a></li>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/categorie/liste-categorie">Liste des catégoriese</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -296,5 +296,5 @@ The number of sub-directory is unlimited into controller directory.
 
 
 ```php
-<?=ADMROOT?>controller/modules/name_of_your_module/directory_in_controller/name_of_controller
+<?=ADMWEBROOT?>controller/modules/name_of_your_module/directory_in_controller/name_of_controller
 ```

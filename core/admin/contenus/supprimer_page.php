@@ -9,20 +9,20 @@
 
 			if ($gestion_contenu->getErreur() != true) {
 				\core\HTML\flashmessage\FlashMessage::setFlash("La page a bien été supprimée", "success");
-				header("location:".ADMROOT."gestion-contenus/index");
+				header("location:".ADMWEBROOT."gestion-contenus/index");
 			}
 			else {
-				header("location:".ADMROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
+				header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
 			}
 		}
 		else {
 			\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas le droit de supprimer cette page");
 
 			if (isset($_GET['id'])) {
-				header("location:".ADMROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
+				header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
 			}
 			else {
-				header("location:".ADMROOT."gestion-contenus/index");
+				header("location:".ADMWEBROOT."gestion-contenus/index");
 			}
 		}
 	}
@@ -30,10 +30,10 @@
 		\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas le droit de supprimer cette page");
 
 		if (isset($_GET['id'])) {
-			header("location:".ADMROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
+			header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
 		}
 		else {
-			header("location:".ADMROOT."gestion-contenus/index");
+			header("location:".ADMWEBROOT."gestion-contenus/index");
 		}
 	}
 

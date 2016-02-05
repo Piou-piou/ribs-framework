@@ -11,7 +11,7 @@
 	<?php require_once(LIBSROOT."barre_chargement/index.php");?>
 	<div class="contenu modifier-contenu">
 		<h2>Ajouter un module</h2>
-		<form action="<?=ADMROOT?>controller/core/modules/installation/installer" method="get" id="form-install">
+		<form action="<?=ADMWEBROOT?>controller/core/modules/installation/installer" method="get" id="form-install">
 			<div class="bloc">
 				<label for="url" class="label">Entre ici l'url du fichier zip de votre module à installer</label>
 				<input type="text" name="url">
@@ -42,9 +42,9 @@
 						</td>
 						<td>
 							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) == true) { ?>
-								<a class="supprimer popup-delete" href="<?=ADMROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
+								<a class="supprimer popup-delete" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
 							<?php }else{ ?>
-								<a class="installer-module" href="<?=ADMROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page_syst->getUrlTelechargement()[$i]?>">Installer</a>
+								<a class="installer-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page_syst->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>
 						</td>
 					</tr>
@@ -74,9 +74,9 @@
 						</td>
 						<td>
 							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page->getNom()[$i]) == true) { ?>
-								<a class="supprimer popup-delete" href="<?=ADMROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
+								<a class="supprimer popup-delete" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
 							<?php }else{ ?>
-								<a href="<?=ADMROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page->getUrlTelechargement()[$i]?>">Installer</a>
+								<a href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>
 						</td>
 					</tr>

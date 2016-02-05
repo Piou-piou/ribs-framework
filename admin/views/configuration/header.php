@@ -1,7 +1,7 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			<li><a href="<?=ADMROOT?>configuration/module">Modules</a></li>
+			<li><a href="<?=ADMWEBROOT?>configuration/module">Modules</a></li>
 		</ul>
 	</div>
 </nav>

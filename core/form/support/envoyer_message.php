@@ -24,5 +24,5 @@
 		}
 	}
 
-	header("location:".ADMROOT."contacter-support");
+	header("location:".ADMWEBROOT."contacter-support");
 ?>

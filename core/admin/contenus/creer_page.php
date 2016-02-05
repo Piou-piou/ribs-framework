@@ -5,9 +5,9 @@
 
 	if (\core\App::getErreur() != true) {
 		\core\HTML\flashmessage\FlashMessage::setFlash("La page ".$_POST['titre_page']." a bien été crée", "success");
-		header("location:".ADMROOT."gestion-contenus/modifier-contenu?id=".$gestion_contenu->getIdPage());
+		header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$gestion_contenu->getIdPage());
 	}
 	else {
-		header("location:".ADMROOT."gestion-contenus/creer-une-page");
+		header("location:".ADMWEBROOT."gestion-contenus/creer-une-page");
 	}
 ?>

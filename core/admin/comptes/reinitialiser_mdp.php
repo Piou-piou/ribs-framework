@@ -7,5 +7,5 @@
 
 	$admin->setReinitialiserMdp($id_identite);
 
-	header("location:".ADMROOT."gestion-comptes/index");
+	header("location:".ADMWEBROOT."gestion-comptes/index");
 ?>

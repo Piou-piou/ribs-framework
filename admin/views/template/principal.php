@@ -22,21 +22,21 @@
 				<i class="fa fa-bars"></i>
 			</div>
 			<ul>
-				<li><i class="fa fa-user"></i><a href="<?=ADMROOT?>gestion-comptes/mon-compte">Mon compte</a></li>
+				<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/mon-compte">Mon compte</a></li>
 
 				<!-- Pour avoir accès à la gestion des autres comptes -->
 				<?php if($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
-					<li><i class="fa fa-users"></i><a href="<?=ADMROOT?>gestion-comptes/index">Gestion des comptes</a></li>
+					<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a></li>
 				<?php endif;?>
 
 				<!-- Pour avoir accès à la gestion des autres comptes -->
 				<?php if($droit_acces->getDroitAccesPage("gestion-droits-acces/index") == true):?>
-					<li><i class="fa fa-lock"></i><a href="<?=ADMROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
+					<li><i class="fa fa-lock"></i><a href="<?=ADMWEBROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
 				<?php endif;?>
 
 				<!-- Pour avoir accès à la gestion des autres comptes -->
 				<?php if($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
-					<li><i class="fa fa-file-text"></i><a href="<?=ADMROOT?>gestion-contenus/index">Gestion des contenus</a></li>
+					<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a></li>
 				<?php endif;?>
 
 				<!-- pour afficher le menu des modules -->
@@ -47,9 +47,9 @@
 				<?php endfor;?>
 
 				<?php if($droit_acces->getSuperAdmin() == 1):?>
-					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMROOT?>configuration/index">Configuration</a></li>
+					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a></li>
 				<?php endif;?>
-				<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMROOT?>contacter-support">Contacter le support</a></li>
+				<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMWEBROOT?>contacter-support">Contacter le support</a></li>
 				<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/logout">Déconexion</a></li>
 			</ul>
 		</nav>

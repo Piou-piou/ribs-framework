@@ -40,7 +40,7 @@
 					</div>
 				</div>
 
-				<a href="<?=ADMROOT?>gestion-droits-acces/modifier-liste?id_liste=<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>" titre="" class="modifier">Modifier cette liste</a>
+				<a href="<?=ADMWEBROOT?>gestion-droits-acces/modifier-liste?id_liste=<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>" titre="" class="modifier">Modifier cette liste</a>
 				<a href="controller/core/admin/droitacces/liste/supprimer?id_liste=<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>" class="supprimer popup-delete">Supprimer cette liste</a>
 			</div>
 		<?php endfor;?>

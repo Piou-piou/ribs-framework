@@ -5,7 +5,7 @@
 </header>
 <div class="inner">
 	<?php if ($droit_acces->getDroitAccesContenu("CREATION COMPTE ADMIN", "gestion-comptes/index")):?>
-		<a class="submit-contenu" href="<?=ADMROOT?>gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
+		<a class="submit-contenu" href="<?=ADMWEBROOT?>gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
 	<?php endif;?>
 	<div class="contenu gestion-comptes">
 		<table>
@@ -29,8 +29,8 @@
 					<?php if ($config->getValiderInscription() == 1): ?>
 						<td><?=$valide[$i]?></td>
 					<?php endif;?>
-					<td><a href="<?=ADMROOT?>controller/core/admin/comptes/reinitialiser_mdp?id_identite=<?=$id_identite[$i]?>">Réinitialiser le mot de passe</a></td>
-					<td><a href="<?=ADMROOT?>controller/core/admin/comptes/supprimer_compte?id_identite=<?=$id_identite[$i]?>" class="supprimer popup-delete">Supprimer ce compte</a></td>
+					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/reinitialiser_mdp?id_identite=<?=$id_identite[$i]?>">Réinitialiser le mot de passe</a></td>
+					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/supprimer_compte?id_identite=<?=$id_identite[$i]?>" class="supprimer popup-delete">Supprimer ce compte</a></td>
 				</tr>
 			<?php endfor;?>
 		</table>

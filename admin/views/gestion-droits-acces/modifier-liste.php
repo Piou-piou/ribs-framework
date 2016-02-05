@@ -5,9 +5,9 @@
 </header>
 <?php include("header.php");?>
 
-<form action="<?=ADMROOT?>controller/core/admin/modules/blog/article/modifier" method="post">
+<form action="<?=ADMWEBROOT?>controller/core/admin/modules/blog/article/modifier" method="post">
 	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-pencil"></i>Modifier</button>
-	<button class="submit-contenu supprimer-page popup-delete" href="<?=ADMROOT?>controller/core/admin/modules/blog/article/supprimer?id_article=<?=$id_article?>"><i class="fa fa-times"></i>Supprimer l'article</button>
+	<button class="submit-contenu supprimer-page popup-delete" href="<?=ADMWEBROOT?>controller/core/admin/modules/blog/article/supprimer?id_article=<?=$id_article?>"><i class="fa fa-times"></i>Supprimer l'article</button>
 
 	<div class="inner">
 		<section class="contenu modifier-contenu">

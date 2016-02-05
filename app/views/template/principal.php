@@ -7,12 +7,12 @@
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/animate.css">
 		<?php if ($config->getResponsive() == 1){?>
-			<link rel="stylesheet" type="text/css" href="<?=TPLROOT?>css/foundation.css">
-			<link rel="stylesheet" type="text/css" href="<?=TPLROOT?>css/nav-responsive.css">
+			<link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/foundation.css">
+			<link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/nav-responsive.css">
 		<?php } else {?>
 			<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>reset_css/reset.css">
 		<?php } ?>
-		<link rel="stylesheet" type="text/css" href="<?=TPLROOT?>css/style.css">
+		<link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash();?>

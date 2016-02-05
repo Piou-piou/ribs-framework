@@ -1,9 +1,9 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			<li><a href="<?=ADMROOT?>gestion-droits-acces/ajouter-article">Ajouter une liste</a></li>
-			<li><a href="<?=ADMROOT?>gestion-droits-acces/liste-droits-acces">Modifier une liste</a></li>
-			<li><a href="<?=ADMROOT?>gestion-droits-acces/liste-droits-acces">Toutes les listes</a></li>
+			<li><a href="<?=ADMWEBROOT?>gestion-droits-acces/ajouter-article">Ajouter une liste</a></li>
+			<li><a href="<?=ADMWEBROOT?>gestion-droits-acces/liste-droits-acces">Modifier une liste</a></li>
+			<li><a href="<?=ADMWEBROOT?>gestion-droits-acces/liste-droits-acces">Toutes les listes</a></li>
 		</ul>
 	</div>
 </nav>

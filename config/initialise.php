@@ -38,7 +38,7 @@
 	define('ROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME']));
 
 	//definit le chemin vers la racine du template -> app/views/template/
-	define('TPLROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."app/views/template/");
+	define('TPLWEBROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."app/views/template/");
 
 	//definit le chemin vers la racine des libs -> libs/
 	define('LIBSWEBROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."libs/");
@@ -46,11 +46,8 @@
 	//definit le chemin vers la racine des libs -> libs/
 	define('LIBSROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."libs/");
 
-	//definit le chemin vers la racine du template admin -> admin/views/template/
-	define('ADMTPLROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."administrator/views/template/");
-
 	//definit le chemin vers la racine de l'admin -> admin/
-	define('ADMROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."administrator/");
+	define('ADMWEBROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."administrator/");
 
 	//definit la route vers les modules utilisés
 	define('MODULEROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."modules/");

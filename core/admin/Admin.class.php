@@ -66,7 +66,7 @@
 
 					if ($config->getValiderInscription() == 1) {
 						if ($obj->valide == 0) {
-							$valide[] = "<a href=".ADMROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
+							$valide[] = "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
 						}
 						else {
 							$valide[] = "Utilisateur validé";

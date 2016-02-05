@@ -16,7 +16,7 @@
 	<body class="login">
 		<div class="inner">
 			<div class="login-form active" id="login">
-				<form  action="<?=ADMROOT?>controller/core/auth/login" method="POST">
+				<form  action="<?=ADMWEBROOT?>controller/core/auth/login" method="POST">
 					<img src="<?=WEBROOT?>admin/views/template/images/ribs1.png" alt="">
 
 					<h1>Connexion à Ribs</h1>

@@ -7,9 +7,9 @@
 <?php require_once("admin/controller/ckeditor.php");?>
 
 
-<form action="<?=ADMROOT?>controller/core/form/support/envoyer_message.php" method="post">
+<form action="<?=ADMWEBROOT?>controller/core/form/support/envoyer_message.php" method="post">
 	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
-	<a href="<?=ADMROOT?>index"><button type="button" class="submit-contenu supprimer-page"><i class="fa fa-times"></i>Annuler</button></a>
+	<a href="<?=ADMWEBROOT?>index"><button type="button" class="submit-contenu supprimer-page"><i class="fa fa-times"></i>Annuler</button></a>
 	<div class="inner">
 		<section class="contenu modifier-contenu">
 			<h2>Contactez le support</h2>

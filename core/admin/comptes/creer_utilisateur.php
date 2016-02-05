@@ -30,5 +30,5 @@
 		$inscription->setInscrireUtilisateur();
 	}
 
-	header("location:".ADMROOT."gestion-comptes/creer-utilisateur");
+	header("location:".ADMWEBROOT."gestion-comptes/creer-utilisateur");
 ?>

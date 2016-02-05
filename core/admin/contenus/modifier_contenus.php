@@ -54,5 +54,5 @@
 		\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas l'autorisation de modifier cette page !");
 	}
 
-	header("location:".ADMROOT."gestion-contenus/modifier-contenu?id=".$_POST['id_page']);
+	header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_POST['id_page']);
 ?>

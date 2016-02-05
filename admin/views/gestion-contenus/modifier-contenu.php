@@ -8,13 +8,13 @@
 <?php require_once("admin/controller/ckeditor.php");?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
 
-<form action="<?=ADMROOT?>controller/core/admin/contenus/modifier_contenus" method="post">
+<form action="<?=ADMWEBROOT?>controller/core/admin/contenus/modifier_contenus" method="post">
 	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1)):?>
 		<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 	<?php endif;?>
 	<input type="hidden" name="id_page" value="<?=$id_page_courante?>">
 	<?php if (($_GET['id'] != 1) && ($droit_acces->getSupprimerPage() == 1)):?>
-		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page" href="<?=ADMROOT?>controller/core/admin/contenus/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
+		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page" href="<?=ADMWEBROOT?>controller/core/admin/contenus/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
 	<?php endif;?>
 
 	<div class="inner">

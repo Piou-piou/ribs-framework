@@ -4,7 +4,7 @@
 		<h1>Créer un compte utilisateur</h1>
 	</div>
 </header>
-<form action="<?=ADMROOT?>controller/core/admin/comptes/creer_utilisateur" method="post">
+<form action="<?=ADMWEBROOT?>controller/core/admin/comptes/creer_utilisateur" method="post">
 	<div class="inner">
 		<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 
