@@ -31,7 +31,18 @@
 				$count_query = 0;
 			}
 
-			if (($count_query > 0) || ((!is_array($query)) && ($query > 0))) {
+
+			$find   = 'controller/';
+			$pos = strpos($url, $find);
+
+			if ($pos !== false) {
+				$controller = true;
+			}
+			else {
+				$controller = false;
+			}
+
+			if (($count_query > 0) || ((!is_array($query)) && ($query > 0)) || ($controller == true)) {
 				return true;
 			}
 			else {
