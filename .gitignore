@@ -1,6 +1,5 @@
 *.txt
 .idea/*
-bdd_backup/*
 temp/*
 cache/*
 *.sass-cache
