@@ -1,0 +1,189 @@
+$clr-texte-label: #bfbfbf;
+$color-lien-page: #2196F3;
+$color-error-input: #F34336;
+$bg-liste-element: #bfbfbf;
+$bg-liste-element-hover: #A0A0A0;
+
+.modifier-contenu {
+	.bloc {
+		position: relative;
+		padding: 16px 0 8px 0;
+
+		.label {
+			position: relative;
+			margin: 0;
+			display: block;
+			color: $clr-texte-label;
+			line-height: 16px;
+			font-size: 16px;
+			font-weight: 400;
+			transform: translateY(32px);
+			transition: transform 0.3s, font-size 0.3s;
+
+			&.label-textarea {
+				transform: translateY(37px);
+				margin-left: 10px;
+			}
+		}
+
+		input {
+			position: relative;
+			display: block;
+			min-width: 510px;
+			width: 100%;
+			height: 32px;
+			padding: 8px 3px 3px 3px;
+			margin: 0;
+			line-height: 16px;
+			font-size: 16px;
+			background: transparent;
+			border: none;
+			-webkit-appearance: none;
+			outline: none;
+		}
+
+		select {
+			position: relative;
+			display: block;
+			min-width: 510px;
+			width: 100%;
+			height: 59px;
+			padding: 8px 3px 3px 3px;
+			margin: 0;
+			line-height: 16px;
+			font-size: 16px;
+			border: none;
+		}
+
+		&:not(.no-input) {
+			&::before, &::after {
+				content: '';
+				height: 2px;
+				width: 100%;
+				position: absolute;
+				bottom: 6px;
+				left: 0;
+				background-color: #E6E6E6;
+			}
+
+			&::after {
+				background-color: $color-lien-page;
+				transform: scaleX(0);
+				transition: transform 0.3s ease;
+			}
+		}
+
+		/*appellee dans le js*/
+		&.is-focused {
+			.label {
+				color: $color-lien-page
+			}
+
+			&::after {
+				transform: scaleX(1);
+			}
+
+			textarea {
+				border: 2px solid $color-lien-page;
+			}
+		}
+		/*appelee par le js egalement*/
+		&.has-label {
+			.label {
+				transform: translateY(0);
+				font-size: 14px;
+				margin-left: 0;
+			}
+
+			&.invalid {
+				.label::after {
+					top: 65px;
+				}
+			}
+		}
+
+		/*appelle par le js*/
+		&.invalid {
+			&::after {
+				transform: scaleX(1);
+				background-color: $color-error-input;
+			}
+
+			.label::after {
+				color: $color-error-input;
+				content: attr(data-error);
+				opacity: 1;
+				position: absolute;
+				top: 35px;
+				left: 0;
+			}
+
+			textarea {
+				border: 2px solid $color-error-input;
+			}
+		}
+
+		textarea {
+			border: none;
+			padding: 10px;
+			margin: 10px 0px;
+			border-radius: 2px;
+			background: transparent;
+			transition: 0.3s all ease;
+			min-width: 1080px;
+			min-height: 70px;
+			display: block;
+			resize: none;
+			position: relative;
+			border: 2px solid #E6E6E6;
+		}
+	}
+
+	.liste-deroulante {
+		background-color: $bg-liste-element;
+		color: #FFF;
+		visibility: hidden;
+		opacity: 0;
+		height: 0;
+		margin-top: -16px;
+		width: 516px;
+		margin-left: 10px;
+		transition: all 0.3s ease;
+		position: absolute;
+		z-index: 1;
+
+		&.active {
+			visibility: visible;
+			opacity: 100;
+			transition: all 0.3s ease;
+			height: auto;
+		}
+
+		li {
+			list-style: none;
+			padding: 10px;
+			transition: 0.3s all ease;
+
+			&:hover {
+				background-color: $bg-liste-element-hover;
+				border-left: 3px solid $color-lien-page;
+				transition: 0.3s all ease;
+				cursor: pointer;
+			}
+
+			li {
+				padding-top: 5px;
+				padding-left: 20px;
+				border-left: 3px solid transparent;
+				border-bottom: 3px solid transparent;
+				transition: 0.3s all ease;
+
+				&:hover {
+					background-color: $bg-liste-element-hover;
+					border-bottom: 3px solid $color-lien-page;
+					transition: 0.3s all ease;
+				}
+			}
+		}
+	}
+}

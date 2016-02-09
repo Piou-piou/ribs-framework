@@ -4,21 +4,25 @@
 		<title><?=$titre_page?></title>
 		<meta charset="utf-8">
 		<meta name="description" content="<?=$description_page?>">
-		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/animate.css">
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>font_awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>font_awesome/css/animate.css">
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>reset_css/reset.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
-		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/menu.js"></script>
-		<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/effet_input.js"></script>
+
+		<!-- Les librairies utlisées -->
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>input_type_admin/css/style.css">
+		<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
+		<script src="<?=LIBSWEBROOT?>input_type_admin/js/effet_input.js"></script>
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash();?>
 	<body>
 		<nav class="menu active">
 			<div class="titre">
-				<h1>Ribs V1.5</h1>
+				<h1>Ribs V1.6</h1>
 				<i class="fa fa-bars"></i>
 			</div>
 			<ul>
