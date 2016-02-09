@@ -8,46 +8,40 @@
 	src: url(../polices/noto-sans.ttf);
 }
 
+/*----couleurs générales ----*/
 $bg-general: #2F3B4C;
-$bg-lien-hover: #2A3344;
-$bg-lien-supprimer: #F34336;
-$bg-lien-supprimer-hover: #DD2A2A;
+
+/*----pour la page de login ----*/
+$color-error-input-login: #F34336;
+
+/*----couleurs pour les liens ----*/
 $color-lien: #AFBDC4;
-$color-error-input: #F34336;
-$color-titre: #AFBDC4;
 $color-lien-page: #2196F3;
 $color-lien-hover-page: #217ED3;
-$border-color-focus: #2BA6CB;
-$border-color-focus-invalid: #CA0000;
+$bg-lien-supprimer: #F34336;
+$bg-lien-supprimer-hover: #DD2A2A;
+
+/*----couleurs pour les labels et titres + polices ----*/
+$color-titre: #AFBDC4;
 $clr-texte-label: #bfbfbf;
 $police-princ: noto-sans;
 $police-sec: lobster;
-
-/*---- page de login ----*/
-$login-bg-submit: #2A3344;
-$login-bg-submit-hover: #2758B1;;
 
 /*---- barre de menu à gauche ----*/
 $menug-bg-header: #00BEE7;
 $menug-clr-header: #0082A8;
 $menug-clr-border-lien: #2BA5CA;
 $menug-ombre-header: #2C3747;
+$bg-lien-hover-menu: #2A3344;
 
 /*---- pour les pages ----*/
 $bg-header-page: #ffffff;
 $bg-page: #fff;
 
-/*---- pour les li_ste déroulante sur input ----*/
-$bg-liste-element: #bfbfbf;
-$bg-liste-element-hover: #A0A0A0;
+/*---- pour les modules ----*/
+$bg-categorie: rgba(47, 59, 76, 0.8);
+$clr-categorie: #fff;
 
-/*---- pour le blog ----*/
-$bg-categorie-blog: rgba(47, 59, 76, 0.8);
-$clr-categorie-blog: #fff;
-
-/*---- pour les imports ----*/
-$clr-label-input-file: #2196F3;
-$clr-label-input-file-hover: #217ED3;
 @import "../../../../libs/input_file/css/style";
 
 @mixin button-txt {
@@ -261,11 +255,11 @@ a {
 			&.invalid {
 				&::after {
 					transform: scaleX(1);
-					background-color: $color-error-input;
+					background-color: $color-error-input-login;
 				}
 
 				.label::after {
-					color: $color-error-input;
+					color: $color-error-input-login;
 					content: attr(data-error);
 					opacity: 1;
 					position: absolute;
@@ -390,7 +384,7 @@ a {
 			}
 
 			&:hover {
-				background-color: $bg-lien-hover;
+				background-color: $bg-lien-hover-menu;
 				border-left: 3px solid $menug-clr-border-lien;
 				transition: 0.3s all ease;
 
@@ -401,7 +395,7 @@ a {
 			}
 
 			&.active {
-				background-color: $bg-lien-hover;
+				background-color: $bg-lien-hover-menu;
 			}
 
 			&.support {
@@ -710,9 +704,9 @@ header {
 
 					li {
 						display: inline-block;
-						background-color: $bg-categorie-blog;
+						background-color: $bg-categorie;
 						padding: 5px;
-						color: $clr-categorie-blog;
+						color: $clr-categorie;
 						margin-bottom: 5px;
 					}
 				}
@@ -721,9 +715,9 @@ header {
 			.date {
 				margin-top: -26px;
 				float: left;
-				background-color: $bg-categorie-blog;
+				background-color: $bg-categorie;
 				padding: 5px;
-				color: $clr-categorie-blog;
+				color: $clr-categorie;
 			}
 
 			img {
@@ -909,18 +903,3 @@ header {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
