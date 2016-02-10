@@ -119,7 +119,8 @@ INSERT INTO `droit_acces` (`ID_droit_acces`, `droit_acces`, `page`, `actif`) VAL
 (21, 'MODIFIER ALBUM GALERIE PHOTO', NULL, 1),
 (22, 'SUPPRIMER ALBUM GALERIE PHOTO', NULL, 1),
 (23, 'AJOUTER IMAGE GALERIE PHOTO', NULL, 1),
-(24, 'SUPPRIMER IMAGE GALERIE PHOTO', NULL, 1);
+(24, 'SUPPRIMER IMAGE GALERIE PHOTO', NULL, 1),
+(25, 'CREATION COMPTE ADMIN', 'gestion-comptes/index', '1');
 
 -- --------------------------------------------------------
 

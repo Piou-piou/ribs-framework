@@ -26,9 +26,9 @@
 		\core\HTML\flashmessage\FlashMessage::setFlash("<ul>".$inscription->getErreur()."</ul>");
 	}
 	else {
-		\core\HTML\flashmessage\FlashMessage::setFlash("L'utilisateur ".$inscription->getNom()." ".$inscription->getPrenom()."a bien été inscrit");
+		\core\HTML\flashmessage\FlashMessage::setFlash("L'utilisateur ".$inscription->getNom()." ".$inscription->getPrenom()."a bien été inscrit", "success");
 		$inscription->setInscrireUtilisateur();
 	}
 
-	header("location:".ADMWEBROOT."gestion-comptes/creer-utilisateur");
+	header("location:".ADMROOT."gestion-comptes/creer-utilisateur");
 ?>
