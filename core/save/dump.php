@@ -1,6 +1,8 @@
 <?php
+	date_default_timezone_set('Europe/Berlin');
 
 	if (!file_exists(ROOT."bdd_backup")) mkdir(ROOT."bdd_backup");
+
 
 	if ($config->getLastSave() != date("Y-m-d")) {
 		try {
