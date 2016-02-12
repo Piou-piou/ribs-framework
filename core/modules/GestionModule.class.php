@@ -6,6 +6,7 @@
 		private $id_module;
 		private $url;
 		private $nom;
+		private $version;
 		private $icone;
 		private $url_telechargement;
 		
@@ -23,6 +24,9 @@
 		}
 		public function getNom() {
 			return $this->nom;
+		}
+		public function getVersion() {
+			return $this->version;
 		}
 		public function getIcone() {
 			return $this->icone;
@@ -44,10 +48,11 @@
 					$id_module[] = $obj->ID_module;
 					$url[] = $obj->url;
 					$nom[] = $obj->nom_module;
+					$version[] = $obj->version;
 					$icone[] = $obj->icone;
 				}
 
-				$this->setListeModuleActiver($id_module, $url, $nom, $icone);
+				$this->setListeModuleActiver($id_module, $url, $version, $nom, $icone);
 			}
 		}
 
@@ -65,10 +70,11 @@
 					$id_module[] = $obj->ID_module;
 					$url[] = $obj->url;
 					$nom[] = $obj->nom_module;
+					$version[] = $obj->version;
 					$url_telechargement[] = $obj->url_telechargement;
 				}
 
-				$this->setListeModuleActiver($id_module, $url, $nom, null, $url_telechargement);
+				$this->setListeModuleActiver($id_module, $url, $version, $nom, null, $url_telechargement);
 			}
 		}
 
@@ -86,10 +92,11 @@
 					$id_module[] = $obj->ID_module;
 					$url[] = $obj->url;
 					$nom[] = $obj->nom_module;
+					$version[] = $obj->version;
 					$url_telechargement[] = $obj->url_telechargement;
 				}
 
-				$this->setListeModuleActiver($id_module, $url, $nom, null, $url_telechargement);
+				$this->setListeModuleActiver($id_module, $url, $version, $nom, null, $url_telechargement);
 			}
 		}
 
@@ -143,10 +150,11 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setListeModuleActiver($id_module, $url, $nom, $icone=null, $url_telechargement=null) {
+		private function setListeModuleActiver($id_module, $url, $version, $nom, $icone=null, $url_telechargement=null) {
 			$this->id_module = $id_module;
 			$this->url = $url;
 			$this->nom = $nom;
+			$this->version = $version;
 			$this->icone = $icone;
 			$this->url_telechargement = $url_telechargement;
 		}

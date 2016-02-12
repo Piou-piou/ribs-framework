@@ -46,7 +46,10 @@
 				<!-- pour afficher le menu des modules -->
 				<?php for ($i=0 ; $i<count($gestion_module->getUrl()) ; $i++):?>
 					<?php if((\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true) && ($droit_acces->getDroitAccesPage($gestion_module->getUrl()[$i]."index") == true)):?>
-						<li><i class="fa <?=$gestion_module->getIcone()[$i]?>"></i><a href="<?=MODULEADMWEBROOT.$gestion_module->getUrl()[$i]?>index">Gestion <?=$gestion_module->getNom()[$i]?></a></li>
+						<li>
+							<i class="fa <?=$gestion_module->getIcone()[$i]?>"></i>
+							<a href="<?=MODULEADMWEBROOT.$gestion_module->getUrl()[$i]?>index">Gestion <?=$gestion_module->getNom()[$i]?> (V<?=$gestion_module->getVersion()[$i]?>)</a>
+						</li>
 					<?php endif;?>
 				<?php endfor;?>
 
