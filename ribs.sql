@@ -201,6 +201,7 @@ CREATE TABLE IF NOT EXISTS `module` (
 `ID_module` int(11) NOT NULL,
   `url` varchar(255) NOT NULL,
   `nom_module` varchar(255) NOT NULL,
+  `version` varchar(15) NOT NULL,
   `activer` int(1) NOT NULL,
   `installer` int(1) NOT NULL,
   `systeme` int(1) DEFAULT NULL,
@@ -213,9 +214,9 @@ CREATE TABLE IF NOT EXISTS `module` (
 --
 
 INSERT INTO `module` (`ID_module`, `url`, `nom_module`, `activer`, `installer`, `systeme`, `icone`, `url_telechargement`) VALUES
-(1, 'livre_or/', 'livre d''or', 0, 0, 1, 'fa-book', 'http://library.clicand.com/livre_or.zip'),
-(2, 'blog/', 'blog', 0, 0, 1, 'fa-newspaper-o', 'http://library.clicand.com/blog.zip'),
-(3, 'galerie_photo/', 'galerie photo', 0, 0, 1, 'fa-photo', 'http://library.clicand.com/galerie_photo.zip');
+(1, 'livre_or/', 'livre d''or', '1.0', 0, 0, 1, 'fa-book', 'http://library.clicand.com/livre_or.zip'),
+(2, 'blog/', 'blog', '1.0', 0, 0, 1, 'fa-newspaper-o', 'http://library.clicand.com/blog.zip'),
+(3, 'galerie_photo/', 'galerie photo', '1.0', 0, 0, 1, 'fa-photo', 'http://library.clicand.com/galerie_photo.zip');
 
 -- --------------------------------------------------------
 
