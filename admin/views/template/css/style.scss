@@ -462,6 +462,23 @@ header {
 	background-color: $bg-general;
 	min-height: 48px;
 
+	.notification {
+		float: right;
+		display: block;
+		padding: 15.5px;
+		background: #f34336;
+		color: #fff;
+		transition: all 0.3s;
+
+		p {
+			margin-right: 5px;
+		}
+
+		&:hover {
+			background: #217ED3;
+		}
+	}
+
 	.inner >ul {
 		a {
 			height: 23px;

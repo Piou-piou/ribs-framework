@@ -298,3 +298,20 @@ The number of sub-directory is unlimited into controller directory.
 ```php
 <?=ADMWEBROOT?>controller/modules/name_of_your_module/directory_in_controller/name_of_controller
 ```
+
+##Notification into a module
+
+In a module you can add notification which is added a the right of the navigation menu
+
+```php
+<a href="<?=ADMROOT?>modules/gestion_planning/demande-conges">
+	<div class="notification">
+		<div class="colonne">
+			<p>Lorem ipsum dolor sit amet</p>
+		</div>
+		<div class="colonne">
+			<i class="fa fa-exclamation animated swing infinite"></i>
+		</div>
+	</div>
+</a>
+```		
