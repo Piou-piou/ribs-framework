@@ -301,17 +301,64 @@ The number of sub-directory is unlimited into controller directory.
 
 ##Notification into a module
 
-In a module you can add notification which is added a the right of the navigation menu
+In a module you can add notification which is added a the right of the navigation menu.
+
+###File : admin/views/header.php
 
 ```php
-<a href="<?=ADMROOT?>modules/gestion_planning/demande-conges">
-	<div class="notification">
-		<div class="colonne">
-			<p>Lorem ipsum dolor sit amet</p>
-		</div>
-		<div class="colonne">
-			<i class="fa fa-exclamation animated swing infinite"></i>
-		</div>
+
+<?php require_once(MODULEROOT."blog/router/config.php"); ?>
+<?php require_once(MODULEROOT."blog/admin/controller/initialise/page_detect.php"); ?>
+<nav class="nav-page">
+	<a href="<?=ADMROOT?>modules/gestion_planning/demande-conges">
+    	<div class="notification">
+    		<div class="colonne">
+    			<p>Lorem ipsum dolor sit amet</p>
+    		</div>
+    		<div class="colonne">
+    			<i class="fa fa-exclamation animated swing infinite"></i>
+    		</div>
+    	</div>
+    </a>
+
+	<div class="inner">
+		<ul>
+			<li><a href="">Articles</a>
+				<ul>
+					<?php if ($droit_acces->getDroitAccesAction("AJOUTER ARTICLE BLOG") == true):?>
+						<li><a href="<?=ADMWEBROOT?>modules/blog/ajouter-article">Ajouter un article</a></li>
+					<?php endif;?>
+					<?php if ($droit_acces->getDroitAccesAction("MODIFIER ARTICLE BLOG") == true):?>
+						<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Modifier un article</a></li>
+					<?php endif;?>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Liste des articles</a></li>
+				</ul>
+			</li>
+			<li><a href="">Catégories</a>
+				<ul>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/categorie/ajouter-categorie">Ajouter une catégorie</a></li>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/categorie/liste-categorie">Modifier une catégorie</a></li>
+					<li><a href="<?=ADMWEBROOT?>modules/blog/categorie/liste-categorie">Liste des catégoriese</a></li>
+				</ul>
+			</li>
+		</ul>
 	</div>
-</a>
+</nav>
+
+
+
+<div class="popup" id="popup-delete">
+	<div class="content">
+		<h2>Etes-vous sûr de vouloir supprimer cet article ?</h2>
+		<p>Si vous le supprimé, tous les commentaires qui y sont associés seront supprimés ainsi que l'article et son contenu textuel.<br/>
+			Les images qui le compose seront quant à elle sauvegardées.
+		</p>
+
+		<div class="lien">
+			<a class="annuler">Annuler</a>
+			<a href="" class="valider">Valider</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
 ```		
