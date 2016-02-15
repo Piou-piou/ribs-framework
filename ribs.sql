@@ -203,6 +203,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `url` varchar(255) NOT NULL,
   `nom_module` varchar(255) NOT NULL,
   `version` varchar(15) NOT NULL,
+  `next_check_version` date DEFAULT NULL,
   `activer` int(1) NOT NULL,
   `installer` int(1) NOT NULL,
   `systeme` int(1) DEFAULT NULL,

@@ -146,6 +146,52 @@
 				}
 			}
 		}
+
+		public function getCheckModuleVersion() {
+			$dbc = App::getDb();
+
+			$today = date("Y-m-d");
+			$today_o = new \DateTime($today);
+
+			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, ID_module FROM module");
+
+			if (count($query) > 0) {
+				foreach ($query as $obj) {
+					if ($obj->next_check_version == null) {
+						//si pas de version a checker, cela veut dire qu'on vient d'installer le module
+						//du coup on met le next_check aa la semaine pro
+						$set_next = true;
+					}
+					else if ($obj->next_check_version <= $today) {
+						//on ouvre le zip du module et on recupere le fichier version.txt pour le comparer avec celle sur notre site
+						//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
+						$explode = explode("/", $obj->url_telechargement);
+						$this->nom_fichier = end($explode);
+
+						//on recupere le nom du dossier + extention
+						$explode  = explode(".", $obj->url_telechargement);
+						array_pop($explode);
+
+						$version_txt = implode(".", $explode)."_version.txt";
+
+						if(file_get_contents($version_txt) == true) {
+
+							$version_online = file_get_contents($version_txt);
+
+						}
+					}
+				}
+			}
+
+			if ((isset($set_next)) && ($set_next == true)) {
+				$value = [
+					"next_check" => $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"),
+					"id_module" => $obj->ID_module
+				];
+
+				$dbc->prepare("UPDATE module SET next_check_version=:next_check WHERE ID_module=:id_module", $value);
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		
 		
