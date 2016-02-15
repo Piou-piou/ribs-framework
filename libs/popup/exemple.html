@@ -2,7 +2,14 @@
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 
-<div class="popup">
+
+<!-- exemple de lien pour ouvrir une popup
+ l'attribut popup permet de definir l'id de la popup à ouvrir
+-->
+<a href="<?=ADMWEBROOT?>controller/comptes/supprimer_compte" class="supprimer open-popup" popup="popup-test">Supprimer ce compte</a>
+
+
+<div class="popup" id="popup-test">
 	<div class="content">
 		<h2>Etes-vous sûr de vouloir supprimer ce module ?</h2>
 		<p>Si vous supprimez ce module, tous les contenus, images qui y sont associés seront supprimés<br/></p>
