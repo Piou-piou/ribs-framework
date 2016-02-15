@@ -156,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `identite` (
   `img_profil` varchar(255) NOT NULL,
   `img_profil_blog` varchar(255) DEFAULT NULL,
   `valide` int(11) DEFAULT NULL,
+  `archiver` int(11) DEFAULT NULL,
   `acces_admin` int(11) DEFAULT NULL,
   `liste_droit` int(11) DEFAULT NULL,
   `super_admin` int(11) DEFAULT NULL
