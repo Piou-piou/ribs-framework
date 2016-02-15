@@ -24,9 +24,9 @@
 			}
 
 			//si on ne passe pas dans le foreach -> on est pas admin donc on deco le compte
-			if (!isset($this->acces_admin)) {
-				Connexion::setDeconnexion(WEBROOT."index.php");
+			if ((!isset($this->acces_admin)) || ($this->acces_admin != 1)) {
 				FlashMessage::setFlash("Vous n'êtes pas un administrateur, vous ne pouvez pas accéder à cette page");
+				header("location:".WEBROOT."index.php");
 			}
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
