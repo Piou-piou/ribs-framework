@@ -21,6 +21,10 @@
 
 ##Explication of files
 
+###Downloading a virgin module
+
+You can download a virgin module at this adress : library.anthony-pilloud.fr/virgin_module.zip
+
 
 
 ###File : install.php
