@@ -30,16 +30,29 @@
 					<?php if ($config->getValiderInscription() == 1): ?>
 						<td><?=$valide[$i]?></td>
 					<?php endif;?>
-					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/archiver_compte?id_identite=<?=$id_identite[$i]?>  class="supprimer popup-delete"">Archiver ce compte</a></td>
 					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/reinitialiser_mdp?id_identite=<?=$id_identite[$i]?>">Réinitialiser le mot de passe</a></td>
-					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/supprimer_compte?id_identite=<?=$id_identite[$i]?>" class="supprimer popup-delete">Supprimer ce compte</a></td>
+					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/archiver_compte?id_identite=<?=$id_identite[$i]?>"  class="supprimer open-popup" popup="popup-archiver-utilisateur">Archiver ce compte</a></td>
+					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/supprimer_compte?id_identite=<?=$id_identite[$i]?>" class="supprimer open-popup" popup="popup-supprimer-utilisateur">Supprimer ce compte</a></td>
 				</tr>
 			<?php endfor;?>
 		</table>
 	</div>
 </div>
 
-<div class="popup">
+<div class="popup" id="popup-archiver-utilisateur">
+	<div class="content">
+		<h2>Etes-vous sûr de vouloir archiver cet utilisateur ?</h2>
+		<p>Si vous l'archivez, tous ses informations seront conservées mais tous ces accès au site seront suspendus.</p>
+
+		<div class="lien">
+			<a class="annuler">Annuler</a>
+			<a href="" class="valider">Valider</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div class="popup" id="popup-supprimer-utilisateur">
 	<div class="content">
 		<h2>Etes-vous sûr de vouloir supprimer cet utilisateur ?</h2>
 		<p>Si vous le supprimé, tous ses informations seront supprimées ainsi que tous ces accès au site.</p>
