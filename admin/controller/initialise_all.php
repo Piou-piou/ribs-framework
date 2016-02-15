@@ -1,13 +1,5 @@
 <?php
 	//---------- actif pour toutes les pages ------------------------------------//
-	$admin->getAllUser();
-	$id_identite = $admin->getIdidentite();
-	$img_profil = $admin->getImg();
-	$nom = $admin->getNom();
-	$prenom = $admin->getPrenom();
-	$pseudo = $admin->getPseudo();
-	$valide = $admin->getValide();
-
 	$gestion_module = new \core\modules\GestionModule();
 	$gestion_module->getListeModuleActiver();
 	//---------- fin actif pour toutes les pages ------------------------------------//

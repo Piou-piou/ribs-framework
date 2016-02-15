@@ -41,11 +41,18 @@
 		//************* POUR LES GETTER POUR LES PARAMETRES DE COMPTES UTILISATEUR (reinit mdp, suppression...) ******//
 		/**
 		 * Pour récupérer la liste de tous les users afin d'activer un compte ou modifier des trucs dessus
+		 * si archiver == null on récupère les utilisateurs actifs sur le site sinon on récupere les utilisateurs archives
 		 */
-		public function getAllUser() {
+		public function getAllUser($archiver=null) {
 			$dbc = \core\App::getDb();
+			$this->setAllUser(null, null, null, null, null, null, null);
 
-			$query = $dbc->query("SELECT * FROM identite  WHERE ID_identite > 1");
+			if ($archiver == null) {
+				$query = $dbc->query("SELECT * FROM identite WHERE archiver IS NULL AND ID_identite > 1");
+			}
+			else {
+				$query = $dbc->query("SELECT * FROM identite WHERE archiver IS NOT NULL AND ID_identite > 1");
+			}
 
 			$config = new Configuration();
 
@@ -172,6 +179,21 @@
 			$value = array(
 				"id_identite" => $id_identite,
 				"archiver" => 1
+			);
+
+			$dbc->prepare("UPDATE identite SET archiver=:archiver WHERE ID_identite=:id_identite", $value);
+		}
+
+		/**
+		 * Supprime le compte en question et enleve l'image de profil aussi
+		 * @param $id_identite
+		 */
+		public function setActiverCompte($id_identite) {
+			$dbc = \core\App::getDb();
+
+			$value = array(
+				"id_identite" => $id_identite,
+				"archiver" => NULL
 			);
 
 			$dbc->prepare("UPDATE identite SET archiver=:archiver WHERE ID_identite=:id_identite", $value);
