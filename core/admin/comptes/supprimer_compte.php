@@ -6,8 +6,9 @@
 	$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
 
 	$id_identite = $_GET['id_identite'];
-	$prenom = $admin->getPrenom();
-	$nom = $admin->getNom();
+	$membre = new Membre($id_identite);
+	$prenom = $membre->getPrenom();
+	$nom = $membre->getNom();
 
 	$admin->setSupprimerCompte($id_identite);
 
