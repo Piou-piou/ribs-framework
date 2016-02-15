@@ -9,6 +9,6 @@
 		Connexion::setLogin($pseudo, $mdp, WEBROOT."administrator/login", WEBROOT."administrator");
 	}
 	else {
-		Connexion::setLogin($pseudo, $mdp, WEBROOT."login", "index.php");
+		Connexion::setLogin($pseudo, $mdp, WEBROOT."login", WEBROOT."index.php");
 	}
 ?>
