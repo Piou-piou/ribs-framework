@@ -12,7 +12,7 @@
 		define('DB_HOST', "127.0.0.1");
 
 		//pour les images ajoutées par des utilisateurs
-		define('IMGROOT', "http://".$_SERVER['SERVER_NAME']."/plugins/NEW_MVC/app/images/");
+		define('IMGROOT', "http://".$_SERVER['SERVER_NAME']."/plugins/ribs-framework/app/images/");
 		define('ROOTCKFINDER', "NEW_MVC/app/images/pages");
 	}
 	else {
