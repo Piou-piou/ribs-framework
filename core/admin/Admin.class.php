@@ -166,6 +166,21 @@
 		 * Supprime le compte en question et enleve l'image de profil aussi
 		 * @param $id_identite
 		 */
+		public function setArchiverCompte($id_identite) {
+			$dbc = \core\App::getDb();
+
+			$value = array(
+				"id_identite" => $id_identite,
+				"archiver" => 1
+			);
+
+			$dbc->prepare("UPDATE identite SET archiver=:archiver WHERE ID_identite=:id_identite", $value);
+		}
+
+		/**
+		 * Supprime le compte en question et enleve l'image de profil aussi
+		 * @param $id_identite
+		 */
 		public function setSupprimerCompte($id_identite) {
 			$dbc = \core\App::getDb();
 
