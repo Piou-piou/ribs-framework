@@ -18,6 +18,7 @@
 						<td>Valider le compte</td>
 					<?php endif;?>
 					<td>Réinitialiser le mot de passe</td>
+					<td>Archiver le compte</td>
 					<td>Supprimer le compte</td>
 				</tr>
 			</thead>
@@ -29,6 +30,7 @@
 					<?php if ($config->getValiderInscription() == 1): ?>
 						<td><?=$valide[$i]?></td>
 					<?php endif;?>
+					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/archiver_compte?id_identite=<?=$id_identite[$i]?>  class="supprimer popup-delete"">Archiver ce compte</a></td>
 					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/reinitialiser_mdp?id_identite=<?=$id_identite[$i]?>">Réinitialiser le mot de passe</a></td>
 					<td><a href="<?=ADMWEBROOT?>controller/core/admin/comptes/supprimer_compte?id_identite=<?=$id_identite[$i]?>" class="supprimer popup-delete">Supprimer ce compte</a></td>
 				</tr>
