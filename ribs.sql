@@ -206,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `next_check_version` date DEFAULT NULL,
   `activer` int(1) NOT NULL,
   `installer` int(1) NOT NULL,
+  `mettre_jour` int(1) DEFAULT NULL,
   `systeme` int(1) DEFAULT NULL,
   `icone` varchar(255) DEFAULT NULL,
   `url_telechargement` varchar(255) NOT NULL

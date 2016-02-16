@@ -149,11 +149,10 @@
 
 		public function getCheckModuleVersion() {
 			$dbc = App::getDb();
-
 			$today = date("Y-m-d");
 			$today_o = new \DateTime($today);
 
-			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, ID_module FROM module");
+			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, mettre_jour, ID_module FROM module");
 
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
@@ -162,7 +161,7 @@
 						//du coup on met le next_check aa la semaine pro
 						$set_next = true;
 					}
-					else if ($obj->next_check_version <= $today) {
+					else if (($obj->next_check_version <= $today) && ($obj->mettre_jour != 1)) {
 						//on ouvre le zip du module et on recupere le fichier version.txt pour le comparer avec celle sur notre site
 						//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
 						$explode = explode("/", $obj->url_telechargement);
@@ -176,20 +175,37 @@
 
 						if(file_get_contents($version_txt) == true) {
 
-							$version_online = file_get_contents($version_txt);
+							$version_online = floatval(file_get_contents($version_txt));
+							$version_site = floatval($obj->version);
 
+							//la version sur le serveur de telechargement est plus récente, on va donc proposer
+							//en passant la valeur update a 1 dans la table module pour ce module
+							// au client de mettre a jour sa version sinon on met la next check a la semaine pro
+							if ($version_online > $version_site) {
+								$value = [
+									"update" => 1,
+									"id_module" => $obj->ID_module
+								];
+
+								$dbc->prepare("UPDATE module SET mettre_jour=:update WHERE ID_module=:id_module", $value);
+
+								$set_next = true;
+							}
+							else {
+								$set_next = true;
+							}
 						}
 					}
+
+					if ((isset($set_next)) && ($set_next == true)) {
+						$value = [
+							"next_check" => $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"),
+							"id_module" => $obj->ID_module
+						];
+
+						$dbc->prepare("UPDATE module SET next_check_version=:next_check WHERE ID_module=:id_module", $value);
+					}
 				}
-			}
-
-			if ((isset($set_next)) && ($set_next == true)) {
-				$value = [
-					"next_check" => $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"),
-					"id_module" => $obj->ID_module
-				];
-
-				$dbc->prepare("UPDATE module SET next_check_version=:next_check WHERE ID_module=:id_module", $value);
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
