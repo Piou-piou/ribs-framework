@@ -29,6 +29,7 @@
 					<td>Nom du module</td>
 					<td>Activer</td>
 					<td>Installer | Supprimer</td>
+					<td>Mise à jour</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,6 +46,17 @@
 								<a class="supprimer popup-delete" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
 							<?php }else{ ?>
 								<a class="installer-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page_syst->getUrlTelechargement()[$i]?>">Installer</a>
+							<?php }?>
+						</td>
+						<td>
+							<?php if ((\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) == true) && (\core\modules\GestionModule::getModuleActiver($gestion_module_page_syst->getNom()[$i]) == true)){ ?>
+								<?php if (\core\modules\GestionModule::getModuleAJour($gestion_module_page_syst->getNom()[$i]) != 1) { ?>
+									<a href="">Mettre à jour</a>
+								<?php } else {?>
+									Module à jour
+								<?php }?>
+							<?php } else {?>
+								Module non installé et/ou activé
 							<?php }?>
 						</td>
 					</tr>

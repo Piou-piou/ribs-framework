@@ -147,6 +147,21 @@
 			}
 		}
 
+		public static function getModuleAJour($nom_module) {
+			$dbc = App::getDb();
+
+			$query = $dbc->query("SELECT mettre_jour FROM module WHERE nom_module = ".$dbc->quote($nom_module));
+
+			foreach ($query as $obj) {
+				if ($obj->mettre_jour == 1) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+		}
+
 		public function getCheckModuleVersion() {
 			$dbc = App::getDb();
 			$today = date("Y-m-d");
