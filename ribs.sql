@@ -255,7 +255,9 @@ INSERT INTO `page` (`ID_page`, `titre`, `contenu`, `url`, `meta_description`, `b
 CREATE TABLE IF NOT EXISTS `notification` (
 `ID_notification` int(11) NOT NULL,
   `admin` int(1) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+INSERT INTO `ribs`.`notification` (`ID_notification`, `admin`) VALUES (NULL, '0');
 
 --
 -- Index pour les tables exportées
@@ -385,7 +387,7 @@ MODIFY `ID_page` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT pour la table `notification`
 --
 ALTER TABLE `notification`
-MODIFY `ID_notification` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `ID_notification` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

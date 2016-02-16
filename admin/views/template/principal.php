@@ -54,7 +54,10 @@
 				<?php endfor;?>
 
 				<?php if ($droit_acces->getSuperAdmin() == 1):?>
-					<li class="notification <?php if ($admin->getNotification() == 1): ?> non-vue<?php endif;?>"><i class="fa fa-exclamation animated infinite swing"></i><a href="<?=ADMWEBROOT?>notifications">Notifications systèmes</a></li>
+					<li class="notification <?php if ($admin->getNotification() == 1): ?> non-vue<?php endif;?>">
+						<i class="fa fa-exclamation <?php if ($admin->getNotification() == 1):?> animated infinite swing<?php endif;?>"></i>
+						<a href="<?=ADMWEBROOT?>notifications">Notifications systèmes</a>
+					</li>
 				<?php endif;?>
 				<?php if($droit_acces->getSuperAdmin() == 1):?>
 					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a></li>

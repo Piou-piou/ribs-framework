@@ -39,7 +39,7 @@
 			return $this->acces_admin;
 		}
 
-		//************* POUR LES GETTER POUR LES PARAMETRES DE COMPTES UTILISATEUR (reinit mdp, suppression...) ******//
+
 		/**
 		 * Pour récupérer la liste de tous les users afin d'activer un compte ou modifier des trucs dessus
 		 * si archiver == null on récupère les utilisateurs actifs sur le site sinon on récupere les utilisateurs archives
@@ -123,7 +123,6 @@
 				}
 			}
 		}
-		//************* FIN POUR LES GETTER POUR LES PARAMETRES DE COMPTES UTILISATEUR (reinit mdp, suppression...) ******//
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
@@ -139,7 +138,6 @@
 			$this->valide = $valide;
 		}
 
-		//************* POUR LES SETTER POUR LES PARAMETRES DE COMPTES UTILISATEUR (reinit mdp, suppression...) ******//
 		/**
 		 * Fonction qui permet de valider un compte utilisateur pour qu'il puisse se conecter au site
 		 * @param $id_identite
@@ -242,9 +240,20 @@
 
 			$dbc->prepare("DELETE FROM identite WHERE ID_identite=:id_identite", $value);
 		}
-		//************* FIN POUR LES SETTER POUR LES PARAMETRES DE COMPTES UTILISATEUR (reinit mdp, suppression...) ******//
 
+		/**
+		 * permet de dire qu'on a vue une notification dans l'administration du site internet
+		 */
+		public static function setNotificationVue() {
+			$dbc = App::getDb();
 
+			$value = [
+				"admin" => 0,
+				"id" => 1
+			];
+
+			$dbc->prepare("UPDATE notification SET admin=:admin WHERE ID_notification=:id", $value);
+		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 
 
