@@ -53,6 +53,9 @@
 					<?php endif;?>
 				<?php endfor;?>
 
+				<?php if (($droit_acces->getSuperAdmin() == 1) && ($admin->getNotification()) == 1):?>
+					<li class="notification"><i class="fa fa-exclamation animated infinite swing"></i><a href="<?=ADMWEBROOT?>configuration/index">Notifications systèmes</a></li>
+				<?php endif;?>
 				<?php if($droit_acces->getSuperAdmin() == 1):?>
 					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a></li>
 				<?php endif;?>

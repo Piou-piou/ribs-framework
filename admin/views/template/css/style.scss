@@ -10,6 +10,7 @@
 
 /*----couleurs générales ----*/
 $bg-general: #2F3B4C;
+$bg-notification: #f34336;
 
 /*----pour la page de login ----*/
 $color-error-input-login: #F34336;
@@ -402,14 +403,19 @@ a {
 				position: absolute;
 				bottom: 36px;
 				width: 100%;
-				/*border-bottom: none;*/
 			}
 
 			&.configuration {
 				position: absolute;
 				bottom: 74px;
 				width: 100%;
-				/*border-bottom: none;*/
+			}
+
+			&.notification {
+				position: absolute;
+				bottom: 112px;
+				width: 100%;
+				background-color: $bg-notification;
 			}
 
 			&.logout {
@@ -466,7 +472,7 @@ header {
 		float: right;
 		display: block;
 		padding: 15.5px;
-		background: #f34336;
+		background: $bg-notification;
 		color: #fff;
 		transition: all 0.3s;
 

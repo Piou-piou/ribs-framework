@@ -1,6 +1,7 @@
 <?php
 	namespace core\admin;
 
+	use core\App;
 	use core\auth\Connexion;
 	use core\auth\Encrypt;
 	use core\auth\Membre;
@@ -104,6 +105,22 @@
 				$this->img = $obj->img_profil;
 				$this->mail = $obj->mail;
 				$this->valide = $obj->valide;
+			}
+		}
+
+		/**
+		 * fonction qui si égale a 1 alors il y a une notification dans l'admin du site
+		 * @return mixed
+		 */
+		public function getNotification() {
+			$dbc = App::getDb();
+
+			$query = $dbc->query("SELECT admin FROM notification");
+
+			if (count($query) == 1) {
+				foreach ($query as $obj) {
+					return $obj->admin;
+				}
 			}
 		}
 		//************* FIN POUR LES GETTER POUR LES PARAMETRES DE COMPTES UTILISATEUR (reinit mdp, suppression...) ******//
