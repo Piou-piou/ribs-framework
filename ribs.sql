@@ -254,7 +254,7 @@ INSERT INTO `page` (`ID_page`, `titre`, `contenu`, `url`, `meta_description`, `b
 
 CREATE TABLE IF NOT EXISTS `notification` (
 `ID_notification` int(11) NOT NULL,
-  `notification_admin` int(11) DEFAULT NULL
+  `admin` int(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
