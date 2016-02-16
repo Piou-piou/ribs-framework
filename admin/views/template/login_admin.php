@@ -4,13 +4,14 @@
 		<title><?=$titre_page?></title>
 		<meta charset="utf-8">
 		<meta name="description" content="<?=$description_page?>">
-		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/animate.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<script src="<?=WEBROOT?>admin/views/template/js/effet_input.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/login.js"></script>
+
+		<!-- Les librairies utlisées -->
+		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>input_type_admin/css/style.css">
+		<script src="<?=LIBSWEBROOT?>input_type_admin/js/effet_input.js"></script>
 	</head>
 	<?=core\HTML\flashmessage\FlashMessage::getFlash();?>
 	<body class="login">
@@ -35,11 +36,10 @@
 
 					<input type="submit" class="submit-contenu submit-standard no-shadow full-width" value="Connexion">
 					<input type="hidden" name="admin" value="true"/>
-					<!--<input type="hidden" name="remember" value="true"/>-->
 				</form>
 
 				<div class="lien">
-					<a id="mdp-oublie">Mot de passe oublié ?</a> | <a href="">Pas encore inscrit ?</a>
+					<a id="mdp-oublie">Mot de passe oublié ?</a>
 				</div>
 			</div>
 
@@ -59,11 +59,10 @@
 
 					<input type="submit" class="submit-contenu submit-standard no-shadow full-width" value="Valider">
 					<input type="hidden" name="admin" value="true"/>
-					<!--<input type="hidden" name="remember" value="true"/>-->
 				</form>
 
 				<div class="lien">
-					<a id="login">Retour</a> | <a href="">Pas encore inscrit ?</a>
+					<a id="login">Retour</a>
 				</div>
 			</div>
 		</div>
