@@ -246,6 +246,17 @@ CREATE TABLE IF NOT EXISTS `page` (
 INSERT INTO `page` (`ID_page`, `titre`, `contenu`, `url`, `meta_description`, `balise_title`, `ordre`, `parent`, `affiche`) VALUES
 (1, 'Accueil', 'Accueil du site', '', 'Accueil de mon site', 'Accueil de mon site', 1, 0, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `notification`
+--
+
+CREATE TABLE IF NOT EXISTS `notification` (
+`ID_notification` int(11) NOT NULL,
+  `notification_admin` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 --
 -- Index pour les tables exportées
 --
@@ -311,6 +322,12 @@ ALTER TABLE `page`
  ADD PRIMARY KEY (`ID_page`);
 
 --
+-- Index pour la table `notification`
+--
+ALTER TABLE `notification`
+ ADD PRIMARY KEY (`ID_notification`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -364,6 +381,11 @@ MODIFY `ID_module` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 ALTER TABLE `page`
 MODIFY `ID_page` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `notification`
+--
+ALTER TABLE `notification`
+MODIFY `ID_notification` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
