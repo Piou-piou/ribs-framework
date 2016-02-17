@@ -7,6 +7,7 @@
 		private $url;
 		private $nom;
 		private $version;
+		private $online_version;
 		private $icone;
 		private $url_telechargement;
 		
@@ -27,6 +28,9 @@
 		}
 		public function getVersion() {
 			return $this->version;
+		}
+		public function getOnlineVersion() {
+			return $this->online_version;
 		}
 		public function getIcone() {
 			return $this->icone;
@@ -147,6 +151,12 @@
 			}
 		}
 
+		/**
+		 * @param $nom_module
+		 * @return bool
+		 * fonction qui permet de savoir si un module est à jour ou non
+		 * si a jour renvoi true sinon renvoi false
+		 */
 		public static function getModuleAJour($nom_module) {
 			$dbc = App::getDb();
 
@@ -162,6 +172,10 @@
 			}
 		}
 
+		/**
+		 * fonction qui se lance à chaquer fois que l'on ouvre l'admin
+		 * permet de tester si tous les modules présent sur le site sont bien à jour
+		 */
 		public function getCheckModuleVersion() {
 			$dbc = App::getDb();
 			$today = date("Y-m-d");
@@ -190,7 +204,10 @@
 
 						if(file_get_contents($version_txt) == true) {
 
-							$version_online = floatval(file_get_contents($version_txt));
+							//online pour bdd
+							$version_online_txt = file_get_contents($version_txt);
+
+							$version_online = floatval($version_online_txt);
 							$version_site = floatval($obj->version);
 
 							//la version sur le serveur de telechargement est plus récente, on va donc proposer
@@ -199,10 +216,14 @@
 							if ($version_online > $version_site) {
 								$value = [
 									"update" => 1,
+									"online_version" => $version_online_txt,
 									"id_module" => $obj->ID_module
 								];
 
-								$dbc->prepare("UPDATE module SET mettre_jour=:update WHERE ID_module=:id_module", $value);
+								//on met la notification admin à 1
+								$dbc->query("UPDATE notification SET admin=1 WHERE ID_notification=1");
+
+								$dbc->prepare("UPDATE module SET mettre_jour=:update, online_version=:online_version WHERE ID_module=:id_module", $value);
 
 								$set_next = true;
 							}
@@ -223,6 +244,27 @@
 				}
 			}
 		}
+
+		public function getListeModuleMettreJour() {
+			$dbc = App::getDb();
+
+			$query = $dbc->query("SELECT * FROM module WHERE mettre_jour=1");
+
+			if (count($query) > 0) {
+				foreach ($query as $obj) {
+					$nom_module[] = $obj->nom_module;
+					$version[] = $obj->version;
+					$online_version[] = $obj->online_version;
+				}
+
+				$this->setListeModuleMettreJour($nom_module, $version, $online_version);
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		
 		
@@ -234,6 +276,12 @@
 			$this->version = $version;
 			$this->icone = $icone;
 			$this->url_telechargement = $url_telechargement;
+		}
+
+		private function setListeModuleMettreJour($nom_module, $version, $online_version) {
+			$this->nom = $nom_module;
+			$this->version = $version;
+			$this->online_version = $online_version;
 		}
 
 		/**
