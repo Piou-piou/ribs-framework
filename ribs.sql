@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `url` varchar(255) NOT NULL,
   `nom_module` varchar(255) NOT NULL,
   `version` varchar(15) NOT NULL,
-  `online_version` varchar(15) EFAULT NULL,
+  `online_version` varchar(15) DEFAULT NULL,
   `next_check_version` date DEFAULT NULL,
   `activer` int(1) NOT NULL,
   `installer` int(1) NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `module` (
 -- Contenu de la table `module`
 --
 
-INSERT INTO `module` (`ID_module`, `url`, `nom_module`, `activer`, `installer`, `systeme`, `icone`, `url_telechargement`) VALUES
+INSERT INTO `module` (`ID_module`, `url`, `nom_module`, `version`,  `activer`, `installer`, `systeme`, `icone`, `url_telechargement`) VALUES
 (1, 'livre_or/', 'livre d''or', '1.0', 0, 0, 1, 'fa-book', 'http://library.clicand.com/livre_or.zip'),
 (2, 'blog/', 'blog', '1.0', 0, 0, 1, 'fa-newspaper-o', 'http://library.clicand.com/blog.zip'),
 (3, 'galerie_photo/', 'galerie photo', '1.0', 0, 0, 1, 'fa-photo', 'http://library.clicand.com/galerie_photo.zip');
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `admin` int(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
-INSERT INTO `ribs`.`notification` (`ID_notification`, `admin`) VALUES (NULL, '0');
+INSERT INTO `notification` (`ID_notification`, `admin`) VALUES ('1', '0');
 
 --
 -- Index pour les tables exportées
