@@ -46,20 +46,20 @@ RewriteRule ^([a-zA-Z0-9\-\_\/]*) index.php?page=$1 [L,QSA]
 	RewriteCond %{QUERY_STRING} (boot\.ini|etc/passwd|self/environ) [NC,OR]
 	RewriteCond %{QUERY_STRING} (thumbs?(_editor|open)?|tim(thumb)?)\.php [NC,OR]
 	RewriteCond %{QUERY_STRING} (\'|\")(.*)(drop|insert|md5|select|union) [NC]
-	RewriteRule .* - [F]
+	RewriteRule .* app/views/template/error_pages/404.php
 </IfModule>
 
 # 6G:[REQUEST METHOD]
 <IfModule mod_rewrite.c>
 	RewriteCond %{REQUEST_METHOD} ^(connect|debug|delete|move|put|trace|track) [NC]
-	RewriteRule .* - [F]
+	RewriteRule .* app/views/template/error_pages/404.php
 </IfModule>
 
 # 6G:[REFERRERS]
 <IfModule mod_rewrite.c>
 	RewriteCond %{HTTP_REFERER} ([a-z0-9]{2000}) [NC,OR]
 	RewriteCond %{HTTP_REFERER} (semalt.com|todaperfeita) [NC]
-	RewriteRule .* - [F]
+	RewriteRule .* app/views/template/error_pages/404.php
 </IfModule>
 
 # 6G:[REQUEST STRINGS]
