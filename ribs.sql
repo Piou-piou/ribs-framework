@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `droit_acces` (
 `ID_droit_acces` int(11) NOT NULL,
   `droit_acces` varchar(255) DEFAULT NULL,
   `page` varchar(255) DEFAULT NULL,
+  `nom_module` varchar(255) DEFAULT NULL,
   `actif` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
