@@ -35,7 +35,7 @@
 
 			<h3>Mettre à jour le/les module(s)</h3>
 			<p>Pour mettre à jour le/les module(s) rendez-vous sur la page de configuration des modules. Vous pouvez vous y rendre
-				soit par le menu ou en cliquand sur le lien ci-dessous.
+				soit par le menu ou en cliquant sur le lien ci-dessous.
 			</p>
 			<a href="<?=ADMWEBROOT?>configuration/module" class="submit-contenu submit-standard no-shadow inline ml0">Configuration des modules</a>
 		<?php endif;?>
