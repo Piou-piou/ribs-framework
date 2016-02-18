@@ -306,6 +306,7 @@ The number of sub-directory is unlimited into controller directory.
 ##Notification into a module
 
 In a module you can add notification which is added a the right of the navigation menu.
+This is very simple, just add the div whith notification class.
 
 ###File : admin/views/header.php
 
