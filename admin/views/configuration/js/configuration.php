@@ -35,19 +35,21 @@
 			var split = href.split("=");
 			var id_module = split[1];
 
-			$.ajax({
-				method: 'GET',
-				url:href,
-				data: "id_module="+id_module,
-				success: function(data){
-					if (data == "success") {
-						window.location.reload(true);
-					}
-					else {
-						$("body").prepend(data);
-					}
-				}
-			});
+			ajaxDeleteUpdateModule(href, id_module);
+		});
+
+		//pour mettre à jour un module
+		$("#config-update-ajax").click(function(e) {
+			e.preventDefault();
+
+			$(".progress").css({display: "block"});
+
+			var href = $(this).attr("href");
+
+			var split = href.split("=");
+			var id_module = split[1];
+
+			ajaxDeleteUpdateModule(href, id_module);
 		});
 
 		//pour installer un module systeme
@@ -76,6 +78,24 @@
 
 			ajaxInstallModule(href, url);
 		});
+
+
+		function ajaxDeleteUpdateModule(url, id_module) {
+			$.ajax({
+				method: 'GET',
+				url:url,
+				data: "id_module="+id_module,
+				success: function(data){
+					if (data == "success") {
+						window.location.reload(true);
+					}
+					else {
+						$("body").prepend(data);
+					}
+				}
+			});
+		}
+
 
 
 		function ajaxInstallModule(href, url) {

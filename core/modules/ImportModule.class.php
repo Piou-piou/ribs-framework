@@ -8,6 +8,7 @@
 		private $nom_dossier;
 		private $nom_fichier;
 		private $extension;
+		private $erreur;
 		
 		
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -24,7 +25,11 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		public function setImportModule($url_module) {
+		/**
+		 * @param $url_module
+		 * fonction qui permets d'importer un module dans notre site internet
+		 */
+		public function setImportModule($url_module, $update=null) {
 			$dbc= App::getDb();
 
 			//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
@@ -46,23 +51,30 @@
 						if ($zip->open(TEMPROOT.$this->nom_fichier) == true) {
 							if ($zip->extractTo(TEMPROOT) == true) {
 								if (rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true) {
-									require_once(MODULEROOT.$this->nom_dossier."/install.php");
-									$dbc->prepare($requete);
+									//si c'est une install et non une mise à jour
+									if ($update == null) {
+										require_once(MODULEROOT.$this->nom_dossier."/install.php");
+										$dbc->prepare($requete);
+									}
+
 
 									FlashMessage::setFlash("Votre module a bien été ajouté au site.", "success");
 								}
 								else {
 									\core\HTML\flashmessage\FlashMessage::setFlash("Erreur lors du téléchargement du module, veuillez réessayer dans un instant.");
+									$this->erreur = true;
 								}
 							}
 							else {
 								\core\HTML\flashmessage\FlashMessage::setFlash("Erreur lors du téléchargement du module, veuillez réessayer dans un instant.");
 								$this->setSupprimerArchiveTemp();
+								$this->erreur = true;
 							}
 						}
 						else {
 							\core\HTML\flashmessage\FlashMessage::setFlash("Erreur lors du téléchargement du module, veuillez réessayer dans un instant.");
 							$this->setSupprimerArchiveTemp();
+							$this->erreur = true;
 						}
 
 						$zip->close();
@@ -70,14 +82,57 @@
 					}
 					else {
 						FlashMessage::setFlash("Le module n'a pas pu être correctement téléchargé, veuillez réesseyer dans un instant");
+						$this->erreur = true;
 					}
 				}
 				else {
 					FlashMessage::setFlash("Ce module est déjà présent sur ce site, merci de renommer votre module");
+					$this->erreur = true;
 				}
 			}
 			else {
 				FlashMessage::setFlash("Le format de votre archive doit obligatoirement être un .zip");
+				$this->erreur = true;
+			}
+		}
+
+		Public function setUpdateModule($id_module) {
+			$dbc = App::getDb();
+
+			$query = $dbc->query("select * from module WHERE ID_module=".$dbc->quote($id_module));
+
+			foreach ($query as $obj) {
+				$url_telechargement = $obj->url_telechargement;
+				$version_ok = $obj->online_version;
+				$dossier_module = str_replace("/", "", $obj->url);
+			}
+
+			//on rename le dossier actuel du module
+			if (rename(MODULEROOT.$dossier_module, MODULEROOT.$dossier_module."_OLDVERSION")) {
+				$this->setImportModule($url_telechargement, true);
+
+				//si pas d'erreur on met la date de next check a la semaine pro ++ on dit
+				//de delete l'ancienne version au next check
+				if (($this->erreur != true) || (!isset($this->erreur))) {
+					$today = date("Y-m-d");
+					$today = new \DateTime($today);
+
+					$value = [
+						"next_check" => $today->add(new \DateInterval("P1W"))->format("Y-m-d"),
+						"version" => $version_ok,
+						"online_version" => "",
+						"mettre_jour" => "",
+						"delete_old_version" => 1,
+						"id_module" => $id_module
+					];
+
+					$dbc->prepare("UPDATE module SET next_check_version=:next_check, version=:version, online_version=:online_version, mettre_jour=:mettre_jour, delete_old_version=:delete_old_version WHERE ID_module=:id_module", $value);
+
+					FlashMessage::setFlash("Votre module a bien été mis à jour", "success");
+				}
+			}
+			else {
+				FlashMessage::setFlash("Impossible de télécharger la mise à jour, veuillez réesseyer dans un instant");
 			}
 		}
 
