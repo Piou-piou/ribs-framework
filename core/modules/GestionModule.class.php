@@ -181,7 +181,7 @@
 			$today = date("Y-m-d");
 			$today_o = new \DateTime($today);
 
-			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, mettre_jour, ID_module FROM module");
+			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, mettre_jour, delete_old_version, ID_module FROM module");
 
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
@@ -191,6 +191,12 @@
 						$set_next = true;
 					}
 					else if (($obj->next_check_version <= $today) && ($obj->mettre_jour != 1)) {
+						//avant tout on regarde si on doit delete une vieille version
+						if ($obj->delete_old_version == 1) {
+							$import = new ImportModule();
+							$import->setSupprimerOldModule($obj->ID_module);
+						}
+
 						//on ouvre le zip du module et on recupere le fichier version.txt pour le comparer avec celle sur notre site
 						//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
 						$explode = explode("/", $obj->url_telechargement);

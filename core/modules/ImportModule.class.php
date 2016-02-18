@@ -9,7 +9,13 @@
 		private $nom_fichier;
 		private $extension;
 		private $erreur;
-		
+
+		//pour les infos du module
+		private $id_module;
+		private $url_telechargement;
+		private $version_ok;
+		private $dossier_module;
+
 		
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct() {
@@ -21,6 +27,22 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $id_module
+		 * permets de récupérer des informations sur un module
+		 */
+		private function getInfoModule($id_module) {
+			$dbc = App::getDb();
+
+			$query = $dbc->query("select * from module WHERE ID_module=".$dbc->quote($id_module));
+
+			foreach ($query as $obj) {
+				$this->id_module = $obj->ID_module;
+				$this->url_telechargement = $obj->url_telechargement;
+				$this->version_ok = $obj->online_version;
+				$this->dossier_module = str_replace("/", "", $obj->url);
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		
 		
@@ -96,20 +118,18 @@
 			}
 		}
 
+		/**
+		 * @param $id_module
+		 * permet de mettre à jour un module en gardant une copie de l'ancienne version pendant une semaine
+		 */
 		Public function setUpdateModule($id_module) {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("select * from module WHERE ID_module=".$dbc->quote($id_module));
-
-			foreach ($query as $obj) {
-				$url_telechargement = $obj->url_telechargement;
-				$version_ok = $obj->online_version;
-				$dossier_module = str_replace("/", "", $obj->url);
-			}
+			$this->getInfoModule($id_module);
 
 			//on rename le dossier actuel du module
-			if (rename(MODULEROOT.$dossier_module, MODULEROOT.$dossier_module."_OLDVERSION")) {
-				$this->setImportModule($url_telechargement, true);
+			if (rename(MODULEROOT.$this->dossier_module, MODULEROOT.$this->dossier_module."_OLDVERSION")) {
+				$this->setImportModule($this->url_telechargement, true);
 
 				//si pas d'erreur on met la date de next check a la semaine pro ++ on dit
 				//de delete l'ancienne version au next check
@@ -119,7 +139,7 @@
 
 					$value = [
 						"next_check" => $today->add(new \DateInterval("P1W"))->format("Y-m-d"),
-						"version" => $version_ok,
+						"version" => $this->version_ok,
 						"online_version" => "",
 						"mettre_jour" => "",
 						"delete_old_version" => 1,
@@ -184,6 +204,25 @@
 			$dbc->prepare($requete);
 
 			$this->supprimerDossier($url);
+		}
+
+		/**
+		 * @param $id_module
+		 * fonction qui permet de supprimer le dossier d'une vielle version d'un module une semaine après son ajout
+		 */
+		public function setSupprimerOldModule($id_module) {
+			$dbc = App::getDb();
+
+			$this->getInfoModule($id_module);
+
+			$this->supprimerDossier(MODULEROOT.$this->dossier_module);
+
+			$value = [
+				"id_module" => $this->id_module,
+				"delete_old_version" => ""
+			];
+
+			$dbc->prepare("UPDATE module SET delete_old_version=:delete_old_version WHERE ID_module=:id_module", $value);
 		}
 
 		/**
