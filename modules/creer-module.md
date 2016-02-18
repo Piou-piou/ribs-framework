@@ -34,6 +34,9 @@ for using the module.
 
 In all those requests, one must be an insert into the table 'module', tanks to this, the module will be incremented by the system.
 
+An another request must be for acces right if your module need it. 
+For understand correctly how access right run, refer you to DroitAcces class documentation in the wiki.
+
 the requests into this file  is something such as :
 
 
@@ -56,6 +59,13 @@ $requete = "
 
         ALTER TABLE _blog_article
         		MODIFY ID_article int(11) NOT NULL AUTO_INCREMENT;
+        		
+        INSERT INTO `droit_acces` (`droit_acces`, `page`, `nom_module`, `actif`) VALUES
+        		('ACCES_ADMIN_BLOG', 'modules/blog/index,modules/blog/ajouter-article,modules/blog/liste-article,modules/blog/modifier-article,modules/blog/gestion-commentaire', 'blog', 1),
+        		('AJOUTER_ARTICLE_BLOG', 'modules/livre-or/ajouter-article', 'blog',  1),
+        		('MODIFIER_ARTICLE_BLOG', 'modules/livre-or/modifier-article', 'blog',  1),
+        		('SUPPRIMER_ARTICLE_BLOG', NULL, 'blog',  1),
+        		('GESTION COMMENTAIRE BLOG', 'modules/blog/gestion-commentaire', 'blog',  1);		
 
 		INSERT INTO module (url, nom_module, installer, icone) VALUES ('url_olf_my_module/', 'name_of_mymodule', '1', 'an incon in font awesome');
 ```
