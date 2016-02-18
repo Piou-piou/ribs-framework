@@ -105,23 +105,7 @@ INSERT INTO `droit_acces` (`ID_droit_acces`, `droit_acces`, `page`, `actif`) VAL
 (4, 'GESTION CONTENUS', 'gestion-contenus/index,gestion-contenus/modifier-contenu,gestion-contenus/creer-une-page', 1),
 (5, 'CREATION PAGE', 'gestion-contenus/creer-une-page', 1),
 (7, 'GESTION CONTENU PAGE', NULL, 1),
-(9, 'ACCES_ADMIN_BLOG', 'modules/blog/index,modules/blog/ajouter-article,modules/blog/liste-article,modules/blog/modifier-article,modules/blog/gestion-commentaire', 1),
-(10, 'AJOUTER_ARTICLE_BLOG', 'modules/livre-or/ajouter-article', 1),
-(11, 'MODIFIER_ARTICLE_BLOG', 'modules/livre-or/modifier-article', 1),
-(12, 'SUPPRIMER_ARTICLE_BLOG', NULL, 1),
-(13, 'GESTION COMMENTAIRE BLOG', 'modules/blog/gestion-commentaire', 1),
-(14, 'ACCES ADMIN LIVRE OR', 'modules/livre-or/index,modules/livre-or/ajouter-article,modules/livre-or/liste-article,modules/livre-or/gestion-commentaire,modules/livre-or/modifier-article', 1),
-(15, 'AJOUTER ARTICLE LIVRE OR', 'modules/livre-or/ajouter-article', 1),
-(16, 'MODIFIER ARTICLE LIVRE OR', 'modules/livre-or/modifier-article', 1),
-(17, 'SUPPRIMER ARTICLE LIVRE OR', NULL, 1),
-(18, 'GESTION COMMENTAIRE LIVRE OR', 'modules/livre-or/gestion-commentaire', 1),
-(19, 'GESTION GALERIE PHOTO', 'modules/galerie-photo/index,modules/galerie-photo/creer-album,modules/galerie-photo/modifier-album,modules/galerie-photo/gestion-image', 1),
-(20, 'CREER ALBUM GALERIE PHOTO', NULL, 1),
-(21, 'MODIFIER ALBUM GALERIE PHOTO', NULL, 1),
-(22, 'SUPPRIMER ALBUM GALERIE PHOTO', NULL, 1),
-(23, 'AJOUTER IMAGE GALERIE PHOTO', NULL, 1),
-(24, 'SUPPRIMER IMAGE GALERIE PHOTO', NULL, 1),
-(25, 'CREATION COMPTE ADMIN', 'gestion-comptes/index', '1');
+(8, 'CREATION COMPTE ADMIN', 'gestion-comptes/index', '1');
 
 -- --------------------------------------------------------
 
@@ -354,7 +338,7 @@ MODIFY `ID_configuration_compte` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=
 -- AUTO_INCREMENT pour la table `droit_acces`
 --
 ALTER TABLE `droit_acces`
-MODIFY `ID_droit_acces` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+MODIFY `ID_droit_acces` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `droit_acces_page`
 --
