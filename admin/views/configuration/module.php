@@ -5,6 +5,8 @@
 </header>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 <script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
+<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 <?php require_once('header.php');?>
 
 <div class="inner">
@@ -43,7 +45,7 @@
 						</td>
 						<td>
 							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) == true) { ?>
-								<a class="supprimer popup-delete" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
+								<a class="supprimer open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
 							<?php }else{ ?>
 								<a class="installer-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page_syst->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>
@@ -86,7 +88,7 @@
 						</td>
 						<td>
 							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page->getNom()[$i]) == true) { ?>
-								<a class="supprimer popup-delete" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
+								<a class="supprimer open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
 							<?php }else{ ?>
 								<a href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>
