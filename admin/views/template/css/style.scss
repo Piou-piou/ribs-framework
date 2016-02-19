@@ -561,7 +561,6 @@ header {
 
 
 /*------------------------------ AFFICHAGE CONTENU -------------------------------------------------------*/
-/*pour la page pour ajouter/modifier un contenu*/
 .submit-contenu {
 	position: fixed;
 	right: 0px;
@@ -633,6 +632,8 @@ header {
 	}
 }
 
+
+
 .contenu {
 	margin-top: 30px;
 	background-color: $bg-page;
@@ -659,7 +660,7 @@ header {
 	}
 
 
-	/*pour la modifs des comptes client*/
+	/*pour la modifs des comptes client et tous les tableau de l'admin*/
 	&.gestion-comptes {
 		table {
 			width: 100%;
@@ -817,6 +818,7 @@ header {
 			}
 		}
 
+		/*lien dans les pages des listes d'articles ou autre*/
 		a {
 			position: absolute;
 			bottom: 36px;
@@ -860,46 +862,6 @@ header {
 					color: #fff;
 					transition: all 0.5s ease-in;
 				}
-			}
-		}
-	}
-
-	/*exclusivement pour la galerie photo*/
-	.bloc-galerie {
-		.mask {
-			background-color: rgba(0, 0, 0, 0.5);
-			width: 350px;
-			height: 350px;
-			position: absolute;
-			top: 0;
-			z-index: 1;
-			visibility: hidden;
-			opacity: 0;
-			transition: all 0.3s ease;
-		}
-
-
-		button {
-			visibility: hidden;
-			opacity: 0;
-			right: 0;
-			top: 0;
-			display: block;
-			z-index: 2;
-			transition: all 0.3s ease;
-		}
-
-		&:hover {
-			background-color: rgba(0, 0, 0, 0.5);
-
-			.mask {
-				visibility: visible;
-				opacity: 1;
-			}
-
-			button {
-				opacity: 1;
-				visibility: visible;
 			}
 		}
 	}
