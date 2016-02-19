@@ -10,7 +10,6 @@
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/menu.js"></script>
-		<script src="<?=WEBROOT?>admin/views/template/js/effet_input.js"></script>
 
 		<!-- Les librairies utlisées -->
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
