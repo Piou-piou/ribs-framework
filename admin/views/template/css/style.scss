@@ -350,6 +350,7 @@ a {
 
 			&:hover {
 				transform: Scale(1.2);
+				cursor: pointer;
 			}
 		}
 	}
@@ -363,12 +364,9 @@ a {
 			text-transform: uppercase;
 			border-top: 1px solid rgba(255,255,255,0.05);
 			border-bottom: 1px solid #2b333c;
+			border-left: 0px solid transparent;
 			transition: 0.3s all ease;
 			height: 36px;
-
-			&:hover {
-				cursor: pointer;
-			}
 
 			i {
 				color: $color-lien;
@@ -388,11 +386,12 @@ a {
 			&:hover {
 				background-color: $bg-lien-hover-menu;
 				border-left: 3px solid $menug-clr-border-lien;
-				transition: 0.3s all ease;
+				cursor: pointer;
 
 				i {
 					color: $menug-clr-border-lien;
 					transition: 0.3s all ease;
+					cursor: pointer;
 				}
 			}
 
@@ -439,12 +438,8 @@ a {
 					}
 				}
 			}
-
-
 		}
 	}
-
-
 }
 
 
@@ -704,7 +699,6 @@ header {
 
 
 
-
 /*------------------------------ AFFICHAGE DU BLOG ++ LIVRE D'OR -------------------------------------------------------*/
 .blog, .livre-or, .droit-acces, .galerie-photo, .added-module {
 	.bloc {
@@ -786,8 +780,6 @@ header {
 				}
 			}
 		}
-
-
 
 		.separation {
 			width: 100%;
