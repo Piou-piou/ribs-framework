@@ -3,6 +3,7 @@
 bdd_backup/*
 temp/*
 cache/*
-*.sass-cache/*
+.sass-cache/*
+*.scssc
 modules/*
 !modules/creer-module.md
