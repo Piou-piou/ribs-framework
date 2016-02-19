@@ -2,6 +2,7 @@
 	<div class="inner">
 		<ul>
 			<li><a href="<?=ADMWEBROOT?>configuration/module">Modules</a></li>
+			<li><a href="<?=ADMWEBROOT?>configuration/infos-generales">Infos générales</a></li>
 		</ul>
 	</div>
 </nav>

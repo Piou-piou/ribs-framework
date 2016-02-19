@@ -602,6 +602,10 @@ header {
 		display: inline-block;
 	}
 
+	&.link {
+		padding: 11px 20px;
+	}
+
 	i {
 		margin-right: 5px;
 		transition: 0.3s all ease;

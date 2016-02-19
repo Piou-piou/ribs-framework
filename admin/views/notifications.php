@@ -13,7 +13,6 @@
 		<?php if ($gestion_module->getListeModuleMettreJour() == true): ?>
 			<h3>Modules qui ont besoin d'être mis à jour</h3>
 
-
 			<table>
 				<thead>
 					<tr>
