@@ -327,6 +327,11 @@ a {
 		}
 	}
 
+	.principal {
+		max-height: 740px;
+		overflow: hidden;
+	}
+
 	.titre {
 		font-family: $police-sec;
 		font-size: 25px;

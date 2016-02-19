@@ -1,0 +1,15 @@
+<!-- doc -->
+http://manos.malihu.gr/jquery-custom-content-scroller/
+
+<!-- inclut de base dans l'admin -->
+<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>scrollbar/css/scrollbar.css">
+<script src="<?=LIBSWEBROOT?>scrollbar/js/scrollbar.js"></script>
+
+
+<script>
+	(function($){
+		$(window).load(function(){
+			$(".content").mCustomScrollbar();
+		});
+	})(jQuery);
+</script>
