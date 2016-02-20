@@ -9,9 +9,10 @@
 <?php require_once('header.php');?>
 
 <div class="inner">
-	<div class="contenu modifier-contenu">
-		<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
-		<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier" method="post">
+	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
+	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier" method="post">
+		<div class="contenu modifier-contenu">
+
 			<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 
 			<div>
@@ -52,6 +53,29 @@
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>
+		</div>
+
+		<div class="contenu modifier-contenu">
+			<div>
+				<div class="colonne">
+					<div class="bloc">
+						<select name="" id="">
+							<option value="">Ce site doit il être responsive</option>
+							<option value="1">oui</option>
+							<option value="0">non</option>
+						</select>
+					</div>
+				</div>
+				<div class="colonne">
+					<div class="bloc">
+						<select name="" id="">
+							<option value="">Ce site doit il est responsive</option>
+							<option value="1">oui</option>
+							<option value="0">non</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
