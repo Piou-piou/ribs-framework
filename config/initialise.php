@@ -4,28 +4,23 @@
 	if (!isset($page_root)) $page_root = "index.php";
 
 	//-------------------------- CONSTANTE BDD ----------------------------------------------------------------------------//
-	if (($_SERVER['SERVER_ADDR'] == "127.0.0.1") || ($_SERVER['SERVER_ADDR'] == "localhost")) {
-		define('DB_TYPE', "mysql");
-		define('DB_NAME', "ribs");
-		define('DB_USER', "root");
-		define('DB_PASS', "");
-		define('DB_HOST', "127.0.0.1");
-
-		//pour les images ajoutées par des utilisateurs
-		define('IMGROOT', "http://".$_SERVER['SERVER_NAME']."/plugins/ribs-framework/app/images/");
-		define('ROOTCKFINDER', "NEW_MVC/app/images/pages");
+	$ini = parse_ini_file("config.ini");
+	if ($ini["developpment"] == 1) {
+		$tab = "dev";
 	}
 	else {
-		define('DB_TYPE', "mysql");
-		define('DB_NAME', "");
-		define('DB_USER', "");
-		define('DB_PASS', "");
-		define('DB_HOST', "");
-
-		//pour les images ajoutées par des utilisateurs
-		define('IMGROOT', "http://".$_SERVER['SERVER_NAME']."/app/images/");
-		define('ROOTCKFINDER', "/app/images/pages");
+		$tab = "prod";
 	}
+
+	define('DB_TYPE', $ini[$tab]["DB_TYPE"]);
+	define('DB_NAME', $ini[$tab]["DB_NAME"]);
+	define('DB_USER', $ini[$tab]["DB_USER"]);
+	define('DB_PASS', $ini[$tab]["DB_PASS"]);
+	define('DB_HOST', $ini[$tab]["DB_HOST"]);
+
+	//pour les images ajoutées par des utilisateurs
+	define('IMGROOT', "http://".$_SERVER['SERVER_NAME'].$ini[$tab]["IMGROOT"]);
+	define('ROOTCKFINDER', $ini[$tab]["ROOTCKFINDER"]);
 	//-------------------------- FIN CONSTANTE BDD ----------------------------------------------------------------------------//
 
 
