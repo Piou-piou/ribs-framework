@@ -1,6 +1,5 @@
 <?php
 	$page_root = "admin.php";
-	require("config/initialise.php");
 
 	use \core\Autoloader;
 
@@ -11,6 +10,8 @@
 
 	require("core/Autoloader.class.php");
 	Autoloader::register();
+
+	require("config/initialise.php");
 
 	$login = new Connexion();
 	$droit_acces = new DroitAcces();

@@ -1,7 +1,5 @@
 <?php
 	$page_root = "index.php";
-	require("config/initialise.php");
-
 
 	use \core\Autoloader;
 	use \core\auth\Connexion;
@@ -11,6 +9,8 @@
 
 	require("core/Autoloader.class.php");
 	Autoloader::register();
+
+	require("config/initialise.php");
 
 
 	//--------------------------------------------- INITIALISATION DES CLASS -------------------------------------------------------//
