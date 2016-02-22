@@ -325,7 +325,7 @@ This is very simple, just add the div whith notification class.
 <?php require_once(MODULEROOT."blog/router/config.php"); ?>
 <?php require_once(MODULEROOT."blog/admin/controller/initialise/page_detect.php"); ?>
 <nav class="nav-page">
-	<a href="<?=ADMROOT?>modules/gestion_planning/demande-conges">
+	<a href="<?=ADMWEBROOT?>modules/gestion_planning/demande-conges">
     	<div class="notification">
     		<div class="colonne">
     			<p>Lorem ipsum dolor sit amet</p>
