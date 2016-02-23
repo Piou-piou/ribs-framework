@@ -134,6 +134,10 @@
 			$gerant_site = $config->getGerantSite();
 			$mail_site = $config->getMailSite();
 			$mail_administrateur = $config->getMailAdministrateur();
+
+			$contenu_dynamique = $config->getContenusDynamique();
+			$responsive = $config->getResponsive();
+			$cache_config = $config->getCache();
 		}
 	}
 	//---------- fin actif pour la configuration des modules ------------------------------------//

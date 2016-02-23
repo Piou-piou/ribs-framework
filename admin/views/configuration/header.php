@@ -6,7 +6,6 @@
 		</ul>
 	</div>
 </nav>
-<?php require_once(ROOT."admin/views/configuration/js/configuration.php");?>
 
 
 <div class="popup" id="popup-delete-module">

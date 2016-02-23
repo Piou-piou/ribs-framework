@@ -6,12 +6,18 @@
 
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
+<script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
+<?php require_once(ROOT."admin/views/configuration/js/infos_generales.php");?>
 <?php require_once('header.php');?>
 
 <div class="inner">
+	<?php require_once(LIBSROOT."barre_chargement/index.php");?>
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
 	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier" method="post">
 		<div class="contenu modifier-contenu">
+
+			<h2>Gestion des infos</h2>
 
 			<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 
@@ -54,28 +60,44 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="contenu modifier-contenu">
-			<div>
-				<div class="colonne">
-					<div class="bloc">
-						<select name="" id="">
-							<option value="">Ce site doit il être responsive</option>
-							<option value="1">oui</option>
-							<option value="0">non</option>
-						</select>
-					</div>
-				</div>
-				<div class="colonne">
-					<div class="bloc">
-						<select name="" id="">
-							<option value="">Ce site doit il est responsive</option>
-							<option value="1">oui</option>
-							<option value="0">non</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</div>
 	</form>
+
+	<div class="contenu modifier-contenu gestion-comptes">
+		<h2>Gestion des options</h2>
+
+		<table>
+			<thead>
+				<tr>
+					<td>Nom de l'option</td>
+					<td>Activer / déasctiver</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Responsive</td>
+					<td>
+						<label for="responsive" class="checkbox-perso switched">
+							<input type="checkbox" class="test-check" id="responsive" <?php if ($responsive == 1): ?>checked<?php endif;?>>
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>Contenu dynamique</td>
+					<td>
+						<label for="contenu_dynamique" class="checkbox-perso switched">
+							<input type="checkbox" class="test-check" id="contenu_dynamique" <?php if ($contenu_dynamique == 1): ?>checked<?php endif;?>>
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>Cache</td>
+					<td>
+						<label for="cache_config" class="checkbox-perso switched">
+							<input type="checkbox" class="test-check" id="cache_config" <?php if ($cache_config == 1): ?>checked<?php endif;?>>
+						</label>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
