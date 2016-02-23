@@ -1,16 +1,15 @@
 <?php
 	namespace core\admin\configuration;
 
+	use core\App;
 	use core\Configuration;
+	use core\HTML\flashmessage\FlashMessage;
 
 	class AdminConfiguration extends Configuration {
 		
 		
 		
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct() {
-			
-		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 		
 		
@@ -51,6 +50,24 @@
 			$_SESSION['err_modification_infos_config'] = true;
 
 			FlashMessage::setFlash("la configuration de votre site a été correctement mse à jour", "success");
+		}
+
+		/**
+		 * @param $option
+		 * @param $activer
+		 * fonction qui permet de modifier une option dans la configuration (responsive, cache...)
+		 */
+		public function setModificerOption($option, $activer) {
+			$dbc = App::getDb();
+
+			$value = [
+				$option => $activer,
+				"id_config" => 1
+			];
+
+			$dbc->prepare("UPDATE configuration SET $option=:$option WHERE ID_configuration=:id_config", $value);
+
+			FlashMessage::setFlash("L'option $option a bien été modifiée", "success");
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}

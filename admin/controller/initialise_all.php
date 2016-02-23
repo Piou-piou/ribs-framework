@@ -126,6 +126,11 @@
 			$mail_administrateur = $_SESSION['mail_administrateur'];
 
 			unset($_SESSION['err_modification_infos_config']);
+
+			$config = new \core\Configuration();
+			$contenu_dynamique = $config->getContenusDynamique();
+			$responsive = $config->getResponsive();
+			$cache_config = $config->getCache();
 		}
 		else {
 			$config = new \core\Configuration();
