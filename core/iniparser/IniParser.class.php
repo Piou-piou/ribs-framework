@@ -2,23 +2,18 @@
 	namespace core\iniparser;
 
 	class IniParser {
-		private $file;
-		
-		
+
+
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($file = null) {
-			//if we got a file, we parse it
-			if ($file != null) {
-				$this->file = $file;
-			}
+		public function __construct() {
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 		
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getParse() {
-			return parse_ini_file($this->file);
+		public function getParse($file) {
+			return parse_ini_file($file);
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		

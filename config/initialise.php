@@ -4,8 +4,8 @@
 	if (!isset($page_root)) $page_root = "index.php";
 
 	//-------------------------- CONSTANTE BDD ----------------------------------------------------------------------------//
-	$ini_parse = new \core\iniparser\IniParser("config/config.ini");
-	$ini = $ini_parse->getParse();
+	$ini_parse = new \core\iniparser\IniParser();
+	$ini = $ini_parse->getParse("config/config.ini");
 
 	if ($ini["developpment"] == 1) {
 		$tab = "dev";

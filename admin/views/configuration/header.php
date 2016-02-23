@@ -3,6 +3,7 @@
 		<ul>
 			<li><a href="<?=ADMWEBROOT?>configuration/module">Modules</a></li>
 			<li><a href="<?=ADMWEBROOT?>configuration/infos-generales">Infos générales</a></li>
+			<li><a href="<?=ADMWEBROOT?>configuration/base-de-donnees">Base de données</a></li>
 		</ul>
 	</div>
 </nav>

@@ -146,4 +146,30 @@
 		}
 	}
 	//---------- fin actif pour la configuration des modules ------------------------------------//
+
+
+
+	//---------- actif pour la configuration des bases de données ------------------------------------//
+	if ($page == "configuration/base-de-donnees") {
+		$ini_parse1 = new \core\iniparser\IniParser();
+		$ini1 = $ini_parse1->getParse(ROOT."config/config.ini");
+
+		if (isset($_SESSION['err_modification_configini'])) {
+
+		}
+		else {
+			$db_type_dev = $ini["dev"]["DB_TYPE"];
+			$db_name_dev = $ini["dev"]["DB_NAME"];
+			$db_user_dev = $ini["dev"]["DB_USER"];
+			$db_pass_dev = $ini["dev"]["DB_PASS"];
+			$db_host_dev = $ini["dev"]["DB_HOST"];
+
+			$db_type_prod = $ini["prod"]["DB_TYPE"];
+			$db_name_prod = $ini["prod"]["DB_NAME"];
+			$db_user_prod = $ini["prod"]["DB_USER"];
+			$db_pass_prod = $ini["prod"]["DB_PASS"];
+			$db_host_prod = $ini["prod"]["DB_HOST"];
+		}
+	}
+	//---------- fin actif pour la configuration des bases de données ------------------------------------//
 ?>
