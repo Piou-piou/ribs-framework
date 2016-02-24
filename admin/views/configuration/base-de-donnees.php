@@ -20,7 +20,7 @@
 					<td>Le site est il toujours en développement</td>
 					<td>
 						<label for="developpement" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="developpement" <?php if ($developpement == 1): ?>checked<?php endif;?>>
+							<input type="checkbox" class="test-check" id="developpement" name="developpement" <?php if ($developpement == 1): ?>checked<?php endif;?>>
 						</label>
 					</td>
 				</tr>
