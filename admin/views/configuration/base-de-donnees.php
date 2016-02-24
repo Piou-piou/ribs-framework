@@ -15,20 +15,20 @@
 	<?php require_once(LIBSROOT."barre_chargement/index.php");?>
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
 
-	<div class="contenu modifier-contenu gestion-comptes">
-		<table>
-			<tr>
-				<td>Le site est il toujours en développement</td>
-				<td>
-					<label for="developpement" class="checkbox-perso switched">
-						<input type="checkbox" class="test-check" id="developpement" <?php if ($developpement == 1): ?>checked<?php endif;?>>
-					</label>
-				</td>
-			</tr>
-		</table>
-	</div>
-
 	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier_bdd" method="post">
+		<div class="contenu modifier-contenu gestion-comptes">
+			<table>
+				<tr>
+					<td>Le site est il toujours en développement</td>
+					<td>
+						<label for="developpement" class="checkbox-perso switched">
+							<input type="checkbox" class="test-check" id="developpement" <?php if ($developpement == 1): ?>checked<?php endif;?>>
+						</label>
+					</td>
+				</tr>
+			</table>
+		</div>
+
 		<div class="contenu modifier-contenu">
 
 			<h2>Gestion des infos de développement</h2>

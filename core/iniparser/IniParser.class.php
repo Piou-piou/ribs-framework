@@ -24,7 +24,7 @@
 		 * @param $developpment
 		 * @param $dev_info
 		 * @param $prod_info
-		 * function to modify informations in config.ini file
+		 * fonction pour modifier les infos dans config.ini
 		 */
 		public function setModifierConfigIni($developpment, $dev_info, $prod_info) {
 			$value = "installation = 0
