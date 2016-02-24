@@ -10,4 +10,4 @@ cache/*
 *.scssc
 modules/*
 !modules/creer-module.md
-*.ini
+config/config.ini

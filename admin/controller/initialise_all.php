@@ -158,6 +158,8 @@
 
 		}
 		else {
+			$developpement = $ini["developpment"];
+
 			$db_type_dev = $ini["dev"]["DB_TYPE"];
 			$db_name_dev = $ini["dev"]["DB_NAME"];
 			$db_user_dev = $ini["dev"]["DB_USER"];
