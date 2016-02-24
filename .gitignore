@@ -9,6 +9,6 @@ cache/*
 .sass-cache/
 *.scssc
 modules/*
-!modules/creer-module.md
 /config/config.ini
 *.ini
+!modules/creer-module.md
