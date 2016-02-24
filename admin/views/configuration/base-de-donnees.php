@@ -8,11 +8,9 @@
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 <script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
-<?php require_once(ROOT."admin/views/configuration/js/infos_generales.php");?>
 <?php require_once('header.php');?>
 
 <div class="inner">
-	<?php require_once(LIBSROOT."barre_chargement/index.php");?>
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
 
 	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier_bdd" method="post">

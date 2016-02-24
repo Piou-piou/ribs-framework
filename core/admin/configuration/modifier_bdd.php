@@ -24,5 +24,5 @@
 
 	$ini->setModifierConfigIni($_POST["developpement"], $dev_info, $prod_info);
 
-	header("location:".ADMWEBROOT."configuration/base-données");
+	header("location:".ADMWEBROOT."configuration/base-de-donnees");
 ?>

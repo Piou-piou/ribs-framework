@@ -26,9 +26,16 @@
 		 * @param $prod_info
 		 * fonction pour modifier les infos dans config.ini
 		 */
-		public function setModifierConfigIni($developpment, $dev_info, $prod_info) {
+		public function setModifierConfigIni($developpement, $dev_info, $prod_info) {
+			if ($developpement == "on") {
+				$developpement = 1;
+			}
+			else {
+				$developpement = 0;
+			}
+
 			$value = "installation = 0
-				developpment = $developpment
+				developpment = $developpement
 
 				[dev]
 				dev[DB_TYPE] = $dev_info[0]
