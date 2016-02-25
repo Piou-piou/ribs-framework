@@ -23,7 +23,7 @@
 	<body>
 		<nav class="menu active">
 			<div class="titre">
-				<h1>Ribs V2.2</h1>
+				<h1>Ribs V2.2.1</h1>
 				<i class="fa fa-bars"></i>
 			</div>
 			<ul>
