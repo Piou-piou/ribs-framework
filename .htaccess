@@ -7,6 +7,19 @@ RewriteRule 404 app/views/template/error_pages/404.php [L,QSA]
 RewriteCond %{REQUEST_URI} 403$
 RewriteRule 403 app/views/template/error_pages/404.php [L,QSA]
 
+
+
+#--------------------------- PARTIE INSTALLATION --------------------------------------#
+RewriteCond %{REQUEST_URI} installation$
+RewriteRule ([a-zA-Z0-9\-\_\/]*)$ installation.php [L,QSA]
+
+#page installation/qqch
+RewriteCond %{REQUEST_URI} installation/(.*)$
+RewriteRule installation/([a-zA-Z0-9\-\_\/]*) installation.php?page=$1 [L,QSA]
+
+
+
+#--------------------------- PARTIE ADMINISTRATOR --------------------------------------#
 #page admin/controller/*** ---> pour les pages liees a l'admin juste de ce site
 RewriteCond %{REQUEST_URI} administrator/controller/(.*)
 RewriteRule administrator/([a-zA-Z0-9\-\_\/]*) admin.php?page=$1 [L,QSA]
@@ -20,12 +33,14 @@ RewriteCond %{REQUEST_URI} administrator/(.*)$
 RewriteRule administrator/([a-zA-Z0-9\-\_\/]*) admin.php?page=$1 [L,QSA]
 
 
+
 #--------------------------- PARTIE FRONT --------------------------------------#
 RewriteCond %{REQUEST_URI} controller/(.*)
 RewriteRule ([a-zA-Z0-9\-\_\/]*) index.php?page=$1 [L,QSA]
 
 RewriteCond %{REQUEST_URI} ^([a-zA-Z0-9\-\_\/]*)$
 RewriteRule ^([a-zA-Z0-9\-\_\/]*) index.php?page=$1 [L,QSA]
+
 
 
 #--------------------------- PARTIE FIREWALL 6G --------------------------------------#

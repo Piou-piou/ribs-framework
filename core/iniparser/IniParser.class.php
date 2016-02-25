@@ -13,7 +13,12 @@
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public function getParse($file) {
-			return parse_ini_file($file);
+			if (file_exists($file)) {
+				return parse_ini_file($file);
+			}
+			else {
+				return false;
+			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		

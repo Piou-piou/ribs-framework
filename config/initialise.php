@@ -3,30 +3,6 @@
 
 	if (!isset($page_root)) $page_root = "index.php";
 
-	//-------------------------- CONSTANTE BDD ----------------------------------------------------------------------------//
-	$ini_parse = new \core\iniparser\IniParser();
-	$ini = $ini_parse->getParse("config/config.ini");
-
-	if ($ini["developpment"] == 1) {
-		$tab = "dev";
-	}
-	else {
-		$tab = "prod";
-	}
-
-	define('DB_TYPE', $ini[$tab]["DB_TYPE"]);
-	define('DB_NAME', $ini[$tab]["DB_NAME"]);
-	define('DB_USER', $ini[$tab]["DB_USER"]);
-	define('DB_PASS', $ini[$tab]["DB_PASS"]);
-	define('DB_HOST', $ini[$tab]["DB_HOST"]);
-
-	//pour les images ajoutées par des utilisateurs
-	define('IMGROOT', "http://".$_SERVER['SERVER_NAME'].$ini[$tab]["IMGROOT"]);
-	define('ROOTCKFINDER', $ini[$tab]["ROOTCKFINDER"]);
-	//-------------------------- FIN CONSTANTE BDD ----------------------------------------------------------------------------//
-
-
-
 	//-------------------------- CONSTANTE POUR LES ROUTES ----------------------------------------------------------------------------//
 	//definit le chemin vers la racine du projet (depuis racine serveur web
 	define('WEBROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_NAME']));
@@ -58,6 +34,42 @@
 	//definit la route vers le dossier temporaire
 	define('TEMPROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."temp/");
 	//-------------------------- FIN CONSTANTE POUR LES ROUTES ----------------------------------------------------------------------------//
+
+
+
+	//-------------------------- CONSTANTE BDD ----------------------------------------------------------------------------//
+	$ini_parse = new \core\iniparser\IniParser();
+
+	//on test si on a bien le fichier de config. sinon on est sur une nouvelle installation
+	if (file_exists(ROOT."config/config.ini") == true) {
+		$ini = $ini_parse->getParse("config/config.ini");
+
+		//si l'installation est à 1 cela veut dire que l'on doit ainstaller le site
+		if ($ini["installation"] == 1) {
+			header("location:".WEBROOT."installation");
+		}
+	}
+	else {
+		header("location:".WEBROOT."installation");
+	}
+
+	if ($ini["developpment"] == 1) {
+		$tab = "dev";
+	}
+	else {
+		$tab = "prod";
+	}
+
+	define('DB_TYPE', $ini[$tab]["DB_TYPE"]);
+	define('DB_NAME', $ini[$tab]["DB_NAME"]);
+	define('DB_USER', $ini[$tab]["DB_USER"]);
+	define('DB_PASS', $ini[$tab]["DB_PASS"]);
+	define('DB_HOST', $ini[$tab]["DB_HOST"]);
+
+	//pour les images ajoutées par des utilisateurs
+	define('IMGROOT', "http://".$_SERVER['SERVER_NAME'].$ini[$tab]["IMGROOT"]);
+	define('ROOTCKFINDER', $ini[$tab]["ROOTCKFINDER"]);
+	//-------------------------- FIN CONSTANTE BDD ----------------------------------------------------------------------------//
 
 
 
