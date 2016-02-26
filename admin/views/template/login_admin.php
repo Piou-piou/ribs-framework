@@ -74,6 +74,5 @@
 		<!-- scripts particules -->
 		<script src="<?=WEBROOT?>admin/views/template/js/login/particles.js"></script>
 		<script src="<?=WEBROOT?>admin/views/template/js/login//app.js"></script>
-		<!--<script src="js/lib/stats.js"></script>-->
 	</body>
 </html>
