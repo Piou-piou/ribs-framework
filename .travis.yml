@@ -1,1 +1,6 @@
 language: php
+
+before_script:
+  - composer install --dev
+
+script: phpunit --coverage-text
