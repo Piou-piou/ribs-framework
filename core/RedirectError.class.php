@@ -1,12 +1,13 @@
 <?php
 	namespace core;
 
-	use core\functions\ChaineCaractere;
-	use core\HTML\flashmessage\FlashMessage;
 	use core\modules\RouterModule;
 
 	class RedirectError {
 
+		/**
+		 * @param integer $type
+		 */
 		public static function Redirect($type) {
 			if ($type == 404) {
 				header("HTTP/1.0 404 Not Found");

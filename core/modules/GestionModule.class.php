@@ -133,7 +133,7 @@
 
 		/**
 		 * @param $nom_module
-		 * @return bool
+		 * @return boolean|null
 		 * return true si le module est activer sinon false
 		 */
 		public static function getModuleActiver($nom_module) {
@@ -153,7 +153,7 @@
 
 		/**
 		 * @param $nom_module
-		 * @return bool
+		 * @return boolean|null
 		 * fonction qui permet de savoir si un module est à jour ou non
 		 * si a jour renvoi true sinon renvoi false
 		 */

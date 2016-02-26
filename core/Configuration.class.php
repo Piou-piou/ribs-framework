@@ -2,8 +2,6 @@
     namespace core;
 
 
-    use core\HTML\flashmessage\FlashMessage;
-
 	class Configuration {
 		//pour la configuration générale du site
         private $nom_site; //-> nom du site

@@ -2,8 +2,6 @@
 	namespace core\auth;
 
 
-	use core\images\Resize;
-
 	class Membre {
 		protected $id_identite;
 		protected $nom;

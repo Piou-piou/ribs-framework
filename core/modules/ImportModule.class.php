@@ -49,6 +49,7 @@
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		/**
 		 * @param $url_module
+		 * @param boolean $update
 		 * fonction qui permets d'importer un module dans notre site internet
 		 */
 		public function setImportModule($url_module, $update=null) {
@@ -226,7 +227,7 @@
 		}
 
 		/**
-		 * @param $url
+		 * @param string $url
 		 * fonction qui permet de supprmer un dossier avec toute son abrorescence en fonction d'une URL
 		 */
 		private function supprimerDossier($url) {

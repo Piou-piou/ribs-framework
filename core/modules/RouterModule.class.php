@@ -4,7 +4,6 @@
 
 	use core\App;
 	use core\functions\ChaineCaractere;
-	use core\HTML\flashmessage\FlashMessage;
 
 	class RouterModule {
 		//varaibles de base de config

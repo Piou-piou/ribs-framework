@@ -25,6 +25,10 @@
 		    private $height;
 			private $imageResized;
 
+			/**
+			 * Resize constructor.
+			 * @param null|string $fileName
+			 */
 			function __construct($fileName)
 			{
 				// *** Open up the file
@@ -84,7 +88,12 @@
 			}
 
 			## --------------------------------------------------------
-			
+			/**
+			 * @param $newWidth
+			 * @param $newHeight
+			 * @param string $option
+			 * @return array
+			 */
 			private function getDimensions($newWidth, $newHeight, $option)
 			{
 
@@ -202,7 +211,10 @@
 			}
 
 			## --------------------------------------------------------
-
+			/**
+			 * @param string $savePath
+			 * @param string $imageQuality
+			 */
 			public function saveImage($savePath, $imageQuality="100")
 			{
 				// *** Get extension

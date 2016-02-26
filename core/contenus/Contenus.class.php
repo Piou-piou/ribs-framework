@@ -1,7 +1,6 @@
 <?php
 	namespace core\contenus;
 
-	use core\functions\ChaineCaractere;
 	use core\RedirectError;
 
 

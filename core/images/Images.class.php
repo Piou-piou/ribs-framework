@@ -3,7 +3,6 @@
 	namespace core\images;
 
 	use core\App;
-	use core\HTML\flashmessage\FlashMessage;
 
 	class Images {
 		//initialisée pour le bon fonctionnement de la class
@@ -77,7 +76,7 @@
 		 * @return null|boolean -> renvoi false si err sinon renvoi le chemin vers l'img
 		 */
 		public function setEnvoyerImage($name, $old_image_req=null, $autorize_empty=1, $delete_old_img=1) {
-			$dbc = \core\App::getDb();
+			$dbc = App::getDb();
 
 			$this->old_image = null;
 			$this->chemin_image = null;
@@ -171,8 +170,6 @@
 			if (($delete_old == 1) && ($req_img == null) && ($this->chemin_image != "")) {
 				unlink($this->chemin_image);
 			}
-
-			/*return $image;*/
 		}
 
 
