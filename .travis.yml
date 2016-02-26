@@ -1,5 +1,4 @@
 language: php
-<<<<<<< HEAD
 
 php:
   - 5.6
@@ -10,5 +9,3 @@ before_script:
   - composer install --dev
 
 script: phpunit --coverage-text
-=======
->>>>>>> origin/master
