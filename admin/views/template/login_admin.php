@@ -17,7 +17,6 @@
 	</head>
 	<?=core\HTML\flashmessage\FlashMessage::getFlash();?>
 	<body class="login">
-		<!-- count particles -->
 		<div id="particles-js"></div>
 
 		<div class="inner">
