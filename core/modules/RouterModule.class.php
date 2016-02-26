@@ -89,7 +89,7 @@
 				$test_module1 = ChaineCaractere::FindInString($url, str_replace("/", "", $obj->url));
 				$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);
 
-				if ((($test_module == true) || ($test_module1 == true)) && ($module_activer == true)) {
+				if ((($test_module === true) || ($test_module1 === true)) && ($module_activer === true)) {
 					$error = false;
 					break;
 				}
@@ -98,7 +98,7 @@
 				}
 			}
 
-			if ($error == true) {
+			if ($error === true) {
 				return false;
 			}
 			else {

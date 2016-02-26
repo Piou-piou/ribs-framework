@@ -67,22 +67,6 @@
 						<label class="label" for="parent_texte">Parent de la page</label>
 						<input type="hidden" name="parent" value="<?=$parent_courant?>"/>
 						<input type="text" name="parent_texte" value="<?=$texte_parent_courant?>"/>
-
-						<!--<div id="liste-parent" class="liste-parent">
-							<?php /*for ($i=0 ; $i<count($id_page) ; $i++): */?>
-								<?php /*if (($parent[$i] == 0) && ($id_page[$i] != $id_page_courante)): */?>
-									<li id-page="<?/*=$id_page[$i]*/?>"><?/*=$titre[$i]*/?>
-										<ul>
-											<?php /*for ($j=0 ; $j<count($id_page) ; $j++): */?>
-												<?php /*if (($parent[$j] == $id_page[$i]) && ($id_page[$i] != $id_page_courante)): */?>
-													<li id-page="<?/*=$id_page[$j]*/?>"><?/*=$titre[$j]*/?></li>
-												<?php /*endif;*/?>
-											<?php /*endfor;*/?>
-										</ul>
-									</li>
-								<?php /*endif;*/?>
-							<?php /*endfor;*/?>
-						</div>-->
 					</div>
 				</div>
 			</section>

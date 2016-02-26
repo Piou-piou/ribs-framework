@@ -239,7 +239,7 @@
 						}
 					}
 
-					if ((isset($set_next)) && ($set_next == true)) {
+					if ((isset($set_next)) && ($set_next === true)) {
 						$value = [
 							"next_check" => $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"),
 							"id_module" => $obj->ID_module

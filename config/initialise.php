@@ -41,7 +41,7 @@
 	$ini_parse = new \core\iniparser\IniParser();
 
 	//on test si on a bien le fichier de config. sinon on est sur une nouvelle installation
-	if (file_exists(ROOT."config/config.ini") == true) {
+	if (file_exists(ROOT."config/config.ini") === true) {
 		$ini = $ini_parse->getParse("config/config.ini");
 
 		//si l'installation est à 1 cela veut dire que l'on doit ainstaller le site

@@ -105,7 +105,7 @@
 				}
 			}
 
-			if ($cache->setStart() == false) {
+			if ($cache->setStart() === false) {
 				require("app/controller/initialise_all.php");
 				require("app/views/template/principal.php");
 			}
@@ -118,4 +118,3 @@
 		require("app/views/template/principal.php");
 	}
 	//--------------------------------------------- FIN ROUTING -------------------------------------------------------//
-?>

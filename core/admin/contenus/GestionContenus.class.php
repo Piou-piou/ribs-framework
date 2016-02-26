@@ -117,7 +117,7 @@
 			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
 			$err_titre_page = App::getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
 
-			if (App::getErreur() != true) {
+			if (App::getErreur() !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
 					$ordre = $this->getLastOrdre()+1;
@@ -194,7 +194,7 @@
 				$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
 				$err_titre_page = App::getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite, $this->id_page);
 
-				if (App::getErreur() != true) {
+				if (App::getErreur() !== true) {
 					$new_url = explode("/", $url);
 					$new_filename = ROOT."app/views/".end($new_url).".php";
 

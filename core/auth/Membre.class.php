@@ -192,7 +192,7 @@
 		 * @param string $mdp
 		 * @return integer
 		 */
-		function testpassword($mdp)	{
+		private function testpassword($mdp)	{
 			$longueur = strlen($mdp);
 			$point = 0;
 

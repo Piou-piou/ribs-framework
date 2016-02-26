@@ -134,7 +134,7 @@
 
 				//si pas d'erreur on met la date de next check a la semaine pro ++ on dit
 				//de delete l'ancienne version au next check
-				if (($this->erreur != true) || (!isset($this->erreur))) {
+				if (($this->erreur !== true) || (!isset($this->erreur))) {
 					$today = date("Y-m-d");
 					$today = new \DateTime($today);
 

@@ -43,13 +43,13 @@
 				$controller = false;
 			}
 
-			if (($count_query > 0) || ((!is_array($query)) && ($query > 0)) || ($controller == true)) {
+			if (($count_query > 0) || ((!is_array($query)) && ($query > 0)) || ($controller === true)) {
 				return true;
 			}
 			else {
 				$router = new RouterModule();
 
-				if ($router->getRouteModuleExist($url) == false) {
+				if ($router->getRouteModuleExist($url) === false) {
 					self::Redirect(404);
 				}
 

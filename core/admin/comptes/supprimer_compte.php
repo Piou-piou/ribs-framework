@@ -1,6 +1,7 @@
 <?php
 	namespace core\admin;
 
+	use core\auth\Membre;
 	use core\HTML\flashmessage\FlashMessage;
 
 	$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);

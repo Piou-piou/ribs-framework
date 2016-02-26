@@ -80,7 +80,7 @@
 				$query = $dbc->query("SELECT balise_title, meta_description, ID_page FROM page WHERE url LIKE '$url'");
 			}
 
-			if (RedirectError::testRedirect404($query, $url) == true) {
+			if (RedirectError::testRedirect404($query, $url) === true) {
 				foreach ($query as $obj) {
 					$this->id_page = $obj->ID_page;
 					$this->meta_description = $obj->meta_description;

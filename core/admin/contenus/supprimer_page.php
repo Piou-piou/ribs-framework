@@ -7,7 +7,7 @@
 
 			$gestion_contenu->setSupprimerPage($_GET['id']);
 
-			if ($gestion_contenu->getErreur() != true) {
+			if ($gestion_contenu->getErreur() !== true) {
 				\core\HTML\flashmessage\FlashMessage::setFlash("La page a bien été supprimée", "success");
 				header("location:".ADMWEBROOT."gestion-contenus/index");
 			}

@@ -113,7 +113,7 @@
 				if (count($query) > 0) {
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
 
-					if (($this->super_admin == 1) || ($acces == true) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null))) {
+					if (($this->super_admin == 1) || ($acces === true) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null))) {
 						return true;
 					}
 					else {
@@ -121,7 +121,7 @@
 					}
 				}
 				else {
-					if ($acces == true) {
+					if ($acces === true) {
 						return true;
 					}
 					else {

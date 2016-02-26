@@ -46,7 +46,7 @@
 
 		$gestion_contenu->setModifierPage($_POST['id_page'], $balise_title, $url, $meta_description, $titre_page, $parent, $contenu);
 
-		if ((\core\App::getErreur() != true) && ($gestion_contenu->getErreur() != true)) {
+		if ((\core\App::getErreur() !== true) && ($gestion_contenu->getErreur() !== true)) {
 			\core\HTML\flashmessage\FlashMessage::setFlash("La page ".$_POST['titre_page']." a été mise à jour", "success");
 		}
 	}

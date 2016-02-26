@@ -16,7 +16,7 @@
 
 		include("message.inc.php");
 
-		if ($mail->setEnvoyerMail($objet, $message) == true) {
+		if ($mail->setEnvoyerMail($objet, $message) === true) {
 			\core\HTML\flashmessage\FlashMessage::setFlash("Votre message a été correctement envoyé au support et sera traité au plus vite", "success");
 		}
 		else {

@@ -14,8 +14,8 @@ RewriteCond %{REQUEST_URI} installation$
 RewriteRule ([a-zA-Z0-9\-\_\/]*)$ installation.php [L,QSA]
 
 #page installation/qqch
-RewriteCond %{REQUEST_URI} installation/(.*)$
-RewriteRule installation/([a-zA-Z0-9\-\_\/]*) installation.php?page=$1 [L,QSA]
+#RewriteCond %{REQUEST_URI} installation/(.*)$
+#RewriteRule installation/([a-zA-Z0-9\-\_\/]*) installation.php?page=$1 [L,QSA]
 
 
 

@@ -63,7 +63,7 @@
 		 * @return mixed
 		 */
 		public static function ChangerFormatHeure($temps) {
-			if (ChaineCaractere::FindInString($temps, ":") == true) {
+			if (ChaineCaractere::FindInString($temps, ":") === true) {
 				$chaine = str_replace(":", "h", $temps);
 
 				return $chaine;
@@ -107,7 +107,7 @@
 
 				$jour_semaine = $jours[date("w", mktime(0, 0, 0, $mois_d, $jour_d, $annee_d))];
 
-				if ($abreger != NULL) {
+				if ($abreger !== NULL) {
 					return $jour_d." ".mb_substr($explode[2], 0, 3, "UTF-8")." ".$annee_d;
 				}
 				else {

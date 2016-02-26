@@ -23,7 +23,7 @@
         }
 
         public function getErrors() {
-            if ($this->errors) {
+            if (!empty($this->errors)) {
                 $errors = "<ul>";
                 foreach ($this->errors as $error) {
                     $errors .= "<li>".$error."</li>";
