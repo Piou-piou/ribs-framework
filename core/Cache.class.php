@@ -53,7 +53,7 @@
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		/**
-		 * @return bool
+		 * @return boolean|null
 		 * fonction verifie en bdd si on a déjà enregistrer le fichier en cache
 		 * si il ne l'est pas on le met, et si il y est et que reload cache == 0 on prend le fichier qui est en cache
 		 * sinon soit on update la bdd et on refait un cache soit on crée tout
@@ -132,7 +132,7 @@
 		}
 
 		/**
-		 * @param $contenu_fichier
+		 * @param string $contenu_fichier
 		 * fonction qui met en cache le contenu du fichier enregistrer dans le ob
 		 */
 		private function setCache($contenu_fichier) {

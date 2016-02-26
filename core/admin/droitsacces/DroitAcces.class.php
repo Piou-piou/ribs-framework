@@ -80,8 +80,7 @@
 		/**
 		 * pour savoir si en fonction des droits d'accès de l'utilisateur il peu ou non accéder à cete page
 		 * on passe outre les test si on est super admin
-		 * @param $page
-		 * @param null $id_page
+		 * @param string $page
 		 * @return bool
 		 */
 		public function getDroitAccesPage($page) {
@@ -143,7 +142,7 @@
 		 * si on est super admin on passe outre tous les tests
 		 * @param $droit
 		 * @param $id_page
-		 * @return bool
+		 * @return bool|null
 		 */
 		public function getDroitAccesContenu($droit, $id_page) {
 			$dbc = \core\App::getDb();

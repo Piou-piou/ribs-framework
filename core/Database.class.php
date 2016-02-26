@@ -95,7 +95,7 @@
 		 * @param $table
 		 * @param $champ
 		 * @param $value
-		 * @return bool
+		 * @return boolean|null
 		 */
 		public function rechercherEgalite($table, $champ, $value, $id_table=null, $id=null) {
 			if ($id == null) {

@@ -13,6 +13,10 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param null $id_identite
+		 * @return mixed
+		 */
 		public static function getParams($id_identite=null) {
 			if ($id_identite != null) {
 				$dbc = App::getDb();
@@ -101,7 +105,7 @@
 
 		/**
 		 * sauvegarde les parametres pour retrouver le mot de passe dans la bdd
-		 * @param $params
+		 * @param string $params
 		 * @param $id_identite
 		 */
 		public static function setSaveParams($params, $id_identite) {

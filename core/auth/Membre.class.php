@@ -82,6 +82,9 @@
 		
 		
 		//------------------------------ setter-----------------------------------
+		/**
+		 * @param null $id_identite
+		 */
 		public function setSupprimUser($id_identite=null) {
 			$dbc = \core\App::getDb();
 
@@ -107,7 +110,10 @@
 			
 			$dbc->prepare("DELETE FROM identite WHERE ID_identite=".$id_identite);
 		}
-		
+
+		/**
+		 * @param string $new_pseudo
+		 */
 		public function setPseudo($new_pseudo) {
 			$dbc = \core\App::getDb();
 			
@@ -135,7 +141,12 @@
 				$this->pseudo = $new_pseudo;
 			}
 		}
-		
+
+		/**
+		 * @param string $old_mdp
+		 * @param string $new_mdp
+		 * @param string $verif_new_mdp
+		 */
 		public function setMdp($old_mdp, $new_mdp, $verif_new_mdp) {
 			$dbc = \core\App::getDb();
 
@@ -173,96 +184,6 @@
 				}
 			}
 		}
-			
-		public function setImg($image) {
-			$dbc = \core\App::getDb();
-			$image = $_FILES['image']['name'];
-			$taille = $_FILES['image']['size'];
-			$tmp = $_FILES['image']['tmp_name'];
-			$extension = 'jpg'; // Extension du fichier sans le .
-			$extension2 = 'png';
-			$extension3 = 'jpeg';
-			$extension4 = 'gif';
-			$max_size = 20971520; // Taille max en octets du fichier (20Mo)
-			$width_max = 1920; // Largeur max de l'image en pixels
-			$height_max = 1200; // Hauteur max de l'image en pixels
-			
-			
-			if (empty($_FILES['image']['name'])) {
-				$query = $dbc->query("SELECT img_profil,img_com FROM identite where ID_identite=$this->id_identite");
-
-				foreach ($query as $obj) {
-					$oldimg_profil = $obj->img_profil;
-					$oldimg_com = $obj->img_com;
-				}
-
-				
-				$urlimg = $this->debut_lien."profil/defaut.png";
-				$dbc->query("UPDATE identite SET img_profil='$urlimg' WHERE ID_identite='$this->id_identite'");
-			}
-			else {
-				//test si il y a deja une img
-				$query = $dbc->query("SELECT img_profil FROM identite where ID_identite=$this->id_identite");
-
-				foreach ($query as $obj) {
-					$oldimg_profil = $obj->img_profil;
-				}
-				
-				//recuperation info sur img
-				$infos_img = getimagesize($_FILES['image']['tmp_name']);
-				
-				if(substr($image, -3) == (!$extension || !$extension2 || !$extension3 || !$extension4)) {
-					$err = "Votre image ne comporte pas l'extension .jpg";
-					$this->erreur = $err;
-				}
-				else if(($infos_img[0] >= $width_max) && ($infos_img[1] >= $height_max) && ($_FILES['image']['size'] >= $max_size)) {
-					$err = "Problème dans les dimensions ou taille de l\'image.";
-					$this->erreur = $err;
-				}
-				else {
-					$uniqid = uniqid();
-					$chemin_destination = '../images/profil/';
-					if(substr($image, -3) == ($extension)) {
-						move_uploaded_file($_FILES['image']['tmp_name'], $chemin_destination.$uniqid.".jpg");
-						$imageok = $uniqid.".jpg";
-					}
-					else if(substr($image, -3) == ($extension2)) {
-						move_uploaded_file($_FILES['image']['tmp_name'], $chemin_destination.$uniqid.".png");
-						$imageok = $uniqid.".png";
-					}
-					else if(substr($image, -3) == ($extension3)) {
-						move_uploaded_file($_FILES['image']['tmp_name'], $chemin_destination.$uniqid.".jpeg");
-						$imageok = $uniqid.".jpeg";
-					}
-					else {
-						move_uploaded_file($_FILES['image']['tmp_name'], $chemin_destination.$uniqid.".gif");
-						$imageok = $uniqid.".gif";
-					}
-					$urlimg = $this->debut_lien."profil/$imageok";
-					
-					
-					$img_com = new Resize($urlimg);
-					$img_com->resizeImage(60, 60, 'crop');
-					$img_comresiz = "resized_".$imageok;
-					$img_com->saveImage("../images/profil/$img_comresiz", 100);
-					$img_profil = $this->debut_lien."profil/$img_comresiz";
-					
-					$dbc->query("UPDATE identite SET img_profil='$img_profil' WHERE ID_identite='$this->id_identite'");
-					
-					unlink("../images/profil/".$imageok);
-				}
-			}
-			
-			if ($oldimg_profil != "") {
-				$oldimg_profil = explode("/", $oldimg_profil);
-				
-				if($oldimg_profil[7] == "defaut.png") {
-				}
-				else {
-					unlink("../images/profil/".$oldimg_profil[7]);
-				}
-			}
-		}
 		//------------------------------ fin setter -----------------------------------
 
 
@@ -271,7 +192,7 @@
 		/**
 		 * Fonction  qui permet de verifier la securite d'un mdp
 		 * @param string $mdp
-		 * @return float
+		 * @return integer
 		 */
 		function testpassword($mdp)	{
 			$longueur = strlen($mdp);

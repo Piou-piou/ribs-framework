@@ -46,6 +46,10 @@
 			return $this->erreur;;
 		}
 
+		/**
+		 * @param $value
+		 * @return bool
+		 */
 		protected function getTestRequired($value) {
 			if (($value == "") || ($value == null) || (strlen($value) == 0)) {
 				return false;
@@ -55,6 +59,11 @@
 			}
 		}
 
+		/**
+		 * @param $value
+		 * @param integer $longeur
+		 * @return bool
+		 */
 		protected function getTestLongueur($value, $longeur) {
 			if (strlen($value) > $longeur) {
 				return true;
@@ -64,6 +73,10 @@
 			}
 		}
 
+		/**
+		 * @param $value
+		 * @return bool
+		 */
 		protected function getTestInt($value) {
 			if (is_numeric($value)) {
 				return true;

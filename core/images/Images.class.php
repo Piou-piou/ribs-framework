@@ -74,7 +74,7 @@
 		 * @param $old_image_req
 		 * @param int $autorize_empty
 		 * @param int $delete_old_img
-		 * @return bool|string -> renvoi false si err sinon renvoi le chemin vers l'img
+		 * @return null|boolean -> renvoi false si err sinon renvoi le chemin vers l'img
 		 */
 		public function setEnvoyerImage($name, $old_image_req=null, $autorize_empty=1, $delete_old_img=1) {
 			$dbc = \core\App::getDb();
@@ -178,9 +178,8 @@
 
 		/**
 		 * fonction qui permet de supprimer une image en fonction d'une requete ou de la variable old_image
-		 * @param null $chemin_img
-		 * @param null $req_image
-		 * @return bool
+		 * @param null|string $nom_image
+		 * @return boolean|null
 		 */
 		public function setDeleteImage($nom_image=null) {
 			//si pas de requete et qu'on a une old_img on la supprime
