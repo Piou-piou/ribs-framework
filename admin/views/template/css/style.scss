@@ -138,6 +138,17 @@ a {
 .login {
 	background-color: $bg-general;
 
+	#particles-js{
+		width: 100%;
+		height: 100%;
+		/*background-color: #b61924;*/
+		background-image: url('');
+		background-size: cover;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		position: absolute;
+	}
+
 	.login-form {
 		opacity: 0;
 		height: 0;
@@ -146,6 +157,7 @@ a {
 		background-color: #EBEDF1;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, .19),
 		0 6px 6px rgba(0, 0, 0, .23);
+		display: none;
 
 		&.active {
 			-webkit-animation: cardEnter 0.75s ease-in-out 0.5s;
@@ -153,9 +165,12 @@ a {
 			-webkit-animation-fill-mode: both;
 			animation-fill-mode: both;
 			height: auto;
-			margin: 50px auto;
+			margin: 0px auto;
 			padding: 20px;
 			opacity: 1;
+			display: block;
+			position: relative;
+			top: 50px;
 		}
 
 		h1 {

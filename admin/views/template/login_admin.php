@@ -17,6 +17,9 @@
 	</head>
 	<?=core\HTML\flashmessage\FlashMessage::getFlash();?>
 	<body class="login">
+		<!-- count particles -->
+		<div id="particles-js"></div>
+
 		<div class="inner">
 			<div class="login-form active" id="login">
 				<form  action="<?=ADMWEBROOT?>controller/core/auth/login" method="POST">
@@ -68,5 +71,10 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- scripts particules -->
+		<script src="<?=WEBROOT?>admin/views/template/js/login/particles.js"></script>
+		<script src="<?=WEBROOT?>admin/views/template/js/login//app.js"></script>
+		<!--<script src="js/lib/stats.js"></script>-->
 	</body>
 </html>
