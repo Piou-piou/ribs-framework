@@ -1,5 +1,7 @@
 # Ribs Framework
 
+[![Build Status](https://scrutinizer-ci.com/g/Piou-piou/ribs-framwork/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Piou-piou/ribs-framwork/build-status/master)
+
 **Ribs is a framework which allow you to create fully personalisable and administrable pages !**
 
 In this framework you can add an illimited number of modules created by yourself or the community :)
