@@ -31,4 +31,3 @@
 	}
 
 	header("location:".ADMWEBROOT."gestion-comptes/creer-utilisateur");
-?>

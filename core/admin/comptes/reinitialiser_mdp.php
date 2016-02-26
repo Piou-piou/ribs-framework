@@ -8,4 +8,3 @@
 	$admin->setReinitialiserMdp($id_identite);
 
 	header("location:".ADMWEBROOT."gestion-comptes/index");
-?>

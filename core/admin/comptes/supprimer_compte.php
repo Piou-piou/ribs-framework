@@ -15,4 +15,3 @@
 	FlashMessage::setFlash("Le compte de $prenom $nom a bien été supprimé", "success");
 
 	header("location:".ADMWEBROOT."gestion-comptes/index");
-?>

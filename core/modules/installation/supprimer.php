@@ -3,4 +3,3 @@
 	$import_module->setSupprimerModule($_GET['id_module']);
 
 	echo("success");
-?>

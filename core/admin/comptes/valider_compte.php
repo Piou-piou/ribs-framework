@@ -12,4 +12,3 @@
 	FlashMessage::setFlash("Le compte de ".$admin->getPrenom()." ".$admin->getNom()." a bien été validé", "success");
 
 	header("location:".ADMWEBROOT."gestion-comptes/index");
-?>

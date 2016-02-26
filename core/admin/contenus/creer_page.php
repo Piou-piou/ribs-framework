@@ -10,4 +10,3 @@
 	else {
 		header("location:".ADMWEBROOT."gestion-contenus/creer-une-page");
 	}
-?>

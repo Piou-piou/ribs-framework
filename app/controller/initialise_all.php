@@ -14,4 +14,3 @@
 	if (\core\modules\GestionModule::getModuleActiver("galerie photo") == true) {
 		$gphoto = new \modules\galerie_photo\app\controller\GaleriePhoto(null, 1);
 	}
-?>

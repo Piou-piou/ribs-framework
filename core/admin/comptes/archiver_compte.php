@@ -16,4 +16,3 @@
 	FlashMessage::setFlash("Le compte de $prenom $nom a bien été archivé", "success");
 
 	header("location:".ADMWEBROOT."gestion-comptes/index");
-?>

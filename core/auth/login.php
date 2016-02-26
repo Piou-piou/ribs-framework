@@ -11,4 +11,3 @@
 	else {
 		Connexion::setLogin($pseudo, $mdp, WEBROOT."login", WEBROOT."index.php");
 	}
-?>

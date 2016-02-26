@@ -36,6 +36,3 @@
 			header("location:".ADMWEBROOT."gestion-contenus/index");
 		}
 	}
-
-
-?>

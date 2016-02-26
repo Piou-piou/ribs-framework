@@ -40,7 +40,10 @@
 			}
 
 			## --------------------------------------------------------
-
+			/**
+			 * @param null|string $file
+			 * @return bool|resource
+			 */
 			private function openImage($file)
 			{
 				// *** Get extension

@@ -3,4 +3,3 @@
 	$import_module->setImportModule($_GET['url']);
 
 	echo("success");
-?>

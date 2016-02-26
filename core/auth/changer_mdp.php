@@ -36,5 +36,3 @@
 			FlashMessage::setFlash("Votre mot de passe a été changé avec succès, vous pouvez vous reconnecter avec votre nouveau mot de passe", "info");
 		}
 	}
-
-?>

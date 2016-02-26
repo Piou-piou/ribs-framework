@@ -174,4 +174,3 @@
 		}
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
-?>

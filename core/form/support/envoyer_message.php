@@ -25,4 +25,3 @@
 	}
 
 	header("location:".ADMWEBROOT."contacter-support");
-?>

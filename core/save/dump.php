@@ -15,4 +15,3 @@
 			echo("impossible de faire une save ".$e->getMessage());
 		}
 	}
-?>

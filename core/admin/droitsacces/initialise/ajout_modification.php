@@ -24,4 +24,3 @@
 		$titre_courant = null;
 		$article = null;
 	}
-?>

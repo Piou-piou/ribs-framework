@@ -55,4 +55,3 @@
 	}
 
 	header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_POST['id_page']);
-?>

@@ -3,4 +3,3 @@
 
 
 	Connexion::setDeconnexion(WEBROOT."index.php");
-?>

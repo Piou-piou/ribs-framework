@@ -4,4 +4,3 @@
 	$ckeditor = new CKEditor();
 	$ckeditor->basePath	= WEBROOT.'libs/ckeditor/';
 	CKFinder::SetupCKEditor($ckeditor, WEBROOT.'libs/ckfinder/');
-?>

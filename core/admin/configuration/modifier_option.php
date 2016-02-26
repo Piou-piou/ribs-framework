@@ -3,4 +3,3 @@
 	$config->setModificerOption($_GET['option'], $_GET['activer']);
 
 	echo("success");
-?>
