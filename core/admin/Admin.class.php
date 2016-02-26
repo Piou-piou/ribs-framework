@@ -2,7 +2,6 @@
 	namespace core\admin;
 
 	use core\App;
-	use core\auth\Connexion;
 	use core\auth\Encrypt;
 	use core\auth\Membre;
 	use core\Configuration;
