@@ -13,7 +13,7 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($init_all=0) {
+		public function __construct($init_all = 0) {
 			$dbc = \core\App::getDb();
 
 			if ($init_all == 1) {
@@ -119,7 +119,7 @@
 			if (App::getErreur() !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
-					$ordre = $this->getLastOrdre()+1;
+					$ordre = $this->getLastOrdre() + 1;
 					$value = array(
 						"balise_title" => $balise_title,
 						"url" => $url,

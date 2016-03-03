@@ -14,7 +14,7 @@
 
 
         //-------------------------- GETTER ----------------------------------------------------------------------------//
-        public function Check($name, $rule, $option=null) {
+        public function Check($name, $rule, $option = null) {
             $validator = "validate".ucfirst($rule);
 
             if (!$this->$validator($name, $option)) {

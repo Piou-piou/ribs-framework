@@ -15,7 +15,7 @@
 		 * @param string $message message a affiche dans la popup d'erreur
 		 * @param string $type type du message (error, success, info)
 		 */
-		public static function setFlash($message, $type="error") {
+		public static function setFlash($message, $type = "error") {
 			if (session_id() == "") {
 				session_start();
 			}

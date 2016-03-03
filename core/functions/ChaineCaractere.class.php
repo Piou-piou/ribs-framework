@@ -15,9 +15,9 @@
 		public static function random($longueur) {
 			$string = "";
 			$chaine = "abcdefghijklmnpqrstuvwxyz0123456789";
-			srand((double)microtime()*1000000);
-			for($i=0; $i<$longueur; $i++) {
-				$string .= $chaine[rand()%strlen($chaine)];
+			srand((double)microtime() * 1000000);
+			for ($i = 0; $i < $longueur; $i++) {
+				$string .= $chaine[rand() % strlen($chaine)];
 			}
 			return $string;
 		}
@@ -28,7 +28,7 @@
 		 * @return mixed
 		 */
 		public static function setUrl($url) {
-			$search =  array(' ', 'é', '"\"', 'è', '"', '?', '*', "'", '@', ':', '&', '#', 'à', '=', '+', '°', '!', '%', '|', '$', '£');
+			$search = array(' ', 'é', '"\"', 'è', '"', '?', '*', "'", '@', ':', '&', '#', 'à', '=', '+', '°', '!', '%', '|', '$', '£');
 			$replace = array('-', 'e', '-', 'e', '-', '-', '-', '-', '-', '-', '-', '-', 'a', '-', '-', '-', '-', '%', '-', '-', '-');
 
 			return strtolower(str_replace($search, $replace, $url));

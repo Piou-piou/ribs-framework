@@ -8,7 +8,7 @@
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 <script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
-<?php require_once('header.php');?>
+<?php require_once('header.php'); ?>
 
 <div class="inner">
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
@@ -20,7 +20,7 @@
 					<td>Le site est il toujours en développement</td>
 					<td>
 						<label for="developpement" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="developpement" name="developpement" <?php if ($developpement == 1): ?>checked<?php endif;?>>
+							<input type="checkbox" class="test-check" id="developpement" name="developpement" <?php if ($developpement == 1): ?>checked<?php endif; ?>>
 						</label>
 					</td>
 				</tr>

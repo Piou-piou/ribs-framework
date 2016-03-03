@@ -8,11 +8,11 @@
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 <script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
-<?php require_once(ROOT."admin/views/configuration/js/infos_generales.php");?>
-<?php require_once('header.php');?>
+<?php require_once(ROOT."admin/views/configuration/js/infos_generales.php"); ?>
+<?php require_once('header.php'); ?>
 
 <div class="inner">
-	<?php require_once(LIBSROOT."barre_chargement/index.php");?>
+	<?php require_once(LIBSROOT."barre_chargement/index.php"); ?>
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
 	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier" method="post">
 		<div class="contenu modifier-contenu">
@@ -77,7 +77,7 @@
 					<td>Responsive</td>
 					<td>
 						<label for="responsive" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="responsive" <?php if ($responsive == 1): ?>checked<?php endif;?>>
+							<input type="checkbox" class="test-check" id="responsive" <?php if ($responsive == 1): ?>checked<?php endif; ?>>
 						</label>
 					</td>
 				</tr>
@@ -85,7 +85,7 @@
 					<td>Contenu dynamique</td>
 					<td>
 						<label for="contenu_dynamique" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="contenu_dynamique" <?php if ($contenu_dynamique == 1): ?>checked<?php endif;?>>
+							<input type="checkbox" class="test-check" id="contenu_dynamique" <?php if ($contenu_dynamique == 1): ?>checked<?php endif; ?>>
 						</label>
 					</td>
 				</tr>
@@ -93,7 +93,7 @@
 					<td>Cache</td>
 					<td>
 						<label for="cache_config" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="cache_config" <?php if ($cache_config == 1): ?>checked<?php endif;?>>
+							<input type="checkbox" class="test-check" id="cache_config" <?php if ($cache_config == 1): ?>checked<?php endif; ?>>
 						</label>
 					</td>
 				</tr>

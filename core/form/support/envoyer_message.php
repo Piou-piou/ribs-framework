@@ -10,7 +10,7 @@
 	}
 	else {
 		$mail = new \core\mail\Mail($config->getMailAdministrateur());
-		$type= $_POST["type"];
+		$type = $_POST["type"];
 		$objet = $_POST['objet']." de la part de ".$_SERVER['HTTP_HOST'];
 		$demande = $_POST['demande'];
 

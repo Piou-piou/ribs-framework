@@ -3,11 +3,11 @@
 		<h1>Gestion des droits d'accès | toutes les listes</h1>
 	</div>
 </header>
-<?php include("header.php");?>
+<?php include("header.php"); ?>
 
 <div class="inner">
 	<div class="droit-acces">
-		<?php for ($i=0 ; $i<count($gestion_droit_acces->getIdListeDroitAcces()) ; $i++):?>
+		<?php for ($i = 0; $i < count($gestion_droit_acces->getIdListeDroitAcces()); $i++):?>
 			<div class="bloc">
 				<h2><?=$gestion_droit_acces->getNomListe()[$i]?></h2>
 
@@ -22,27 +22,27 @@
 
 					<div id="droit-acces-<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>-detail">
 						<h2>Liste des droits d'acces</h2>
-						<?php for ($j=0 ; $j<count($gestion_droit_acces->getDroitAcces()) ; $j++):?>
+						<?php for ($j = 0; $j < count($gestion_droit_acces->getDroitAcces()); $j++):?>
 							<h4><?=$gestion_droit_acces->getDroitAcces()[$j]?></h4>
-						<?php endfor;?>
+						<?php endfor; ?>
 					</div>
 					<div id="droit-acces-page-<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>-detail">
 						<h2>Liste des droits d'acces pour les pages</h2>
-						<?php for ($j=0 ; $j<count($gestion_droit_acces->getIdPage()) ; $j++):?>
+						<?php for ($j = 0; $j < count($gestion_droit_acces->getIdPage()); $j++):?>
 							<h4><?=$gestion_droit_acces->getTitrePage()[$j]?></h4>
-						<?php endfor;?>
+						<?php endfor; ?>
 					</div>
 					<div id="droit-acces-user-<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>-detail">
 						<h2>Liste utilisateurs dans cette liste</h2>
-						<?php for ($j=0 ; $j<count($gestion_droit_acces->getIdidentite()) ; $j++):?>
+						<?php for ($j = 0; $j < count($gestion_droit_acces->getIdidentite()); $j++):?>
 							<h4><?=$gestion_droit_acces->getPseudo()[$j]?></h4>
-						<?php endfor;?>
+						<?php endfor; ?>
 					</div>
 				</div>
 
 				<a href="<?=ADMWEBROOT?>gestion-droits-acces/modifier-liste?id_liste=<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>" titre="" class="modifier">Modifier cette liste</a>
 				<a href="controller/core/admin/droitacces/liste/supprimer?id_liste=<?=$gestion_droit_acces->getIdListeDroitAcces()[$i]?>" class="supprimer popup-delete">Supprimer cette liste</a>
 			</div>
-		<?php endfor;?>
+		<?php endfor; ?>
 	</div>
 </div>

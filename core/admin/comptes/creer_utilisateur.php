@@ -18,7 +18,7 @@
 		session_start();
 		$_SESSION['err_ajout_utilisateur'] = true;
 		$_SESSION['nom'] = $inscription->getNom();
-		$_SESSION['prenom']= $inscription->getPrenom();
+		$_SESSION['prenom'] = $inscription->getPrenom();
 		$_SESSION['pseudo'] = $inscription->getPseudo();
 		$_SESSION['mail'] = $inscription->getMail();
 		$_SESSION['acces_admin'] = $inscription->getAccesAdministration();

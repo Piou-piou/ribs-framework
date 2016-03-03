@@ -19,7 +19,7 @@
 		<script src="<?=LIBSWEBROOT?>input_type_admin/js/effet_input.js"></script>
 		<script src="<?=LIBSWEBROOT?>scrollbar/js/scrollbar.js"></script>
 	</head>
-	<?=\core\HTML\flashmessage\FlashMessage::getFlash();?>
+	<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body>
 		<nav class="menu active">
 			<div class="titre">
@@ -31,42 +31,42 @@
 					<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/mon-compte">Mon compte</a></li>
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<?php if($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
+					<?php if ($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
 						<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a></li>
-					<?php endif;?>
+					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<?php if($droit_acces->getDroitAccesPage("gestion-droits-acces/index") == true):?>
+					<?php if ($droit_acces->getDroitAccesPage("gestion-droits-acces/index") == true):?>
 						<li><i class="fa fa-lock"></i><a href="<?=ADMWEBROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
-					<?php endif;?>
+					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<?php if($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
+					<?php if ($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
 						<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a></li>
-					<?php endif;?>
+					<?php endif; ?>
 
 					<!-- pour afficher le menu des modules -->
-					<?php for ($i=0 ; $i<count($gestion_module->getUrl()) ; $i++):?>
-						<?php if((\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true) && ($droit_acces->getDroitAccesPage($gestion_module->getUrl()[$i]."index") == true)):?>
+					<?php for ($i = 0; $i < count($gestion_module->getUrl()); $i++):?>
+						<?php if ((\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true) && ($droit_acces->getDroitAccesPage($gestion_module->getUrl()[$i]."index") == true)):?>
 							<li>
 								<i class="fa <?=$gestion_module->getIcone()[$i]?>"></i>
 								<a href="<?=MODULEADMWEBROOT.$gestion_module->getUrl()[$i]?>index">Gestion <?=$gestion_module->getNom()[$i]?> (V<?=$gestion_module->getVersion()[$i]?>)</a>
 							</li>
-						<?php endif;?>
-					<?php endfor;?>
+						<?php endif; ?>
+					<?php endfor; ?>
 				</div>
 
 
 				<!-- lien fixes en bas de la page -->
 				<?php if ($droit_acces->getSuperAdmin() == 1):?>
-					<li class="notification <?php if ($admin->getNotification() == 1): ?> non-vue<?php endif;?>">
-						<i class="fa fa-exclamation <?php if ($admin->getNotification() == 1):?> animated infinite swing<?php endif;?>"></i>
+					<li class="notification <?php if ($admin->getNotification() == 1): ?> non-vue<?php endif; ?>">
+						<i class="fa fa-exclamation <?php if ($admin->getNotification() == 1):?> animated infinite swing<?php endif; ?>"></i>
 						<a href="<?=ADMWEBROOT?>notifications">Notifications systèmes</a>
 					</li>
-				<?php endif;?>
-				<?php if($droit_acces->getSuperAdmin() == 1):?>
+				<?php endif; ?>
+				<?php if ($droit_acces->getSuperAdmin() == 1):?>
 					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a></li>
-				<?php endif;?>
+				<?php endif; ?>
 				<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMWEBROOT?>contacter-support">Contacter le support</a></li>
 				<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/logout">Déconexion</a></li>
 			</ul>

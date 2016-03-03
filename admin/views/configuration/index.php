@@ -3,4 +3,4 @@
 		<h1>Configuration</h1>
 	</div>
 </header>
-<?php require_once('header.php');?>
+<?php require_once('header.php'); ?>

@@ -75,7 +75,7 @@
 		 * @param int $delete_old_img
 		 * @return null|boolean -> renvoi false si err sinon renvoi le chemin vers l'img
 		 */
-		public function setEnvoyerImage($name, $old_image_req=null, $autorize_empty=1, $delete_old_img=1) {
+		public function setEnvoyerImage($name, $old_image_req = null, $autorize_empty = 1, $delete_old_img = 1) {
 			$dbc = App::getDb();
 
 			$this->old_image = null;
@@ -145,7 +145,7 @@
 		 * @param null $req_img
 		 * @return string
 		 */
-		public function setResizeImage($width, $height, $prefixe, $delete_old=1, $req_img=null) {
+		public function setResizeImage($width, $height, $prefixe, $delete_old = 1, $req_img = null) {
 			if (($req_img == null) && ($this->chemin_image != "")) {
 				$this->getImage();
 
@@ -171,7 +171,7 @@
 		 * @param null|string $nom_image
 		 * @return boolean|null
 		 */
-		public function setDeleteImage($nom_image=null) {
+		public function setDeleteImage($nom_image = null) {
 			//si pas de requete et qu'on a une old_img on la supprime
 			if (($this->old_image != "") && ($nom_image === null)) {
 				$old_image = explode("/", $this->old_image);
@@ -186,7 +186,7 @@
 
 				if (is_array($nom_image)) {
 					$count = count($nom_image);
-					for ($i=0 ; $i<$count ; $i++) {
+					for ($i = 0; $i < $count; $i++) {
 						$chemin_img = $this->dossier_image."/".$nom_image[$i];
 
 						if (unlink($chemin_img)) {

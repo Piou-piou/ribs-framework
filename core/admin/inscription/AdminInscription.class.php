@@ -30,7 +30,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifAccesAdministration($value, $required=null) {
+		protected function setVerifAccesAdministration($value, $required = null) {
 			//on verifie que la valeur est bien un int
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
@@ -58,7 +58,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifListeDroitAcces($value, $required=null) {
+		protected function setVerifListeDroitAcces($value, $required = null) {
 			//on verifie que la valeur est bien un int
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {

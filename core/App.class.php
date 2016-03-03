@@ -15,7 +15,7 @@
     
     
         //-------------------------- GETTER ----------------------------------------------------------------------------//
-		public static function getErreur(){
+		public static function getErreur() {
 		    return self::$erreur;
 		}
 
@@ -25,7 +25,7 @@
 		 */
 		public static function getDb() {
 			if (self::$database == null) {
-				self::$database =  new Database(DB_TYPE, DB_NAME, DB_USER, DB_PASS, DB_HOST);
+				self::$database = new Database(DB_TYPE, DB_NAME, DB_USER, DB_PASS, DB_HOST);
 			}
 			return self::$database;
 		}
@@ -42,7 +42,7 @@
 		 * @param null $value_id_table
 		 * @return string
 		 */
-		public static function getVerifChamp($nom_table, $nom_id_table, $champ, $value, $limit_char, $err_char, $err_egalite, $value_id_table=null) {
+		public static function getVerifChamp($nom_table, $nom_id_table, $champ, $value, $limit_char, $err_char, $err_egalite, $value_id_table = null) {
 			$dbc = self::getDb();
 
 			if (strlen(utf8_decode($value)) > $limit_char) {

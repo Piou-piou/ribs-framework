@@ -7,7 +7,7 @@
     
     
         //-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-        public function __construct($mail=null) {
+        public function __construct($mail = null) {
             $this->mail = $mail;
         }
         //-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -41,13 +41,13 @@
          * @param null $destinataire -> si  null on emet le gerant du site car mail vient depuis l'admin
          * @return bool
          */
-        public function setEnvoyerMail($sujet, $message, $destinataire=null, $from=null) {
+        public function setEnvoyerMail($sujet, $message, $destinataire = null, $from = null) {
             //on récupere le mail du site
             $config = new \core\Configuration();
 
             if ($from == null) $from = $config->getMailSite();
 
-            $headers = 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $headers = 'Content-type: text/html; charset=utf-8'."\r\n";
             $headers .= "From: ".$from;
 
             //si pas de destinataire on envoi le mail au gérant du site car c'est un mail envoyé par le site lui même

@@ -42,7 +42,7 @@
 		 * @param $id_identite
 		 * @return string
 		 */
-		public static function setEncryptMdp($mdp, $id_identite=null) {
+		public static function setEncryptMdp($mdp, $id_identite = null) {
 			$encrypt_str = ChaineCaractere::random(154);
 
 			//on cache le mdp
@@ -52,9 +52,9 @@
 			$longeur_mdp = strlen($mdp);
 
 			//on va couper le mot de passe en 2 suivant un nombre aleatoire
-			$nb_aleatoire_mdp = rand(3, $longeur_mdp-2);
-			$bout1_mdp = mb_substr($mdp, 0, $longeur_mdp/2, "UTF-8");
-			$bout2_mdp = mb_substr($mdp, $longeur_mdp/2, $longeur_mdp, "UTF-8");
+			$nb_aleatoire_mdp = rand(3, $longeur_mdp - 2);
+			$bout1_mdp = mb_substr($mdp, 0, $longeur_mdp / 2, "UTF-8");
+			$bout2_mdp = mb_substr($mdp, $longeur_mdp / 2, $longeur_mdp, "UTF-8");
 
 			//on stock la taille des bouts pour pouvoir les décrypter
 			$taille_bout1 = strlen($bout1_mdp);
@@ -63,7 +63,7 @@
 			//on insere le premier bout aleatoirement dans le hashmdp
 			//on calcul sa longeur total (celle duhash + la logneur du mdp que l'on va rajouter dedans)
 			$longueur_hash = strlen($encrypt_str);
-			$debut_bout1 = rand(0, $longueur_hash/2);
+			$debut_bout1 = rand(0, $longueur_hash / 2);
 
 			//on rajouter le premier bout dans le mot de passe + recalcule de la longeur du hash avec le mdp add
 			$encrypt_str = mb_substr($encrypt_str, 0, $debut_bout1).$bout1_mdp.mb_substr($encrypt_str, $debut_bout1, $longueur_hash);
@@ -71,7 +71,7 @@
 			//on insere le second bout aleatoirement dans le hashmdp
 			//on calcul sa longeur total (celle duhash + la logneur premier bout du mdp que l'on va rajouter dedans)
 			$longueur_hash = strlen($encrypt_str);
-			$debut_bout2 = rand($longueur_hash/2, $longueur_hash);
+			$debut_bout2 = rand($longueur_hash / 2, $longueur_hash);
 
 			//on rajoute le deuxieme
 			$mdp_encrypt = mb_substr($encrypt_str, 0, $debut_bout2).$bout2_mdp.mb_substr($encrypt_str, $debut_bout2, $longueur_hash);

@@ -17,7 +17,7 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($init_all=0) {
+		public function __construct($init_all = 0) {
 			$dbc = \core\App::getDb();
 
 			if ($init_all == 1) {
@@ -70,7 +70,7 @@
 		 * pour récupérer l'en tete d'une page (balise title ++ meta description)
 		 * @param $id_page
 		 */
-		public function getHeadPage($id_page, $url=null) {
+		public function getHeadPage($id_page, $url = null) {
 			$dbc = \core\App::getDb();
 
 			if ($id_page != 0) {
@@ -93,7 +93,7 @@
 		 * pour récupérer une page en particulier
 		 * @param $id_page
 		 */
-		public function getContenuPage($id_page=null) {
+		public function getContenuPage($id_page = null) {
 			$dbc = \core\App::getDb();
 
 			if ($id_page == null) {
@@ -119,7 +119,7 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		protected function setMenu($id_page, $titre, $balise_title, $url, $parent ){
+		protected function setMenu($id_page, $titre, $balise_title, $url, $parent) {
 			$this->id_page = $id_page;
 			$this->titre = $titre;
 			$this->balise_title = $balise_title;

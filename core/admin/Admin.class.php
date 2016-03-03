@@ -43,7 +43,7 @@
 		 * Pour récupérer la liste de tous les users afin d'activer un compte ou modifier des trucs dessus
 		 * si archiver == null on récupère les utilisateurs actifs sur le site sinon on récupere les utilisateurs archives
 		 */
-		public function getAllUser($archiver=null) {
+		public function getAllUser($archiver = null) {
 			$dbc = \core\App::getDb();
 			$this->setAllUser(null, null, null, null, null, null, null);
 
@@ -228,7 +228,7 @@
 
 			if ($oldimg_profil != "") {
 				$oldimg_profil = explode("/", $oldimg_profil);
-				if($oldimg_profil[7] != "defaut.png") {
+				if ($oldimg_profil[7] != "defaut.png") {
 					unlink("../../images/profil/".$oldimg_profil[7]);
 				}
 			}

@@ -22,13 +22,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php for ($i=0 ; $i<count($gestion_module->getNom()) ; $i++):?>
+					<?php for ($i = 0; $i < count($gestion_module->getNom()); $i++):?>
 						<tr>
 							<td><?=$gestion_module->getNom()[$i]?></td>
 							<td><?=$gestion_module->getVersion()[$i]?></td>
 							<td><?=$gestion_module->getOnlineVersion()[$i]?></td>
 						</tr>
-					<?php endfor;?>
+					<?php endfor; ?>
 				</tbody>
 			</table>
 
@@ -37,6 +37,6 @@
 				soit par le menu ou en cliquant sur le lien ci-dessous.
 			</p>
 			<a href="<?=ADMWEBROOT?>configuration/module" class="submit-contenu submit-standard no-shadow inline ml0">Configuration des modules</a>
-		<?php endif;?>
+		<?php endif; ?>
 	</div>
 </div>

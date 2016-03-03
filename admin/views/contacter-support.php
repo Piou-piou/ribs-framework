@@ -4,7 +4,7 @@
 	</div>
 </header>
 
-<?php require_once("admin/controller/ckeditor.php");?>
+<?php require_once("admin/controller/ckeditor.php"); ?>
 
 
 <form action="<?=ADMWEBROOT?>controller/core/form/support/envoyer_message.php" method="post">
