@@ -43,16 +43,16 @@
 	if (isset($_GET['page'])) {
 		$page = $_GET['page'];
 
-		$find   = 'controller/';
+		$find = 'controller/';
 		$pos = strpos($page, $find);
 
 		if ($pos !== false) {
 			//recherche savoir si le fichier appele fait parti du core du systeme pour construire le lien
-			$find_core   = 'controller/core/';
+			$find_core = 'controller/core/';
 			$core = strpos($page, $find_core);
 
 			//recherche savoir si le fichier appele est un module du systeme pour construire le lien
-			$find_module   = 'controller/modules/';
+			$find_module = 'controller/modules/';
 			$module = strpos($page, $find_module);
 
 			$explode = explode("/", $page, 2);

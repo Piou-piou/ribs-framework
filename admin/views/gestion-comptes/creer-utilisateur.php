@@ -1,4 +1,4 @@
-<?=\core\HTML\flashmessage\FlashMessage::getFlash();?>
+<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 <header>
 	<div class="inner">
 		<h1>Créer un compte utilisateur</h1>

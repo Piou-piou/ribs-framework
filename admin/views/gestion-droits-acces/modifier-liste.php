@@ -3,7 +3,7 @@
 		<h1>Gestion des droits d'accès | modifier la liste : </h1>
 	</div>
 </header>
-<?php include("header.php");?>
+<?php include("header.php"); ?>
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/modules/blog/article/modifier" method="post">
 	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-pencil"></i>Modifier</button>
