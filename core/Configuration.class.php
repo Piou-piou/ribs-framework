@@ -1,14 +1,14 @@
 <?php
-    namespace core;
+	namespace core;
 
 
 	class Configuration {
 		//pour la configuration générale du site
-        private $nom_site; //-> nom du site
-        private $mail_site; //-> pour le gérant du site contact@nomdedomaine;com
-        private $gerant_site; //->nom du gérant du site
-        private $url_site; //-> url de site
-        private $mail_administrateur; //-> mail de l'administrateur web@clicand.com
+		private $nom_site; //-> nom du site
+		private $mail_site; //-> pour le gérant du site contact@nomdedomaine;com
+		private $gerant_site; //->nom du gérant du site
+		private $url_site; //-> url de site
+		private $mail_administrateur; //-> mail de l'administrateur web@clicand.com
 		private $last_save; //-> derniere sauvegarde de la bdd
 		private $acces_admin; //-> si == 1 on a acces à l'admin
 		private $contenu_dynamique; //->savoir si es contenus sont dynamique (stockés in DB)
@@ -21,24 +21,24 @@
 		private $activer_connexion;
 
 
-        //-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-        public function __construct() {
-            $dbc = \core\App::getDb();
+		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
+		public function __construct() {
+			$dbc = \core\App::getDb();
 
 			//pour la configuration générale du site
-            $query = $dbc->query("SELECT * FROM configuration WHERE ID_configuration=1");
-            foreach ($query as $obj) {
-                $this->nom_site = $obj->nom_site;
-                $this->mail_site = $obj->mail_site;
-                $this->gerant_site = $obj->gerant_site;
-                $this->url_site = $obj->url_site;
-                $this->mail_administrateur = $obj->mail_administrateur;
-                $this->last_save = $obj->last_save;
+			$query = $dbc->query("SELECT * FROM configuration WHERE ID_configuration=1");
+			foreach ($query as $obj) {
+				$this->nom_site = $obj->nom_site;
+				$this->mail_site = $obj->mail_site;
+				$this->gerant_site = $obj->gerant_site;
+				$this->url_site = $obj->url_site;
+				$this->mail_administrateur = $obj->mail_administrateur;
+				$this->last_save = $obj->last_save;
 				$this->acces_admin = $obj->acces_admin;
 				$this->contenu_dynamique = $obj->contenu_dynamique;
 				$this->responsive = $obj->responsive;
 				$this->cache = $obj->cache;
-            }
+			}
 
 			//pour la configuration des comptes
 			$query = $dbc->query("SELECT * FROM configuration_compte WHERE ID_configuration_compte=1");
@@ -47,31 +47,31 @@
 				$this->activer_inscription = $obj->activer_inscription;
 				$this->activer_connexion = $obj->activer_connexion;
 			}
-        }
-        //-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
+		}
+		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 
 
 
-        //-------------------------- GETTER ----------------------------------------------------------------------------//
+		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		//pour la configuration générale du site
-        public function getNomSite() {
-            return $this->nom_site;
-        }
-        public function getMailSite() {
-            return $this->mail_site;
-        }
-        public function getGerantSite() {
-            return $this->gerant_site;
-        }
-        public function getUrlSite() {
-            return $this->url_site;
-        }
-        public function getMailAdministrateur() {
-            return $this->mail_administrateur;
-        }
-        public function getLastSave() {
-            return $this->last_save;
-        }
+		public function getNomSite() {
+			return $this->nom_site;
+		}
+		public function getMailSite() {
+			return $this->mail_site;
+		}
+		public function getGerantSite() {
+			return $this->gerant_site;
+		}
+		public function getUrlSite() {
+			return $this->url_site;
+		}
+		public function getMailAdministrateur() {
+			return $this->mail_administrateur;
+		}
+		public function getLastSave() {
+			return $this->last_save;
+		}
 		public function getAccesAdmin() {
 			return $this->acces_admin;
 		}
@@ -95,11 +95,11 @@
 		public function getActiverConnexion() {
 			return $this->activer_connexion;
 		}
-        //-------------------------- FIN GETTER ----------------------------------------------------------------------------//
+		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
 
-        //-------------------------- SETTER ----------------------------------------------------------------------------//
+		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		/**
 		 * fonction qui permet de mettre à jour la date de la derniere save de la bdd
 		 * + supprimer la sauverde ancienne d'il y a 1 mois
@@ -123,5 +123,5 @@
 				unlink(ROOT."bdd_backup/".$nom_save);
 			}
 		}
-        //-------------------------- FIN SETTER ----------------------------------------------------------------------------//
-    }
+		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
+	}
