@@ -24,9 +24,9 @@
 		 **/
 		public static function Heureenseconde($heure, $minute) {
 			if ((is_numeric($heure)) && (is_numeric($minute))) {
-				$heuresec = $heure*3600;
-				$minutesec = $minute*60;
-				$heureseconde = $heuresec+$minutesec;
+				$heuresec = $heure * 3600;
+				$minutesec = $minute * 60;
+				$heureseconde = $heuresec + $minutesec;
 				return $heureseconde;
 			}
 			else {
@@ -80,12 +80,12 @@
 		 * @param int $abreger si NOT NULL, on abrege la date, on enleve la semaine et on coupe le mois à 3 lettres
 		 * @return string
 		 */
-		public static function date_fr_texte($date=0, $abreger=null) {
-			$mois = array("Janvier", "Fevrier", "Mars", "Avril","Mai", "Juin", "Juillet", "Août","Septembre", "Octobre", "Novembre", "Decembre");
-			$jours= array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+		public static function date_fr_texte($date = 0, $abreger = null) {
+			$mois = array("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre");
+			$jours = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
 
 			if ($date == 0) {
-				return $jours[date("w")]." ".date("j").(date("j")==1 ? "er":" ").$mois[date("n")-1]." ".date("Y");
+				return $jours[date("w")]." ".date("j").(date("j") == 1 ? "er" : " ").$mois[date("n") - 1]." ".date("Y");
 			}
 			else if ((strpos($date, "-") > 0) || (strpos($date, "/") > 0)) {
 				$pos = strpos($date, "-");
@@ -110,7 +110,7 @@
 					return $jour_d." ".mb_substr($explode[2], 0, 3, "UTF-8")." ".$annee_d;
 				}
 				else {
-					return $jour_semaine." ".$jour_d." ".$mois[$mois_d-1]." ".$annee_d;
+					return $jour_semaine." ".$jour_d." ".$mois[$mois_d - 1]." ".$annee_d;
 				}
 			}
 			else {

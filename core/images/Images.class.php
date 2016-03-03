@@ -42,13 +42,13 @@
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 
 		public function getOldImage() {
-		    return $this->old_image;
+			return $this->old_image;
 		}
 		public function getCheminImage() {
-		    return $this->chemin_image;
+			return $this->chemin_image;
 		}
 		public function getErreur() {
-		    return $this->erreur;
+			return $this->erreur;
 		}
 		public function getNomImage() {
 			return $this->nom_image;

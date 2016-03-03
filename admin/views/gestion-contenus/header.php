@@ -1,19 +1,19 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			<?php for ($i=0 ; $i<count($id_page) ; $i++): ?>
+			<?php for ($i = 0; $i < count($id_page); $i++): ?>
 				<?php if ($parent[$i] == 0): ?>
 					<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page[$i]?>"><?=$titre[$i]?></a>
 						<ul>
-							<?php for ($j=0 ; $j<count($id_page) ; $j++): ?>
+							<?php for ($j = 0; $j < count($id_page); $j++): ?>
 								<?php if ($parent[$j] == $id_page[$i]): ?>
 									<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page[$j]?>"><?=$titre[$j]?></a></li>
-								<?php endif;?>
-							<?php endfor;?>
+								<?php endif; ?>
+							<?php endfor; ?>
 						</ul>
 					</li>
-				<?php endif;?>
-			<?php endfor;?>
+				<?php endif; ?>
+			<?php endfor; ?>
 		</ul>
 	</div>
 </nav>

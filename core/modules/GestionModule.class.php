@@ -198,12 +198,12 @@
 						}
 
 						//on recupere le nom du dossier + extention
-						$explode  = explode(".", $obj->url_telechargement);
+						$explode = explode(".", $obj->url_telechargement);
 						array_pop($explode);
 
 						$version_txt = implode(".", $explode)."_version.txt";
 
-						if(file_get_contents($version_txt) !== "") {
+						if (file_get_contents($version_txt) !== "") {
 
 							//online pour bdd
 							$version_online_txt = file_get_contents($version_txt);

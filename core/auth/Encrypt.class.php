@@ -15,9 +15,9 @@
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		/**
 		 * @param null $id_identite
-		 * @return mixed
+		 * @return string
 		 */
-		public static function getParams($id_identite=null) {
+		public static function getParams($id_identite = null) {
 			if ($id_identite != null) {
 				$dbc = App::getDb();
 
@@ -38,7 +38,7 @@
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		/**
 		 * fonction qui permet d'encrypter un mot de passe, une fois encrype, on save les params pour le retrouver en bdd
-		 * @param $mdp
+		 * @param string|null $mdp
 		 * @param $id_identite
 		 * @return string
 		 */

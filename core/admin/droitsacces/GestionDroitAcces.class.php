@@ -1,7 +1,7 @@
 <?php
-    namespace core\admin\droitsacces;
+	namespace core\admin\droitsacces;
 
-    use core\App;
+	use core\App;
 
 	class GestionDroitAcces extends DroitAcces {
 		//pour les droit_acces standard
@@ -64,11 +64,11 @@
 				$this->id_liste_droit_acces = $id_liste_droit_acces;
 			}
 		}
-        //-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
+		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 
 
 
-        //-------------------------- GETTER ----------------------------------------------------------------------------//
+		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		//pour les droit_acces standard
 		public function getIdListeDroitAcces() {
 			return $this->id_liste_droit_acces;
@@ -205,4 +205,4 @@
 			$this->prenom = $prenom;
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
-    }
+	}
