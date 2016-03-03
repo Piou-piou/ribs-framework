@@ -20,7 +20,7 @@
 		 * Fonction pour passer du format H:m en seconde
 		 * @param int $heure recoit l'heure a passer en minute
 		 * @param int $minute recoit les minutes a passer en minute
-		 * @return int
+		 * @return double|null
 		 **/
 		public static function Heureenseconde($heure, $minute) {
 			if ((is_numeric($heure)) && (is_numeric($minute))) {
@@ -38,7 +38,6 @@
 
 		/**
 		 * passe des secondes au format H:m
-		 * @param int $temps correspond aux format seconde à repasser en H:m
 		 * @return string
 		 */
 		public static function Secondeenheure($seconde) {
@@ -77,7 +76,7 @@
 
 		/**
 		 * affiche la date du jour au format jeudi 12 janvier
-		 * @param string $date si NULL on prend la date du jour sinon on prend la date qui est mise
+		 * @param integer $date si NULL on prend la date du jour sinon on prend la date qui est mise
 		 * @param int $abreger si NOT NULL, on abrege la date, on enleve la semaine et on coupe le mois à 3 lettres
 		 * @return string
 		 */

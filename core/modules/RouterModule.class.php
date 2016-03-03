@@ -47,11 +47,11 @@
 		 * @param $url
 		 * @return string
 		 */
-		public function getUrl($url){
+		public function getUrl($url) {
 			$explode = explode("/", $url);
 			$count = count($explode);
 
-			for ($i=0 ; $i<$count ; $i++) {
+			for ($i = 0; $i < $count; $i++) {
 				if (in_array($explode[$i], $this->getAllModules())) {
 					$this->module = $explode[$i];
 					$debut_url = $explode[$i];
@@ -85,7 +85,7 @@
 
 			$query = $dbc->query("SELECT * FROM module");
 
-			foreach($query as $obj) {
+			foreach ($query as $obj) {
 				$test_module = ChaineCaractere::FindInString($url, $obj->url);
 				$test_module1 = ChaineCaractere::FindInString($url, str_replace("/", "", $obj->url));
 				$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);

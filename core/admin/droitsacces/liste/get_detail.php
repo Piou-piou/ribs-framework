@@ -29,6 +29,6 @@
 		$contenu[] = "Cette liste ne contient pas d'élément dans cette catégorie, modifiez la liste pour en ajouter.";
 	}
 ?>
-<?php for ($i=0 ; $i<$counter ; $i++):?>
+<?php for ($i = 0; $i < $counter; $i++):?>
 	<h4><?=$contenu[$i]?></h4>
-<?php endfor;?>
+<?php endfor; ?>

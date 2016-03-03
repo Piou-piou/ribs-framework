@@ -4,18 +4,18 @@
 		<h2>Modification de la page <?=$titre_courant?></h2>
 	</div>
 </header>
-<?php include("header.php");?>
-<?php require_once("admin/controller/ckeditor.php");?>
+<?php include("header.php"); ?>
+<?php require_once("admin/controller/ckeditor.php"); ?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/contenus/modifier_contenus" method="post">
 	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1)):?>
 		<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
-	<?php endif;?>
+	<?php endif; ?>
 	<input type="hidden" name="id_page" value="<?=$id_page_courante?>">
 	<?php if (($_GET['id'] != 1) && ($droit_acces->getSupprimerPage() == 1)):?>
 		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page" href="<?=ADMWEBROOT?>controller/core/admin/contenus/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
-	<?php endif;?>
+	<?php endif; ?>
 
 	<div class="inner">
 		<?php if (($droit_acces->getModifSeo() == 0) && ($droit_acces->getModifNavigation() == 0) && ($droit_acces->getModifContenu() == 0)):?>
@@ -24,11 +24,11 @@
 
 				<?php if ($droit_acces->getSupprimerPage() == 1):?>
 					<h3>Vous pouvez uniquement supprimer cette page</h3>
-				<?php endif;?>
+				<?php endif; ?>
 
 				<p>Si vous voulez pouvoir modifier cette page, contactez votre gérant.</p>
 			</section>
-		<?php endif;?>
+		<?php endif; ?>
 
 		<?php if ($droit_acces->getModifSeo() == 1):?>
 			<section class="contenu modifier-contenu">
@@ -42,7 +42,7 @@
 				<div class="colonne">
 					<div class="bloc">
 						<label class="label" for="url" data-error="L'url doit être comprise entre 3 et 92 caractères">Url affichée dans le navigateur</label>
-						<input type="text" name="url" type-val="string" min="3" max="92" value="<?=$url?>" <?php if($id_page_courante==1): ?>disabled<?php endif;?>/>
+						<input type="text" name="url" type-val="string" min="3" max="92" value="<?=$url?>" <?php if ($id_page_courante == 1): ?>disabled<?php endif; ?>/>
 					</div>
 				</div>
 
@@ -51,7 +51,7 @@
 					<textarea name="meta_description" type-val="string" min="10" max="158" required=""><?=$meta_description?></textarea>
 				</div>
 			</section>
-		<?php endif;?>
+		<?php endif; ?>
 
 		<?php if ($droit_acces->getModifNavigation() == 1):?>
 			<section class="contenu modifier-contenu">
@@ -70,13 +70,13 @@
 					</div>
 				</div>
 			</section>
-		<?php endif;?>
+		<?php endif; ?>
 
 		<?php if ($droit_acces->getModifContenu() == 1):?>
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant l'affichage dans le navigateur</h2>
 				<div class="bloc">
-					<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1){ ?>
+					<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1) { ?>
 						<?php $ckeditor->editor('contenu', $contenu_page); ?>
 					<?php } else {?>
 						<p>Vous n'êtes pas autorisé à créer / modifier des contenus sur ce site internet</p>
@@ -84,7 +84,7 @@
 					<?php }?>
 				</div>
 			</section>
-		<?php endif;?>
+		<?php endif; ?>
 	</div>
 </form>
 

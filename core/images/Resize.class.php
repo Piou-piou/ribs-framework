@@ -42,7 +42,7 @@
 				// *** Get extension
 				$extension = strtolower(strrchr($file, '.'));
 
-				switch($extension)
+				switch ($extension)
 				{
 					case '.jpg':
 					case '.jpeg':
@@ -63,7 +63,7 @@
 
 			## --------------------------------------------------------
 
-			public function resizeImage($newWidth, $newHeight, $option="auto")
+			public function resizeImage($newWidth, $newHeight, $option = "auto")
 			{
 				// *** Get optimal width and height - based on $option
 				$optionArray = $this->getDimensions($newWidth, $newHeight, $option);
@@ -97,15 +97,15 @@
 				{
 					case 'exact':
 						$optimalWidth = $newWidth;
-						$optimalHeight= $newHeight;
+						$optimalHeight = $newHeight;
 						break;
 					case 'portrait':
 						$optimalWidth = $this->getSizeByFixedHeight($newHeight);
-						$optimalHeight= $newHeight;
+						$optimalHeight = $newHeight;
 						break;
 					case 'landscape':
 						$optimalWidth = $newWidth;
-						$optimalHeight= $this->getSizeByFixedWidth($newWidth);
+						$optimalHeight = $this->getSizeByFixedWidth($newWidth);
 						break;
 					case 'auto':
 						$optionArray = $this->getSizeByAuto($newWidth, $newHeight);
@@ -143,27 +143,27 @@
 				// *** Image to be resized is wider (landscape)
 				{
 					$optimalWidth = $newWidth;
-					$optimalHeight= $this->getSizeByFixedWidth($newWidth);
+					$optimalHeight = $this->getSizeByFixedWidth($newWidth);
 				}
 				elseif ($this->height > $this->width)
 				// *** Image to be resized is taller (portrait)
 				{
 					$optimalWidth = $this->getSizeByFixedHeight($newHeight);
-					$optimalHeight= $newHeight;
+					$optimalHeight = $newHeight;
 				}
 				else
 				// *** Image to be resizerd is a square
 				{
 					if ($newHeight < $newWidth) {
 						$optimalWidth = $newWidth;
-						$optimalHeight= $this->getSizeByFixedWidth($newWidth);
+						$optimalHeight = $this->getSizeByFixedWidth($newWidth);
 					} else if ($newHeight > $newWidth) {
 						$optimalWidth = $this->getSizeByFixedHeight($newHeight);
-						$optimalHeight= $newHeight;
+						$optimalHeight = $newHeight;
 					} else {
 						// *** Sqaure being resized to a square
 						$optimalWidth = $newWidth;
-						$optimalHeight= $newHeight;
+						$optimalHeight = $newHeight;
 					}
 				}
 
@@ -176,7 +176,7 @@
 			{
 
 				$heightRatio = $this->height / $newHeight;
-				$widthRatio  = $this->width /  $newWidth;
+				$widthRatio  = $this->width / $newWidth;
 
 				if ($heightRatio < $widthRatio) {
 					$optimalRatio = $heightRatio;
@@ -185,7 +185,7 @@
 				}
 
 				$optimalHeight = $this->height / $optimalRatio;
-				$optimalWidth  = $this->width  / $optimalRatio;
+				$optimalWidth  = $this->width / $optimalRatio;
 
 				return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
 			}
@@ -233,7 +233,7 @@
 
 					case '.png':
 						// *** Scale quality from 0-100 to 0-9
-						$scaleQuality = round(($imageQuality/100) * 9);
+						$scaleQuality = round(($imageQuality / 100) * 9);
 
 						// *** Invert quality setting as 0 is best, not 9
 						$invertScaleQuality = 9 - $scaleQuality;

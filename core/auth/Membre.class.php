@@ -17,7 +17,7 @@
 		
 		//------------------------------ constructeur-----------------------------------
 		//Récupérer en base de données les infos du membre
-		public function __construct($id_identite=null){
+		public function __construct($id_identite = null) {
 			$dbc = \core\App::getDb();
 
 			$this->debut_lien = IMGROOT."profil/";
@@ -83,7 +83,7 @@
 		/**
 		 * @param null $id_identite
 		 */
-		public function setSupprimUser($id_identite=null) {
+		public function setSupprimUser($id_identite = null) {
 			$dbc = \core\App::getDb();
 
 			if ($id_identite == null) {
@@ -98,7 +98,7 @@
 			if ($oldimg_profil != "") {
 				$oldimg_profil = explode("/", $oldimg_profil);
 
-				if(end($oldimg_profil) != "defaut.png") {
+				if (end($oldimg_profil) != "defaut.png") {
 					unlink("../../images/profil/".end($oldimg_profil));
 				}
 			}
@@ -189,22 +189,22 @@
 		 * @param string $mdp
 		 * @return integer
 		 */
-		private function testpassword($mdp)	{
+		private function testpassword($mdp) {
 			$longueur = strlen($mdp);
 			$point = 0;
 
-			for ($i=0 ; $i<$longueur ; $i++) 	{
+			for ($i = 0; $i < $longueur; $i++) {
 				$lettre = $mdp[$i];
 
 				if ($lettre >= 'a' && $lettre <= 'z') {
 					$point = $point + 1;
 					$point_min = 1;
 				}
-				else if ($lettre >= 'A' && $lettre <= 'Z'){
+				else if ($lettre >= 'A' && $lettre <= 'Z') {
 					$point = $point + 2;
 					$point_maj = 2;
 				}
-				else if ($lettre >= '0' && $lettre <= '9'){
+				else if ($lettre >= '0' && $lettre <= '9') {
 					$point = $point + 3;
 					$point_chiffre = 3;
 				}

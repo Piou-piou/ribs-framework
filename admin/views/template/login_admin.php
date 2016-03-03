@@ -15,7 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>font_awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>font_awesome/css/animate.css">
 	</head>
-	<?=core\HTML\flashmessage\FlashMessage::getFlash();?>
+	<?=core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body class="login">
 		<div id="particles-js"></div>
 

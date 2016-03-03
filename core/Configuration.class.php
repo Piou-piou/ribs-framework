@@ -54,22 +54,22 @@
 
         //-------------------------- GETTER ----------------------------------------------------------------------------//
 		//pour la configuration générale du site
-        public function getNomSite(){
+        public function getNomSite() {
             return $this->nom_site;
         }
-        public function getMailSite(){
+        public function getMailSite() {
             return $this->mail_site;
         }
-        public function getGerantSite(){
+        public function getGerantSite() {
             return $this->gerant_site;
         }
-        public function getUrlSite(){
+        public function getUrlSite() {
             return $this->url_site;
         }
-        public function getMailAdministrateur(){
+        public function getMailAdministrateur() {
             return $this->mail_administrateur;
         }
-        public function getLastSave(){
+        public function getLastSave() {
             return $this->last_save;
         }
 		public function getAccesAdmin() {

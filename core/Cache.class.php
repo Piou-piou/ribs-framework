@@ -15,7 +15,7 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($page, $admin=null) {
+		public function __construct($page, $admin = null) {
 			$config = new Configuration();
 
 			//on test si le cache est bien active
@@ -34,10 +34,10 @@
 			}
 
 			if ($admin == null) {
-				$this->dossier_cache =  ROOT."cache/app/";
+				$this->dossier_cache = ROOT."cache/app/";
 			}
 			else {
-				$this->dossier_cache =  ROOT."cache/admin/";
+				$this->dossier_cache = ROOT."cache/admin/";
 			}
 
 			$page = ChaineCaractere::setUrl($page);
@@ -136,7 +136,7 @@
 		 * fonction qui met en cache le contenu du fichier enregistrer dans le ob
 		 */
 		private function setCache($contenu_fichier) {
-			$dbc= App::getDb();
+			$dbc = App::getDb();
 
 			$fichier_cache = $this->chemin_cache;
 

@@ -4,8 +4,8 @@
 		<h2>Création d'une page</h2>
 	</div>
 </header>
-<?php include("header.php");?>
-<?php include("admin/controller/ckeditor.php");?>
+<?php include("header.php"); ?>
+<?php include("admin/controller/ckeditor.php"); ?>
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/contenus/creer_page" method="post">
 	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
@@ -22,7 +22,7 @@
 			<div class="colonne">
 				<div class="bloc">
 					<label class="label" for="url" data-error="L'url doit être comprise entre 3 et 92 caractères">Url affichée dans le navigateur</label>
-					<input type="text" name="url" type-val="string" min="3" max="92" value="<?=$url?>" <?php if($id_page_courante==1): ?>disabled<?php endif;?> required=""/>
+					<input type="text" name="url" type-val="string" min="3" max="92" value="<?=$url?>" <?php if ($id_page_courante == 1): ?>disabled<?php endif; ?> required=""/>
 				</div>
 			</div>
 
@@ -59,7 +59,7 @@
 		<section class="contenu modifier-contenu">
 			<h2>Partie concernant l'affichage dans le navigateur</h2>
 			<div class="bloc">
-				<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1){ ?>
+				<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1) { ?>
 					<?php $ckeditor->editor('contenu', $contenu_page); ?>
 				<?php } else {?>
 					<p>Vous n'êtes pas autorisé à créer / modifier des contenus sur ce site internet</p>

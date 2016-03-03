@@ -270,7 +270,7 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setListeModuleActiver($id_module, $url, $version, $nom, $icone=null, $url_telechargement=null) {
+		private function setListeModuleActiver($id_module, $url, $version, $nom, $icone = null, $url_telechargement = null) {
 			$this->id_module = $id_module;
 			$this->url = $url;
 			$this->nom = $nom;

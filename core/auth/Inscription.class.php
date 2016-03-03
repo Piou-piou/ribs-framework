@@ -15,7 +15,7 @@
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($datas) {
 			$count = count($datas);
-			for ($i=0 ; $i<$count ; $i++) {
+			for ($i = 0; $i < $count; $i++) {
 				$function = "setVerif".ucfirst($datas[$i][0]);
 
 				if (isset($datas[$i][2])) {
@@ -44,7 +44,7 @@
 			return $this->mail;
 		}
 		public function getErreur() {
-			return $this->erreur;;
+			return $this->erreur; ;
 		}
 
 		/**
@@ -97,7 +97,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifNom($value, $required=null) {
+		protected function setVerifNom($value, $required = null) {
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
 				$this->erreur .= "<li>Le champs nom ne peut pas être vide</li>";
@@ -124,7 +124,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifPrenom($value, $required=null) {
+		protected function setVerifPrenom($value, $required = null) {
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
 				$this->erreur .= "<li>Le champs prénom ne peut pas être vide</li>";
@@ -151,7 +151,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifMdp($value, $required=null) {
+		protected function setVerifMdp($value, $required = null) {
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
 				$this->erreur .= "<li>Le champs mot de passe ne peut pas être vide</li>";
@@ -194,7 +194,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifPseudo($value, $required=null) {
+		protected function setVerifPseudo($value, $required = null) {
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
 				$this->erreur .= "<li>Le champs pseudo ne peut pas être vide</li>";
@@ -221,7 +221,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifMail($value, $required=null) {
+		protected function setVerifMail($value, $required = null) {
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
 				$this->erreur .= "<li>Le champs E-mail ne peut pas être vide</li>";

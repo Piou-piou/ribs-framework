@@ -25,7 +25,7 @@
 
 
         //-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($id_liste_droit_acces=null) {
+		public function __construct($id_liste_droit_acces = null) {
 			$dbc = App::getDb();
 
 			if ($id_liste_droit_acces == null) {
@@ -87,7 +87,7 @@
 		public function getIdPage() {
 			return $this->id_page;
 		}
-		public function getTitrePage(){
+		public function getTitrePage() {
 			return $this->titre_page;
 		}
 		public function getNbDroitAccesPage() {
@@ -107,7 +107,7 @@
 		public function getPseudo() {
 			return $this->pseudo;
 		}
-		public function getNbUser(){
+		public function getNbUser() {
 		    return $this->nb_user;
 		}
 
@@ -115,7 +115,7 @@
 		 * fonction qui récupère la liste des droits d'acces en texte en fonction de l'id de la liste
 		 * @param $id_liste_droit_acces
 		 */
-		public function getListeDroitAccesDetailDroit($id_liste_droit_acces=null){
+		public function getListeDroitAccesDetailDroit($id_liste_droit_acces = null) {
 		    $dbc = \core\App::getDb();
 
 			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
@@ -136,7 +136,7 @@
 		 * fonction qui récupère la liste des utilisateur dans une liste de droits d'acces en texte en fonction de l'id de la liste
 		 * @param $id_liste_droit_acces
 		 */
-		public function getListeDroitAccesDetailUser($id_liste_droit_acces=null) {
+		public function getListeDroitAccesDetailUser($id_liste_droit_acces = null) {
 			$dbc = \core\App::getDb();
 
 			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
@@ -159,7 +159,7 @@
 		 * fonction qui récupère la liste des droits d'acces sur les pages en texte en fonction de l'id de la liste
 		 * @param $id_liste_droit_acces
 		 */
-		public function getListeDroitAccesDetailPage($id_liste_droit_acces=null){
+		public function getListeDroitAccesDetailPage($id_liste_droit_acces = null) {
 		    $dbc = \core\App::getDb();
 
 			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
@@ -184,7 +184,7 @@
 
 
         //-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user){
+		private function setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user) {
 			$this->id_liste_droit_acces = $id_liste_droit_acces;
 			$this->nom_liste = $nom_liste;
 			$this->nb_droit_acces = $nb_droit_acces;

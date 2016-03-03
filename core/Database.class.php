@@ -62,7 +62,7 @@
 		 * @param $req -> la req a executer
 		 * @param $value -> le ou les tableaux de valeurs
 		 */
-		public function prepare($req, $value=null) {
+		public function prepare($req, $value = null) {
 			//si pas de donnees
 			if ($value === null) {
 				$this->getPdo()->query($req);
@@ -97,7 +97,7 @@
 		 * @param $value
 		 * @return boolean|null
 		 */
-		public function rechercherEgalite($table, $champ, $value, $id_table=null, $id=null) {
+		public function rechercherEgalite($table, $champ, $value, $id_table = null, $id = null) {
 			if ($id == null) {
 				$query = $this->getPdo()->query("SELECT COUNT($champ) as nb FROM $table WHERE $champ LIKE '$value'");
 			}
@@ -122,7 +122,7 @@
 		/**
 		 * tester si une table dans la base donnee existe
 		 * @param string $table definit la table pour laquelle on doit tester l'existance
-		 * @return true|false
+		 * @return boolean
 		 */
 		public function TestTableExist($table) {
 			$query = $this->getPdo()->query("SHOW TABLES LIKE '$table'");
