@@ -197,18 +197,13 @@
 							$import->setSupprimerOldModule($obj->ID_module);
 						}
 
-						//on ouvre le zip du module et on recupere le fichier version.txt pour le comparer avec celle sur notre site
-						//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
-						$explode = explode("/", $obj->url_telechargement);
-						$this->nom_fichier = end($explode);
-
 						//on recupere le nom du dossier + extention
 						$explode  = explode(".", $obj->url_telechargement);
 						array_pop($explode);
 
 						$version_txt = implode(".", $explode)."_version.txt";
 
-						if(file_get_contents($version_txt) == true) {
+						if(file_get_contents($version_txt) !== "") {
 
 							//online pour bdd
 							$version_online_txt = file_get_contents($version_txt);

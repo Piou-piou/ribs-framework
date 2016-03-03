@@ -175,7 +175,6 @@
 		/**
 		 * fonction qui permet de vérifier que le verif_mdp == mdp
 		 * @param $value
-		 * @param null $required
 		 * @return bool
 		 */
 		protected function setVerifRetapeMdp($value) {

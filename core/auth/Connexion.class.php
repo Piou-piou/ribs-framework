@@ -33,12 +33,15 @@
 			$query = $dbc->query("select * from identite where pseudo=$pseudo");
 
 			//aficher query tant que qqch dans $ligne
-			foreach ($query as $obj) {
-				$id = $obj->ID_identite;
-				$pseudo = $obj->pseudo;
-				$valide = $obj->valide;
-				$archiver = $obj->archiver;
+			if (count($query) > 0) {
+				foreach ($query as $obj) {
+					$id = $obj->ID_identite;
+					$pseudo = $obj->pseudo;
+					$valide = $obj->valide;
+					$archiver = $obj->archiver;
+				}
 			}
+
 
 			//verif si num enr = 0
 			if (!isset($id)) {

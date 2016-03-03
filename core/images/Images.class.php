@@ -15,10 +15,10 @@
 		private $height_max;
 		private $dossier_image;
 
-		private $old_image; // init dans setImg()
-		private $chemin_image; // init dans setImg()
-		private $image; //init dans getImage() grace au chemin_image
-		private $nom_image; //init dans setEnvoyerImage();
+		private $old_image;
+		private $chemin_image;
+		private $image;
+		private $nom_image;
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		/**
@@ -173,7 +173,7 @@
 		 */
 		public function setDeleteImage($nom_image=null) {
 			//si pas de requete et qu'on a une old_img on la supprime
-			if (($this->old_image != "") && ($nom_image == null)) {
+			if (($this->old_image != "") && ($nom_image === null)) {
 				$old_image = explode("/", $this->old_image);
 
 				if (end($old_image) === "defaut.png") {
