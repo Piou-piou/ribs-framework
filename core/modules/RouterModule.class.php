@@ -49,8 +49,9 @@
 		 */
 		public function getUrl($url){
 			$explode = explode("/", $url);
+			$count = count($explode);
 
-			for ($i=0 ; $i<count($explode) ; $i++) {
+			for ($i=0 ; $i<$count ; $i++) {
 				if (in_array($explode[$i], $this->getAllModules())) {
 					$this->module = $explode[$i];
 					$debut_url = $explode[$i];

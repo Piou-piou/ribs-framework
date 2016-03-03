@@ -97,12 +97,9 @@
 			$oldimg_profil = $obj->img_profil;
 			if ($oldimg_profil != "") {
 				$oldimg_profil = explode("/", $oldimg_profil);
-				if(end($oldimg_profil) == "defaut.png") {
-					
-				}
-				else {
+
+				if(end($oldimg_profil) != "defaut.png") {
 					unlink("../../images/profil/".end($oldimg_profil));
-					
 				}
 			}
 			

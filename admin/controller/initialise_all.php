@@ -26,9 +26,6 @@
 	}
 
 	//pour les pages sur les droits d'acces
-	if ($page == "gestion-droits-acces/index") {
-		//require_once(ROOT."core/admin/modules/droitsacces/initialise/liste_article.php");
-	}
 	if (($page == "gestion-droits-acces/ajouter-liste") || ($page == "gestion-droits-acces/modifier-liste")) {
 		require_once(ROOT."core/admin/droitsacces/initialise/ajout_modification.php");
 	}
@@ -44,7 +41,6 @@
 			$pseudo = $_SESSION['pseudo'];
 			$mail = $_SESSION['mail'];
 			$acces_admin = $_SESSION['acces_admin'];
-			//$id_liste_droit_acces = $_SESSION['id_liste_droit_acces'];
 
 			unset($_SESSION['err_ajout_utilisateur']);
 		}
@@ -155,7 +151,19 @@
 		$ini1 = $ini_parse1->getParse(ROOT."config/config.ini");
 
 		if (isset($_SESSION['err_modification_configini'])) {
+			$db_type_dev = $_SESSION["db_type_dev"];
+			$db_name_dev = $_SESSION["db_name_dev"];
+			$db_user_dev = $_SESSION["db_user_dev"];
+			$db_pass_dev = $_SESSION["db_pass_dev"];
+			$db_host_dev = $_SESSION["db_host_dev"];
 
+			$db_type_prod = $_SESSION["db_type_prod"];
+			$db_name_prod = $_SESSION["db_name_prod"];
+			$db_user_prod = $_SESSION["db_user_prod"];
+			$db_pass_prod = $_SESSION["db_pass_prod"];
+			$db_host_prod = $_SESSION["db_host_prod"];
+
+			unset($_SESSION['err_modification_configini']);
 		}
 		else {
 			$developpement = $ini["developpment"];

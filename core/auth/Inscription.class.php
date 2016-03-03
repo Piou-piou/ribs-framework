@@ -14,7 +14,8 @@
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($datas) {
-			for ($i=0 ; $i<count($datas) ; $i++) {
+			$count = count($datas);
+			for ($i=0 ; $i<$count ; $i++) {
 				$function = "setVerif".ucfirst($datas[$i][0]);
 
 				if (isset($datas[$i][2])) {
@@ -177,7 +178,7 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifRetapeMdp($value, $required=null) {
+		protected function setVerifRetapeMdp($value) {
 			if ($this->mdp == $value) {
 				return true;
 			}

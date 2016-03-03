@@ -153,18 +153,11 @@
 				$resize->resizeImage($width, $height, 'crop');
 				$img_resize = $prefixe."_".$this->image;
 				$resize->saveImage($this->dossier_image."/".$img_resize, 100);
-				$image = $this->dossier_image."/".$img_resize;
 
 				$this->nom_image = $img_resize;
 			}
 			else {
-
 				$this->nom_image = null;
-				/*$resize = new resize($urlimg);
-				$resize->resizeImage(60, 60, 'crop');
-				$img_resize = "resized_".$imageok;
-				$resize->saveImage($this->dossier_image."/".$img_resize, 100);
-				$image = $this->dossier_image."/".$img_resize;*/
 			}
 
 			if (($delete_old == 1) && ($req_img == null) && ($this->chemin_image != "")) {
@@ -183,16 +176,17 @@
 			if (($this->old_image != "") && ($nom_image == null)) {
 				$old_image = explode("/", $this->old_image);
 
-				if (end($old_image) != "defaut.png") {
+				if (end($old_image) === "defaut.png") {
 					echo($this->dossier_image."/".end($old_image));
 					unlink($this->dossier_image."/".end($old_image));
 					return true;
 				}
 			}
-			else if ($nom_image != null) {
+			else if ($nom_image !== null) {
 
 				if (is_array($nom_image)) {
-					for ($i=0 ; $i<count($nom_image) ; $i++) {
+					$count = count($nom_image);
+					for ($i=0 ; $i<$count ; $i++) {
 						$chemin_img = $this->dossier_image."/".$nom_image[$i];
 
 						if (unlink($chemin_img)) {

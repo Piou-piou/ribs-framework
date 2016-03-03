@@ -22,7 +22,7 @@
 		$_SESSION['pseudo'] = $inscription->getPseudo();
 		$_SESSION['mail'] = $inscription->getMail();
 		$_SESSION['acces_admin'] = $inscription->getAccesAdministration();
-		//$id_liste_droit_acces = $_SESSION['id_liste_droit_acces'];
+
 		\core\HTML\flashmessage\FlashMessage::setFlash("<ul>".$inscription->getErreur()."</ul>");
 	}
 	else {

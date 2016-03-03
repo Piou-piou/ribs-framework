@@ -37,7 +37,6 @@
 
 				if (count($query > 0)) {
 					foreach ($query as $obj) {
-						/*echo("dgfdgf<br>");*/
 						$id_page[] = $obj->ID_page;
 						$titre[] = $obj->titre;
 						$balise_title[] = $obj->balise_title;

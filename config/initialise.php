@@ -1,6 +1,4 @@
 <?php
-	//error_reporting(E_ALL ^ E_NOTICE);
-
 	if (!isset($page_root)) $page_root = "index.php";
 
 	//-------------------------- CONSTANTE POUR LES ROUTES ----------------------------------------------------------------------------//

@@ -7,13 +7,6 @@
    #  Date:      17-Jan-10
    #  Purpose:   Resizes and saves image
    #  Requires : Requires PHP5, GD library.
-   #  Usage Example:
-   #                     include("classes/resize_class.php");
-   #                     $resizeObj = new resize('images/cars/large/input.jpg');
-   #                     $resizeObj -> resizeImage(150, 100, 0);
-   #                     $resizeObj -> saveImage('images/cars/large/output.jpg', 100);
-   #
-   #
    # ========================================================================#
 	namespace core\images;
 
@@ -206,7 +199,6 @@
 				$cropStartY = ( $optimalHeight/ 2) - ( $newHeight/2 );
 
 				$crop = $this->imageResized;
-				//imagedestroy($this->imageResized);
 
 				// *** Now crop from center to exact requested size
 				$this->imageResized = imagecreatetruecolor($newWidth , $newHeight);
