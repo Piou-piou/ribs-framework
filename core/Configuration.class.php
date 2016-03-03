@@ -57,6 +57,10 @@
 		public function getNomSite() {
 			return $this->nom_site;
 		}
+
+		/**
+		 * @return string|null
+		 */
 		public function getMailSite() {
 			return $this->mail_site;
 		}

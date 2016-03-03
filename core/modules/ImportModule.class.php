@@ -52,15 +52,15 @@
 		 * @param boolean $update
 		 * fonction qui permets d'importer un module dans notre site internet
 		 */
-		public function setImportModule($url_module, $update=null) {
-			$dbc= App::getDb();
+		public function setImportModule($url_module, $update = null) {
+			$dbc = App::getDb();
 
 			//avant tout on récupère le nom du fichier pour le mettre dans le dossier temporaire
 			$explode = explode("/", $url_module);
 			$this->nom_fichier = end($explode);
 
 			//on recupere le nom du dossier + extention
-			$explode  = explode(".", $this->nom_fichier);
+			$explode = explode(".", $this->nom_fichier);
 			$this->nom_dossier = $explode[0];
 			$this->extension = $explode[1];
 

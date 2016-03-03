@@ -1,10 +1,10 @@
 <?php
-    namespace core\admin\droitsacces;
+	namespace core\admin\droitsacces;
 
 	use core\App;
 
 	class DroitAcces {
-    	private $logged;
+		private $logged;
 
 		//pour la table identite
 		private $id_identite;
@@ -21,10 +21,10 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-        public function __construct() {
+		public function __construct() {
 			$dbc = \core\App::getDb();
 
-            if (isset($_SESSION["idlogin".CLEF_SITE])) {
+			if (isset($_SESSION["idlogin".CLEF_SITE])) {
 				$this->logged = true;
 				$this->id_identite = $_SESSION["idlogin".CLEF_SITE];
 
@@ -44,36 +44,36 @@
 			else {
 				$this->logged = false;
 			}
-        }
-        //-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
+		}
+		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
     
     
     
-        //-------------------------- GETTER ----------------------------------------------------------------------------//
+		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public function getLogged(){
-		    return $this->logged;
+			return $this->logged;
 		}
 		public function getSuperAdmin(){
-		    return $this->super_admin;
+			return $this->super_admin;
 		}
 
 		//pour la table liste_droit_acces
 		public function getIdListeDroitAcces(){
-		    return $this->id_liste_droit_acces;
+			return $this->id_liste_droit_acces;
 		}
 
 		//pour les droits sur la gestion des contenus
 		public function getModifSeo(){
-		    return $this->modif_seo;
+			return $this->modif_seo;
 		}
 		public function getModifContenu(){
-		    return $this->modif_contenu;
+			return $this->modif_contenu;
 		}
 		public function getModifNavigation(){
-		    return $this->modif_navigation;
+			return $this->modif_navigation;
 		}
 		public function getSupprimerPage(){
-		    return $this->supprimer_page;
+			return $this->supprimer_page;
 		}
 
 		//autres getter
@@ -239,11 +239,11 @@
 				return true;
 			}
 		}
-        //-------------------------- FIN GETTER ----------------------------------------------------------------------------//
+		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
     
     
     
-        //-------------------------- SETTER ----------------------------------------------------------------------------//
+		//-------------------------- SETTER ----------------------------------------------------------------------------//
 
-        //-------------------------- FIN SETTER ----------------------------------------------------------------------------//
-    }
+		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
+	}
