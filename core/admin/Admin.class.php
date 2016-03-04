@@ -107,13 +107,15 @@
 
 			$query = $dbc->query("SELECT * FROM identite WHERE ID_identite=".$id_identite);
 
-			foreach ($query as $obj) {
-				$this->id_identite = $obj->ID_identite;
-				$this->nom = $obj->nom;
-				$this->prenom = $obj->prenom;
-				$this->img = $obj->img_profil;
-				$this->mail = $obj->mail;
-				$this->valide = $obj->valide;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->id_identite = $obj->ID_identite;
+					$this->nom = $obj->nom;
+					$this->prenom = $obj->prenom;
+					$this->img = $obj->img_profil;
+					$this->mail = $obj->mail;
+					$this->valide = $obj->valide;
+				}
 			}
 		}
 
@@ -126,7 +128,7 @@
 
 			$query = $dbc->query("SELECT admin FROM notification");
 
-			if (count($query) == 1) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					return $obj->admin;
 				}
