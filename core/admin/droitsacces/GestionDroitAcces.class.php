@@ -33,7 +33,7 @@
 				//récupération des droits d'acces génériques
 				$query = $dbc->query("SELECT * FROM liste_droit_acces");
 
-				if (count($query) > 0) {
+				if ((is_array($query)) && (count($query) > 0)) {
 					$id_liste_droit_acces = [];
 					$nom_liste = [];
 					$nb_droit_acces = [];
@@ -46,20 +46,28 @@
 
 						//récupération du nombre de droits d'acces pour cette liste
 						$query1 = $dbc->query("SELECT count(ID_droit_acces) as ID_droit_acces FROM liaison_liste_droit WHERE ID_liste_droit_acces =".$obj->ID_liste_droit_acces);
-						foreach ($query1 as $obj1) {
-							$nb_droit_acces[] = $obj1->ID_droit_acces;
+						if ((is_array($query1)) && (count($query1) > 0)) {
+							foreach ($query1 as $obj1) {
+								$nb_droit_acces[] = $obj1->ID_droit_acces;
+							}
 						}
+
 
 						//récupération du nombre d'utilisateurs qui sont dans cette liste
 						$query2 = $dbc->query("SELECT count(ID_identite) as ID_identite FROM identite WHERE liste_droit=".$obj->ID_liste_droit_acces);
-						foreach ($query2 as $obj2) {
-							$nb_user[] = $obj2->ID_identite;
+						if ((is_array($query2)) && (count($query2) > 0)) {
+							foreach ($query2 as $obj2) {
+								$nb_user[] = $obj2->ID_identite;
+							}
 						}
+
 
 						//récupération du nombres de pages dans cette liste
 						$query3 = $dbc->query("SELECT count(ID_page) as ID_page FROM droit_acces_page WHERE ID_liste_droit_acces = $obj->ID_liste_droit_acces");
-						foreach ($query3 as $obj3) {
-							$nb_droit_acces_page[] = $obj3->ID_page;
+						if ((is_array($query3)) && (count($query3) > 0)) {
+							foreach ($query3 as $obj3) {
+								$nb_droit_acces_page[] = $obj3->ID_page;
+							}
 						}
 					}
 
@@ -129,7 +137,7 @@
 			$query = $dbc->query("SELECT * FROM droit_acces, liaison_liste_droit WHERE
 										droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
 										liaison_liste_droit.ID_liste_droit_acces =".$id_liste_droit_acces);
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$droit_acces = [];
 
 				foreach ($query as $obj) {
@@ -151,7 +159,7 @@
 
 			//récupératin des utilisateurs qui sont dans cette liste
 			$query = $dbc->query("SELECT * FROM identite WHERE liste_droit=".$id_liste_droit_acces);
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
 				$pseudo = [];
 				$nom = [];
@@ -183,7 +191,7 @@
 									droit_acces_page.ID_page = page.ID_page AND
 									liste_droit_acces.ID_liste_droit_acces = $id_liste_droit_acces
 			");
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$id_page = [];
 				$titre_page = [];
 

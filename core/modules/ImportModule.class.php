@@ -36,11 +36,13 @@
 
 			$query = $dbc->query("select * from module WHERE ID_module=".$dbc->quote($id_module));
 
-			foreach ($query as $obj) {
-				$this->id_module = $obj->ID_module;
-				$this->url_telechargement = $obj->url_telechargement;
-				$this->version_ok = $obj->online_version;
-				$this->dossier_module = str_replace("/", "", $obj->url);
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->id_module = $obj->ID_module;
+					$this->url_telechargement = $obj->url_telechargement;
+					$this->version_ok = $obj->online_version;
+					$this->dossier_module = str_replace("/", "", $obj->url);
+				}
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
@@ -182,9 +184,11 @@
 
 			$query = $dbc->query("SELECT * FROM module WHERE ID_module=".$id_module);
 
-			foreach ($query as $obj) {
-				$url = MODULEROOT.str_replace("/", "", $obj->url);
-				$systeme = $obj->systeme;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$url = MODULEROOT.str_replace("/", "", $obj->url);
+					$systeme = $obj->systeme;
+				}
 			}
 
 			if ($systeme == 1) {

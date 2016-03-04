@@ -66,9 +66,11 @@
 
 			if (count($query) > 0) {
 				$reload_cache = 0;
-				foreach ($query as $obj) {
-					$reload_cache = $obj->reload_cache;
-					$this->no_cache = $obj->no_cache;
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						$reload_cache = $obj->reload_cache;
+						$this->no_cache = $obj->no_cache;
+					}
 				}
 			}
 			else {

@@ -24,7 +24,7 @@
 				//on construit le menu
 				$query = $dbc->query("SELECT ID_page, titre, balise_title, parent, url FROM page WHERE affiche=1 ORDER BY ordre");
 
-				if (count($query) > 0) {
+				if ((is_array($query)) && (count($query) > 0)) {
 					$id_page = [];
 					$titre = [];
 					$balise_title = [];
@@ -87,10 +87,12 @@
 			}
 
 			if (RedirectError::testRedirect404($query, $url) === true) {
-				foreach ($query as $obj) {
-					$this->id_page = $obj->ID_page;
-					$this->meta_description = $obj->meta_description;
-					$this->balise_title = $obj->balise_title;
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						$this->id_page = $obj->ID_page;
+						$this->meta_description = $obj->meta_description;
+						$this->balise_title = $obj->balise_title;
+					}
 				}
 			}
 		}
@@ -109,7 +111,7 @@
 			if ($id_page != null) {
 				$query = $dbc->query("SELECT * FROM page WHERE ID_page=".$id_page);
 
-				if (count($query) > 0) {
+				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) {
 						$this->id_page = $obj->ID_page;
 						$this->titre = $obj->titre;

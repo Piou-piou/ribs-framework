@@ -33,7 +33,7 @@
 			$query = $dbc->query("select * from identite where pseudo=$pseudo");
 
 			//aficher query tant que qqch dans $ligne
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					$id = $obj->ID_identite;
 					$pseudo = $obj->pseudo;
@@ -65,9 +65,12 @@
 
 				$mdpbdd = "";
 				$query2 = $dbc->query("select mdp from identite where ID_identite='$id'");
-				foreach ($query2 as $obj2) {
-					$mdpbdd = Encrypt::setDecryptMdp($obj2->mdp, $id);
+				if ((is_array($query2)) && (count($query2) > 0)) {
+					foreach ($query2 as $obj2) {
+						$mdpbdd = Encrypt::setDecryptMdp($obj2->mdp, $id);
+					}
 				}
+
 				
 
 				//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
@@ -124,48 +127,49 @@
 				$auth = explode("-----", $auth);
 
 				$query = $dbc->query("SELECT * FROM identite WHERE ID_identite=".$auth[0]);
-				foreach ($query as $obj) {
-					//si le compte est archivé on déconnecte la session et le cookie
-					if ($obj->archiver == 1) {
-						setcookie("auth".CLEF_SITE, NULL, -1);
-						self::setDeconnexion($page_retour);
-					}
-					else {
-						$key = sha1($obj->pseudo.$obj->mdp);
-
-						if ($key == $auth[1]) {
-							$_SESSION['login'] = $obj->pseudo;
-							$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
-
-							//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
-							$date_array = DateHeure::dateBddToArray(self::getlastConnexion($obj->ID_identite));
-							$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
-							$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-
-							if (($today - $last_change_mdp) > 259200) {
-								self::setUpdatelastConnexion($obj->ID_identite);
-
-								//on refait un nouveau mdp encrypté avec le même mdp
-								$mdp_actuel = Encrypt::setDecryptMdp($obj->mdp, $obj->ID_identite);
-								$membre = new Membre($obj->ID_identite);
-								$membre->setMdp($mdp_actuel, $mdp_actuel, $mdp_actuel);
-
-								//on detruit le cookie et on le refait avec le mdp regénéré
-								setcookie("auth".CLEF_SITE, NULL, -1);
-								$key = sha1($obj->pseudo.$membre->getMdp());
-								setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-							}
-							else {
-								setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-							}
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						//si le compte est archivé on déconnecte la session et le cookie
+						if ($obj->archiver == 1) {
+							setcookie("auth".CLEF_SITE, NULL, -1);
+							self::setDeconnexion($page_retour);
 						}
 						else {
-							if ($obj_connecte == 1) {
-								self::setDeconnexion($page_retour);
+							$key = sha1($obj->pseudo.$obj->mdp);
+
+							if ($key == $auth[1]) {
+								$_SESSION['login'] = $obj->pseudo;
+								$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
+
+								//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
+								$date_array = DateHeure::dateBddToArray(self::getlastConnexion($obj->ID_identite));
+								$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
+								$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+
+								if (($today - $last_change_mdp) > 259200) {
+									self::setUpdatelastConnexion($obj->ID_identite);
+
+									//on refait un nouveau mdp encrypté avec le même mdp
+									$mdp_actuel = Encrypt::setDecryptMdp($obj->mdp, $obj->ID_identite);
+									$membre = new Membre($obj->ID_identite);
+									$membre->setMdp($mdp_actuel, $mdp_actuel, $mdp_actuel);
+
+									//on detruit le cookie et on le refait avec le mdp regénéré
+									setcookie("auth".CLEF_SITE, NULL, -1);
+									$key = sha1($obj->pseudo.$membre->getMdp());
+									setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
+								}
+								else {
+									setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
+								}
+							}
+							else {
+								if ($obj_connecte == 1) {
+									self::setDeconnexion($page_retour);
+								}
 							}
 						}
 					}
-
 				}
 			}
 			else if (!isset($_SESSION["idlogin".CLEF_SITE])) {
@@ -215,6 +219,8 @@
 			$dbc = App::getDb();
 
 			$query = $dbc->query("SELECT last_change_mdp FROM identite WHERE ID_identite=".$id_identite);
-			foreach ($query as $obj) return $obj->last_change_mdp;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) return $obj->last_change_mdp;
+			}
 		}
 	}

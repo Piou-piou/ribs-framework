@@ -35,7 +35,7 @@
 					$query = $dbc->query("SELECT ID_page, titre, balise_title, parent, url FROM page ORDER BY ordre");
 				}
 
-				if (count($query > 0)) {
+				if ((is_array($query)) && (count($query) > 0)) {
 					$id_page = [];
 					$titre = [];
 					$balise_title = [];
@@ -64,7 +64,9 @@
 			$dbc = \core\App::getDb();
 
 			$query = $dbc->query("SELECT titre FROM page WHERE ID_page=".$parent);
-			foreach ($query as $obj) $this->parent_texte = $obj->titre;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) $this->parent_texte = $obj->titre;
+			}
 
 			return $this->parent_texte;
 		}
@@ -77,9 +79,12 @@
 			$ordre = "";
 
 			$query = $dbc->query("SELECT ordre FROM page ORDER BY ordre ASC LIMIT 1");
-			foreach ($query as $obj) {
-				$ordre = $obj->ordre;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$ordre = $obj->ordre;
+				}
 			}
+
 			return $ordre;
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//

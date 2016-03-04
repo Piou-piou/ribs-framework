@@ -27,25 +27,29 @@
 
 			//pour la configuration générale du site
 			$query = $dbc->query("SELECT * FROM configuration WHERE ID_configuration=1");
-			foreach ($query as $obj) {
-				$this->nom_site = $obj->nom_site;
-				$this->mail_site = $obj->mail_site;
-				$this->gerant_site = $obj->gerant_site;
-				$this->url_site = $obj->url_site;
-				$this->mail_administrateur = $obj->mail_administrateur;
-				$this->last_save = $obj->last_save;
-				$this->acces_admin = $obj->acces_admin;
-				$this->contenu_dynamique = $obj->contenu_dynamique;
-				$this->responsive = $obj->responsive;
-				$this->cache = $obj->cache;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->nom_site = $obj->nom_site;
+					$this->mail_site = $obj->mail_site;
+					$this->gerant_site = $obj->gerant_site;
+					$this->url_site = $obj->url_site;
+					$this->mail_administrateur = $obj->mail_administrateur;
+					$this->last_save = $obj->last_save;
+					$this->acces_admin = $obj->acces_admin;
+					$this->contenu_dynamique = $obj->contenu_dynamique;
+					$this->responsive = $obj->responsive;
+					$this->cache = $obj->cache;
+				}
 			}
 
 			//pour la configuration des comptes
 			$query = $dbc->query("SELECT * FROM configuration_compte WHERE ID_configuration_compte=1");
-			foreach ($query as $obj) {
-				$this->valider_inscription = $obj->valider_inscription;
-				$this->activer_inscription = $obj->activer_inscription;
-				$this->activer_connexion = $obj->activer_connexion;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->valider_inscription = $obj->valider_inscription;
+					$this->activer_inscription = $obj->activer_inscription;
+					$this->activer_connexion = $obj->activer_connexion;
+				}
 			}
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//

@@ -23,8 +23,10 @@
 				$params = "";
 
 				$query = $dbc->query("SELECT mdp_params FROM identite WHERE ID_identite=".$id_identite);
-				foreach ($query as $obj) {
-					$params = $obj->mdp_params;
+				if ((is_array($query)) && (count($query) > 0)){
+					foreach ($query as $obj) {
+						$params = $obj->mdp_params;
+					}
 				}
 			}
 			else {

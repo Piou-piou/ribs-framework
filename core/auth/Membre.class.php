@@ -25,20 +25,22 @@
 			if ($id_identite != null) {
 				$query = $dbc->query("SELECT * FROM identite where ID_identite=$id_identite");
 
-				foreach ($query as $obj) {
-					$this->id_identite = $obj->ID_identite;
-					$this->nom = $obj->nom;
-					$this->prenom = $obj->prenom;
-					$this->mail = $obj->mail;
-					$this->pseudo = $obj->pseudo;
-					$this->mdp = $obj->mdp;
-					$this->valide = $obj->valide;
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						$this->id_identite = $obj->ID_identite;
+						$this->nom = $obj->nom;
+						$this->prenom = $obj->prenom;
+						$this->mail = $obj->mail;
+						$this->pseudo = $obj->pseudo;
+						$this->mdp = $obj->mdp;
+						$this->valide = $obj->valide;
 
-					if ($obj->img_profil == "") {
-						$this->img = $this->debut_lien."defaut.png";
-					}
-					else {
-						$this->img = $obj->img_profil;
+						if ($obj->img_profil == "") {
+							$this->img = $this->debut_lien."defaut.png";
+						}
+						else {
+							$this->img = $obj->img_profil;
+						}
 					}
 				}
 			}
@@ -90,8 +92,10 @@
 			//recherche si pseudo pas deja existant
 			$pseudo_bdd = "";
 			$query = $dbc->query("SELECT pseudo FROM identite WHERE pseudo=$new_pseudo");
-			foreach ($query as $obj) {
-				$pseudo_bdd = $dbc->quote(htmlspecialchars($obj->pseudo));
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$pseudo_bdd = $dbc->quote(htmlspecialchars($obj->pseudo));
+				}
 			}
 			
 			//si pseudo trop court

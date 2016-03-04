@@ -35,8 +35,10 @@
 
 			$query = $query = $dbc->query("SELECT * FROM module");
 
-			foreach ($query as $obj) {
-				$module[] = str_replace("/", "", $obj->url);
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$module[] = str_replace("/", "", $obj->url);
+				}
 			}
 
 			return $module;
@@ -88,17 +90,19 @@
 
 			$query = $dbc->query("SELECT * FROM module");
 
-			foreach ($query as $obj) {
-				$test_module = ChaineCaractere::FindInString($url, $obj->url);
-				$test_module1 = ChaineCaractere::FindInString($url, str_replace("/", "", $obj->url));
-				$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$test_module = ChaineCaractere::FindInString($url, $obj->url);
+					$test_module1 = ChaineCaractere::FindInString($url, str_replace("/", "", $obj->url));
+					$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);
 
-				if ((($test_module === true) || ($test_module1 === true)) && ($module_activer === true)) {
-					$error = false;
-					break;
-				}
-				else {
-					$error = true;
+					if ((($test_module === true) || ($test_module1 === true)) && ($module_activer === true)) {
+						$error = false;
+						break;
+					}
+					else {
+						$error = true;
+					}
 				}
 			}
 

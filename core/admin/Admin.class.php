@@ -19,8 +19,10 @@
 
 			//on récupere le lvl de l'admin
 			$query = $dbc->query("SELECT acces_admin FROM identite WHERE ID_identite=".$id_identite);
-			foreach ($query as $obj) {
-				$this->acces_admin = $obj->acces_admin;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->acces_admin = $obj->acces_admin;
+				}
 			}
 
 			//si on ne passe pas dans le foreach -> on est pas admin donc on deco le compte
@@ -56,7 +58,7 @@
 
 			$config = new Configuration();
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$valide = "";
 				$id_identite = [];
 				$nom = [];
@@ -232,9 +234,13 @@
 
 			//test si il y a deja une img
 			$query = $dbc->query("SELECT img_profil FROM identite where ID_identite=$id_identite");
-			foreach ($query as $obj) {
-				$oldimg_profil = $obj->img_profil;
+
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$oldimg_profil = $obj->img_profil;
+				}
 			}
+
 
 			if ($oldimg_profil != "") {
 				$oldimg_profil = explode("/", $oldimg_profil);

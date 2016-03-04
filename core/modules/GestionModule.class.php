@@ -47,7 +47,7 @@
 
 			$query = $dbc->query("SELECT * FROM module WHERE activer=1 AND installer=1");
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];
 				$url = [];
 				$nom = [];
@@ -75,7 +75,7 @@
 
 			$query = $dbc->query("SELECT * FROM module WHERE systeme IS NULL");
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];
 				$url = [];
 				$nom = [];
@@ -103,7 +103,7 @@
 
 			$query = $dbc->query("SELECT * FROM module WHERE systeme = 1");
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];
 				$url = [];
 				$nom = [];
@@ -132,7 +132,7 @@
 
 			$query = $dbc->query("SELECT * FROM module WHERE nom_module = ".$dbc->quote($nom_module));
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$installer = 0;
 
 				foreach ($query as $obj) {
@@ -161,12 +161,14 @@
 
 			$query = $dbc->query("SELECT activer FROM module WHERE nom_module = ".$dbc->quote($nom_module));
 
-			foreach ($query as $obj) {
-				if ($obj->activer == 1) {
-					return true;
-				}
-				else {
-					return false;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					if ($obj->activer == 1) {
+						return true;
+					}
+					else {
+						return false;
+					}
 				}
 			}
 		}
@@ -182,12 +184,14 @@
 
 			$query = $dbc->query("SELECT mettre_jour FROM module WHERE nom_module = ".$dbc->quote($nom_module));
 
-			foreach ($query as $obj) {
-				if ($obj->mettre_jour == 1) {
-					return false;
-				}
-				else {
-					return true;
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					if ($obj->mettre_jour == 1) {
+						return false;
+					}
+					else {
+						return true;
+					}
 				}
 			}
 		}
@@ -203,7 +207,7 @@
 
 			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, mettre_jour, delete_old_version, ID_module FROM module");
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					if ($obj->next_check_version == null) {
 						//si pas de version a checker, cela veut dire qu'on vient d'installer le module
@@ -271,7 +275,7 @@
 
 			$query = $dbc->query("SELECT * FROM module WHERE mettre_jour=1");
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$nom_module = [];
 				$version = [];
 				$online_version = [];

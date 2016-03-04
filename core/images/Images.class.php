@@ -94,7 +94,7 @@
 				//test si il y a deja une img
 				if ($old_image_req != null) {
 					$query = $dbc->query($old_image_req);
-					if (count($query > 0)) {
+					if ((is_array($query)) && (count($query) > 0)) {
 						foreach ($query as $obj) {
 							$this->old_image = $obj->$name;
 						}

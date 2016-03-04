@@ -30,14 +30,11 @@
 
 				//on test voir si super admin
 				$query = $dbc->query("SELECT super_admin,liste_droit FROM identite WHERE ID_identite=".$this->id_identite);
-				foreach ($query as $obj) {
-					if ($obj->super_admin == 1) $this->super_admin = 1;
 
-					if ($obj->liste_droit == 1) {
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						$this->super_admin = $obj->super_admin;
 						$this->id_liste_droit_acces = $obj->liste_droit;
-					}
-					else {
-						$this->id_liste_droit_acces = 0;
 					}
 				}
 			}
@@ -90,7 +87,9 @@
 
 				if (!in_array($page, $all_access)) {
 					$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
-					foreach ($query as $obj) $droit_acces = $obj->droit_acces;
+					if ((is_array($query)) && (count($query) > 0)) {
+						foreach ($query as $obj) $droit_acces = $obj->droit_acces;
+					}
 				}
 
 				//si la page n'est pas trouvée dans les droit d'accès c'est qu'elle est obligatoirement accessible dans admin
@@ -108,7 +107,7 @@
 								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
 				");
 
-				if (count($query) > 0) {
+				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
 
 					if (($this->super_admin == 1) || ($acces === true) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null))) {
@@ -154,7 +153,9 @@
 								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
 								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
 				");
-				foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
+				}
 
 				if (in_array($droit, $liste_droit_acces)) {
 					//on check si il a le droit de modifier ou supprimer cette page
@@ -166,7 +167,7 @@
 					");
 
 						//si on a un resultat
-						if (count($query) > 0) {
+						if ((is_array($query)) && (count($query) > 0)) {
 							foreach ($query as $obj) {
 								$this->modif_seo = $obj->seo;
 								$this->modif_contenu = $obj->contenu;
@@ -221,7 +222,7 @@
 								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
 								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
 				");
-				if (count($query) > 0) {
+				if ((is_array($query)) && (count($query) > 0)) {
 					$liste_droit_acces = [];
 
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
