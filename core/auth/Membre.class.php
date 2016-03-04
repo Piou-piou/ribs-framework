@@ -80,32 +80,6 @@
 		
 		
 		//------------------------------ setter-----------------------------------
-		/**
-		 * @param null $id_identite
-		 */
-		public function setSupprimUser($id_identite = null) {
-			$dbc = \core\App::getDb();
-
-			if ($id_identite == null) {
-				$id_identite = $this->id_identite;
-			}
-			
-			//test si il y a deja une img
-			$query = $dbc->query("SELECT img_profil FROM identite where ID_identite=$id_identite");
-			foreach ($query as $obj) {
-				$oldimg_profil = $obj->img_profil;
-			}
-
-			if ($oldimg_profil != "") {
-				$oldimg_profil = explode("/", $oldimg_profil);
-
-				if (end($oldimg_profil) != "defaut.png") {
-					unlink("../../images/profil/".end($oldimg_profil));
-				}
-			}
-			
-			$dbc->prepare("DELETE FROM identite WHERE ID_identite=".$id_identite);
-		}
 
 		/**
 		 * @param string $new_pseudo
