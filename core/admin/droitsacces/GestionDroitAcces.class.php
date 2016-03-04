@@ -24,7 +24,7 @@
 
 
 
-        //-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
+		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($id_liste_droit_acces = null) {
 			$dbc = App::getDb();
 
@@ -108,7 +108,7 @@
 			return $this->pseudo;
 		}
 		public function getNbUser() {
-		    return $this->nb_user;
+			return $this->nb_user;
 		}
 
 		/**
@@ -116,7 +116,7 @@
 		 * @param $id_liste_droit_acces
 		 */
 		public function getListeDroitAccesDetailDroit($id_liste_droit_acces = null) {
-		    $dbc = \core\App::getDb();
+			$dbc = \core\App::getDb();
 
 			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
 
@@ -160,7 +160,7 @@
 		 * @param $id_liste_droit_acces
 		 */
 		public function getListeDroitAccesDetailPage($id_liste_droit_acces = null) {
-		    $dbc = \core\App::getDb();
+			$dbc = \core\App::getDb();
 
 			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
 
@@ -179,11 +179,11 @@
 				$this->setListeDroitAccesDetailPage($id_page, $titre_page);
 			}
 		}
-        //-------------------------- FIN GETTER ----------------------------------------------------------------------------//
+		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
 
-        //-------------------------- SETTER ----------------------------------------------------------------------------//
+		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		private function setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user) {
 			$this->id_liste_droit_acces = $id_liste_droit_acces;
 			$this->nom_liste = $nom_liste;
