@@ -92,9 +92,10 @@
 			
 			//test si il y a deja une img
 			$query = $dbc->query("SELECT img_profil FROM identite where ID_identite=$id_identite");
-			$query->setFetchMode(PDO::FETCH_OBJ);
-			$obj = $query->fetch();
-			$oldimg_profil = $obj->img_profil;
+			foreach ($query as $obj) {
+				$oldimg_profil = $obj->img_profil;
+			}
+
 			if ($oldimg_profil != "") {
 				$oldimg_profil = explode("/", $oldimg_profil);
 
@@ -113,6 +114,7 @@
 			$dbc = \core\App::getDb();
 			
 			//recherche si pseudo pas deja existant
+			$pseudo_bdd = "";
 			$query = $dbc->query("SELECT pseudo FROM identite WHERE pseudo=$new_pseudo");
 			foreach ($query as $obj) {
 				$pseudo_bdd = $dbc->quote(htmlspecialchars($obj->pseudo));
@@ -192,6 +194,10 @@
 		private function testpassword($mdp) {
 			$longueur = strlen($mdp);
 			$point = 0;
+			$point_min = 0;
+			$point_maj = 0;
+			$point_chiffre = 0;
+			$point_caracteres = 0;
 
 			for ($i = 0; $i < $longueur; $i++) {
 				$lettre = $mdp[$i];
