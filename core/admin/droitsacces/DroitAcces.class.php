@@ -56,13 +56,9 @@
 		public function getSuperAdmin(){
 			return $this->super_admin;
 		}
-
-		//pour la table liste_droit_acces
 		public function getIdListeDroitAcces(){
 			return $this->id_liste_droit_acces;
 		}
-
-		//pour les droits sur la gestion des contenus
 		public function getModifSeo(){
 			return $this->modif_seo;
 		}
