@@ -151,6 +151,8 @@
 
 			//récupération de la liste des droits de l'utilisateur si aps super admin
 			if ($this->super_admin != 1) {
+				$liste_droit_acces = [];
+
 				$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
 								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
 								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
