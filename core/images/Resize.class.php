@@ -14,8 +14,8 @@
 		{
 			// *** Class variables
 			private $image;
-		    private $width;
-		    private $height;
+			private $width;
+			private $height;
 			private $imageResized;
 
 			/**
@@ -27,9 +27,9 @@
 				// *** Open up the file
 				$this->image = $this->openImage($fileName);
 
-			    // *** Get width and height
-			    $this->width  = imagesx($this->image);
-			    $this->height = imagesy($this->image);
+				// *** Get width and height
+				$this->width  = imagesx($this->image);
+				$this->height = imagesy($this->image);
 			}
 
 			## --------------------------------------------------------
@@ -139,19 +139,19 @@
 
 			private function getSizeByAuto($newWidth, $newHeight)
 			{
-				if ($this->height < $this->width)
-				// *** Image to be resized is wider (landscape)
+				if ($this->height < $this->width) {
+								// *** Image to be resized is wider (landscape)
 				{
 					$optimalWidth = $newWidth;
-					$optimalHeight = $this->getSizeByFixedWidth($newWidth);
 				}
-				elseif ($this->height > $this->width)
-				// *** Image to be resized is taller (portrait)
+					$optimalHeight = $this->getSizeByFixedWidth($newWidth);
+				} elseif ($this->height > $this->width) {
+								// *** Image to be resized is taller (portrait)
 				{
 					$optimalWidth = $this->getSizeByFixedHeight($newHeight);
-					$optimalHeight = $newHeight;
 				}
-				else
+					$optimalHeight = $newHeight;
+				} else
 				// *** Image to be resizerd is a square
 				{
 					if ($newHeight < $newWidth) {
@@ -195,14 +195,14 @@
 			private function crop($optimalWidth, $optimalHeight, $newWidth, $newHeight)
 			{
 				// *** Find center - this will be used for the crop
-				$cropStartX = ( $optimalWidth / 2) - ( $newWidth /2 );
-				$cropStartY = ( $optimalHeight/ 2) - ( $newHeight/2 );
+				$cropStartX = ($optimalWidth / 2) - ($newWidth / 2);
+				$cropStartY = ($optimalHeight / 2) - ($newHeight / 2);
 
 				$crop = $this->imageResized;
 
 				// *** Now crop from center to exact requested size
-				$this->imageResized = imagecreatetruecolor($newWidth , $newHeight);
-				imagecopyresampled($this->imageResized, $crop , 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight , $newWidth, $newHeight);
+				$this->imageResized = imagecreatetruecolor($newWidth, $newHeight);
+				imagecopyresampled($this->imageResized, $crop, 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
 			}
 
 			## --------------------------------------------------------
@@ -213,8 +213,8 @@
 			public function saveImage($savePath, $imageQuality="100")
 			{
 				// *** Get extension
-        		$extension = strrchr($savePath, '.');
-       			$extension = strtolower($extension);
+				$extension = strrchr($savePath, '.');
+	   			$extension = strtolower($extension);
 
 				switch($extension)
 				{
