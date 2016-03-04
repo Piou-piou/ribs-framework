@@ -57,6 +57,14 @@
 			$config = new Configuration();
 
 			if (count($query) > 0) {
+				$valide = "";
+				$id_identite = [];
+				$nom = [];
+				$prenom = [];
+				$pseudo = [];
+				$mail = [];
+				$img_profil = [];
+
 				foreach ($query as $obj) {
 					$id_identite[] = $obj->ID_identite;
 					$nom[] = $obj->nom;
@@ -220,6 +228,8 @@
 		public function setSupprimerCompte($id_identite) {
 			$dbc = \core\App::getDb();
 
+			$oldimg_profil = "";
+
 			//test si il y a deja une img
 			$query = $dbc->query("SELECT img_profil FROM identite where ID_identite=$id_identite");
 			foreach ($query as $obj) {
@@ -228,7 +238,7 @@
 
 			if ($oldimg_profil != "") {
 				$oldimg_profil = explode("/", $oldimg_profil);
-				if ($oldimg_profil[7] != "defaut.png") {
+				if (end($oldimg_profil) != "defaut.png") {
 					unlink("../../images/profil/".$oldimg_profil[7]);
 				}
 			}
