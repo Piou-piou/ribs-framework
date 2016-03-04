@@ -89,6 +89,8 @@
 			if ($this->super_admin != 1) {
 				//page sans droit dans admin
 				$all_access = array("gestion-comptes/mon-compte", "index");
+				$droit_acces = [];
+				$liste_droit_acces = [];
 
 				if (!in_array($page, $all_access)) {
 					$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
@@ -222,6 +224,8 @@
 								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
 				");
 				if (count($query) > 0) {
+					$liste_droit_acces = [];
+
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
 
 					if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {
