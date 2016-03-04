@@ -70,7 +70,7 @@
 				
 
 				//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
-				if (($valide == 1) && ($archiver != 1) && ($mdp == $mdpbdd)) {
+				if (((isset($valide)) && ($valide != 1)) && ((isset($archiver)) && ($archiver == 1)) && ($mdp == $mdpbdd)) {
 					$_SESSION['login'] = $pseudo;
 					$_SESSION["idlogin".CLEF_SITE] = $id;
 
