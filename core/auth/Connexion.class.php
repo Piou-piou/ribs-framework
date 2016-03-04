@@ -62,7 +62,8 @@
 					FlashMessage::setFlash("Votre compte a été bloqué par un administrateur, vous ne pouvez donc pas vous connecter à ce site, veuillez réesseyer ultérieurement");
 					header("location:$page_retour_err");
 				}
-				
+
+				$mdpbdd = "";
 				$query2 = $dbc->query("select mdp from identite where ID_identite='$id'");
 				foreach ($query2 as $obj2) {
 					$mdpbdd = Encrypt::setDecryptMdp($obj2->mdp, $id);
@@ -75,7 +76,7 @@
 					$_SESSION["idlogin".CLEF_SITE] = $id;
 
 					//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
-					$date_array = DateHeure::dateBddToArray(self::getlastConnexion($obj->ID_identite));
+					$date_array = DateHeure::dateBddToArray(self::getlastConnexion($id));
 					$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
 					$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
 
