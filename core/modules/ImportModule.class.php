@@ -76,6 +76,7 @@
 								if (rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true) {
 									//si c'est une install et non une mise à jour
 									if ($update == null) {
+										$requete = "";
 										require_once(MODULEROOT.$this->nom_dossier."/install.php");
 										$dbc->prepare($requete);
 									}
@@ -176,6 +177,8 @@
 		 */
 		public function setSupprimerModule($id_module) {
 			$dbc = App::getDb();
+			$systeme = "";
+			$url = "";
 
 			$query = $dbc->query("SELECT * FROM module WHERE ID_module=".$id_module);
 
@@ -201,6 +204,7 @@
 				$dbc->prepare("DELETE FROM module WHERE ID_module=:id_module", $value);
 			}
 
+			$requete = "";
 			require_once($url."/uninstall.php");
 			$dbc->prepare($requete);
 
