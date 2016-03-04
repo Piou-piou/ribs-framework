@@ -31,6 +31,7 @@
 
 		private function getAllModules() {
 			$dbc = App::getDb();
+			$module = "";
 
 			$query = $query = $dbc->query("SELECT * FROM module");
 
@@ -50,6 +51,7 @@
 		public function getUrl($url) {
 			$explode = explode("/", $url);
 			$count = count($explode);
+			$debut_url = "";
 
 			for ($i = 0; $i < $count; $i++) {
 				if (in_array($explode[$i], $this->getAllModules())) {
@@ -82,6 +84,7 @@
 		 */
 		public function getRouteModuleExist($url) {
 			$dbc = \core\App::getDb();
+			$error = true;
 
 			$query = $dbc->query("SELECT * FROM module");
 
