@@ -5,7 +5,7 @@
 	$validator->Check('demande', 'required');
 
 
-	if ($validator->getErrors()) {
+	if ($validator->getErrors() !== null) {
 		\core\HTML\flashmessage\FlashMessage::setFlash($validator->getErrors());
 	}
 	else {
