@@ -25,6 +25,12 @@
 				$query = $dbc->query("SELECT ID_page, titre, balise_title, parent, url FROM page WHERE affiche=1 ORDER BY ordre");
 
 				if (count($query) > 0) {
+					$id_page = [];
+					$titre = [];
+					$balise_title = [];
+					$url = [];
+					$parent = [];
+
 					foreach ($query as $obj) {
 						$id_page[] = $obj->ID_page;
 						$titre[] = $obj->titre;
