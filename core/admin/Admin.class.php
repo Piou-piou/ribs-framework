@@ -137,6 +137,10 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+
+		/**
+		 * @param null|string $valide
+		 */
 		private function setAllUser($id_identite, $nom, $prenom, $mail, $pseudo, $img_profil, $valide) {
 			$this->id_identite = $id_identite;
 			$this->nom = $nom;
