@@ -210,13 +210,13 @@
 			 * @param string $savePath
 			 * @param string $imageQuality
 			 */
-			public function saveImage($savePath, $imageQuality="100")
+			public function saveImage($savePath, $imageQuality = "100")
 			{
 				// *** Get extension
 				$extension = strrchr($savePath, '.');
 	   			$extension = strtolower($extension);
 
-				switch($extension)
+				switch ($extension)
 				{
 					case '.jpg':
 					case '.jpeg':
