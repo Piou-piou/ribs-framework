@@ -52,15 +52,13 @@
 				$config = new Configuration();
 
 				//cela veut dire que l'utilisateur doit obligatoirement etre valider pour avoir acces au site
-				if ($config->getValiderInscription() == 1) {
-					if ($valide != 1) {
-						FlashMessage::setFlash("Votre compta n'a encore pas été validé par un administrateur, vous ne pouvez donc pas accéder à ce site, veuillez réesseyer ultérieurement");
-						header("location:$page_retour_err");
-					}
+				if (($config->getValiderInscription() == 1) && ((isset($valide)) && ($valide != 1))) {
+					FlashMessage::setFlash("Votre compta n'a encore pas été validé par un administrateur, vous ne pouvez donc pas accéder à ce site, veuillez réesseyer ultérieurement");
+					header("location:$page_retour_err");
 				}
 
 				//si le compte est archiver (bloqué) l'utilisateur ne peut pas se connecter au site
-				if ($archiver == 1) {
+				if ((isset($archiver)) && ($archiver == 1)) {
 					FlashMessage::setFlash("Votre compte a été bloqué par un administrateur, vous ne pouvez donc pas vous connecter à ce site, veuillez réesseyer ultérieurement");
 					header("location:$page_retour_err");
 				}
@@ -72,42 +70,39 @@
 				
 
 				//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
-				if (($valide == 1) && ($archiver != 1)) {
-					if ($mdp == $mdpbdd) {
-						$_SESSION['login'] = $pseudo;
-						$_SESSION["idlogin".CLEF_SITE] = $id;
+				if (($valide == 1) && ($archiver != 1) && ($mdp == $mdpbdd)) {
+					$_SESSION['login'] = $pseudo;
+					$_SESSION["idlogin".CLEF_SITE] = $id;
 
-						//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
-						$date_array = DateHeure::dateBddToArray(self::getlastConnexion($obj->ID_identite));
-						$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
-						$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+					//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
+					$date_array = DateHeure::dateBddToArray(self::getlastConnexion($obj->ID_identite));
+					$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
+					$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
 
-						if (($today - $last_change_mdp) > 259200) {
-							self::setUpdatelastConnexion($id);
+					if (($today - $last_change_mdp) > 259200) {
+						self::setUpdatelastConnexion($id);
 
-							$membre = new Membre($id);
-							$membre->setMdp($mdpbdd, $mdp_noncrypt, $mdp_noncrypt);
+						$membre = new Membre($id);
+						$membre->setMdp($mdpbdd, $mdp_noncrypt, $mdp_noncrypt);
 
-							if (isset($_POST['remember'])) {
-								setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
-							}
+						if (isset($_POST['remember'])) {
+							setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
 						}
-						else {
-							if (isset($_POST['remember'])) {
-								setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$mdpbdd), time() + 3600 * 24 * 3, "/", "", false, true);
-							}
-						}
-
-
-						FlashMessage::setFlash("Vous êtes maintenant connecté", "info");
-						header("location:$page_retour");
 					}
 					else {
-						FlashMessage::setFlash("Vos identifiants de connexions sont incorrects");
-						header("location:$page_retour_err");
+						if (isset($_POST['remember'])) {
+							setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$mdpbdd), time() + 3600 * 24 * 3, "/", "", false, true);
+						}
 					}
-				}
 
+
+					FlashMessage::setFlash("Vous êtes maintenant connecté", "info");
+					header("location:$page_retour");
+				}
+				else {
+					FlashMessage::setFlash("Vos identifiants de connexions sont incorrects");
+					header("location:$page_retour_err");
+				}
 			}
 		}
 
