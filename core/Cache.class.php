@@ -64,14 +64,13 @@
 			//on regarde si il existe et un cache et si il faut ou non le remettre à jour
 			$query = $dbc->query("SELECT * FROM cache WHERE nom_fichier like '$this->page'");
 
-			if (count($query) > 0) {
+			if ((is_array($query)) && (count($query) > 0)) {
 				$reload_cache = 0;
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						$reload_cache = $obj->reload_cache;
-						$this->no_cache = $obj->no_cache;
-					}
+				foreach ($query as $obj) {
+					$reload_cache = $obj->reload_cache;
+					$this->no_cache = $obj->no_cache;
 				}
+
 			}
 			else {
 				$value = [
