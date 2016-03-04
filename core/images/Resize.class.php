@@ -117,6 +117,10 @@
 						$optimalWidth = $optionArray['optimalWidth'];
 						$optimalHeight = $optionArray['optimalHeight'];
 						break;
+				   default:
+					   $optimalWidth = "";
+					   $optimalHeight = "";
+					   break;
 				}
 				return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
 			}
