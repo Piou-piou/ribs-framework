@@ -48,6 +48,12 @@
 			$query = $dbc->query("SELECT * FROM module WHERE activer=1 AND installer=1");
 
 			if (count($query) > 0) {
+				$id_module = [];
+				$url = [];
+				$nom = [];
+				$version = [];
+				$icone = [];
+
 				foreach ($query as $obj) {
 					$id_module[] = $obj->ID_module;
 					$url[] = $obj->url;
@@ -70,6 +76,12 @@
 			$query = $dbc->query("SELECT * FROM module WHERE systeme IS NULL");
 
 			if (count($query) > 0) {
+				$id_module = [];
+				$url = [];
+				$nom = [];
+				$version = [];
+				$url_telechargement = [];
+
 				foreach ($query as $obj) {
 					$id_module[] = $obj->ID_module;
 					$url[] = $obj->url;
@@ -92,6 +104,12 @@
 			$query = $dbc->query("SELECT * FROM module WHERE systeme = 1");
 
 			if (count($query) > 0) {
+				$id_module = [];
+				$url = [];
+				$nom = [];
+				$version = [];
+				$url_telechargement = [];
+
 				foreach ($query as $obj) {
 					$id_module[] = $obj->ID_module;
 					$url[] = $obj->url;
@@ -115,6 +133,8 @@
 			$query = $dbc->query("SELECT * FROM module WHERE nom_module = ".$dbc->quote($nom_module));
 
 			if (count($query) > 0) {
+				$installer = 0;
+
 				foreach ($query as $obj) {
 					$installer = $obj->installer;
 				}
@@ -252,6 +272,10 @@
 			$query = $dbc->query("SELECT * FROM module WHERE mettre_jour=1");
 
 			if (count($query) > 0) {
+				$nom_module = [];
+				$version = [];
+				$online_version = [];
+
 				foreach ($query as $obj) {
 					$nom_module[] = $obj->nom_module;
 					$version[] = $obj->version;
