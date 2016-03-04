@@ -32,7 +32,7 @@
 				$count_query = 0;
 			}
 
-			$find   = 'controller/';
+			$find = 'controller/';
 			$controller = strpos($url, $find);
 
 			if (($count_query > 0) || ((!is_array($query)) && ($query > 0)) || ($controller !== false)) {
