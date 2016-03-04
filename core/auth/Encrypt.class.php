@@ -20,6 +20,7 @@
 		public static function getParams($id_identite = null) {
 			if ($id_identite != null) {
 				$dbc = App::getDb();
+				$params = "";
 
 				$query = $dbc->query("SELECT mdp_params FROM identite WHERE ID_identite=".$id_identite);
 				foreach ($query as $obj) {
