@@ -183,6 +183,8 @@
 				}
 			}
 			else if ($nom_image !== null) {
+				$success = false;
+
 
 				if (is_array($nom_image)) {
 					$count = count($nom_image);
