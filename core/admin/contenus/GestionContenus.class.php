@@ -36,6 +36,12 @@
 				}
 
 				if (count($query > 0)) {
+					$id_page = [];
+					$titre = [];
+					$balise_title = [];
+					$url = [];
+					$parent = [];
+
 					foreach ($query as $obj) {
 						$id_page[] = $obj->ID_page;
 						$titre[] = $obj->titre;
@@ -68,6 +74,7 @@
 
 		private function getLastOrdre() {
 			$dbc = \core\App::getDb();
+			$ordre = "";
 
 			$query = $dbc->query("SELECT ordre FROM page ORDER BY ordre ASC LIMIT 1");
 			foreach ($query as $obj) {
