@@ -91,15 +91,7 @@
 					}
 				}
 
-				//si la page n'est pas trouvée dans les droit d'accès c'est qu'elle est obligatoirement accessible dans admin
-				if (!isset($droit_acces)) {
-					return true;
-				}
-				else {
-					return false;
-				}
-
-				//récupération de la liste des droits de l'utilisateur
+				//récupération de la liste des droits du userr
 				$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
 								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
 								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
@@ -108,15 +100,14 @@
 
 				if ((is_array($query)) && (count($query) > 0)) {
 					$liste_droit_acces = [];
-
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
+				}
 
-					if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null))) {
-						return true;
-					}
-					else {
-						return false;
-					}
+				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null)) || (!isset($droit_acces))) {
+					return true;
+				}
+				else {
+					return false;
 				}
 			}
 			else {
