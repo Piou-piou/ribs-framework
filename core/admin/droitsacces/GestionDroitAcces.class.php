@@ -148,7 +148,7 @@
 
 		/**
 		 * @param $id_liste_droit_acces
-		 * @return array|int
+		 * @return integer
 		 */
 		private function getNombrePageListe($id_liste_droit_acces) {
 			$dbc = App::getDb();
