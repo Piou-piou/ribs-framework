@@ -139,12 +139,7 @@
 					$installer = $obj->installer;
 				}
 
-				if ($installer == 1) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return $installer;
 			}
 			else {
 				return false;

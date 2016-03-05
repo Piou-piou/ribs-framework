@@ -45,14 +45,14 @@
 							</label>
 						</td>
 						<td>
-							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) === true) { ?>
+							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) === 1) { ?>
 								<a class="open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
 							<?php } else { ?>
 								<a class="installer-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page_syst->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>
 						</td>
 						<td>
-							<?php if ((\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) === true) && (\core\modules\GestionModule::getModuleActiver($gestion_module_page_syst->getNom()[$i]) === true)) { ?>
+							<?php if ((\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) === 1) && (\core\modules\GestionModule::getModuleActiver($gestion_module_page_syst->getNom()[$i]) === true)) { ?>
 								<?php if (\core\modules\GestionModule::getModuleAJour($gestion_module_page_syst->getNom()[$i]) != 1) { ?>
 									<a href="<?=ADMWEBROOT?>controller/core/modules/installation/update?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>" class="open-popup" popup="popup-update-module">Mettre à jour</a>
 								<?php } else {?>
