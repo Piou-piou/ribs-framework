@@ -21,14 +21,15 @@
 		 * @param string $mdp mot de passe que l'utilisateur utilise
 		 * @param string $page_retour_err page de retour en cas d'err de mdp ou pseudo
 		 * @param string $page_retour page de retour quand connexion ok
+		 * @param int|null $remember si on doit mémoriser la connexion au site
 		 */
-		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour) {
+		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour, $remember = null) {
 			$dbc = App::getDb();
 			$mdpbdd = "";
 
 			//recup des donnees
 			$pseudo = $dbc->quote(htmlspecialchars($pseudo));
-			$mdp_noncrypt = $mdp;
+			$mdp_nonencrypt = $mdp;
 			$mdp = md5(htmlspecialchars($mdp));
 
 			$query = $dbc->query("select * from identite where pseudo=$pseudo");
@@ -70,24 +71,7 @@
 					$_SESSION['login'] = $pseudo;
 					$_SESSION["idlogin".CLEF_SITE] = $id;
 
-					//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
-					$date_array = DateHeure::dateBddToArray(self::getlastConnexion($id));
-					$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
-					$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-
-					if (($today - $last_change_mdp) > 259200) {
-						self::setUpdatelastConnexion($id);
-
-						$membre = new Membre($id);
-						$membre->setMdp($mdpbdd, $mdp_noncrypt, $mdp_noncrypt);
-
-						if (isset($_POST['remember'])) {
-							setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
-						}
-					}
-					else if (isset($_POST['remember'])) {
-						setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$mdpbdd), time() + 3600 * 24 * 3, "/", "", false, true);
-					}
+					self::setTestChangerMdp($id, $mdp_nonencrypt, $remember);
 
 					FlashMessage::setFlash("Vous êtes maintenant connecté", "info");
 					header("location:$page_retour");
@@ -204,6 +188,29 @@
 			$query = $dbc->query("SELECT last_change_mdp FROM identite WHERE ID_identite=".$id_identite);
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) return $obj->last_change_mdp;
+			}
+		}
+
+		/**
+		 * @param $id_identite
+		 * @param null $remember
+		 */
+		private static function setTestChangerMdp($id_identite, $mdp_nonencrypt_tape, $remember = null) {
+			$membre = new Membre($id_identite);
+
+			$date_array = DateHeure::dateBddToArray(self::getlastConnexion($id_identite));
+			$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
+			$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+
+			if (($today - $last_change_mdp) > 259200) {
+				self::setUpdatelastConnexion($id_identite);
+
+				$membre->setMdp($mdp_nonencrypt_tape, $mdp_nonencrypt_tape, $mdp_nonencrypt_tape);
+			}
+
+			if ((isset($remember)) && ($remember !== null)) {
+				setcookie("auth".CLEF_SITE, NULL, -1);
+				setcookie("auth".CLEF_SITE, $id_identite."-----".sha1($membre->getPseudo().$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
 			}
 		}
 	}

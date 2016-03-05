@@ -127,7 +127,6 @@
 
 			$mdp = Encrypt::setDecryptMdp($this->mdp, $this->id_identite);
 
-			
 			//si mdp trop court
 			if (md5($old_mdp) != $mdp) {
 				$err = "Votre mot de passe est incorrect";
