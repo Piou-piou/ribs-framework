@@ -112,27 +112,7 @@
 								$_SESSION['login'] = $obj->pseudo;
 								$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
 
-								//on test quand le user s'est connecté pour la derniere fois, si la date est supérrieur de trois jour, on refait un mdp
-								$date_array = DateHeure::dateBddToArray(self::getlastConnexion($obj->ID_identite));
-								$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
-								$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-
-								if (($today - $last_change_mdp) > 259200) {
-									self::setUpdatelastConnexion($obj->ID_identite);
-
-									//on refait un nouveau mdp encrypté avec le même mdp
-									$mdp_actuel = Encrypt::setDecryptMdp($obj->mdp, $obj->ID_identite);
-									$membre = new Membre($obj->ID_identite);
-									$membre->setMdp($mdp_actuel, $mdp_actuel, $mdp_actuel);
-
-									//on detruit le cookie et on le refait avec le mdp regénéré
-									setcookie("auth".CLEF_SITE, NULL, -1);
-									$key = sha1($obj->pseudo.$membre->getMdp());
-									setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-								}
-								else {
-									setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-								}
+								setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
 							}
 							else if ($obj_connecte == 1) {
 								self::setDeconnexion($page_retour);
