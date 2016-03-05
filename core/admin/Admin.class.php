@@ -73,21 +73,13 @@
 					$prenom[] = $obj->prenom;
 					$pseudo[] = $obj->pseudo;
 					$mail[] = $obj->mail;
+					$img_profil[] = $obj->img_profil;
 
-					if ($obj->img_profil == "") {
-						$img_profil[] = "profil/defaut.png";
+					if (($config->getValiderInscription() == 1) && ($obj->valide == 0)) {
+						$valide[] = "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
 					}
 					else {
-						$img_profil[] = $obj->img_profil;
-					}
-
-					if ($config->getValiderInscription() == 1) {
-						if ($obj->valide == 0) {
-							$valide[] = "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
-						}
-						else {
-							$valide[] = "Utilisateur validé";
-						}
+						$valide[] = "Utilisateur validé";
 					}
 				}
 
