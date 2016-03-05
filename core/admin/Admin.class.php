@@ -236,12 +236,9 @@
 				}
 			}
 
-
-			if ($oldimg_profil != "") {
-				$oldimg_profil = explode("/", $oldimg_profil);
-				if (end($oldimg_profil) != "defaut.png") {
-					unlink("../../images/profil/".$oldimg_profil[7]);
-				}
+			$oldimg_profil = explode("/", $oldimg_profil);
+			if (end($oldimg_profil) != "defaut.png") {
+				unlink("../../images/profil/".$oldimg_profil[7]);
 			}
 
 			$value = array(
