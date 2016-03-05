@@ -7,7 +7,6 @@
 
 	$membre = new Membre($_SESSION["idlogin".CLEF_SITE]);
 
-
 	$mdp = $_POST['mdp'];
 	$new_mdp = $_POST['mdp_new'];
 	$verif_new_mdp = $_POST['verif_mdp_new'];
@@ -15,7 +14,7 @@
 	if (isset($_POST['admin'])) {
 		$membre->setMdp($mdp, $new_mdp, $verif_new_mdp);
 
-		if ($membre->getErreur()) {
+		if ($membre->getErreur() != "") {
 			FlashMessage::setFlash($membre->getErreur());
 			header("location:".ADMWEBROOT."gestion-comptes/mon-compte");
 		}
@@ -27,7 +26,7 @@
 	else {
 		$membre->setMdp($mdp, $new_mdp, $verif_new_mdp);
 
-		if ($membre->getErreur()) {
+		if ($membre->getErreur() != "") {
 			FlashMessage::setFlash($membre->getErreur());
 			header("location:index.php");
 		}
