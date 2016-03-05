@@ -93,12 +93,8 @@
 			}
 			
 			//si pseudo trop court
-			if (strlen($new_pseudo) < 5) {
-				$err = "Votre pseudo est trop court";
-				$this->erreur = $err;
-			}
-			else if (strlen($new_pseudo) > 15) {
-				$err = "Votre pseudo est trop long";
+			if ((strlen($new_pseudo) < 5) || (strlen($new_pseudo) > 15)) {
+				$err = "Votre pseudo doit être entre 5 et 15 caractères";
 				$this->erreur = $err;
 			}
 			else if ($new_pseudo == $pseudo_bdd) {
