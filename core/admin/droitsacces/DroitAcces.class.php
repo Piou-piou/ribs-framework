@@ -85,12 +85,11 @@
 				$droit_acces = [];
 				$liste_droit_acces = [];
 
-				if (!in_array($page, $all_access)) {
-					$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
-					if ((is_array($query)) && (count($query) > 0)) {
-						foreach ($query as $obj) $droit_acces = $obj->droit_acces;
-					}
+				$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) $droit_acces = $obj->droit_acces;
 				}
+
 
 				//récupération de la liste des droits du userr
 				$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
@@ -103,7 +102,7 @@
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
 				}
 
-				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null)) || (!isset($droit_acces))) {
+				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
 					return true;
 				}
 				else {
