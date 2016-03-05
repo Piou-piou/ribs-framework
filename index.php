@@ -100,7 +100,7 @@
 				$explode = explode("/", $page);
 				$page = "app/views/".end($explode);
 
-				if (!file_exists(ROOT.$page)) {
+				if (!file_exists(ROOT.$page.".php")) {
 					\core\RedirectError::Redirect(404);
 				}
 			}
