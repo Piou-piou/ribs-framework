@@ -21,7 +21,7 @@
 		 * @param string $mdp mot de passe que l'utilisateur utilise
 		 * @param string $page_retour_err page de retour en cas d'err de mdp ou pseudo
 		 * @param string $page_retour page de retour quand connexion ok
-		 * @param int|null $remember si on doit mémoriser la connexion au site
+		 * @param int $remember si on doit mémoriser la connexion au site
 		 */
 		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour, $remember) {
 			$dbc = App::getDb();
