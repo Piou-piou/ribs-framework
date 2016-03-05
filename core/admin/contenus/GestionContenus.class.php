@@ -35,24 +35,7 @@
 					$query = $dbc->query("SELECT ID_page, titre, balise_title, parent, url FROM page ORDER BY ordre");
 				}
 
-				if ((is_array($query)) && (count($query) > 0)) {
-					$id_page = [];
-					$titre = [];
-					$balise_title = [];
-					$url = [];
-					$parent = [];
-
-					foreach ($query as $obj) {
-						$id_page[] = $obj->ID_page;
-						$titre[] = $obj->titre;
-						$balise_title[] = $obj->balise_title;
-						$url[] = $obj->url;
-						$parent[] = $obj->parent;
-					}
-
-					$this->setMenu($id_page, $titre, $balise_title, $url, $parent);
-				}
-
+				$this->getMenu($query);
 			}
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
