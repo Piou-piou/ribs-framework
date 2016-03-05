@@ -107,6 +107,7 @@
 					$this->erreur = "Problème dans les dimensions, taille ou format (extension) de l'image.";
 					return false;
 				}
+
 				else if (move_uploaded_file($_FILES[$name]['tmp_name'], $this->dossier_image."/".$uniqid.substr($image, -4))) {
 					$imageok = $uniqid.substr($image, -4);
 
@@ -171,19 +172,11 @@
 					return true;
 				}
 			}
-			else if ($nom_image !== null) {
-				if (unlink($this->dossier_image."/".$nom_image)) {
-					$success = true;
-				}
-				else {
-					$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
-					$success = false;
-				}
-
-				return $success;
+			else if (($nom_image !== null) && (unlink($this->dossier_image."/".$nom_image))) {
+				return true;
 			}
 			else {
-				$this->erreur = "Impossible de supprimer cette image";
+				$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
 				return false;
 			}
 		}
