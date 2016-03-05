@@ -86,7 +86,6 @@
 		 */
 		public function getRouteModuleExist($url) {
 			$dbc = \core\App::getDb();
-			$error = true;
 
 			$query = $dbc->query("SELECT * FROM module");
 
@@ -97,20 +96,12 @@
 					$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);
 
 					if ((($test_module === true) || ($test_module1 === true)) && ($module_activer === true)) {
-						$error = false;
-						break;
+						return true;
 					}
 					else {
-						$error = true;
+						return false;
 					}
 				}
-			}
-
-			if ($error === true) {
-				return false;
-			}
-			else {
-				return true;
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
