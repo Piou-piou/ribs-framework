@@ -110,7 +110,7 @@
 
 		/**
 		 * @param $id_liste_droit_acces
-		 * @return array
+		 * @return integer
 		 */
 		private function getNombreUtilisateurListe($id_liste_droit_acces) {
 			$dbc = App::getDb();
@@ -129,7 +129,7 @@
 
 		/**
 		 * @param $id_liste_droit_acces
-		 * @return array
+		 * @return integer
 		 */
 		private function getNombreDroitAccesListe($id_liste_droit_acces) {
 			$dbc = App::getDb();
