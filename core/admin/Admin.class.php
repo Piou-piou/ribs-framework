@@ -59,13 +59,13 @@
 			$config = new Configuration();
 
 			if ((is_array($query)) && (count($query) > 0)) {
-				$valide = "";
 				$id_identite = [];
 				$nom = [];
 				$prenom = [];
 				$pseudo = [];
 				$mail = [];
 				$img_profil = [];
+				$valide = "";
 
 				foreach ($query as $obj) {
 					$id_identite[] = $obj->ID_identite;
@@ -88,9 +88,6 @@
 						else {
 							$valide[] = "Utilisateur validé";
 						}
-					}
-					else {
-						$valide = "";
 					}
 				}
 

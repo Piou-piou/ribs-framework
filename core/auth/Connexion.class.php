@@ -24,6 +24,7 @@
 		 */
 		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour) {
 			$dbc = App::getDb();
+			$mdpbdd = "";
 
 			//recup des donnees
 			$pseudo = $dbc->quote(htmlspecialchars($pseudo));
@@ -39,9 +40,9 @@
 					$pseudo = $obj->pseudo;
 					$valide = $obj->valide;
 					$archiver = $obj->archiver;
+					$mdpbdd = Encrypt::setDecryptMdp($obj->mdp, $id);
 				}
 			}
-
 
 			//verif si num enr = 0
 			if (!isset($id)) {
@@ -63,15 +64,6 @@
 					header("location:$page_retour_err");
 				}
 
-				$mdpbdd = "";
-				$query2 = $dbc->query("select mdp from identite where ID_identite='$id'");
-				if ((is_array($query2)) && (count($query2) > 0)) {
-					foreach ($query2 as $obj2) {
-						$mdpbdd = Encrypt::setDecryptMdp($obj2->mdp, $id);
-					}
-				}
-
-				
 
 				//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
 				if ($mdp == $mdpbdd) {
@@ -93,12 +85,9 @@
 							setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
 						}
 					}
-					else {
-						if (isset($_POST['remember'])) {
-							setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$mdpbdd), time() + 3600 * 24 * 3, "/", "", false, true);
-						}
+					else if (isset($_POST['remember'])) {
+						setcookie("auth".CLEF_SITE, $id."-----".sha1($pseudo.$mdpbdd), time() + 3600 * 24 * 3, "/", "", false, true);
 					}
-
 
 					FlashMessage::setFlash("Vous êtes maintenant connecté", "info");
 					header("location:$page_retour");
@@ -114,8 +103,6 @@
 		 * Fonction pour lancer une connexoin avec un compte
 		 * @param int $obj_connecte si = 1 on est obligge d'être connecte pour avoir acces à la page
 		 * @param string $page_retour page sur laquel rediriger le mec qui a clique sur déconnexion
-		 *
-		 * Ne pa oublier de changer auth et mettre auth_nomdusite opur ne pas avoir de conflits
 		 */
 		public static function setConnexion($obj_connecte, $page_retour) {
 			$dbc = App::getDb();
@@ -163,20 +150,16 @@
 									setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
 								}
 							}
-							else {
-								if ($obj_connecte == 1) {
-									self::setDeconnexion($page_retour);
-								}
+							else if ($obj_connecte == 1) {
+								self::setDeconnexion($page_retour);
 							}
 						}
 					}
 				}
 			}
-			else if (!isset($_SESSION["idlogin".CLEF_SITE])) {
-				if ($obj_connecte == 1) {
-					FlashMessage::setFlash("Vous devez être connecté pour accéder à cette page");
-					header("location:".$page_retour);
-				}
+			else if ((!isset($_SESSION["idlogin".CLEF_SITE])) && ($obj_connecte == 1)) {
+				FlashMessage::setFlash("Vous devez être connecté pour accéder à cette page");
+				header("location:".$page_retour);
 			}
 		}
 
