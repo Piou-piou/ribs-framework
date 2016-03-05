@@ -41,7 +41,7 @@
 			else {
 				$router = new RouterModule();
 
-				if ($router->getRouteModuleExist($url) === false) {
+				if ($router->getRouteModuleExist($url) !== true) {
 					self::Redirect(404);
 				}
 
