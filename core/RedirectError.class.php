@@ -25,11 +25,10 @@
 		 * @return bool
 		 */
 		public static function testRedirect404($query, $url) {
+			$count_query = 0;
+
 			if (is_array($query)) {
 				$count_query = count($query);
-			}
-			else {
-				$count_query = 0;
 			}
 
 			$find = 'controller/';
