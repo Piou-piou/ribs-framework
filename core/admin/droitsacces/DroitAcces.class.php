@@ -83,7 +83,6 @@
 				//page sans droit dans admin
 				$all_access = array("gestion-comptes/mon-compte", "index");
 				$droit_acces = [];
-				$liste_droit_acces = [];
 
 				if (!in_array($page, $all_access)) {
 					$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
@@ -94,10 +93,10 @@
 
 				//si la page n'est pas trouvée dans les droit d'accès c'est qu'elle est obligatoirement accessible dans admin
 				if (!isset($droit_acces)) {
-					$acces = true;
+					return true;
 				}
 				else {
-					$acces = false;
+					return false;
 				}
 
 				//récupération de la liste des droits de l'utilisateur
@@ -108,17 +107,11 @@
 				");
 
 				if ((is_array($query)) && (count($query) > 0)) {
+					$liste_droit_acces = [];
+
 					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
 
-					if (($this->super_admin == 1) || ($acces === true) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null))) {
-						return true;
-					}
-					else {
-						return false;
-					}
-				}
-				else {
-					if ($acces === true) {
+					if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null))) {
 						return true;
 					}
 					else {
@@ -159,36 +152,28 @@
 
 				if (in_array($droit, $liste_droit_acces)) {
 					//on check si il a le droit de modifier ou supprimer cette page
-					if (isset($id_page)) {
-						$query = $dbc->query("SELECT * FROM droit_acces_page, liste_droit_acces WHERE
+					$query = $dbc->query("SELECT * FROM droit_acces_page, liste_droit_acces WHERE
 									droit_acces_page.ID_liste_droit_acces = liste_droit_acces.ID_liste_droit_acces AND
 									droit_acces_page.ID_page = $id_page AND
 									liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
 					");
 
-						//si on a un resultat
-						if ((is_array($query)) && (count($query) > 0)) {
-							foreach ($query as $obj) {
-								$this->modif_seo = $obj->seo;
-								$this->modif_contenu = $obj->contenu;
-								$this->modif_navigation = $obj->navigation;
-								$this->supprimer_page = $obj->supprimer;
-							}
+					//si on a un resultat
+					if ((is_array($query)) && (count($query) > 0)) {
+						foreach ($query as $obj) {
+							$this->modif_seo = $obj->seo;
+							$this->modif_contenu = $obj->contenu;
+							$this->modif_navigation = $obj->navigation;
+							$this->supprimer_page = $obj->supprimer;
+						}
 
-							//si les trois sont différent de 0 on renvoit true soinon false
-							if (($this->modif_seo != 0) || ($this->modif_contenu != 0) || ($this->modif_navigation != 0) || ($this->supprimer_page != 0)) {
-								return true;
-							}
-							else {
-								return false;
-							}
+						//si les trois sont différent de 0 on renvoit true soinon false
+						if (($this->modif_seo != 0) || ($this->modif_contenu != 0) || ($this->modif_navigation != 0) || ($this->supprimer_page != 0)) {
+							return true;
 						}
 						else {
 							return false;
 						}
-					}
-					else if ($id_page == "creation_page") {
-						$this->getDroitAccesPage("gestion-contenus/index");
 					}
 					else {
 						return false;
