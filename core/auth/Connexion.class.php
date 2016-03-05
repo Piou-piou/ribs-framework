@@ -195,7 +195,7 @@
 		 * @param $id_identite
 		 * @param null $remember
 		 */
-		private static function setTestChangerMdp($id_identite, $mdp_nonencrypt_tape, $remember = null) {
+		private static function setTestChangerMdp($id_identite, $mdp_nonencrypt_tape, $remember) {
 			$membre = new Membre($id_identite);
 
 			$date_array = DateHeure::dateBddToArray(self::getlastConnexion($id_identite));
