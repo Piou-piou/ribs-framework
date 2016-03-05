@@ -83,21 +83,12 @@
 		public function setPseudo($new_pseudo) {
 			$dbc = \core\App::getDb();
 			
-			//recherche si pseudo pas deja existant
-			$pseudo_bdd = "";
-			$query = $dbc->query("SELECT pseudo FROM identite WHERE pseudo=$new_pseudo");
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) {
-					$pseudo_bdd = $dbc->quote(htmlspecialchars($obj->pseudo));
-				}
-			}
-			
 			//si pseudo trop court
 			if ((strlen($new_pseudo) < 5) || (strlen($new_pseudo) > 15)) {
 				$err = "Votre pseudo doit être entre 5 et 15 caractères";
 				$this->erreur = $err;
 			}
-			else if ($new_pseudo == $pseudo_bdd) {
+			else if ($dbc->rechercherEgalite("identite", "pseudo", $new_pseudo) == false) {
 				$err = "Ce pseudo est déjà utilisé, veuillez en choisir un autre";
 				$this->erreur = $err;
 			}
