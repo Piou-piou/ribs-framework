@@ -84,11 +84,9 @@
 
 			$image = $_FILES[$name]['name'];
 
-			if (empty($_FILES[$name]['name'])) {
-				if ($autorize_empty == 0) {
-					$this->erreur = "Vous devez obligatoirement ajouter une image";
-					return false;
-				}
+			if ((empty($_FILES[$name]['name'])) && ($autorize_empty == 0)) {
+				$this->erreur = "Vous devez obligatoirement ajouter une image";
+				return false;
 			}
 			else {
 				//test si il y a deja une img
@@ -101,9 +99,9 @@
 					}
 				}
 
-
 				//recuperation info sur img
 				$infos_img = getimagesize($_FILES[$name]['tmp_name']);
+				$uniqid = uniqid();
 
 				if (!in_array(substr($image, -3), $this->autorized_extention)) {
 					$this->erreur = "Votre image ne comporte pas l'extension jpg, png, jpeg, gif, JPG, PNG, JPEG, GIF";
@@ -113,25 +111,21 @@
 					$this->erreur = "Problème dans les dimensions ou taille de l'image.";
 					return false;
 				}
+				else if (move_uploaded_file($_FILES[$name]['tmp_name'], $this->dossier_image."/".$uniqid.substr($image, -4))) {
+					$imageok = $uniqid.substr($image, -4);
+
+					$urlimg = $this->dossier_image."/$imageok";
+					$this->chemin_image = $urlimg;
+					$this->nom_image = $imageok;
+
+					if (($delete_old_img == 1) && ($this->old_image != "") && (!empty($_FILES[$name]['name']))) {
+						$this->setDeleteImage();
+					}
+
+					return true;
+				}
 				else {
-					$uniqid = uniqid();
-
-					if (move_uploaded_file($_FILES[$name]['tmp_name'], $this->dossier_image."/".$uniqid.substr($image, -4))) {
-						$imageok = $uniqid.substr($image, -4);
-
-						$urlimg = $this->dossier_image."/$imageok";
-						$this->chemin_image = $urlimg;
-						$this->nom_image = $imageok;
-
-						if (($delete_old_img == 1) && ($this->old_image != "") && (!empty($_FILES[$name]['name']))) {
-							$this->setDeleteImage();
-						}
-
-						return true;
-					}
-					else {
-						$this->erreur = "Impossible d'envoyer votre image sur le serveur, veuillez réessayer dans une instant, si l'erreur se reproduit, contactez votre administrateur";
-					}
+					$this->erreur = "Impossible d'envoyer votre image sur le serveur, veuillez réessayer dans une instant, si l'erreur se reproduit, contactez votre administrateur";
 				}
 			}
 		}
@@ -177,14 +171,12 @@
 				$old_image = explode("/", $this->old_image);
 
 				if (end($old_image) === "defaut.png") {
-					echo($this->dossier_image."/".end($old_image));
 					unlink($this->dossier_image."/".end($old_image));
 					return true;
 				}
 			}
 			else if ($nom_image !== null) {
 				$success = false;
-
 
 				if (is_array($nom_image)) {
 					$count = count($nom_image);
@@ -194,14 +186,12 @@
 						if (unlink($chemin_img)) {
 							$success = true;
 						}
+						else if (unlink($this->chemin_image)) {
+							$success = true;
+						}
 						else {
-							if (unlink($this->chemin_image)) {
-								$success = true;
-							}
-							else {
-								$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
-								$success = false;
-							}
+							$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
+							$success = false;
 						}
 					}
 				}
@@ -209,14 +199,12 @@
 					if (unlink($this->dossier_image."/".$nom_image)) {
 						$success = true;
 					}
+					else if (unlink($this->chemin_image)) {
+						$success = true;
+					}
 					else {
-						if (unlink($this->chemin_image)) {
-							$success = true;
-						}
-						else {
-							$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
-							$success = false;
-						}
+						$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
+						$success = false;
 					}
 				}
 
