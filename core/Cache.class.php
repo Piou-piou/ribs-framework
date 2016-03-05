@@ -70,7 +70,6 @@
 					$reload_cache = $obj->reload_cache;
 					$this->no_cache = $obj->no_cache;
 				}
-
 			}
 			else {
 				$value = [
