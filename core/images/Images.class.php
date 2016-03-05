@@ -166,8 +166,6 @@
 		 * @return boolean|null
 		 */
 		public function setDeleteImage($nom_image = null) {
-			$success = false;
-
 			//si pas de requete et qu'on a une old_img on la supprime
 			if (($this->old_image != "") && ($nom_image === null)) {
 				$old_image = explode("/", $this->old_image);
@@ -177,25 +175,8 @@
 					return true;
 				}
 			}
-			else if (($nom_image !== null) && (is_array($nom_image))) {
-
-					$count = count($nom_image);
-					for ($i = 0; $i < $count; $i++) {
-						$chemin_img = $this->dossier_image."/".$nom_image[$i];
-
-						if ((unlink($chemin_img)) || (unlink($this->chemin_image))) {
-							$success = true;
-						}
-						else {
-							$this->erreur = "Impossible de supprimer cette image, veuillez réesayer dans un instant, sinon contacter l'administrateur de votre site";
-							$success = false;
-						}
-					}
-
-				return $success;
-			}
-			else if (!is_array($nom_image)) {
-				if ((unlink($this->dossier_image."/".$nom_image)) || (unlink($this->chemin_image))) {
+			else if ($nom_image !== null) {
+				if (unlink($this->dossier_image."/".$nom_image)) {
 					$success = true;
 				}
 				else {
