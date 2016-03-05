@@ -62,25 +62,19 @@
 		 * @param $req -> la req a executer
 		 * @param $value -> le ou les tableaux de valeurs
 		 */
-		public function prepare($req, $value = null) {
-			//si pas de donnees
-			if ($value === null) {
-				$this->getPdo()->query($req);
-			}
-			else {
-				$query = $this->getPdo()->prepare($req);
-				//si on a plusieurs tableaux
-				if (array_key_exists(0, $value)) {
-					foreach ($value as $val) {
-						if (!$query->execute($val)) {
-							$err = true;
-						}
-					}
-				}
-				else {
-					if (!$query->execute($value)) {
+		public function prepare($req, $value) {
+			$query = $this->getPdo()->prepare($req);
+			//si on a plusieurs tableaux
+			if (array_key_exists(0, $value)) {
+				foreach ($value as $val) {
+					if (!$query->execute($val)) {
 						$err = true;
 					}
+				}
+			}
+			else {
+				if (!$query->execute($value)) {
+					$err = true;
 				}
 			}
 

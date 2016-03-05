@@ -80,7 +80,7 @@
 									if ($update == null) {
 										$requete = "";
 										require_once(MODULEROOT.$this->nom_dossier."/install.php");
-										$dbc->prepare($requete);
+										$dbc->query($requete);
 									}
 
 
@@ -210,7 +210,7 @@
 
 			$requete = "";
 			require_once($url."/uninstall.php");
-			$dbc->prepare($requete);
+			$dbc->query($requete);
 
 			$this->supprimerDossier($url);
 		}
