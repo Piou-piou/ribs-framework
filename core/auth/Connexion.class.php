@@ -23,7 +23,7 @@
 		 * @param string $page_retour page de retour quand connexion ok
 		 * @param int|null $remember si on doit mémoriser la connexion au site
 		 */
-		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour, $remember = null) {
+		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour, $remember) {
 			$dbc = App::getDb();
 			$mdpbdd = "";
 
@@ -188,7 +188,7 @@
 				$membre->setMdp($mdp_nonencrypt_tape, $mdp_nonencrypt_tape, $mdp_nonencrypt_tape);
 			}
 
-			if ((isset($remember)) && ($remember !== null)) {
+			if ((isset($remember)) && ($remember != 0)) {
 				setcookie("auth".CLEF_SITE, NULL, -1);
 				setcookie("auth".CLEF_SITE, $id_identite."-----".sha1($membre->getPseudo().$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
 			}
