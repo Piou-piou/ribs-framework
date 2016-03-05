@@ -103,12 +103,8 @@
 				$infos_img = getimagesize($_FILES[$name]['tmp_name']);
 				$uniqid = uniqid();
 
-				if (!in_array(substr($image, -3), $this->autorized_extention)) {
-					$this->erreur = "Votre image ne comporte pas l'extension jpg, png, jpeg, gif, JPG, PNG, JPEG, GIF";
-					return false;
-				}
-				else if (($infos_img[0] >= $this->width_max) && ($infos_img[1] >= $this->height_max) && ($_FILES[$name]['size'] >= $this->poid_max)) {
-					$this->erreur = "Problème dans les dimensions ou taille de l'image.";
+				if ((!in_array(substr($image, -3), $this->autorized_extention)) || (($infos_img[0] >= $this->width_max) && ($infos_img[1] >= $this->height_max) && ($_FILES[$name]['size'] >= $this->poid_max))) {
+					$this->erreur = "Problème dans les dimensions, taille ou format (extension) de l'image.";
 					return false;
 				}
 				else if (move_uploaded_file($_FILES[$name]['tmp_name'], $this->dossier_image."/".$uniqid.substr($image, -4))) {
