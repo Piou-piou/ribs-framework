@@ -34,13 +34,7 @@
 						$this->pseudo = $obj->pseudo;
 						$this->mdp = $obj->mdp;
 						$this->valide = $obj->valide;
-
-						if ($obj->img_profil == "") {
-							$this->img = $this->debut_lien."defaut.png";
-						}
-						else {
-							$this->img = $obj->img_profil;
-						}
+						$this->img = $obj->img_profil;
 					}
 				}
 			}
