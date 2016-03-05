@@ -108,35 +108,27 @@
 
 			$mdp = Encrypt::setDecryptMdp($this->mdp, $this->id_identite);
 
+			$testmdp = $this->testpassword($new_mdp);
+
 			//si mdp trop court
 			if (md5($old_mdp) != $mdp) {
 				$err = "Votre mot de passe est incorrect";
 				$this->erreur = $err;
 			}
+			else if ($new_mdp != $verif_new_mdp) {
+				$err = "Vos mots de passe sont différents";
+				$this->erreur = $err;
+			}
+			else if ((strlen($new_mdp) < 5) || ($testmdp < 40)) {
+				$err = "Votre mot de passe est trop simple";
+				$this->erreur = $err;
+			}
 			else {
-				if ($new_mdp != $verif_new_mdp) {
-					$err = "Vos mots de passe sont différents";
-					$this->erreur = $err;
-				}
-				else {
-					$testmdp = $this->testpassword($new_mdp);
-					
-					if (strlen($new_mdp) < 5) {
-						$err = "Votre mot de passe est trop court";
-						$this->erreur = $err;
-					}
-					else if ($testmdp < 40) {
-						$err = "Votre mot de passe est trop simple";
-						$this->erreur = $err;
-					}
-					else {
-						$mdpok = Encrypt::setEncryptMdp($new_mdp, $this->id_identite);
-						//le nouveau mdp est bon on update
-						$dbc->query("UPDATE identite SET mdp='$mdpok' WHERE ID_identite=".$this->id_identite);
+				$mdpok = Encrypt::setEncryptMdp($new_mdp, $this->id_identite);
+				//le nouveau mdp est bon on update
+				$dbc->query("UPDATE identite SET mdp='$mdpok' WHERE ID_identite=".$this->id_identite);
 
-						$this->mdp = $mdpok;
-					}
-				}
+				$this->mdp = $mdpok;
 			}
 		}
 		//------------------------------ fin setter -----------------------------------
