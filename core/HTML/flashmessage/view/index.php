@@ -1,12 +1,12 @@
 <div class="module-flashmessage">
-	<div class="notification <?=$type?>">
+	<div class="notification <?=$_SESSION['flash']['type']?>">
 		<div class="left">
 			<div class="icone">
-				<?=$icone?>
+				<?=$_SESSION['flash']['icone']?>
 			</div>
 		</div>
 		<div class="right">
-			<p><?=$message?></p>
+			<p><?=$_SESSION['flash']['message']?></p>
 		</div>
 	</div>
 </div>

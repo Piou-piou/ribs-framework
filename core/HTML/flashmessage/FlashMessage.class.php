@@ -4,10 +4,7 @@
 	class FlashMessage {
 
 		public function __construct() {
-
-			if (session_id() == null) {
-				session_start();
-			}
+			self::setStartSession();
 		}
 
 
@@ -16,9 +13,7 @@
 		 * @param string $type type du message (error, success, info)
 		 */
 		public static function setFlash($message, $type = "error") {
-			if (session_id() == "") {
-				session_start();
-			}
+			self::setStartSession();
 
 			if ($type == "error") {
 				$icone = "<i class='fa fa-close'></i>";
@@ -41,33 +36,27 @@
 		 * pour afficher un message d'info definit avec setFlash()
 		 */
 		public static function getFlash() {
-			if (session_id() == "") {
-				session_start();
-			}
+			self::setStartSession();
 			if (isset($_SESSION['flash'])) {
-				$message = $_SESSION['flash']['message'];
-				$type = $_SESSION['flash']['type'];
-				$icone = $_SESSION['flash']['icone'];
 
-				//test le fichier index.php du module existe
-				if (file_exists(__DIR__."/view/index.php")) {
-					//on check si on vient de index.php ou admin.php
-					if (strstr($_SERVER['SCRIPT_NAME'], "index.php")) {
-						//definit le chemin sachant que l'on part de index.php
-						$chemin = str_replace("\\", "/", str_replace("index.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");
-					}
-					else {
-						//definit le chemin sachant que l'on part de admin.php
-						$chemin = str_replace("\\", "/", str_replace("admin.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");
-					}
-
-
-					require("view/index.php");
+				//on check si on vient de index.php ou admin.php
+				if (strstr($_SERVER['SCRIPT_NAME'], "index.php")) {
+					//definit le chemin sachant que l'on part de index.php
+					$chemin = str_replace("\\", "/", str_replace("index.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");
 				}
 				else {
-					echo("$icone $type : $message");
+					//definit le chemin sachant que l'on part de admin.php
+					$chemin = str_replace("\\", "/", str_replace("admin.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");
 				}
+
+				require("view/index.php");
 				unset($_SESSION['flash']);
+			}
+		}
+
+		private static function setStartSession() {
+			if (session_id() == "") {
+				session_start();
 			}
 		}
 	}
