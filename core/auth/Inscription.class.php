@@ -86,6 +86,35 @@
 				return false;
 			}
 		}
+
+		/**
+		 * @param $varaible
+		 * @param $value
+		 * @param $erreur
+		 * @param $erreur_long
+		 * @param null $required
+		 * @return bool
+		 */
+		protected function getTestValue($varaible, $value, $erreur, $erreur_long, $required = null) {
+			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
+			if (($required != null) && ($this->getTestRequired($value) === false)) {
+				$this->erreur .= "<li>$erreur</li>";
+				return false;
+			}
+			else {
+				if (($value != "") && ($this->getTestLongueur($value, 2) === true)) {
+					$this->$varaible = $value;
+					return true;
+				}
+				else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
+					$this->erreur .= "<li>$erreur_long</li>";
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
@@ -98,24 +127,7 @@
 		 * @return bool
 		 */
 		protected function setVerifNom($value, $required = null) {
-			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
-			if (($required != null) && ($this->getTestRequired($value) === false)) {
-				$this->erreur .= "<li>Le champs nom ne peut pas être vide</li>";
-				return false;
-			}
-			else {
-				if (($value != "") && ($this->getTestLongueur($value, 2) === true)) {
-					$this->nom = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
-					$this->erreur .= "<li>Le champs nom soit être supérieur à deux caractères</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
-			}
+			return $this->getTestValue("nom", $value, "Le champs nom ne peut pas être vide", "Le champs nom doit être supérieur à deux caractères", $required);
 		}
 
 		/**
@@ -125,24 +137,7 @@
 		 * @return bool
 		 */
 		protected function setVerifPrenom($value, $required = null) {
-			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
-			if (($required != null) && ($this->getTestRequired($value) === false)) {
-				$this->erreur .= "<li>Le champs prénom ne peut pas être vide</li>";
-				return false;
-			}
-			else {
-				if (($value != "") && ($this->getTestLongueur($value, 2) === true)) {
-					$this->prenom = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
-					$this->erreur .= "<li>Le champs prénom soit être supérieur à deux caractères</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
-			}
+			return $this->getTestValue("prenom", $value, "Le champs prénom ne peut pas être vide", "Le champs prénom doit être supérieur à deux caractères", $required);
 		}
 
 		/**
@@ -152,24 +147,7 @@
 		 * @return bool
 		 */
 		protected function setVerifMdp($value, $required = null) {
-			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
-			if (($required != null) && ($this->getTestRequired($value) === false)) {
-				$this->erreur .= "<li>Le champs mot de passe ne peut pas être vide</li>";
-				return false;
-			}
-			else {
-				if (($value != "") && ($this->getTestLongueur($value, 2) === true)) {
-					$this->mdp = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
-					$this->erreur .= "<li>Le champs mot de passe soit être supérieur à deux caractères</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
-			}
+			return $this->getTestValue("mdp", $value, "Le champs mot de passe ne peut pas être vide", "Le champs mot de passe doit être supérieur à deux caractères", $required);
 		}
 
 		/**
@@ -195,24 +173,7 @@
 		 * @return bool
 		 */
 		protected function setVerifPseudo($value, $required = null) {
-			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
-			if (($required != null) && ($this->getTestRequired($value) === false)) {
-				$this->erreur .= "<li>Le champs pseudo ne peut pas être vide</li>";
-				return false;
-			}
-			else {
-				if (($value != "") && ($this->getTestLongueur($value, 2) === true)) {
-					$this->pseudo = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
-					$this->erreur .= "<li>Le champs pseudo soit être supérieur à deux caractères</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
-			}
+			return $this->getTestValue("pseudo", $value, "Le champs pseudo ne peut pas être vide", "Le champs pseudo doit être supérieur à deux caractères", $required);
 		}
 
 		/**
