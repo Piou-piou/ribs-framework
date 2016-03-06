@@ -47,6 +47,8 @@
 		public static function setLogin($pseudo, $mdp, $page_retour_err, $page_retour, $remember) {
 			$dbc = App::getDb();
 			$mdpbdd = "";
+			$valide = "";
+			$archiver = "";
 
 			//recup des donnees
 			$pseudo = $dbc->quote(htmlspecialchars($pseudo));
