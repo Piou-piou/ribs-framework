@@ -90,6 +90,21 @@
 			return $liste_droit_acces;
 		}
 
+		/**
+		 * @return array/
+		 */
+		private function getListeDroitPage() {
+			$dbc = App::getDb();
+			$droit_acces = [];
+
+			$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) $droit_acces = $obj->droit_acces;
+			}
+
+			return $droit_acces;
+		}
+
 		//autres getter
 		/**
 		 * pour savoir si en fonction des droits d'accès de l'utilisateur il peu ou non accéder à cete page
@@ -98,30 +113,14 @@
 		 * @return bool
 		 */
 		public function getDroitAccesPage($page) {
-			$dbc = \core\App::getDb();
+			//page sans droit dans admin
+			$all_access = array("gestion-comptes/mon-compte", "index");
 
-			if ($this->super_admin != 1) {
-				//page sans droit dans admin
-				$all_access = array("gestion-comptes/mon-compte", "index");
-				$droit_acces = [];
-
-				$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) $droit_acces = $obj->droit_acces;
-				}
-
-				//récupération de la liste des droits du userr
-				$liste_droit_acces = $this->getListeDroitAcces();
-
-				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
-					return true;
-				}
-				else {
-					return false;
-				}
+			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage(), $this->getListeDroitAcces())) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
+				return true;
 			}
 			else {
-				return true;
+				return false;
 			}
 		}
 
@@ -167,9 +166,6 @@
 							return false;
 						}
 					}
-					else {
-						return false;
-					}
 				}
 				else {
 					return false;
@@ -191,18 +187,13 @@
 		 * @return bool
 		 */
 		public function getDroitAccesAction($droit_acces) {
-			if ($this->super_admin != 1) {
-				$liste_droit_acces = $this->getListeDroitAcces();
+			$liste_droit_acces = $this->getListeDroitAcces();
 
-				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {
-					return true;
-				}
-				else {
-					return false;
-				}
+			if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {
+				return true;
 			}
 			else {
-				return true;
+				return false;
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
