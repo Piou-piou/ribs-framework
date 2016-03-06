@@ -91,9 +91,9 @@
 		}
 
 		/**
-		 * @return array/
+		 * @return array
 		 */
-		private function getListeDroitPage() {
+		private function getListeDroitPage($page) {
 			$dbc = App::getDb();
 			$droit_acces = [];
 
@@ -116,7 +116,7 @@
 			//page sans droit dans admin
 			$all_access = array("gestion-comptes/mon-compte", "index");
 
-			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage(), $this->getListeDroitAcces())) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
+			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces())) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
 				return true;
 			}
 			else {
