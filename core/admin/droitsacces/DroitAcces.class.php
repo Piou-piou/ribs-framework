@@ -105,6 +105,9 @@
 			return $droit_acces;
 		}
 
+		/**
+		 * @param $id_page
+		 */
 		private function getListeDroitModificationContenu($id_page) {
 			$dbc = App::getDb();
 
