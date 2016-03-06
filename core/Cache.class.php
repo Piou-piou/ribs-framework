@@ -11,7 +11,9 @@
 		private $no_cache; //definit dans get cache pour dire que cette page ne doit jamais etre en cache
 
 		private $cache_active; //si == 1 le cache est actif sur le site
-		
+
+		private $reload_cache; //si == 1 cela veut dire que l'on doit recharger le cache de la page
+
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -53,35 +55,43 @@
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		/**
-		 * @return boolean|null
-		 * fonction verifie en bdd si on a déjà enregistrer le fichier en cache
-		 * si il ne l'est pas on le met, et si il y est et que reload cache == 0 on prend le fichier qui est en cache
-		 * sinon soit on update la bdd et on refait un cache soit on crée tout
+		 * fonction qui test si on a besoin de racharger le cache d'une page
+		 * et si la page a le droit d'etre mise en cache
 		 */
-		private function getCache() {
+		private function getTestCache() {
 			$dbc = App::getDb();
 
 			//on regarde si il existe et un cache et si il faut ou non le remettre à jour
 			$query = $dbc->query("SELECT * FROM cache WHERE nom_fichier like '$this->page'");
 
 			if ((is_array($query)) && (count($query) > 0)) {
-				$reload_cache = 0;
+				$this->reload_cache = 0;
 				foreach ($query as $obj) {
-					$reload_cache = $obj->reload_cache;
+					$this->reload_cache = $obj->reload_cache;
 					$this->no_cache = $obj->no_cache;
 				}
 			}
 			else {
 				$value = [
-					"nom_fichier" => $this->page,
-					"reload_cache" => 0
+						"nom_fichier" => $this->page,
+						"reload_cache" => 0
 				];
 				$dbc->prepare("INSERT INTO cache (nom_fichier, reload_cache) VALUES (:nom_fichier, :reload_cache)", $value);
 
-				$reload_cache = 0;
+				$this->reload_cache = 0;
 			}
+		}
 
-			if ((file_exists($this->chemin_cache)) && ($reload_cache == 0) && ($this->no_cache == null)) {
+		/**
+		 * @return boolean|null
+		 * fonction verifie en bdd si on a déjà enregistrer le fichier en cache
+		 * si il ne l'est pas on le met, et si il y est et que reload cache == 0 on prend le fichier qui est en cache
+		 * sinon soit on update la bdd et on refait un cache soit on crée tout
+		 */
+		private function getCache() {
+			$this->getTestCache();
+
+			if ((file_exists($this->chemin_cache)) && ($this->reload_cache == 0) && ($this->no_cache == null)) {
 				return true;
 			}
 		}
