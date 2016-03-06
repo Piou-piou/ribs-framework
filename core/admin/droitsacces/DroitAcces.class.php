@@ -105,6 +105,34 @@
 			return $droit_acces;
 		}
 
+		private function getListeDroitModificationContenu($id_page) {
+			$dbc = App::getDb();
+
+			//on check si il a le droit de modifier ou supprimer cette page
+			$query = $dbc->query("SELECT * FROM droit_acces_page, liste_droit_acces WHERE
+									droit_acces_page.ID_liste_droit_acces = liste_droit_acces.ID_liste_droit_acces AND
+									droit_acces_page.ID_page = $id_page AND
+									liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
+					");
+
+			//si on a un resultat
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->modif_seo = $obj->seo;
+					$this->modif_contenu = $obj->contenu;
+					$this->modif_navigation = $obj->navigation;
+					$this->supprimer_page = $obj->supprimer;
+				}
+			}
+
+			if ($this->super_admin == 1) {
+				$this->modif_seo = 1;
+				$this->modif_contenu = 1;
+				$this->modif_navigation = 1;
+				$this->supprimer_page = 1;
+			}
+		}
+
 		//autres getter
 		/**
 		 * pour savoir si en fonction des droits d'accès de l'utilisateur il peu ou non accéder à cete page
@@ -135,49 +163,16 @@
 		 * @return bool|null
 		 */
 		public function getDroitAccesContenu($droit, $id_page) {
-			$dbc = \core\App::getDb();
+			$liste_droit_acces = $this->getListeDroitAcces();
 
-			//récupération de la liste des droits de l'utilisateur si aps super admin
-			if ($this->super_admin != 1) {
-				$liste_droit_acces = $this->getListeDroitAcces();
+			$this->getListeDroitModificationContenu($id_page);
 
-				if (in_array($droit, $liste_droit_acces)) {
-					//on check si il a le droit de modifier ou supprimer cette page
-					$query = $dbc->query("SELECT * FROM droit_acces_page, liste_droit_acces WHERE
-									droit_acces_page.ID_liste_droit_acces = liste_droit_acces.ID_liste_droit_acces AND
-									droit_acces_page.ID_page = $id_page AND
-									liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-					");
-
-					//si on a un resultat
-					if ((is_array($query)) && (count($query) > 0)) {
-						foreach ($query as $obj) {
-							$this->modif_seo = $obj->seo;
-							$this->modif_contenu = $obj->contenu;
-							$this->modif_navigation = $obj->navigation;
-							$this->supprimer_page = $obj->supprimer;
-						}
-
-						//si les trois sont différent de 0 on renvoit true soinon false
-						if (($this->modif_seo != 0) || ($this->modif_contenu != 0) || ($this->modif_navigation != 0) || ($this->supprimer_page != 0)) {
-							return true;
-						}
-						else {
-							return false;
-						}
-					}
-				}
-				else {
-					return false;
-				}
+			//si les trois sont différent de 0 on renvoit true soinon false
+			if (($this->super_admin == 1) || ((in_array($droit, $liste_droit_acces)) && (($this->modif_seo != 0) || ($this->modif_contenu != 0) || ($this->modif_navigation != 0) || ($this->supprimer_page != 0)))) {
+				return true;
 			}
 			else {
-				$this->modif_seo = 1;
-				$this->modif_contenu = 1;
-				$this->modif_navigation = 1;
-				$this->supprimer_page = 1;
-
-				return true;
+				return false;
 			}
 		}
 
