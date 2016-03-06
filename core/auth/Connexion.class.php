@@ -14,6 +14,27 @@
 			}
 		}
 
+		/**
+		 * @param $valide
+		 * @param $archiver
+		 * @param $page_retour_err
+		 */
+		private function setTestParamCompte($valide, $archiver, $page_retour_err) {
+			$config = new Configuration();
+
+			//cela veut dire que l'utilisateur doit obligatoirement etre valider pour avoir acces au site
+			if (($config->getValiderInscription() == 1) && ((isset($valide)) && ($valide != 1))) {
+				FlashMessage::setFlash("Votre compta n'a encore pas été validé par un administrateur, vous ne pouvez donc pas accéder à ce site, veuillez réesseyer ultérieurement");
+				header("location:$page_retour_err");
+			}
+
+			//si le compte est archiver (bloqué) l'utilisateur ne peut pas se connecter au site
+			if ((isset($archiver)) && ($archiver == 1)) {
+				FlashMessage::setFlash("Votre compte a été bloqué par un administrateur, vous ne pouvez donc pas vous connecter à ce site, veuillez réesseyer ultérieurement");
+				header("location:$page_retour_err");
+			}
+		}
+
 
 		/**
 		 * Fonction de connexions a un espace membre ou prive avec un login / mdp
@@ -51,20 +72,7 @@
 				header("location:$page_retour_err");
 			}
 			else {
-				$config = new Configuration();
-
-				//cela veut dire que l'utilisateur doit obligatoirement etre valider pour avoir acces au site
-				if (($config->getValiderInscription() == 1) && ((isset($valide)) && ($valide != 1))) {
-					FlashMessage::setFlash("Votre compta n'a encore pas été validé par un administrateur, vous ne pouvez donc pas accéder à ce site, veuillez réesseyer ultérieurement");
-					header("location:$page_retour_err");
-				}
-
-				//si le compte est archiver (bloqué) l'utilisateur ne peut pas se connecter au site
-				if ((isset($archiver)) && ($archiver == 1)) {
-					FlashMessage::setFlash("Votre compte a été bloqué par un administrateur, vous ne pouvez donc pas vous connecter à ce site, veuillez réesseyer ultérieurement");
-					header("location:$page_retour_err");
-				}
-
+				self::setTestParamCompte($valide, $archiver, $page_retour_err);
 
 				//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
 				if ($mdp == $mdpbdd) {
