@@ -80,7 +80,7 @@
 		 * @param int $abreger si NOT NULL, on abrege la date, on enleve la semaine et on coupe le mois à 3 lettres
 		 * @return string
 		 */
-		public static function date_fr_texte($date = 0, $abreger = null) {
+		public static function date_fr_texte($date = 0) {
 			$mois = array("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre");
 			$jours = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
 
@@ -106,12 +106,8 @@
 
 				$jour_semaine = $jours[date("w", mktime(0, 0, 0, $mois_d, $jour_d, $annee_d))];
 
-				if ($abreger !== NULL) {
-					return $jour_d." ".mb_substr($explode[2], 0, 3, "UTF-8")." ".$annee_d;
-				}
-				else {
-					return $jour_semaine." ".$jour_d." ".$mois[$mois_d - 1]." ".$annee_d;
-				}
+				return $jour_semaine." ".$jour_d." ".$mois[$mois_d - 1]." ".$annee_d;
+
 			}
 			else {
 				FlashMessage::setFlash("Format de date passé en paramètre ne correspond pas à YYYY-mm-jj ou jj/mm/YYYY");
