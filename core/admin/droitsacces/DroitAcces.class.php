@@ -69,6 +69,27 @@
 			return $this->supprimer_page;
 		}
 
+		/**
+		 * @return array
+		 */
+		private function getListeDroitAcces() {
+			$dbc = App::getDb();
+
+			$liste_droit_acces = [];
+
+			$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
+								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
+								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
+								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
+				");
+
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
+			}
+
+			return $liste_droit_acces;
+		}
+
 		//autres getter
 		/**
 		 * pour savoir si en fonction des droits d'accès de l'utilisateur il peu ou non accéder à cete page
@@ -83,24 +104,14 @@
 				//page sans droit dans admin
 				$all_access = array("gestion-comptes/mon-compte", "index");
 				$droit_acces = [];
-				$liste_droit_acces = [];
 
 				$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
 				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) $droit_acces = $obj->droit_acces;
 				}
 
-
 				//récupération de la liste des droits du userr
-				$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
-								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-				");
-
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
-				}
+				$liste_droit_acces = $this->getListeDroitAcces();
 
 				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces)) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
 					return true;
@@ -129,16 +140,7 @@
 
 			//récupération de la liste des droits de l'utilisateur si aps super admin
 			if ($this->super_admin != 1) {
-				$liste_droit_acces = [];
-
-				$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
-								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-				");
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
-				}
+				$liste_droit_acces = $this->getListeDroitAcces();
 
 				if (in_array($droit, $liste_droit_acces)) {
 					//on check si il a le droit de modifier ou supprimer cette page
@@ -189,25 +191,11 @@
 		 * @return bool
 		 */
 		public function getDroitAccesAction($droit_acces) {
-			$dbc = App::getDb();
-
 			if ($this->super_admin != 1) {
-				$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
-								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-				");
-				if ((is_array($query)) && (count($query) > 0)) {
-					$liste_droit_acces = [];
+				$liste_droit_acces = $this->getListeDroitAcces();
 
-					foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
-
-					if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {
-						return true;
-					}
-					else {
-						return false;
-					}
+				if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {
+					return true;
 				}
 				else {
 					return false;
