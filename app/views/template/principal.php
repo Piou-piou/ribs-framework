@@ -54,8 +54,7 @@
 			</nav>
 		</header>
 
-		<div class="inner">
-			<?php require($page.".php"); ?>
-		</div>
+		<?php require($page.".php"); ?>
+
 	</body>
 </html>
