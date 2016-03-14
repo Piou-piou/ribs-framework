@@ -136,4 +136,40 @@
 		public function lastInsertId() {
 			return $this->getPdo()->lastInsertId();
 		}
+
+
+
+		//-------------------------- QUERY BUILDER in construction no test have been done --------------------------------------------//
+		private $fiels = [];
+		private $conditions = [];
+		private $from = [];
+
+		public function select() {
+			$this->fiels = func_get_args();
+
+			return $this;
+		}
+
+		public function where() {
+			foreach (func_get_args() as $arg) {
+				$this->conditions[] = $arg;
+			}
+
+			return $this;
+		}
+
+		public function from($table, $alias) {
+			if (is_null($alias)) {
+				$this->from[] = $table;
+			}
+			else {
+				$this->from[] = "$table as $alias";
+			}
+
+			return $this;
+		}
+
+		public function getQuery() {
+			return "SELECT ". implode(", ", $this->fiels) . " FROM " . implode(",", $this->from) . " WHERE " . implode(" AND ", $this->conditions);
+		}
 	}
