@@ -266,7 +266,7 @@
 		public function get() {
 			$requete = $this->req_beginning . implode(",", $this->champs) . " FROM " . implode(",", $this->table);
 
-			if ($this->conditions) {
+			if (!empty($this->conditions)) {
 				$requete .= " WHERE ". implode(" ", $this->conditions);
 			}
 
@@ -281,14 +281,15 @@
 			$values = array_combine($this->champs, $this->value);
 
 			$datas = [];
-			for ($i=0 ; $i<count($this->champs) ; $i++) {
+			$count = count($this->champs);
+			for ($i=0 ; $i<$count ; $i++) {
 				$datas[] = $this->champs[$i]."=:".$this->champs[$i];
 			}
 
 			//si on a des conditions alors on sera dans un insert
 			$requete = $this->req_beginning . implode(",", $this->table) . " SET " . implode(", ", $datas);
 
-			if ($this->conditions) {
+			if (!empty($this->conditions)) {
 				$requete .= " WHERE " . implode(" ", $this->conditions);
 			}
 
@@ -302,7 +303,7 @@
 		public function del() {
 			$requete = $this->req_beginning . implode(",", $this->table);
 
-			if ($this->conditions) {
+			if (!empty($this->conditions)) {
 				$requete .= " WHERE " . implode(" ", $this->conditions);
 			}
 
@@ -318,6 +319,6 @@
 			$this->champs = [];
 			$this->value = [];
 			$this->conditions = [];
-			$this->table = "";
+			$this->table = [];
 		}
 	}
