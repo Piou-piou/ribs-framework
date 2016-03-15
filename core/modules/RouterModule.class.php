@@ -97,9 +97,7 @@
 
 					if ((($test_module === true) || ($test_module1 === true)) && ($module_activer === true)) {
 						return true;
-					}
-					else {
-						return false;
+						break;
 					}
 				}
 			}
