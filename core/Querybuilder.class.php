@@ -6,7 +6,10 @@
 		protected $value = [];
 		protected $conditions = [];
 		protected $table = [];
-		
+
+		abstract public function query();
+		abstract public function prepare();
+
 		
 		//-------------------------- QUERY BUILDER in construction no test have been done --------------------------------------------//
 		/**
