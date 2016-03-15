@@ -1,6 +1,6 @@
 <?php
 	namespace core;
-	class Querybuilder {
+	trait Querybuilder {
 		protected $req_beginning;
 		protected $champs = [];
 		protected $value = [];
