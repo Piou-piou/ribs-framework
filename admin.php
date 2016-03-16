@@ -1,7 +1,7 @@
 <?php
 	$page_root = "admin.php";
 
-	/*require("vendor/autoload.php");*/
+	require("vendor/autoload.php");
 
 	use \core\Autoloader;
 

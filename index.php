@@ -1,6 +1,8 @@
 <?php
 	$page_root = "index.php";
 
+	require("vendor/autoload.php");
+
 	use \core\Autoloader;
 	use \core\auth\Connexion;
 	use \core\contenus\Contenus;
