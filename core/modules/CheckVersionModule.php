@@ -5,6 +5,9 @@
 	use core\App;
 
 	trait CheckVersionModule {
+		private $nom;
+		private $version;
+		private $online_version;
 
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		/**
