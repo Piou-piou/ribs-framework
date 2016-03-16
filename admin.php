@@ -1,6 +1,8 @@
 <?php
 	$page_root = "admin.php";
 
+	/*require("vendor/autoload.php");*/
+
 	use \core\Autoloader;
 
 	use \core\auth\Connexion;
@@ -22,7 +24,7 @@
 		header("location:".WEBROOT);
 	}
 
-	require(ROOT."core/save/dump.php");
+	require(ROOT."core/save/dump/initialise.php");
 
 
 
