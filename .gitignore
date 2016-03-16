@@ -4,7 +4,6 @@
 bdd_backup/*
 temp/*
 cache/*
-vendor/*
 .sass-cache*
 **/.sass-cache/*
 .sass-cache/
