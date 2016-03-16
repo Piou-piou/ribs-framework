@@ -17,7 +17,7 @@
 		/**
 		 * @param $valide
 		 * @param $archiver
-		 * @param $page_retour_err
+		 * @param string $page_retour_err
 		 */
 		private function setTestParamCompte($valide, $archiver, $page_retour_err) {
 			$config = new Configuration();
@@ -183,7 +183,8 @@
 
 		/**
 		 * @param $id_identite
-		 * @param null $remember
+		 * @param string $mdp_nonencrypt_tape
+		 * @param integer $remember
 		 */
 		private static function setTestChangerMdp($id_identite, $mdp_nonencrypt_tape, $remember) {
 			$membre = new Membre($id_identite);
