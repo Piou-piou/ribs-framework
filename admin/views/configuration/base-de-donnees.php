@@ -13,7 +13,7 @@
 <div class="inner">
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
 
-	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier_bdd" method="post">
+	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier/modifier_bdd" method="post">
 		<div class="contenu modifier-contenu gestion-comptes">
 			<table>
 				<tr>

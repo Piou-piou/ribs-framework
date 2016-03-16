@@ -14,7 +14,7 @@
 <div class="inner">
 	<?php require_once(LIBSROOT."barre_chargement/index.php"); ?>
 	<a class="submit-contenu supprimer-page link" href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-times"></i>Annuler</a>
-	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier" method="post">
+	<form action="<?=ADMWEBROOT?>controller/core/admin/configuration/modifier/modifier_infos_generales" method="post">
 		<div class="contenu modifier-contenu">
 
 			<h2>Gestion des infos</h2>

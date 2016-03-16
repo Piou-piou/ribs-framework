@@ -10,7 +10,7 @@
 
 			$.ajax({
 				method: 'GET',
-				url:"<?=ADMWEBROOT?>controller/core/admin/configuration/modifier_option.php",
+				url:"<?=ADMWEBROOT?>controller/core/admin/configuration/modifier/modifier_option.php",
 				data: "option="+option+"&activer="+activer,
 				success: function(data){
 					if (data == "success") {
