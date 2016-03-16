@@ -7,7 +7,7 @@
 <?php include("header.php"); ?>
 <?php include("admin/controller/ckeditor.php"); ?>
 
-<form action="<?=ADMWEBROOT?>controller/core/admin/contenus/creer_page" method="post">
+<form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/creer_page" method="post">
 	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 
 	<div class="inner">
