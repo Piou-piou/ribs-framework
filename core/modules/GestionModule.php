@@ -67,41 +67,14 @@
 		}
 
 		/**
+		 * @param null $systeme
 		 * recupere la listes des modules ajouter par un autre admin
 		 * fonction utilisée uniquement dans la config
 		 */
-		public function getListeModule() {
+		public function getListeModule($systeme = 0) {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM module WHERE systeme IS NULL");
-
-			if ((is_array($query)) && (count($query) > 0)) {
-				$id_module = [];
-				$url = [];
-				$nom = [];
-				$version = [];
-				$url_telechargement = [];
-
-				foreach ($query as $obj) {
-					$id_module[] = $obj->ID_module;
-					$url[] = $obj->url;
-					$nom[] = $obj->nom_module;
-					$version[] = $obj->version;
-					$url_telechargement[] = $obj->url_telechargement;
-				}
-
-				$this->setListeModuleActiver($id_module, $url, $version, $nom, null, $url_telechargement);
-			}
-		}
-
-		/**
-		 * recupere la listes des modules systeme
-		 * fonction utilisée uniquement dans la config
-		 */
-		public function getListeModuleSysteme() {
-			$dbc = App::getDb();
-
-			$query = $dbc->query("SELECT * FROM module WHERE systeme = 1");
+			$query = $dbc->query("SELECT * FROM module WHERE systeme=".$dbc->quote($systeme));
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];
@@ -278,9 +251,6 @@
 				$this->setListeModuleMettreJour($nom_module, $version, $online_version);
 
 				return true;
-			}
-			else {
-				return false;
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
