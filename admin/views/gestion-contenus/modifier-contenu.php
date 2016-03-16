@@ -8,7 +8,7 @@
 <?php require_once("admin/controller/ckeditor.php"); ?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
 
-<form action="<?=ADMWEBROOT?>controller/core/admin/contenus/modifier_contenus" method="post">
+<form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/modifier_contenus" method="post">
 	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1)):?>
 		<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 	<?php endif; ?>
