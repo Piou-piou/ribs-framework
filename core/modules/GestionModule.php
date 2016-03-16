@@ -141,9 +141,6 @@
 
 				return $installer;
 			}
-			else {
-				return false;
-			}
 		}
 
 		/**
@@ -183,9 +180,6 @@
 				foreach ($query as $obj) {
 					if ($obj->mettre_jour == 1) {
 						return false;
-					}
-					else {
-						return true;
 					}
 				}
 			}
