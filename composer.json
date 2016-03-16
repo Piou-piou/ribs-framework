@@ -1,0 +1,21 @@
+{
+    "name": "piou-piou/ribs-framework",
+    "description": "Ribs framework it offer the possibility to create fully personalisable and administrable pages ! You can also add you awn modules and/or modules added by the community",
+    "license": "CC BY SA",
+    "authors": [
+        {
+            "name": "Anthony Pilloud",
+            "email": "pilloud.anthony@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+      "psr-4": {
+        "core\\": "core",
+        "modules\\": "modules"
+      }
+    },
+    "require": {
+      "php": ">=5.3.0"
+    }
+}
