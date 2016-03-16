@@ -53,7 +53,7 @@
 						</td>
 						<td>
 							<?php if ((\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) == 1) && (\core\modules\GestionModule::getModuleActiver($gestion_module_page_syst->getNom()[$i]) == true)) { ?>
-								<?php if (\core\modules\GestionModule::getModuleAJour($gestion_module_page_syst->getNom()[$i]) == false) { ?>
+								<?php if (\core\modules\GestionModule::getModuleAJour($gestion_module_page_syst->getNom()[$i]) == 1) { ?>
 									<a href="<?=ADMWEBROOT?>controller/core/modules/installation/update?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>" class="open-popup" popup="popup-update-module">Mettre à jour</a>
 								<?php } else {?>
 									Module à jour

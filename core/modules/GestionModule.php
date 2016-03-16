@@ -151,9 +151,7 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					if ($obj->mettre_jour == 1) {
-						return false;
-					}
+					return $obj->mettre_jour;
 				}
 			}
 		}
