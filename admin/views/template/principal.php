@@ -68,7 +68,7 @@
 					<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a></li>
 				<?php endif; ?>
 				<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMWEBROOT?>contacter-support">Contacter le support</a></li>
-				<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/logout">Déconexion</a></li>
+				<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout">Déconexion</a></li>
 			</ul>
 		</nav>
 		<div class="clear"></div>
