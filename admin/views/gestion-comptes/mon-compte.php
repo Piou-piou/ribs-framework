@@ -8,7 +8,7 @@
 	<section class="contenu modifier-contenu modif-compte">
 		<h2>Changer mon mot de passe</h2>
 		<p>Sur votre compte administrateur, vous pouvez uniquement changer votre mot de passe</p>
-		<form action="<?=ADMWEBROOT?>controller/core/auth/changer_mdp" method="post">
+		<form action="<?=ADMWEBROOT?>controller/core/auth/mdp/changer_mdp" method="post">
 			<div class="bloc">
 				<label class="label">Votre mot de passe actuel</label>
 				<input type="password" name="mdp" required>
