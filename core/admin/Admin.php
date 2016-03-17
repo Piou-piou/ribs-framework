@@ -56,8 +56,6 @@
 				$query = $dbc->query("SELECT * FROM identite WHERE archiver IS NOT NULL AND ID_identite > 1");
 			}
 
-			$config = new Configuration();
-
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
 				$nom = [];
@@ -74,16 +72,26 @@
 					$pseudo[] = $obj->pseudo;
 					$mail[] = $obj->mail;
 					$img_profil[] = $obj->img_profil;
+					$valide[] = $this->getValideCompteLien($obj->valide);
 
-					if (($config->getValiderInscription() == 1) && ($obj->valide == 0)) {
-						$valide[] = "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
-					}
-					else {
-						$valide[] = "Utilisateur validé";
-					}
 				}
 
 				$this->setAllUser($id_identite, $nom, $prenom, $mail, $pseudo, $img_profil, $valide);
+			}
+		}
+
+		/**
+		 * @param $valide
+		 * @return string
+		 */
+		private function getValideCompteLien($valide) {
+			$config = new Configuration();
+
+			if (($config->getValiderInscription() == 1) && ($valide == 0)) {
+				return "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
+			}
+			else {
+				return "Utilisateur validé";
 			}
 		}
 
