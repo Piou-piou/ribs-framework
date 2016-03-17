@@ -45,16 +45,11 @@
 		 * Pour récupérer la liste de tous les users afin d'activer un compte ou modifier des trucs dessus
 		 * si archiver == null on récupère les utilisateurs actifs sur le site sinon on récupere les utilisateurs archives
 		 */
-		public function getAllUser($archiver = null) {
+		public function getAllUser($archiver = 0) {
 			$dbc = \core\App::getDb();
 			$this->setAllUser(null, null, null, null, null, null, null);
 
-			if ($archiver == null) {
-				$query = $dbc->query("SELECT * FROM identite WHERE archiver IS NULL AND ID_identite > 1");
-			}
-			else {
-				$query = $dbc->query("SELECT * FROM identite WHERE archiver IS NOT NULL AND ID_identite > 1");
-			}
+			$query = $dbc->query("SELECT * FROM identite WHERE archiver = $archiver AND ID_identite > 1");
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
