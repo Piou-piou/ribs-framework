@@ -62,12 +62,7 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					if ($obj->next_check_version == null) {
-						//si pas de version a checker, cela veut dire qu'on vient d'installer le module
-						//du coup on met le next_check aa la semaine pro
-						$this->setNextCheckUpdate($obj->ID_module);
-					}
-					else if (($obj->next_check_version <= $today) && ($obj->mettre_jour != 1)) {
+					if (($obj->next_check_version <= $today) && ($obj->mettre_jour != 1)) {
 						//avant tout on regarde si on doit delete une vieille version
 						$this->setDeleteOldVersionModule($obj->delete_old_version, $obj->ID_module);
 
@@ -79,6 +74,8 @@
 
 						$this->getCheckModuleUpToDate($version_txt, $obj->version, $obj->ID_module);
 					}
+
+					$this->setNextCheckUpdate($obj->ID_module);
 				}
 			}
 		}
@@ -140,8 +137,6 @@
 					$dbc->prepare("UPDATE module SET mettre_jour=:update, online_version=:online_version WHERE ID_module=:id_module", $value);
 				}
 			}
-
-			$this->setNextCheckUpdate($id_module);
 		}
 
 		/**
