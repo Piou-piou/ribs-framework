@@ -49,6 +49,22 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		private function setInstallModule($url_module) {
+			$zip = new \ZipArchive();
+
+			if (($this->extension == "zip") &&
+				(file_exists(MODULEROOT.$this->nom_dossier) == false) &&
+				(file_put_contents(TEMPROOT.$this->nom_fichier, fopen($url_module, 'r')) != false) &&
+				($zip->open(TEMPROOT.$this->nom_fichier) == true) &&
+				($zip->extractTo(TEMPROOT) == true) &&
+				(rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true)) {
+
+				$zip->close();
+				return true;
+			}
+
+			return false;
+		}
 		/**
 		 * @param $url_module
 		 * @param boolean $update
@@ -66,14 +82,8 @@
 			$this->nom_dossier = $explode[0];
 			$this->extension = $explode[1];
 
-			$zip = new \ZipArchive();
-
-			if (($this->extension == "zip") &&
-				(file_exists(MODULEROOT.$this->nom_dossier) == false) &&
-				(file_put_contents(TEMPROOT.$this->nom_fichier, fopen($url_module, 'r')) != false) &&
-				($zip->open(TEMPROOT.$this->nom_fichier) == true) &&
-				($zip->extractTo(TEMPROOT) == true) &&
-				(rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true)) {
+			if ($this->setInstallModule($url_module) == true) {
+				$this->setSupprimerArchiveTemp();
 
 				//si c'est une install et non une mise à jour
 				if ($update == null) {
@@ -85,11 +95,8 @@
 				FlashMessage::setFlash("Votre module a bien été ajouté au site.", "success");
 			}
 			else {
-
 				FlashMessage::setFlash("Le module n'a pas pu être correctement téléchargé et installé, veuillez réesseyer dans un instant");
 			}
-			$this->setSupprimerArchiveTemp();
-			$zip->close();
 		}
 
 		/**
