@@ -7,9 +7,6 @@
 
 		private $id_module;
 		private $url;
-		private $nom;
-		private $version;
-		private $online_version;
 		private $icone;
 		private $url_telechargement;
 		
