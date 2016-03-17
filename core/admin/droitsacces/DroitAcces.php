@@ -24,22 +24,16 @@
 		public function __construct() {
 			$dbc = \core\App::getDb();
 
-			if (isset($_SESSION["idlogin".CLEF_SITE])) {
-				$this->logged = true;
-				$this->id_identite = $_SESSION["idlogin".CLEF_SITE];
+			$this->id_identite = $_SESSION["idlogin".CLEF_SITE];
 
-				//on test voir si super admin
-				$query = $dbc->query("SELECT super_admin,liste_droit FROM identite WHERE ID_identite=".$this->id_identite);
+			//on test voir si super admin
+			$query = $dbc->query("SELECT super_admin,liste_droit FROM identite WHERE ID_identite=".$this->id_identite);
 
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						$this->super_admin = $obj->super_admin;
-						$this->id_liste_droit_acces = $obj->liste_droit;
-					}
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->super_admin = $obj->super_admin;
+					$this->id_liste_droit_acces = $obj->liste_droit;
 				}
-			}
-			else {
-				$this->logged = false;
 			}
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -147,7 +141,7 @@
 			//page sans droit dans admin
 			$all_access = array("gestion-comptes/mon-compte", "index");
 
-			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces())) || (($page == "") || ($page == null)) || (in_array($page, $all_access))) {
+			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces()))|| (in_array($page, $all_access))) {
 				return true;
 			}
 			else {
