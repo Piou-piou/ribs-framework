@@ -66,60 +66,30 @@
 			$this->nom_dossier = $explode[0];
 			$this->extension = $explode[1];
 
-			//si l'extension != zip on renvoit err
-			if ($this->extension == "zip") {
-				//on test dans le dossier module si il n'existe pas déjà
-				if (file_exists(MODULEROOT.$this->nom_dossier) == false) {
-					if (file_put_contents(TEMPROOT.$this->nom_fichier, fopen($url_module, 'r')) != false) {
-						$zip = new \ZipArchive();
+			$zip = new \ZipArchive();
 
-						if ($zip->open(TEMPROOT.$this->nom_fichier) == true) {
-							if ($zip->extractTo(TEMPROOT) == true) {
-								if (rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true) {
-									//si c'est une install et non une mise à jour
-									if ($update == null) {
-										$requete = "";
-										require_once(MODULEROOT.$this->nom_dossier."/install.php");
-										$dbc->query($requete);
-									}
+			if (($this->extension == "zip") &&
+				(file_exists(MODULEROOT.$this->nom_dossier) == false) &&
+				(file_put_contents(TEMPROOT.$this->nom_fichier, fopen($url_module, 'r')) != false) &&
+				($zip->open(TEMPROOT.$this->nom_fichier) == true) &&
+				($zip->extractTo(TEMPROOT) == true) &&
+				(rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true)) {
 
-
-									FlashMessage::setFlash("Votre module a bien été ajouté au site.", "success");
-								}
-								else {
-									\core\HTML\flashmessage\FlashMessage::setFlash("Erreur lors du téléchargement du module, veuillez réessayer dans un instant.");
-									$this->erreur = true;
-								}
-							}
-							else {
-								\core\HTML\flashmessage\FlashMessage::setFlash("Erreur lors du téléchargement du module, veuillez réessayer dans un instant.");
-								$this->setSupprimerArchiveTemp();
-								$this->erreur = true;
-							}
-						}
-						else {
-							\core\HTML\flashmessage\FlashMessage::setFlash("Erreur lors du téléchargement du module, veuillez réessayer dans un instant.");
-							$this->setSupprimerArchiveTemp();
-							$this->erreur = true;
-						}
-
-						$zip->close();
-						$this->setSupprimerArchiveTemp();
-					}
-					else {
-						FlashMessage::setFlash("Le module n'a pas pu être correctement téléchargé, veuillez réesseyer dans un instant");
-						$this->erreur = true;
-					}
+				//si c'est une install et non une mise à jour
+				if ($update == null) {
+					$requete = "";
+					require_once(MODULEROOT.$this->nom_dossier."/install.php");
+					$dbc->query($requete);
 				}
-				else {
-					FlashMessage::setFlash("Ce module est déjà présent sur ce site, merci de renommer votre module");
-					$this->erreur = true;
-				}
+
+				FlashMessage::setFlash("Votre module a bien été ajouté au site.", "success");
 			}
 			else {
-				FlashMessage::setFlash("Le format de votre archive doit obligatoirement être un .zip");
-				$this->erreur = true;
+
+				FlashMessage::setFlash("Le module n'a pas pu être correctement téléchargé et installé, veuillez réesseyer dans un instant");
 			}
+			$this->setSupprimerArchiveTemp();
+			$zip->close();
 		}
 
 		/**
