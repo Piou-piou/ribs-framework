@@ -64,6 +64,43 @@
 				return false;
 			}
 		}
+
+		/**
+		 * @param $name
+		 * @return bool
+		 * foonction pour tester si image est bien une image ++ si taille ok
+		 */
+		private function getTestImageCaract($name) {
+			$image = $_FILES[$name]['name'];
+			$infos_img = getimagesize($_FILES[$name]['tmp_name']);
+
+			if ((!in_array(substr($image, -3), $this->autorized_extention)) || (($infos_img[0] >= $this->width_max) && ($infos_img[1] >= $this->height_max) && ($_FILES[$name]['size'] >= $this->poid_max))) {
+				$this->erreur = "Problème dans les dimensions, taille ou format (extension) de l'image.";
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+		 * @param $name
+		 * @param $req
+		 * @return mixed
+		 * fonction qui récupère l'ancienne image avant celle que l'on vient d'envoyer
+		 */
+		private function getOldImageReq($name, $req) {
+			$dbc = App::getDb();
+
+			//test si il y a deja une img
+			if ($req != null) {
+				$query = $dbc->query($req);
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						return $obj->$name;
+					}
+				}
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		
 		
@@ -76,54 +113,40 @@
 		 * @return null|boolean -> renvoi false si err sinon renvoi le chemin vers l'img
 		 */
 		public function setEnvoyerImage($name, $old_image_req = null, $autorize_empty = 1, $delete_old_img = 1) {
-			$dbc = App::getDb();
-
 			$this->old_image = null;
 			$this->chemin_image = null;
 			$this->nom_image = null;
-
-			$image = $_FILES[$name]['name'];
 
 			if ((empty($_FILES[$name]['name'])) && ($autorize_empty == 0)) {
 				$this->erreur = "Vous devez obligatoirement ajouter une image";
 				return false;
 			}
+
+			//récupératoin de l'ancienne image
+			$this->old_image = $this->getOldImageReq($name, $old_image_req);
+
+			//renvoi true si ok false sinon
+			//test si l'image est ok
+			return $this->getTestImageCaract($name);
+
+			$uniqid = uniqid();
+			$image = $_FILES[$name]['name'];
+
+			if (move_uploaded_file($_FILES[$name]['tmp_name'], $this->dossier_image."/".$uniqid.substr($image, -4))) {
+				$imageok = $uniqid.substr($image, -4);
+
+				$urlimg = $this->dossier_image."/$imageok";
+				$this->chemin_image = $urlimg;
+				$this->nom_image = $imageok;
+
+				if (($delete_old_img == 1) && ($this->old_image != "") && (!empty($_FILES[$name]['name']))) {
+					$this->setDeleteImage();
+				}
+
+				return true;
+			}
 			else {
-				//test si il y a deja une img
-				if ($old_image_req != null) {
-					$query = $dbc->query($old_image_req);
-					if ((is_array($query)) && (count($query) > 0)) {
-						foreach ($query as $obj) {
-							$this->old_image = $obj->$name;
-						}
-					}
-				}
-
-				//recuperation info sur img
-				$infos_img = getimagesize($_FILES[$name]['tmp_name']);
-				$uniqid = uniqid();
-
-				if ((!in_array(substr($image, -3), $this->autorized_extention)) || (($infos_img[0] >= $this->width_max) && ($infos_img[1] >= $this->height_max) && ($_FILES[$name]['size'] >= $this->poid_max))) {
-					$this->erreur = "Problème dans les dimensions, taille ou format (extension) de l'image.";
-					return false;
-				}
-
-				else if (move_uploaded_file($_FILES[$name]['tmp_name'], $this->dossier_image."/".$uniqid.substr($image, -4))) {
-					$imageok = $uniqid.substr($image, -4);
-
-					$urlimg = $this->dossier_image."/$imageok";
-					$this->chemin_image = $urlimg;
-					$this->nom_image = $imageok;
-
-					if (($delete_old_img == 1) && ($this->old_image != "") && (!empty($_FILES[$name]['name']))) {
-						$this->setDeleteImage();
-					}
-
-					return true;
-				}
-				else {
-					$this->erreur = "Impossible d'envoyer votre image sur le serveur, veuillez réessayer dans une instant, si l'erreur se reproduit, contactez votre administrateur";
-				}
+				$this->erreur = "Impossible d'envoyer votre image sur le serveur, veuillez réessayer dans une instant, si l'erreur se reproduit, contactez votre administrateur";
 			}
 		}
 
