@@ -101,18 +101,13 @@
 				$this->erreur .= "<li>$erreur</li>";
 				return false;
 			}
+			else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
+				$this->erreur .= "<li>$erreur_long</li>";
+				return false;
+			}
 			else {
-				if (($value != "") && ($this->getTestLongueur($value, 2) === true)) {
-					$this->$varaible = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestLongueur($value, 2) === false)) {
-					$this->erreur .= "<li>$erreur_long</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
+				$this->$varaible = $value;
+				return true;
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
@@ -188,19 +183,15 @@
 				$this->erreur .= "<li>Le champs E-mail ne peut pas être vide</li>";
 				return false;
 			}
-			else {
-				if (($value != "") && (filter_var($value, FILTER_VALIDATE_EMAIL) != false)) {
-					$this->mail = $value;
-					return true;
-				}
-				else if (($value != "") && (filter_var($value, FILTER_VALIDATE_EMAIL) == false)) {
-					$this->erreur .= "<li>Le champs E-mail doit être une adresse E-mail valide</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
+			else if (($value != "") && (filter_var($value, FILTER_VALIDATE_EMAIL) == false)) {
+				$this->erreur .= "<li>Le champs E-mail doit être une adresse E-mail valide</li>";
+				return false;
 			}
+			else {
+				$this->mail = $value;
+				return true;
+			}
+
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
