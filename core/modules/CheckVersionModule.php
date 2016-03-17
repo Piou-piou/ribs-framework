@@ -69,10 +69,7 @@
 					}
 					else if (($obj->next_check_version <= $today) && ($obj->mettre_jour != 1)) {
 						//avant tout on regarde si on doit delete une vieille version
-						if ($obj->delete_old_version == 1) {
-							$import = new ImportModule();
-							$import->setSupprimerOldModule($obj->ID_module);
-						}
+						$this->setDeleteOldVersionModule($obj->delete_old_version, $obj->ID_module);
 
 						//on recupere le nom du dossier + extention
 						$explode = explode(".", $obj->url_telechargement);
@@ -145,5 +142,17 @@
 			}
 
 			$this->setNextCheckUpdate($id_module);
+		}
+
+		/**
+		 * @param $delete
+		 * @param $id_module
+		 * fonction qui sert à supprimer un module
+		 */
+		public function setDeleteOldVersionModule($delete, $id_module) {
+			if ($delete == 1) {
+				$import = new ImportModule();
+				$import->setSupprimerOldModule($id_module);
+			}
 		}
 	}
