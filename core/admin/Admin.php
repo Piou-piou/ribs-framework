@@ -72,7 +72,7 @@
 					$pseudo[] = $obj->pseudo;
 					$mail[] = $obj->mail;
 					$img_profil[] = $obj->img_profil;
-					$valide[] = $this->getValideCompteLien($obj->valide);
+					$valide[] = $this->getValideCompteLien($obj->valide, $obj->ID_identite);
 
 				}
 
@@ -84,11 +84,11 @@
 		 * @param $valide
 		 * @return string
 		 */
-		private function getValideCompteLien($valide) {
+		private function getValideCompteLien($valide, $id_identite) {
 			$config = new Configuration();
 
 			if (($config->getValiderInscription() == 1) && ($valide == 0)) {
-				return "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$obj->ID_identite>Valider cet utilisateur</a>";
+				return "<a href=".ADMWEBROOT."controller/core/admin/comptes/valider_compte?id_identite=$id_identite>Valider cet utilisateur</a>";
 			}
 			else {
 				return "Utilisateur validé";
