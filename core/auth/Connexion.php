@@ -115,25 +115,37 @@
 							setcookie("auth".CLEF_SITE, NULL, -1);
 							self::setDeconnexion($page_retour);
 						}
-						else {
-							$key = sha1($obj->pseudo.$obj->mdp);
 
-							if ($key == $auth[1]) {
-								$_SESSION['login'] = $obj->pseudo;
-								$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
-
-								setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-							}
-							else if ($obj_connecte == 1) {
-								self::setDeconnexion($page_retour);
-							}
-						}
+						self::setAuthKey($obj->pseudo, $obj->mdp, $obj->ID_identite, $auth, $obj_connecte, $page_retour);
 					}
 				}
 			}
 			else if ((!isset($_SESSION["idlogin".CLEF_SITE])) && ($obj_connecte == 1)) {
 				FlashMessage::setFlash("Vous devez être connecté pour accéder à cette page");
 				header("location:".$page_retour);
+			}
+		}
+
+		/**
+		 * @param $pseudo
+		 * @param $mdp
+		 * @param $id_identite
+		 * @param $auth
+		 * @param $obj_connecte
+		 * @param $page_retour
+		 * fonctoin qui definit la cle du cookie pour le remember de la co
+		 */
+		private static function setAuthKey($pseudo, $mdp, $id_identite, $auth, $obj_connecte, $page_retour) {
+			$key = sha1($pseudo.$mdp);
+
+			if ($key == $auth[1]) {
+				$_SESSION['login'] = $pseudo;
+				$_SESSION["idlogin".CLEF_SITE] = $id_identite;
+
+				setcookie("auth".CLEF_SITE, $id_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
+			}
+			else if ($obj_connecte == 1) {
+				self::setDeconnexion($page_retour);
 			}
 		}
 
