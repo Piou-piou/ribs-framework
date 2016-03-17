@@ -164,8 +164,10 @@
 
 			$this->getListeDroitModificationContenu($id_page);
 
+			$array_modif = [$this->modif_seo, $this->modif_contenu, $this->modif_navigation];
+
 			//si les trois sont différent de 0 on renvoit true soinon false
-			if (($this->super_admin == 1) || ((in_array($droit, $liste_droit_acces)) && (($this->modif_seo != 0) || ($this->modif_contenu != 0) || ($this->modif_navigation != 0) || ($this->supprimer_page != 0)))) {
+			if (($this->super_admin == 1) || ((in_array($droit, $liste_droit_acces)) && in_array(1, $array_modif))) {
 				return true;
 			}
 			else {
