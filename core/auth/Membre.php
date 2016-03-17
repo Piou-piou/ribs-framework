@@ -108,8 +108,6 @@
 
 			$mdp = Encrypt::setDecryptMdp($this->mdp, $this->id_identite);
 
-			$testmdp = $this->testpassword($new_mdp);
-
 			//si mdp trop court
 			if (md5($old_mdp) != $mdp) {
 				$err = "Votre mot de passe est incorrect";
@@ -119,8 +117,8 @@
 				$err = "Vos mots de passe sont différents";
 				$this->erreur = $err;
 			}
-			else if ((strlen($new_mdp) < 5) || ($testmdp < 40)) {
-				$err = "Votre mot de passe est trop simple";
+			else if ($this->testpassword($new_mdp) == false) {
+				$err = "Votre mot de passe est trop simple, il doit contenir 5 caractères et au moins un chiffre";
 				$this->erreur = $err;
 			}
 			else {
@@ -142,47 +140,13 @@
 		 * @return integer
 		 */
 		private function testpassword($mdp) {
-			$longueur = strlen($mdp);
-			$point = 0;
-			$point_min = 0;
-			$point_maj = 0;
-			$point_chiffre = 0;
-			$point_caracteres = 0;
-
-			for ($i = 0; $i < $longueur; $i++) {
-				$lettre = $mdp[$i];
-
-				if ($lettre >= 'a' && $lettre <= 'z') {
-					$point = $point + 1;
-					$point_min = 1;
-				}
-				else if ($lettre >= 'A' && $lettre <= 'Z') {
-					$point = $point + 2;
-					$point_maj = 2;
-				}
-				else if ($lettre >= '0' && $lettre <= '9') {
-					$point = $point + 3;
-					$point_chiffre = 3;
-				}
-				else {
-					$point = $point + 5;
-					$point_caracteres = 5;
-				}
+			if (strlen($mdp) < 5) {
+				return false;
 			}
 
-			// Calcul du coefficient points/longueur
-			$etape1 = $point / $longueur;
-
-			// Calcul du coefficient de la diversite des types de caracteres...
-			$etape2 = $point_min + $point_maj + $point_chiffre + $point_caracteres;
-
-			// Multiplication du coefficient de diversite avec celui de la longueur
-			$resultat = $etape1 * $etape2;
-
-			// Multiplication du resultat par la longueur de la chaene
-			$final = $resultat * $longueur;
-
-			return $final;
+			if (!preg_match("#[0-9]+#", $mdp)) {
+				return false;
+			}
 		}
 		//-------------------------- FIN FONCTIONS POUR TESTER SECURITE D'UN MDP ----------------------------------------------------------------------------//
 	}
