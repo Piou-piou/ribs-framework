@@ -235,6 +235,24 @@ INSERT INTO `page` (`ID_page`, `titre`, `contenu`, `url`, `meta_description`, `b
 
 -- --------------------------------------------------------
 
+
+--
+-- Structure de la table `navigation`
+--
+
+CREATE TABLE IF NOT EXISTS `navigation` (
+`ID_navigation` int(11) NOT NULL,
+  `ID_page` int(11) DEFAULT NULL,
+  `ID_module` int(11) DEFAULT NULL,
+  `ordre` int(2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Contenu de la table `navigation`
+--
+
+INSERT INTO `navigation` (`ID_navigation`, `ID_page`, `ID_module`, `ordre`) VALUES (NULL, '1', NULL, '1');
+
 --
 -- Structure de la table `notification`
 --
@@ -317,6 +335,13 @@ ALTER TABLE `notification`
  ADD PRIMARY KEY (`ID_notification`);
 
 --
+-- Index pour la table `navigation`
+--
+ALTER TABLE `navigation`
+ ADD PRIMARY KEY (`ID_navigation`);
+
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -375,6 +400,11 @@ MODIFY `ID_page` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 ALTER TABLE `notification`
 MODIFY `ID_notification` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `navigation`
+--
+ALTER TABLE `navigation`
+MODIFY `ID_navigation` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
