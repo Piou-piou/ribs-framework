@@ -16,7 +16,10 @@
 	require("config/initialise.php");
 
 	$login = new Connexion();
-	$droit_acces = new DroitAcces();
+	if (isset($_SESSION["idlogin".CLEF_SITE])) {
+		$droit_acces = new DroitAcces();
+	}
+
 	$config = new \core\Configuration();
 
 	if ($config->getAccesAdmin() != 1) {
