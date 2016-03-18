@@ -1,6 +1,8 @@
 <?php
 	namespace core;
 
+	use core\database\Database;
+
 	class App {
 		private static $database;
 		private static $erreur;

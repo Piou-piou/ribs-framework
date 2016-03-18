@@ -24,15 +24,17 @@
 		public function __construct() {
 			$dbc = \core\App::getDb();
 
-			$this->id_identite = $_SESSION["idlogin".CLEF_SITE];
+			if (isset($_SESSION["idlogin".CLEF_SITE])) {
+				$this->id_identite = $_SESSION["idlogin".CLEF_SITE];
 
-			//on test voir si super admin
-			$query = $dbc->query("SELECT super_admin,liste_droit FROM identite WHERE ID_identite=".$this->id_identite);
+				//on test voir si super admin
+				$query = $dbc->query("SELECT super_admin,liste_droit FROM identite WHERE ID_identite=".$this->id_identite);
 
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) {
-					$this->super_admin = $obj->super_admin;
-					$this->id_liste_droit_acces = $obj->liste_droit;
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						$this->super_admin = $obj->super_admin;
+						$this->id_liste_droit_acces = $obj->liste_droit;
+					}
 				}
 			}
 		}

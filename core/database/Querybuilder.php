@@ -1,5 +1,5 @@
 <?php
-	namespace core;
+	namespace core\database;
 	trait Querybuilder {
 		protected $req_beginning;
 		protected $champs = [];

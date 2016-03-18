@@ -6,7 +6,8 @@
 
 	if ($config->getLastSave() != date("Y-m-d")) {
 		try {
-			$dump = new \Ifsnop\Mysqldump\Mysqldump(DB_NAME, DB_USER, DB_PASS, DB_HOST);
+			$dsn = DB_TYPE.":host=".DB_HOST.";dbname=".DB_NAME;
+			$dump = new \Ifsnop\Mysqldump\Mysqldump($dsn, DB_USER, DB_PASS);
 			$dump->start("bdd_backup/save-".date("Y-m-d").".sql");
 
 			$config->setDateSaveToday();

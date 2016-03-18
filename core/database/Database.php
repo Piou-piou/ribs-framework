@@ -1,5 +1,5 @@
 <?php
-	namespace core;
+	namespace core\database;
 
 	use core\HTML\flashmessage\FlashMessage;
 	use PDO;
