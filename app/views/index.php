@@ -1,1 +1,3 @@
-<?=$contenu_page?>
+<?php
+
+	$nav = new \core\Navigation();

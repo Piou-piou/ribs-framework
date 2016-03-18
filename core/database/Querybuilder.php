@@ -6,6 +6,7 @@
 		protected $value = [];
 		protected $conditions = [];
 		protected $table = [];
+		protected $order_by;
 
 		abstract public function query();
 		abstract public function prepare();
@@ -122,6 +123,15 @@
 		}
 
 		/**
+		 * @param $order
+		 */
+		public function orderBy($order) {
+			$this->order_by = " ORDER BY ".$order;
+
+			return $this;
+		}
+
+		/**
 		 * @return array
 		 *
 		 * fonction qui permet de récupérer un select fait sur une table
@@ -131,6 +141,10 @@
 
 			if (!empty($this->conditions)) {
 				$requete .= " WHERE ". implode(" ", $this->conditions);
+			}
+
+			if (!empty($this->order_by)) {
+				$requete .= $this->order_by;
 			}
 
 			$this->unsetQueryBuilder();
@@ -183,5 +197,6 @@
 			$this->value = [];
 			$this->conditions = [];
 			$this->table = [];
+			$this->order_by = "";
 		}
 	}
