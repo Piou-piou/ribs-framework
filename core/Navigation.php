@@ -1,31 +1,39 @@
 <?php
 	namespace core;
 	class Navigation {
+		private $navigation;
 		
 		
 		
-		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
+		//-------------------------- BUILDER ----------------------------------------------------------------------------//
 		public function __construct() {
 			$dbc = App::getDb();
+			$navigation = [];
 
 			$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					if ($obj->ID_page === null) {
-						$this->getLienNavigationModule($obj->ID_module);
+						$navigation = $this->getLienNavigationModule($obj->ID_module);
 					}
 					else {
-						$this->getLienNavigationPage($obj->ID_page);
+						$navigation = $this->getLienNavigationPage($obj->ID_page);
 					}
 				}
+
+				$this->setNavigation($navigation);
 			}
 		}
-		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
+		//-------------------------- END BUILDER ----------------------------------------------------------------------------//
 		
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		public function getNavigation() {
+			return $this->navigation;
+		}
+
 		private function getLienNavigationPage($id_page) {
 			$dbc = App::getDb();
 
@@ -34,11 +42,12 @@
 				->from("page")
 				->where("navigation.ID_page", "=", "page.ID_page", "AND")
 				->where("page.ID_page", "=", $id_page)
+				->where("page.affiche", "=", 1)
 				->get();
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					echo($obj->titre." ++ ".$obj->url."<br>");
+					return [$obj->titre,$obj->url];
 				}
 			}
 		}
@@ -51,18 +60,23 @@
 				->from("module")
 				->where("navigation.ID_module", "=", "module.ID_module", "AND")
 				->where("module.ID_module", "=", $id_module)
+				->where("module.installer", "=", 1)
+				->where("module.activer", "=", 1)
 				->get();
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					echo($obj->nom_module." ++ ".$obj->url."<br>");
+					return [$obj->nom_module,$obj->url];
 				}
 			}
 		}
-		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
+		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
+		private function setNavigation($navigation) {
+			$this->navigation = $navigation;
+		}
+		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}
