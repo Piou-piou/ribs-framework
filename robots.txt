@@ -6,3 +6,4 @@ Disallow: /core/
 Disallow: /libs/
 Disallow: /app/controller/
 Disallow: /bdd_backup/
+Disallow: /vendor/
