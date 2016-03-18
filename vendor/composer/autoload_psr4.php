@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'modules\\' => array($baseDir . '/modules'),
     'core\\' => array($baseDir . '/core'),
+    'Ifsnop\\' => array($vendorDir . '/ifsnop/mysqldump-php/src/Ifsnop'),
 );
