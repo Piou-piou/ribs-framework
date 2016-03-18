@@ -27,7 +27,7 @@
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($id_liste_droit_acces = null) {
 			if ($id_liste_droit_acces == null) {
-				$this->getListeDroitAcces();
+				$this->getListeDroitAccesAdmin();
 			}
 			else {
 				$this->id_liste_droit_acces = $id_liste_droit_acces;
@@ -39,9 +39,6 @@
 
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		//pour les droit_acces standard
-		public function getIdListeDroitAcces() {
-			return $this->id_liste_droit_acces;
-		}
 		public function getNomListe() {
 			return $this->nom_liste;
 		}
@@ -83,7 +80,7 @@
 		/**
 		 * appellee dans le constructeur pour afficher les listes de droit d'acces
 		 */
-		private function getListeDroitAcces() {
+		private function getListeDroitAccesAdmin() {
 			$dbc = App::getDb();
 
 			//pour affichage de la liste des listes de droit d'acces
