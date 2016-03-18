@@ -24,7 +24,7 @@
 		header("location:".WEBROOT);
 	}
 
-	require(ROOT."core/save/dump/initialise.php");
+	require(ROOT."core/save/save.php");
 
 
 
