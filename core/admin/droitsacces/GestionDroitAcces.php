@@ -26,36 +26,8 @@
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($id_liste_droit_acces = null) {
-			$dbc = App::getDb();
-
 			if ($id_liste_droit_acces == null) {
-				//pour affichage de la liste des listes de droit d'acces
-				//récupération des droits d'acces génériques
-				$query = $dbc->query("SELECT * FROM liste_droit_acces");
-
-				if ((is_array($query)) && (count($query) > 0)) {
-					$id_liste_droit_acces = [];
-					$nom_liste = [];
-					$nb_droit_acces = [];
-					$nb_droit_acces_page = [];
-					$nb_user = [];
-
-					foreach ($query as $obj) {
-						$id_liste_droit_acces[] = $obj->ID_liste_droit_acces;
-						$nom_liste[] = $obj->nom_liste;
-
-						//récupération du nombre de droits d'acces pour cette liste
-						$nb_droit_acces = $this->getNombreDroitAccesListe($obj->ID_liste_droit_acces);
-
-						//récupération du nombre d'utilisateurs qui sont dans cette liste
-						$nb_user = $this->getNombreUtilisateurListe($obj->ID_liste_droit_acces);
-
-						//récupération du nombres de pages dans cette liste
-						$nb_droit_acces_page = $this-> getNombrePageListe($obj->ID_liste_droit_acces);
-					}
-
-					$this->setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user);
-				}
+				$this->getListeDroitAcces();
 			}
 			else {
 				$this->id_liste_droit_acces = $id_liste_droit_acces;
@@ -106,6 +78,41 @@
 		}
 		public function getNbUser() {
 			return $this->nb_user;
+		}
+
+		/**
+		 * appellee dans le constructeur pour afficher les listes de droit d'acces
+		 */
+		private function getListeDroitAcces() {
+			$dbc = App::getDb();
+
+			//pour affichage de la liste des listes de droit d'acces
+			//récupération des droits d'acces génériques
+			$query = $dbc->query("SELECT * FROM liste_droit_acces");
+
+			if ((is_array($query)) && (count($query) > 0)) {
+				$id_liste_droit_acces = [];
+				$nom_liste = [];
+				$nb_droit_acces = [];
+				$nb_droit_acces_page = [];
+				$nb_user = [];
+
+				foreach ($query as $obj) {
+					$id_liste_droit_acces[] = $obj->ID_liste_droit_acces;
+					$nom_liste[] = $obj->nom_liste;
+
+					//récupération du nombre de droits d'acces pour cette liste
+					$nb_droit_acces = $this->getNombreDroitAccesListe($obj->ID_liste_droit_acces);
+
+					//récupération du nombre d'utilisateurs qui sont dans cette liste
+					$nb_user = $this->getNombreUtilisateurListe($obj->ID_liste_droit_acces);
+
+					//récupération du nombres de pages dans cette liste
+					$nb_droit_acces_page = $this-> getNombrePageListe($obj->ID_liste_droit_acces);
+				}
+
+				$this->setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user);
+			}
 		}
 
 		/**
@@ -169,14 +176,12 @@
 		 * fonction qui récupère la liste des droits d'acces en texte en fonction de l'id de la liste
 		 * @param $id_liste_droit_acces
 		 */
-		public function getListeDroitAccesDetailDroit($id_liste_droit_acces = null) {
+		public function getListeDroitAccesDetailDroit() {
 			$dbc = \core\App::getDb();
-
-			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
 
 			$query = $dbc->query("SELECT * FROM droit_acces, liaison_liste_droit WHERE
 										droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
-										liaison_liste_droit.ID_liste_droit_acces =".$id_liste_droit_acces);
+										liaison_liste_droit.ID_liste_droit_acces =".$this->id_liste_droit_acces);
 			if ((is_array($query)) && (count($query) > 0)) {
 				$droit_acces = [];
 
@@ -192,13 +197,11 @@
 		 * fonction qui récupère la liste des utilisateur dans une liste de droits d'acces en texte en fonction de l'id de la liste
 		 * @param $id_liste_droit_acces
 		 */
-		public function getListeDroitAccesDetailUser($id_liste_droit_acces = null) {
+		public function getListeDroitAccesDetailUser() {
 			$dbc = \core\App::getDb();
 
-			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
-
 			//récupératin des utilisateurs qui sont dans cette liste
-			$query = $dbc->query("SELECT * FROM identite WHERE liste_droit=".$id_liste_droit_acces);
+			$query = $dbc->query("SELECT * FROM identite WHERE liste_droit=".$this->id_liste_droit_acces);
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
 				$pseudo = [];
@@ -220,16 +223,14 @@
 		 * fonction qui récupère la liste des droits d'acces sur les pages en texte en fonction de l'id de la liste
 		 * @param $id_liste_droit_acces
 		 */
-		public function getListeDroitAccesDetailPage($id_liste_droit_acces = null) {
+		public function getListeDroitAccesDetailPage() {
 			$dbc = \core\App::getDb();
-
-			if ($id_liste_droit_acces == null) $id_liste_droit_acces = $this->id_liste_droit_acces;
 
 			//récupération des droits d'acces pour les pages
 			$query = $dbc->query("SELECT * FROM liste_droit_acces, droit_acces_page, page WHERE
 									liste_droit_acces.ID_liste_droit_acces = droit_acces_page.ID_liste_droit_acces AND
 									droit_acces_page.ID_page = page.ID_page AND
-									liste_droit_acces.ID_liste_droit_acces = $id_liste_droit_acces
+									liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
 			");
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_page = [];
