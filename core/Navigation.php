@@ -12,9 +12,6 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					/*$id_page[] = $obj->ID_page;
-					$id_module[] = $obj->ID_module;*/
-
 					$this->getLienNavigation($obj->ID_page, $obj->ID_module);
 				}
 			}
