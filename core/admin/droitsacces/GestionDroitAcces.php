@@ -26,7 +26,7 @@
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($id_liste_droit_acces = null) {
-			if ($id_liste_droit_acces == null) {
+			if ($id_liste_droit_acces === null) {
 				$this->getListeDroitAccesAdmin();
 			}
 			else {
