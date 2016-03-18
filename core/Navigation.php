@@ -15,10 +15,10 @@
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					if ($obj->ID_page === null) {
-						$navigation = $this->getLienNavigationModule($obj->ID_module);
+						$navigation[] = $this->getLienNavigationModule($obj->ID_module);
 					}
 					else {
-						$navigation = $this->getLienNavigationPage($obj->ID_page);
+						$navigation[] = $this->getLienNavigationPage($obj->ID_page);
 					}
 				}
 
@@ -41,7 +41,7 @@
 				->from("navigation")
 				->from("page")
 				->where("navigation.ID_page", "=", "page.ID_page", "AND")
-				->where("page.ID_page", "=", $id_page)
+				->where("page.ID_page", "=", $id_page, "AND")
 				->where("page.affiche", "=", 1)
 				->get();
 
@@ -59,8 +59,8 @@
 				->from("navigation")
 				->from("module")
 				->where("navigation.ID_module", "=", "module.ID_module", "AND")
-				->where("module.ID_module", "=", $id_module)
-				->where("module.installer", "=", 1)
+				->where("module.ID_module", "=", $id_module, "AND")
+				->where("module.installer", "=", 1, "AND")
 				->where("module.activer", "=", 1)
 				->get();
 
