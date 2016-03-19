@@ -2,6 +2,7 @@
 	namespace core;
 	class Navigation {
 		private $navigation;
+		private $last_ordre;
 		
 		
 		
@@ -20,8 +21,10 @@
 					else {
 						$navigation[] = $this->getLienNavigationPage($obj->ID_page);
 					}
+					$last_ordre = $obj->ordre;
 				}
 
+				$this->last_ordre = $last_ordre;
 				$this->setNavigation($navigation);
 			}
 		}
@@ -77,6 +80,20 @@
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		private function setNavigation($navigation) {
 			$this->navigation = $navigation;
+		}
+
+		public function setTestAjoutLien($id, $value_id, $afficher) {
+			$dbc = App::getDb();
+
+			if ($afficher != null) {
+				$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre+1)->into("navigation")->set();
+			}
+		}
+
+		public function setSupprimerLien($id, $value_id) {echo("$id, $value_id");
+			$dbc = App::getDb();
+
+			$dbc->delete()->from("navigation")->where($id, "=", $value_id)->del();
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}

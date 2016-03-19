@@ -6,6 +6,7 @@
 	use core\admin\droitsacces\DroitAcces;
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
+	use core\Navigation;
 
 	class GestionContenus extends Contenus {
 		private $parent_texte;
@@ -84,7 +85,7 @@
 		 * @param $parent
 		 * @param $contenu
 		 */
-		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $contenu) {
+		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = null) {
 			$dbc = \core\App::getDb();
 
 			$url = ChaineCaractere::setUrl($url);
@@ -128,6 +129,7 @@
 
 					$dbc->prepare("INSERT INTO page (titre, contenu, url, meta_description, balise_title, ordre, parent, affiche) VALUES (:titre, :contenu, :url, :meta_description, :balise_title, :ordre, :parent, :affiche)", $value);
 					$this->id_page = $dbc->lastInsertId();
+					$this->setAjoutLienNavigation("ID_page", $this->id_page , 1);
 				}
 				else {
 					FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
@@ -158,7 +160,7 @@
 		 * @param $parent
 		 * @param $contenu
 		 */
-		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $contenu) {
+		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = null) {
 			$dbc = \core\App::getDb();
 
 			//on trouve l'ancien fichier à parir de la fin de l'url
@@ -205,6 +207,7 @@
 					);
 
 					$dbc->prepare("UPDATE page SET titre=:titre_page, contenu=:contenu, url=:url, meta_description=:meta_description, balise_title=:balise_title, parent=:parent WHERE ID_page=:id_page", $value);
+					$this->setAjoutLienNavigation("ID_page", $id_page, 1);
 				}
 				else {
 					$_SESSION['balise_title'] = $balise_title;
@@ -249,6 +252,9 @@
 					);
 
 					$dbc->prepare("DELETE FROM page WHERE ID_page=:id_page", $value);
+
+					$nav = new Navigation();
+					$nav->setSupprimerLien("ID_page", $id_page);
 				}
 				//sinon on renvoi une erreur en disant que le fichier n'existe pas et qu'il faut contacter un administrateur
 				else {
@@ -259,6 +265,13 @@
 			else {
 				FlashMessage::setFlash("Impossible de supprimer cette page, veuillez contacter votre administrateur pour corriger ce problème");
 				$this->erreur = true;
+			}
+		}
+
+		private function setAjoutLienNavigation($id, $value_id, $affiche) {
+			if ($affiche !== null) {
+				$nav = new Navigation();
+				$nav->setTestAjoutLien($id, $value_id, $affiche);
 			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
