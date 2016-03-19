@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `navigation` (
 -- Contenu de la table `navigation`
 --
 
-INSERT INTO `navigation` (`ID_navigation`, `ID_page`, `ID_module`, `ordre`) VALUES (NULL, '1', NULL, '1');
+INSERT INTO `navigation` (`ID_navigation`, `ID_page`, `ID_module`, `ordre`) VALUES (1, '1', NULL, '1');
 
 --
 -- Structure de la table `notification`
