@@ -7,6 +7,9 @@
 <?php include("header.php"); ?>
 <?php require_once("admin/controller/ckeditor.php"); ?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
+<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
+<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
+
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/modifier_contenus" method="post">
 	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1)):?>
@@ -14,7 +17,7 @@
 	<?php endif; ?>
 	<input type="hidden" name="id_page" value="<?=$id_page_courante?>">
 	<?php if (($_GET['id'] != 1) && ($droit_acces->getSupprimerPage() == 1)):?>
-		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page" href="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
+		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
 	<?php endif; ?>
 
 	<div class="inner">

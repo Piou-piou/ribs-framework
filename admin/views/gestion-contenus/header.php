@@ -19,7 +19,7 @@
 </nav>
 <script src="<?=WEBROOT?>admin/views/gestion-contenus/js/contenu.js"></script>
 
-<div class="popup">
+<div class="popup" id="supprimer-page">
 	<div class="content">
 		<h2>Etes-vous sûr de vouloir supprimer cette page ?</h2>
 		<p>Si vous la supprimée, tous les liens qui y sont associés renverront une erreur, la page et son contenu textuel seront supprimés.<br/>
