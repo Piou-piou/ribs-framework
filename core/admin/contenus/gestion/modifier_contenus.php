@@ -1,6 +1,6 @@
 <?php
 	$gestion_contenu = new \core\admin\contenus\GestionContenus();
-	$contenu_class = new \core\contenus\Contenus(0);
+	$contenu_class = new \core\contenus\Contenus();
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 
 	if ($droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_POST['id_page']) == true) {

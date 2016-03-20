@@ -71,11 +71,43 @@
 
 			return $ordre;
 		}
+
+		/**
+		 * @param $query
+		 * fonction qui permet de récupérer le menu dans admin et front
+		 */
+		private function getMenu($query) {
+			if ((is_array($query)) && (count($query) > 0)) {
+				$id_page = [];
+				$titre = [];
+				$balise_title = [];
+				$url = [];
+				$parent = [];
+
+				foreach ($query as $obj) {
+					$id_page[] = $obj->ID_page;
+					$titre[] = $obj->titre;
+					$balise_title[] = $obj->balise_title;
+					$url[] = $obj->url;
+					$parent[] = $obj->parent;
+				}
+
+				$this->setMenu($id_page, $titre, $balise_title, $url, $parent);
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		private function setMenu($id_page, $titre, $balise_title, $url, $parent) {
+			$this->id_page = $id_page;
+			$this->titre = $titre;
+			$this->balise_title = $balise_title;
+			$this->url = $url;
+			$this->parent = $parent;
+		}
+
 		/**
 		 * fonction qui permet de créer un page
 		 * @param $balise_title

@@ -45,14 +45,30 @@
 				->from("page")
 				->where("navigation.ID_page", "=", "page.ID_page", "AND")
 				->where("page.ID_page", "=", $id_page, "AND")
-				->where("page.affiche", "=", 1)
+				->where("page.affiche", "=", 1, "AND")
+				->where("page.parent", "=", 0)
 				->get();
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->titre,$obj->url];
+					return [$obj->titre, $obj->url, $obj->balise_title, $this->getSousMenu($id_page)];
 				}
 			}
+		}
+
+		private function getSousMenu($id_page) {
+			$dbc = App::getDb();
+			$sous_menu = [];
+
+			$query = $dbc->select()->from("page")->where("parent", "=", $id_page)->get();
+
+			if (is_array($query) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$sous_menu[] = [$obj->titre, $obj->url, $obj->balise_title,];
+				}
+			}
+
+			return $sous_menu;
 		}
 
 		private function getLienNavigationModule($id_module) {

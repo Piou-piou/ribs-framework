@@ -17,16 +17,6 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($init_all = 0) {
-			$dbc = \core\App::getDb();
-
-			if ($init_all == 1) {
-				//on construit le menu
-				$query = $dbc->query("SELECT ID_page, titre, balise_title, parent, url FROM page WHERE affiche=1 ORDER BY ordre");
-
-				$this->getMenu($query);
-			}
-		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 
 
@@ -53,30 +43,6 @@
 		}
 		public function getParent() {
 			return $this->parent;
-		}
-
-		/**
-		 * @param $query
-		 * fonction qui permet de récupérer le menu dans admin et front
-		 */
-		protected function getMenu($query) {
-			if ((is_array($query)) && (count($query) > 0)) {
-				$id_page = [];
-				$titre = [];
-				$balise_title = [];
-				$url = [];
-				$parent = [];
-
-				foreach ($query as $obj) {
-					$id_page[] = $obj->ID_page;
-					$titre[] = $obj->titre;
-					$balise_title[] = $obj->balise_title;
-					$url[] = $obj->url;
-					$parent[] = $obj->parent;
-				}
-
-				$this->setMenu($id_page, $titre, $balise_title, $url, $parent);
-			}
 		}
 
 
@@ -135,12 +101,5 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		protected function setMenu($id_page, $titre, $balise_title, $url, $parent) {
-			$this->id_page = $id_page;
-			$this->titre = $titre;
-			$this->balise_title = $balise_title;
-			$this->url = $url;
-			$this->parent = $parent;
-		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}

@@ -22,19 +22,17 @@
 				<div class="inner">
 					<ul>
 						<?php if ($config->getContenusDynamique() == 1):?>
-							<?php for ($i=0 ; $i<count($id_page) ; $i++): ?>
-								<?php if ($parent[$i] == 0): ?>
-									<li><a href="<?=WEBROOT?><?=$url[$i]?>" title="<?=$balise_title[$i]?> <?=$titre[$i]?>"><?=$titre[$i]?></a>
+							<?php $nav = new \core\Navigation();foreach ($nav->getNavigation() as $nav):?>
+								<li><a href="<?=WEBROOT.$nav[1]?>" title="<?=$nav[2]?>"><?=$nav[0]?></a>
+									<?php if (count($nav[3]) > 0):?>
 										<ul>
-											<?php for ($j=0 ; $j<count($id_page) ; $j++): ?>
-												<?php if ($parent[$j] == $id_page[$i]): ?>
-													<li><a href="<?=WEBROOT?><?=$url[$j]?>" title="<?=$balise_title[$j]?> <?=$titre[$j]?>"><?=$titre[$j]?></a></li>
-												<?php endif;?>
-											<?php endfor;?>
+											<?php foreach ($nav[3] as $snav):?>
+												<li><a href="<?=WEBROOT.$snav[1]?>" title="<?=$snav[2]?>"><?=$snav[0]?></a></li>
+											<?php endforeach;?>
 										</ul>
-									</li>
-								<?php endif;?>
-							<?php endfor;?>
+									<?php endif;?>
+								</li>
+							<?php endforeach;?>
 						<?php endif;?>
 
 						<?php if ($config->getActiverConnexion() == 1):?>
