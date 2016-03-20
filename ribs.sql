@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `url` varchar(92) DEFAULT NULL,
   `meta_description` varchar(160) DEFAULT NULL,
   `balise_title` varchar(70) DEFAULT NULL,
-  `ordre` int(11) NOT NULL,
+  `ordre` int(11) DEFAULT NULL,,
   `parent` int(11) DEFAULT NULL,
   `affiche` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;

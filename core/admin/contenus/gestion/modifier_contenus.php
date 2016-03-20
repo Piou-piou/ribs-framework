@@ -9,7 +9,7 @@
 			$url = $_POST['url'];
 			$meta_description = $_POST['meta_description'];
 			$titre_page = $_POST['titre_page'];
-			$parent = $_POST['parent'];
+			$parent = $_POST['parent_texte'];
 			$contenu = $_POST['contenu'];
 		}
 		else {
@@ -36,7 +36,7 @@
 
 			if ($droit_acces->getModifNavigation() != 0) {
 				$titre_page = $_POST['titre_page'];
-				$parent = $_POST['parent'];
+				$parent = $_POST['parent_texte'];
 			}
 			else {
 				$titre_page = $contenu_class->getTitre();

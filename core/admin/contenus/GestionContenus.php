@@ -44,32 +44,51 @@
 
 
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getParentTexte($parent) {
-			$dbc = \core\App::getDb();
-
-			$query = $dbc->query("SELECT titre FROM page WHERE ID_page=".$parent);
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) $this->parent_texte = $obj->titre;
-			}
-
-			return $this->parent_texte;
-		}
 		public function getErreur() {
 			return $this->erreur;
 		}
 
-		private function getLastOrdre() {
+		public function getParentTexte($parent) {
 			$dbc = \core\App::getDb();
-			$ordre = "";
 
-			$query = $dbc->query("SELECT ordre FROM page ORDER BY ordre ASC LIMIT 1");
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) {
-					$ordre = $obj->ordre;
+			if ($parent != "") {
+				$query = $dbc->query("SELECT titre FROM page WHERE ID_page=".$parent);
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) $this->parent_texte = $obj->titre;
+				}
+
+				return $this->parent_texte;
+			}
+		}
+
+		private function getOrdrePage($parent) {
+			if (($parent != "") || ($parent != 0)) {
+				$dbc = \core\App::getDb();
+				$ordre = "";
+
+				$query = $dbc->query("SELECT ordre FROM page ORDER BY ordre DESC LIMIT 1");
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						$ordre = $obj->ordre;
+					}
+				}
+
+				return $ordre;
+			}
+		}
+
+		private function getParentId($parent) {
+			if ($parent != "") {
+				$dbc = \core\App::getDb();
+
+				$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"')->get();
+
+				if ((is_array($query)) && (count($query) > 0)) {
+					foreach ($query as $obj) {
+						return $obj->ID_page;
+					}
 				}
 			}
-
-			return $ordre;
 		}
 
 		/**
@@ -147,7 +166,6 @@
 			if (App::getErreur() !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
-					$ordre = $this->getLastOrdre() + 1;
 					$value = array(
 						"balise_title" => $balise_title,
 						"url" => $url,
@@ -155,7 +173,7 @@
 						"titre" => $titre_page,
 						"parent" => $parent,
 						"contenu" => $contenu,
-						"ordre" => $ordre,
+						"ordre" => $this->getOrdrePage($parent),
 						"affiche" => 1
 					);
 
@@ -234,7 +252,7 @@
 						"url" => $url,
 						"meta_description" => $meta_description,
 						"titre_page" => $titre_page,
-						"parent" => $parent,
+						"parent" => $this->getParentId($parent),
 						"contenu" => $contenu
 					);
 
