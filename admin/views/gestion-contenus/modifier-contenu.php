@@ -12,11 +12,11 @@
 
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/modifier_contenus" method="post">
-	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1)):?>
+	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
 		<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 	<?php endif; ?>
 	<input type="hidden" name="id_page" value="<?=$id_page_courante?>">
-	<?php if (($_GET['id'] != 1) && ($droit_acces->getSupprimerPage() == 1)):?>
+	<?php if (($_GET['id'] != 1) && (($droit_acces->getSupprimerPage() == 1)  || ($droit_acces->getSuperAdmin() == 1))):?>
 		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
 	<?php endif; ?>
 
@@ -33,7 +33,7 @@
 			</section>
 		<?php endif; ?>
 
-		<?php if ($droit_acces->getModifSeo() == 1):?>
+		<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant le référencement SEO</h2>
 				<div class="colonne">
@@ -56,7 +56,7 @@
 			</section>
 		<?php endif; ?>
 
-		<?php if ($droit_acces->getModifNavigation() == 1):?>
+		<?php if (($droit_acces->getModifNavigation() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant l'affichage dans la navigation</h2>
 				<div class="colonne">
@@ -75,7 +75,7 @@
 			</section>
 		<?php endif; ?>
 
-		<?php if ($droit_acces->getModifContenu() == 1):?>
+		<?php if (($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant l'affichage dans le navigateur</h2>
 				<div class="bloc">

@@ -121,13 +121,6 @@
 					$this->supprimer_page = $obj->supprimer;
 				}
 			}
-
-			if ($this->super_admin == 1) {
-				$this->modif_seo = 1;
-				$this->modif_contenu = 1;
-				$this->modif_navigation = 1;
-				$this->supprimer_page = 1;
-			}
 		}
 
 		//autres getter
