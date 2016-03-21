@@ -77,7 +77,6 @@
 		/**
 		 * affiche la date du jour au format jeudi 12 janvier
 		 * @param integer $date si NULL on prend la date du jour sinon on prend la date qui est mise
-		 * @param int $abreger si NOT NULL, on abrege la date, on enleve la semaine et on coupe le mois à 3 lettres
 		 * @return string
 		 */
 		public static function date_fr_texte($date = 0) {
