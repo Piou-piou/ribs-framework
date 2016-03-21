@@ -51,7 +51,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->titre, $obj->url, $obj->balise_title, $this->getSousMenu($id_page)];
+					return [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, $this->getSousMenu($id_page)];
 				}
 			}
 		}
@@ -60,11 +60,15 @@
 			$dbc = App::getDb();
 			$sous_menu = [];
 
-			$query = $dbc->select()->from("page")->where("parent", "=", $id_page)->get();
+			$query = $dbc->select()
+				->from("page")
+				->where("parent", "=", $id_page, "AND")
+				->where("affiche", "=", 1)
+				->get();
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$sous_menu[] = [$obj->titre, $obj->url, $obj->balise_title,];
+					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title,];
 				}
 			}
 

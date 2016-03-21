@@ -1,19 +1,17 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			<?php for ($i = 0; $i < count($id_page); $i++): ?>
-				<?php if ($parent[$i] == 0): ?>
-					<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page[$i]?>"><?=$titre[$i]?></a>
+			<?php $nav = new \core\Navigation();foreach ($nav->getNavigation() as $nav):?>
+				<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$nav[0]?>" title="<?=$nav[3]?>"><?=$nav[1]?></a>
+					<?php if (count($nav[4]) > 0):?>
 						<ul>
-							<?php for ($j = 0; $j < count($id_page); $j++): ?>
-								<?php if ($parent[$j] == $id_page[$i]): ?>
-									<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page[$j]?>"><?=$titre[$j]?></a></li>
-								<?php endif; ?>
-							<?php endfor; ?>
+							<?php foreach ($nav[4] as $snav):?>
+								<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$snav[0]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>
+							<?php endforeach;?>
 						</ul>
-					</li>
-				<?php endif; ?>
-			<?php endfor; ?>
+					<?php endif;?>
+				</li>
+			<?php endforeach;?>
 		</ul>
 	</div>
 </nav>

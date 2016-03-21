@@ -89,6 +89,8 @@
 					}
 				}
 			}
+
+			return 0;
 		}
 
 		/**
@@ -136,7 +138,7 @@
 		 * @param $parent
 		 * @param $contenu
 		 */
-		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = null) {
+		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = 1) {
 			$dbc = \core\App::getDb();
 
 			$url = ChaineCaractere::setUrl($url);
@@ -174,7 +176,7 @@
 						"parent" => $parent,
 						"contenu" => $contenu,
 						"ordre" => $this->getOrdrePage($parent),
-						"affiche" => 1
+						"affiche" => $affiche
 					);
 
 					$dbc->prepare("INSERT INTO page (titre, contenu, url, meta_description, balise_title, ordre, parent, affiche) VALUES (:titre, :contenu, :url, :meta_description, :balise_title, :ordre, :parent, :affiche)", $value);
@@ -210,7 +212,7 @@
 		 * @param $parent
 		 * @param $contenu
 		 */
-		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = null) {
+		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = 1) {
 			$dbc = \core\App::getDb();
 
 			//on trouve l'ancien fichier à parir de la fin de l'url
@@ -253,11 +255,12 @@
 						"meta_description" => $meta_description,
 						"titre_page" => $titre_page,
 						"parent" => $this->getParentId($parent),
-						"contenu" => $contenu
+						"contenu" => $contenu,
+						"affiche" => $affiche
 					);
 
-					$dbc->prepare("UPDATE page SET titre=:titre_page, contenu=:contenu, url=:url, meta_description=:meta_description, balise_title=:balise_title, parent=:parent WHERE ID_page=:id_page", $value);
-					$this->setAjoutLienNavigation("ID_page", $id_page, 1);
+					$dbc->prepare("UPDATE page SET titre=:titre_page, contenu=:contenu, url=:url, meta_description=:meta_description, balise_title=:balise_title, parent=:parent, affiche=:affiche WHERE ID_page=:id_page", $value);
+					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
 				}
 				else {
 					$_SESSION['balise_title'] = $balise_title;
@@ -322,6 +325,16 @@
 			if ($affiche !== null) {
 				$nav = new Navigation();
 				$nav->setTestAjoutLien($id, $value_id, $affiche);
+			}
+		}
+
+		private function setModifierLienNavigation($id, $id_page, $parent, $affiche) {
+			if ($parent != "") {
+				$nav = new Navigation();
+				$nav->setSupprimerLien($id, $id_page);
+			}
+			else if (($affiche == 1) && ($parent == "")) {
+				$this->setAjoutLienNavigation($id, $id_page, $affiche);
 			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//

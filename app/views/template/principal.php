@@ -23,11 +23,11 @@
 					<ul>
 						<?php if ($config->getContenusDynamique() == 1):?>
 							<?php $nav = new \core\Navigation();foreach ($nav->getNavigation() as $nav):?>
-								<li><a href="<?=WEBROOT.$nav[1]?>" title="<?=$nav[2]?>"><?=$nav[0]?></a>
-									<?php if (count($nav[3]) > 0):?>
+								<li><a href="<?=WEBROOT.$nav[2]?>" title="<?=$nav[3]?>"><?=$nav[1]?></a>
+									<?php if (count($nav[4]) > 0):?>
 										<ul>
-											<?php foreach ($nav[3] as $snav):?>
-												<li><a href="<?=WEBROOT.$snav[1]?>" title="<?=$snav[2]?>"><?=$snav[0]?></a></li>
+											<?php foreach ($nav[4] as $snav):?>
+												<li><a href="<?=WEBROOT.$snav[2]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>
 											<?php endforeach;?>
 										</ul>
 									<?php endif;?>
