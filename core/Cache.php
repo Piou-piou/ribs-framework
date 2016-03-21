@@ -25,13 +25,7 @@
 			//on test si le cache est bien active
 			if ($config->getCache() == 1) {
 				$this->cache_active = 1;
-
-				//on crée les dossier du cache si ils n'existent pas deja
-				if (!file_exists(ROOT."cache")) {
-					mkdir(ROOT."cache");
-					mkdir(ROOT."cache/admin");
-					mkdir(ROOT."cache/app");
-				}
+				$this->setCreerDossier();
 			}
 
 			if ($admin != null) {
@@ -96,6 +90,15 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		private function setCreerDossier() {
+			//on crée les dossier du cache si ils n'existent pas deja
+			if (!file_exists(ROOT."cache")) {
+				mkdir(ROOT."cache");
+				mkdir(ROOT."cache/admin");
+				mkdir(ROOT."cache/app");
+			}
+		}
+
 		/**
 		 * @return bool
 		 * fonction qui permet de démarrer l'affichage de la page
