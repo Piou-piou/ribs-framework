@@ -267,7 +267,7 @@
 				$nav->setSupprimerLien($id, $id_page);
 			}
 			else if (($affiche == 1) && ($parent == "")) {
-				$this->setAjoutLienNavigation($id, $id_page);
+				$this->setAjoutLienNavigation($id, $id_page, $affiche);
 			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
