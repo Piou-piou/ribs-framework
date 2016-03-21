@@ -19,6 +19,8 @@
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct($page, $admin = null) {
 			$config = new Configuration();
+			$this->cache_active = 0;
+			$this->dossier_cache = ROOT."cache/app/";
 
 			//on test si le cache est bien active
 			if ($config->getCache() == 1) {
@@ -31,14 +33,8 @@
 					mkdir(ROOT."cache/app");
 				}
 			}
-			else {
-				$this->cache_active = 0;
-			}
 
-			if ($admin == null) {
-				$this->dossier_cache = ROOT."cache/app/";
-			}
-			else {
+			if ($admin != null) {
 				$this->dossier_cache = ROOT."cache/admin/";
 			}
 
