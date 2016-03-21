@@ -1,9 +1,9 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			<?php $nav = new \core\Navigation();foreach ($nav->getNavigation() as $nav):?>
+			<?php $nav = new \core\Navigation(false);foreach ($nav->getNavigation() as $nav):?>
 				<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$nav[0]?>" title="<?=$nav[3]?>"><?=$nav[1]?></a>
-					<?php if (count($nav[4]) > 0):?>
+					<?php if ((isset($nav[4]) && count($nav[4]) > 0)):?>
 						<ul>
 							<?php foreach ($nav[4] as $snav):?>
 								<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$snav[0]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>

@@ -1,6 +1,7 @@
 <?php
 	namespace core\modules;
 	use core\App;
+	use core\Navigation;
 
 	class GestionModule {
 		use CheckVersionModule;
@@ -137,6 +138,18 @@
 			}
 		}
 
+		private static function getUrlToId($url) {
+			$dbc = App::getDb();
+
+			$query = $dbc->select("ID_module")->from("module")->where("url", "=", $dbc->quote($url))->get();
+
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					return $obj->ID_module;
+				}
+			}
+		}
+
 
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		
@@ -165,6 +178,15 @@
 			);
 
 			$dbc->prepare("UPDATE module SET activer=:activer WHERE url=:url", $value);
+
+			$nav = new Navigation();
+
+			if ($activer == 1) {
+				$nav->setAjoutLien("ID_module", self::getUrlToId($url));
+			}
+			else {
+				$nav->setSupprimerLien("ID_module", self::getUrlToId($url));
+			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}

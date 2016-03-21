@@ -7,11 +7,17 @@
 		
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
-		public function __construct() {
+		public function __construct($no_module = null) {
 			$dbc = App::getDb();
 			$navigation = [];
+			$last_ordre = "";
 
-			$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
+			if($no_module === null) {
+				$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
+			}
+			else {
+				$query = $dbc->select()->from("navigation")->where("ID_page", " IS NOT ", "NULL")->orderBy("ordre")->get();
+			}
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -89,7 +95,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->nom_module,$obj->url];
+					return [$obj->ID_module, $obj->nom_module, $obj->url];
 				}
 			}
 		}
@@ -102,12 +108,10 @@
 			$this->navigation = $navigation;
 		}
 
-		public function setTestAjoutLien($id, $value_id, $afficher) {
+		public function setAjoutLien($id, $value_id) {
 			$dbc = App::getDb();
 
-			if ($afficher != null) {
-				$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre+1)->into("navigation")->set();
-			}
+			$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre+1)->into("navigation")->set();
 		}
 
 		public function setSupprimerLien($id, $value_id) {echo("$id, $value_id");

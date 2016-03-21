@@ -257,7 +257,7 @@
 		private function setAjoutLienNavigation($id, $value_id, $affiche) {
 			if ($affiche !== null) {
 				$nav = new Navigation();
-				$nav->setTestAjoutLien($id, $value_id, $affiche);
+				$nav->setAjoutLien($id, $value_id);
 			}
 		}
 
@@ -267,7 +267,7 @@
 				$nav->setSupprimerLien($id, $id_page);
 			}
 			else if (($affiche == 1) && ($parent == "")) {
-				$this->setAjoutLienNavigation($id, $id_page, $affiche);
+				$this->setAjoutLienNavigation($id, $id_page);
 			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
