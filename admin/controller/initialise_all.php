@@ -18,11 +18,7 @@
 
 	if ($droit_acces->getDroitAccesAction("GESTION CONTENUS")) {
 		$contenu = new \core\contenus\Contenus();
-		$gestion_contenu = new \core\admin\contenus\GestionContenus(1);
-
-		$id_page = $gestion_contenu->getIdPage();
-		$titre = $gestion_contenu->getTitre();
-		$parent = $gestion_contenu->getParent();
+		$gestion_contenu = new \core\admin\contenus\GestionContenus();
 	}
 
 	//pour les pages sur les droits d'acces

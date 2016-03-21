@@ -14,30 +14,8 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($init_all = 0) {
-			$dbc = \core\App::getDb();
+		public function __construct() {
 
-			if ($init_all == 1) {
-				$droit_acces = new DroitAcces();
-				$id_identite = $_SESSION["idlogin".CLEF_SITE];
-
-				//on construit le menu
-				if ($droit_acces->getSuperAdmin() != 1) {
-					$query = $dbc->query("SELECT page.ID_page, page.titre, page.balise_title, page.parent, page.url, droit_acces_page.seo, droit_acces_page.contenu, droit_acces_page.navigation, droit_acces_page.supprimer FROM page, droit_acces_page, liste_droit_acces, identite WHERE
-                                    identite.liste_droit = liste_droit_acces.ID_liste_droit_acces AND
-									liste_droit_acces.ID_liste_droit_acces = droit_acces_page.ID_liste_droit_acces AND
-									page.ID_page = droit_acces_page.ID_page AND
-									(droit_acces_page.seo != 0 OR droit_acces_page.contenu != 0 OR droit_acces_page.navigation != 0 OR droit_acces_page.supprimer != 0 OR identite.super_admin = 1) AND
-									identite.ID_identite = $id_identite
-                                    ORDER BY page.ordre
-                    ");
-				}
-				else {
-					$query = $dbc->query("SELECT ID_page, titre, balise_title, parent, url FROM page ORDER BY ordre");
-				}
-
-				$this->getMenu($query);
-			}
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 
@@ -51,14 +29,12 @@
 		public function getParentTexte($parent) {
 			$dbc = \core\App::getDb();
 
-			if ($parent != "") {
-				$query = $dbc->query("SELECT titre FROM page WHERE ID_page=".$parent);
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) $this->parent_texte = $obj->titre;
-				}
-
-				return $this->parent_texte;
+			$query = $dbc->query("SELECT titre FROM page WHERE ID_page=".$parent);
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) $this->parent_texte = $obj->titre;
 			}
+
+			return $this->parent_texte;
 		}
 
 		private function getOrdrePage($parent) {
@@ -78,55 +54,34 @@
 		}
 
 		private function getParentId($parent) {
-			if ($parent != "") {
-				$dbc = \core\App::getDb();
+			$dbc = \core\App::getDb();
 
-				$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"')->get();
+			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"')->get();
 
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						return $obj->ID_page;
-					}
+			if ((is_array($query)) && (count($query) == 1)) {
+				foreach ($query as $obj) {
+					return $obj->ID_page;
 				}
 			}
 
 			return 0;
-		}
-
-		/**
-		 * @param $query
-		 * fonction qui permet de récupérer le menu dans admin et front
-		 */
-		private function getMenu($query) {
-			if ((is_array($query)) && (count($query) > 0)) {
-				$id_page = [];
-				$titre = [];
-				$balise_title = [];
-				$url = [];
-				$parent = [];
-
-				foreach ($query as $obj) {
-					$id_page[] = $obj->ID_page;
-					$titre[] = $obj->titre;
-					$balise_title[] = $obj->balise_title;
-					$url[] = $obj->url;
-					$parent[] = $obj->parent;
-				}
-
-				$this->setMenu($id_page, $titre, $balise_title, $url, $parent);
-			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setMenu($id_page, $titre, $balise_title, $url, $parent) {
-			$this->id_page = $id_page;
-			$this->titre = $titre;
-			$this->balise_title = $balise_title;
-			$this->url = $url;
-			$this->parent = $parent;
+		private function setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page) {
+			$_SESSION['balise_title'] = $balise_title;
+			$_SESSION['url'] = $url;
+			$_SESSION['meta_description'] = $meta_description;
+			$_SESSION['titre_page'] = $titre_page;
+			$_SESSION['parent'] = $parent;
+			$_SESSION['contenu'] = $contenu;
+			$_SESSION['err_modification_contenu'] = true;
+
+			$message = "<ul>".$err_balise_title.$err_url.$err_meta_description.$err_titre_page."</ul>";
+			FlashMessage::setFlash($message);
 		}
 
 		/**
@@ -189,16 +144,7 @@
 				}
 			}
 			else {
-				$_SESSION['balise_title'] = $balise_title;
-				$_SESSION['url'] = $url;
-				$_SESSION['meta_description'] = $meta_description;
-				$_SESSION['titre_page'] = $titre_page;
-				$_SESSION['parent'] = $parent;
-				$_SESSION['contenu'] = $contenu;
-				$_SESSION['err_modification_contenu'] = true;
-
-				$message = "<ul>".$err_balise_title.$err_url.$err_meta_description.$err_titre_page."</ul>";
-				FlashMessage::setFlash($message);
+				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
 			}
 		}
 
@@ -263,16 +209,7 @@
 					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
 				}
 				else {
-					$_SESSION['balise_title'] = $balise_title;
-					$_SESSION['url'] = $url;
-					$_SESSION['meta_description'] = $meta_description;
-					$_SESSION['titre_page'] = $titre_page;
-					$_SESSION['parent'] = $parent;
-					$_SESSION['contenu'] = $contenu;
-					$_SESSION['err_modification_contenu'] = true;
-
-					$message = "<ul>".$err_balise_title.$err_url.$err_meta_description.$err_titre_page."</ul>";
-					FlashMessage::setFlash($message);
+					$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
 				}
 			}
 			//sinon on renvoi une erreur en disant que le fichier n'existe pas et qu'il faut contacter un administrateur
