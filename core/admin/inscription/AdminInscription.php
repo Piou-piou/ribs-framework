@@ -27,7 +27,6 @@
 		/**
 		 * vient de la partie admin n du site pages gestion-comptes/creer-utilisateur
 		 * @param $value
-		 * @param null $required
 		 * @return bool
 		 */
 		protected function setVerifAccesAdministration($value) {
@@ -50,7 +49,6 @@
 		/**
 		 * vient de la partie admin du site pages gestion-comptes/creer-utilisateur
 		 * @param $value
-		 * @param null $required
 		 * @return bool
 		 */
 		protected function setVerifListeDroitAcces($value) {
