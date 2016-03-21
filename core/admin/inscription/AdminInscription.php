@@ -30,26 +30,21 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifAccesAdministration($value, $required = null) {
+		protected function setVerifAccesAdministration($value) {
 			//on verifie que la valeur est bien un int
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
-			if (($required != null) && ($this->getTestRequired($value) === false)) {
-				$this->erreur .= "<li>Le champs accès administration ne peut pas être vide</li>";
+			if ($this->getTestInt($value) === true) {
+				$this->acces_administration = $value;
+				return true;
+			}
+			else if ($this->getTestInt($value) === false) {
+				$this->erreur .= "<li>Le champs accès administration n'est pas au bon format</li>";
 				return false;
 			}
 			else {
-				if (($value != "") && ($this->getTestInt($value) === true)) {
-					$this->acces_administration = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestInt($value) === false)) {
-					$this->erreur .= "<li>Le champs accès administration n'est pas au bon format</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
+				return true;
 			}
+
 		}
 
 		/**
@@ -58,26 +53,21 @@
 		 * @param null $required
 		 * @return bool
 		 */
-		protected function setVerifListeDroitAcces($value, $required = null) {
+		protected function setVerifListeDroitAcces($value) {
 			//on verifie que la valeur est bien un int
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
-			if (($required != null) && ($this->getTestRequired($value) === false)) {
-				$this->erreur .= "<li>Le champs accès administration ne peut pas être vide</li>";
+			if ($this->getTestInt($value) === true) {
+				$this->id_liste_droit_acces = $value;
+				return true;
+			}
+			else if ($this->getTestInt($value) === false) {
+				$this->erreur .= "<li>Le champs accès administration n'est pas au bon format</li>";
 				return false;
 			}
 			else {
-				if (($value != "") && ($this->getTestInt($value) === true)) {
-					$this->id_liste_droit_acces = $value;
-					return true;
-				}
-				else if (($value != "") && ($this->getTestInt($value) === false)) {
-					$this->erreur .= "<li>Le champs accès administration n'est pas au bon format</li>";
-					return false;
-				}
-				else {
-					return true;
-				}
+				return true;
 			}
+
 		}
 
 		/**
