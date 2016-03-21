@@ -27,6 +27,18 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		private function getUrl($id) {
+			$dbc = App::getDb();
+
+			$query = $dbc->select("url")->from("module")->where("ID_module", "=", $id);
+
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					return MODULEROOT.$obj->url;
+				}
+			}
+		}
+
 		/**
 		 * @param $id_module
 		 * permets de récupérer des informations sur un module
@@ -154,19 +166,8 @@
 		 * @param $id_module
 		 * fonction qui permet de supprimer un module (suppression des tables + appel fonction supprimer dossier)
 		 */
-		public function setSupprimerModule($id_module) {
+		public function setSupprimerModule($id_module, $systeme) {
 			$dbc = App::getDb();
-			$systeme = "";
-			$url = "";
-
-			$query = $dbc->query("SELECT * FROM module WHERE ID_module=".$id_module);
-
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) {
-					$url = MODULEROOT.str_replace("/", "", $obj->url);
-					$systeme = $obj->systeme;
-				}
-			}
 
 			if ($systeme == 1) {
 				$value = array(
@@ -186,10 +187,10 @@
 			}
 
 			$requete = "";
-			require_once($url."/uninstall.php");
+			require_once($this->getUrl($id_module)."uninstall.php");
 			$dbc->query($requete);
 
-			$this->supprimerDossier($url);
+			$this->supprimerDossier($this->getUrl($id_module));
 		}
 
 		/**
