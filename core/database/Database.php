@@ -69,21 +69,7 @@
 		public function prepare($req, $value) {
 			$query = $this->getPdo()->prepare($req);
 			//si on a plusieurs tableaux
-			if (array_key_exists(0, $value)) {
-				foreach ($value as $val) {
-					if (!$query->execute($val)) {
-						$err = true;
-					}
-				}
-			}
-			else {
-				if (!$query->execute($value)) {
-					$err = true;
-				}
-			}
-
-			//si on a une erreur on renvoi un message
-			if (isset($err)) {
+			if (!$query->execute($value)) {
 				FlashMessage::setFlash("Une erreur est survenue en executant cette requette : ".$req);
 			}
 		}
