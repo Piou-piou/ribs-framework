@@ -241,7 +241,7 @@
 
 			$oldimg_profil = explode("/", $oldimg_profil);
 			if (end($oldimg_profil) != "defaut.png") {
-				unlink("../../images/profil/".$oldimg_profil[7]);
+				unlink("../../images/profil/".end($oldimg_profil));
 			}
 
 			$value = array(
