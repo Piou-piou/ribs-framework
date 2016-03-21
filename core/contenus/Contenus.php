@@ -82,17 +82,15 @@
 				$id_page = $this->id_page;
 			}
 
-			if ($id_page != null) {
-				$query = $dbc->query("SELECT * FROM page WHERE ID_page=".$id_page);
+			$query = $dbc->query("SELECT * FROM page WHERE ID_page=".$id_page);
 
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						$this->id_page = $obj->ID_page;
-						$this->titre = $obj->titre;
-						$this->contenu = $obj->contenu;
-						$this->url = $obj->url;
-						$this->parent = $obj->parent;
-					}
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->id_page = $obj->ID_page;
+					$this->titre = $obj->titre;
+					$this->contenu = $obj->contenu;
+					$this->url = $obj->url;
+					$this->parent = $obj->parent;
 				}
 			}
 		}
