@@ -114,7 +114,7 @@
 			$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre+1)->into("navigation")->set();
 		}
 
-		public function setSupprimerLien($id, $value_id) {echo("$id, $value_id");
+		public function setSupprimerLien($id, $value_id) {
 			$dbc = App::getDb();
 
 			$dbc->delete()->from("navigation")->where($id, "=", $value_id)->del();
