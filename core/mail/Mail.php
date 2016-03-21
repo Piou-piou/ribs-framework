@@ -3,12 +3,8 @@
 	namespace core\mail;
         
 	class Mail {
-		private $mail;
-    
-    
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($mail = null) {
-			$this->mail = $mail;
+		public function __construct() {
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
     
@@ -21,11 +17,12 @@
     
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		/**
-		 * fonction qui permet de valider si un E-mail est valide
+		 * @param $email
 		 * @return bool
+		 * fonction qui permet de valider si un E-mail est valide
 		 */
-		public function setVerifierMail() {
-			if (filter_var($this->mail, FILTER_VALIDATE_EMAIL)) {
+		public function setVerifierMail($email) {
+			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				return true;
 			}
 			else {
@@ -51,19 +48,15 @@
 			$headers .= "From: ".$from;
 
 			//si pas de destinataire on envoi le mail au gérant du site car c'est un mail envoyé par le site lui même
-			if (($destinataire == null) && ($this->mail == null)) {
+			if (($destinataire == null)) {
 				$destinataire = $config->getMailSite();
-			}
-			else if ($destinataire == null) {
-				$destinataire = $this->mail;
 			}
 
 			if (mail($destinataire, $sujet, $message, $headers)) {
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}

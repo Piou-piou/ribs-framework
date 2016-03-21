@@ -182,8 +182,8 @@
 
 				$dbc->prepare("UPDATE identite SET mdp=:mdp, last_change_mdp=:last_change_mdp WHERE ID_identite=:id_identite", $value);
 
-				$mail = new Mail($this->mail);
-				$mail->setEnvoyerMail("Réinitialisation de votre E-mail effectuée", "Votre mot de passe a été réinitialisé");
+				$mail = new Mail();
+				$mail->setEnvoyerMail("Réinitialisation de votre E-mail effectuée", "Votre mot de passe a été réinitialisé", $this->mail);
 			}
 			else {
 				FlashMessage::setFlash("le mot de passe de $this->pseudo ne peu pas être réinitialisé car il ne possède pas d'E-mail");
