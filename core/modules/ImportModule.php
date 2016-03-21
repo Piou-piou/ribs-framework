@@ -15,6 +15,7 @@
 		private $url_telechargement;
 		private $version_ok;
 		private $dossier_module;
+		private $url_module;
 
 		
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -27,18 +28,6 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		private function getUrl($id) {
-			$dbc = App::getDb();
-
-			$query = $dbc->select("url")->from("module")->where("ID_module", "=", $id);
-
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) {
-					return MODULEROOT.$obj->url;
-				}
-			}
-		}
-
 		/**
 		 * @param $id_module
 		 * permets de récupérer des informations sur un module
@@ -54,6 +43,7 @@
 					$this->url_telechargement = $obj->url_telechargement;
 					$this->version_ok = $obj->online_version;
 					$this->dossier_module = str_replace("/", "", $obj->url);
+					$this->url_module = $obj->url;
 				}
 			}
 		}
@@ -168,6 +158,7 @@
 		 */
 		public function setSupprimerModule($id_module, $systeme) {
 			$dbc = App::getDb();
+			$this->getInfoModule($id_module);
 
 			if ($systeme == 1) {
 				$value = array(
@@ -187,10 +178,10 @@
 			}
 
 			$requete = "";
-			require_once($this->getUrl($id_module)."uninstall.php");
+			require_once($this->url_module."uninstall.php");
 			$dbc->query($requete);
 
-			$this->supprimerDossier($this->getUrl($id_module));
+			$this->supprimerDossier(str_replace("/", "", $this->url_module));
 		}
 
 		/**
