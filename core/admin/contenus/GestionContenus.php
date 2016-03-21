@@ -237,11 +237,7 @@
 				if (file_exists($filename)) {
 					unlink($filename);
 
-					$value = array(
-						"id_page" => $id_page
-					);
-
-					$dbc->prepare("DELETE FROM page WHERE ID_page=:id_page", $value);
+					$dbc->prepare("DELETE FROM page WHERE ID_page=:id_page", ["id_page" => $id_page]);
 
 					$nav = new Navigation();
 					$nav->setSupprimerLien("ID_page", $id_page);
