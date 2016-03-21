@@ -1,7 +1,7 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			<?php $nav = new \core\Navigation(false);foreach ($nav->getNavigation() as $nav):?>
+			<?php foreach (\core\App::getNav(1)->getNavigation() as $nav):?>
 				<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$nav[0]?>" title="<?=$nav[3]?>"><?=$nav[1]?></a>
 					<?php if ((isset($nav[4]) && count($nav[4]) > 0)):?>
 						<ul>

@@ -5,6 +5,7 @@
 
 	class App {
 		private static $database;
+		private static $nav;
 		private static $erreur;
     
     
@@ -22,8 +23,8 @@
 		}
 
 		/**
-		 * renvoi une instance de la classe Database
 		 * @return Database
+		 * renvoi une instance de la classe Database
 		 */
 		public static function getDb() {
 			if (self::$database == null) {
@@ -33,7 +34,19 @@
 		}
 
 		/**
-		 * fonction qui permet de vérifier qu'il n'y ait pas d'erreur dans le champ spécifié ni de doublons
+		 * @param null $no_module
+		 * @return Navigation
+		 * renvoi une instancde de la class navigation
+		 */
+		public static function getNav($no_module = null) {
+			if (self::$nav == null) {
+				self::$nav = new Navigation($no_module);
+			}
+
+			return self::$nav;
+		}
+
+		/**
 		 * @param $nom_table
 		 * @param $nom_id_table
 		 * @param $champ
@@ -43,6 +56,7 @@
 		 * @param $err_egalite
 		 * @param null $value_id_table
 		 * @return string
+		 * fonction qui permet de vérifier qu'il n'y ait pas d'erreur dans le champ spécifié ni de doublons
 		 */
 		public static function getVerifChamp($nom_table, $nom_id_table, $champ, $value, $limit_char, $err_char, $err_egalite, $value_id_table = null) {
 			$dbc = self::getDb();
