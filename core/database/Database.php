@@ -72,6 +72,8 @@
 			if (!$query->execute($value)) {
 				FlashMessage::setFlash("Une erreur est survenue en executant cette requette : ".$req);
 			}
+
+			return $query->fetchAll(PDO::FETCH_OBJ);
 		}
 
 		/**

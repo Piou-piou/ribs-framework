@@ -2,9 +2,11 @@
 	namespace core\database;
 	trait Querybuilder {
 		protected $req_beginning;
+		protected $select_champ = [];
 		protected $champs = [];
 		protected $value = [];
 		protected $conditions = [];
+		protected $closure = [];
 		protected $table = [];
 		protected $order_by;
 
@@ -21,7 +23,7 @@
 		 */
 		public function select($champs = "*") {
 			$this->req_beginning = "SELECT ";
-			$this->champs[] = $champs;
+			$this->select_champ[] = $champs;
 
 			return $this;
 		}
@@ -122,6 +124,28 @@
 			return $this;
 		}
 
+		public function whereTest($champ, $cond, $champ_test, $closure = null) {
+			/*if ( $closure === null) {
+				$this->conditions[] = $champ.$cond.$champ_test;
+			}
+			else {
+				$this->conditions[] = $champ.$cond.$champ_test." ".$closure;
+			}*/
+
+			if ( $closure === null) {
+				$this->closure[] = "";
+			}
+			else {
+				$this->closure[] = $closure;
+			}
+
+			$this->conditions[] = $cond;
+
+			$this->add($champ, $champ_test);
+
+			return $this;
+		}
+
 		/**
 		 * @param $order
 		 */
@@ -137,7 +161,7 @@
 		 * fonction qui permet de récupérer un select fait sur une table
 		 */
 		public function get() {
-			$requete = $this->req_beginning . implode(",", $this->champs) . " FROM " . implode(",", $this->table);
+			$requete = $this->req_beginning . implode(",", $this->select_champ) . " FROM " . implode(",", $this->table);
 
 			if (!empty($this->conditions)) {
 				$requete .= " WHERE ". implode(" ", $this->conditions);
@@ -149,6 +173,36 @@
 
 			$this->unsetQueryBuilder();
 			return $this->query($requete);
+		}
+
+		public function getTest() {
+			$values = [];
+			$requete = $this->req_beginning . implode(",", $this->select_champ) . " FROM " . implode(",", $this->table);
+
+			if (!empty($this->conditions)) {
+				$values = array_combine(str_replace(".", "", $this->champs),$this->value);
+
+				$datas = [];
+				$count = count($this->champs);
+				for ($i=0 ; $i<$count ; $i++) {
+					$datas[] = $this->champs[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs[$i])." ".$this->closure[$i]." ";
+				}
+
+				$requete .= " WHERE ". implode(" ", $datas);
+			}
+
+			if (!empty($this->order_by)) {
+				$requete .= $this->order_by;
+			}
+			echo("<pre>");
+			print_r($values);
+			echo("</pre>");
+			echo("<br>");
+
+			echo($requete."<br><br>");
+
+			$this->unsetQueryBuilder();
+			return $this->prepare($requete, $values);
 		}
 
 		/**
@@ -193,9 +247,11 @@
 		 */
 		private function unsetQueryBuilder() {
 			$this->req_beginning;
+			$this->select_champ = [];
 			$this->champs = [];
 			$this->value = [];
 			$this->conditions = [];
+			$this->closure = [];
 			$this->table = [];
 			$this->order_by = "";
 		}
