@@ -233,6 +233,8 @@
 		 */
 		private function getWhereConditions() {
 			$values = [];
+			$datas = [];
+
 			if ((!empty($this->conditions))) {
 				$values = array_combine(str_replace(".", "", $this->champs_where), $this->value_where);
 
