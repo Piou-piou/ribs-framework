@@ -54,7 +54,7 @@
 			$pseudo = $dbc->quote(htmlspecialchars($pseudo));
 			$mdp_nonencrypt = $mdp;
 			$mdp = md5(htmlspecialchars($mdp));
-			$query = $dbc->select()->from("identite")->where("pseudo", "=", $pseudo)->get();
+			$query = $dbc->query("select * from identite where pseudo=$pseudo");
 
 			//aficher query tant que qqch dans $ligne
 			if ((is_array($query)) && (count($query) > 0)) {
@@ -105,7 +105,8 @@
 				$auth = $_COOKIE["auth".CLEF_SITE];
 
 				$auth = explode("-----", $auth);
-				$query = $dbc->select()->from("identite")->where("ID_identite", "=", $auth[0])->get();
+
+				$query = $dbc->query("SELECT * FROM identite WHERE ID_identite=".$auth[0]);
 				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) {
 						//si le compte est archivé on déconnecte la session et le cookie
@@ -161,7 +162,8 @@
 		 */
 		public static function setUpdatelastConnexion($id_identite) {
 			$dbc = App::getDb();
-			$dbc->update("last_change_mdp", date("Y-m-d"))->from("identite")->where("ID_identite", "=", $id_identite)->set();
+
+			$dbc->prepare("UPDATE identite SET last_change_mdp=:date WHERE ID_identite=:id_identite", array("date"=>date("Y-m-d"), "id_identite"=>$id_identite));
 		}
 
 		/**
@@ -172,7 +174,7 @@
 		public static function getlastConnexion($id_identite) {
 			$dbc = App::getDb();
 
-			$query = $dbc->select("last_change_mdp")->from("identite")->where("ID_identite", "=", $id_identite)->get();
+			$query = $dbc->query("SELECT last_change_mdp FROM identite WHERE ID_identite=".$id_identite);
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) return $obj->last_change_mdp;
 			}
