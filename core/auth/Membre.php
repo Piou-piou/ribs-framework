@@ -23,7 +23,7 @@
 			$this->debut_lien = IMGROOT."profil/";
 
 			if ($id_identite != null) {
-				$query = $dbc->query("SELECT * FROM identite where ID_identite=$id_identite");
+				$query = $dbc->select()->from("identite")->where("ID_identite", "=", $id_identite)->get();
 
 				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) {
@@ -93,7 +93,7 @@
 				$this->erreur = $err;
 			}
 			else {
-				$dbc->query("UPDATE identite set pseudo=$new_pseudo WHERE ID_identite=".$_SESSION["idlogin".CLEF_SITE]);
+				$dbc->update("pseudo", $new_pseudo)->from("identite")->where("ID_identite", "=", $_SESSION["idlogin".CLEF_SITE])->set();
 				$this->pseudo = $new_pseudo;
 			}
 		}
@@ -124,7 +124,7 @@
 			else {
 				$mdpok = Encrypt::setEncryptMdp($new_mdp, $this->id_identite);
 				//le nouveau mdp est bon on update
-				$dbc->query("UPDATE identite SET mdp='$mdpok' WHERE ID_identite=".$this->id_identite);
+				$dbc->update("mdp", $mdpok)->from("identite")->where("ID_identite", "=", $this->id_identite)->set();
 
 				$this->mdp = $mdpok;
 			}
