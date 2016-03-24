@@ -118,7 +118,7 @@
 		public function getNotification() {
 			$dbc = App::getDb();
 
-			$query = $dbc->select("admin")->from("notification");
+			$query = $dbc->select("admin")->from("notification")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -152,9 +152,7 @@
 		public function setValideCompte($id_identite) {
 			$dbc = \core\App::getDb();
 
-			$value = array("id_identite" => $id_identite);
-
-			$dbc->prepare("UPDATE identite SET valide=1 WHERE ID_identite=:id_identite", $value);
+			$dbc->update("valide", 1)->from("identite")->where("ID_identite", "=", $id_identite)->set();
 
 			$this->getunUser($id_identite);
 		}
@@ -172,15 +170,13 @@
 				$mdp = ChaineCaractere::random(6);
 				$mdp_encode = Encrypt::setEncryptMdp($mdp, $id_identite);
 
-				$value = array(
-					"mdp" => $mdp_encode,
-					"id_identite" => $id_identite,
-					"last_change_mdp" => date("Y-m-d")
-				);
-
 				FlashMessage::setFlash("Mot de passe réinitialisé avec succès ! L'utilisateur à reçu un E-mail avec son nouveau mot de passe", "success");
 
-				$dbc->prepare("UPDATE identite SET mdp=:mdp, last_change_mdp=:last_change_mdp WHERE ID_identite=:id_identite", $value);
+				$dbc->update("mdp", $mdp_encode)
+					->update("last_change_mdp", date("Y-m-d"))
+					->from("identite")
+					->where("ID_identite", "=", $id_identite)
+					->set();
 
 				$mail = new Mail();
 				$mail->setEnvoyerMail("Réinitialisation de votre E-mail effectuée", "Votre mot de passe a été réinitialisé", $this->mail);
@@ -198,12 +194,7 @@
 		public function setArchiverCompte($id_identite) {
 			$dbc = \core\App::getDb();
 
-			$value = array(
-				"id_identite" => $id_identite,
-				"archiver" => 1
-			);
-
-			$dbc->prepare("UPDATE identite SET archiver=:archiver WHERE ID_identite=:id_identite", $value);
+			$dbc->update("archiver", 1)->from("identite")->where("ID_identite", "=", $id_identite)->set();
 		}
 
 		/**
@@ -213,12 +204,7 @@
 		public function setActiverCompte($id_identite) {
 			$dbc = \core\App::getDb();
 
-			$value = array(
-				"id_identite" => $id_identite,
-				"archiver" => NULL
-			);
-
-			$dbc->prepare("UPDATE identite SET archiver=:archiver WHERE ID_identite=:id_identite", $value);
+			$dbc->update("archiver", "null")->from("identite")->where("ID_identite", "=", $id_identite)->set();
 		}
 
 		/**
@@ -231,7 +217,7 @@
 			$oldimg_profil = "";
 
 			//test si il y a deja une img
-			$query = $dbc->query("SELECT img_profil FROM identite where ID_identite=$id_identite");
+			$query = $dbc->select("img_profil")->from("identite")->where("ID_identite", "=", $id_identite)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -244,11 +230,7 @@
 				unlink("../../images/profil/".end($oldimg_profil));
 			}
 
-			$value = array(
-				"id_identite" => $id_identite
-			);
-
-			$dbc->prepare("DELETE FROM identite WHERE ID_identite=:id_identite", $value);
+			$dbc->delete()->from("identite")->where("ID_identite", "=", $id_identite)->del();
 		}
 
 		/**
@@ -257,12 +239,7 @@
 		public static function setNotificationVue() {
 			$dbc = App::getDb();
 
-			$value = [
-				"admin" => 0,
-				"id" => 1
-			];
-
-			$dbc->prepare("UPDATE notification SET admin=:admin WHERE ID_notification=:id", $value);
+			$dbc->update("admin", 0)->from("notification")->where("ID_notification", "=", 1)->set();
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 
