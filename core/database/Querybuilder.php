@@ -115,10 +115,10 @@
 		 * @return $this
 		 * pour intialiser la ou les clauses where d'une requete
 		 */
-		public function where($champ, $cond, $champ_test, $closure = "", $no_bind = null) {
+		public function where($champ, $cond, $champ_test, $closure = "", $no_bind = false) {
 			$this->closure[] = $closure;
 
-			if ($no_bind !== null) {
+			if ($no_bind === true) {
 				$this->conditions_table[] = $champ.$cond.$champ_test;
 			}
 			else {

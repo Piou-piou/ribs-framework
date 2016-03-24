@@ -18,7 +18,7 @@
 			$dbc = \core\App::getDb();
 
 			//on récupere le lvl de l'admin
-			$query = $dbc->query("SELECT acces_admin FROM identite WHERE ID_identite=".$dbc->quote($id_identite));
+			$query = $dbc->select("acces_admin")->from("identite")->where("ID_identite", "=", $id_identite)->get();
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					$this->acces_admin = $obj->acces_admin;
