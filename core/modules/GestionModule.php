@@ -44,8 +44,7 @@
 		 */
 		public function getListeModuleActiver() {
 			$dbc = App::getDb();
-
-			$query = $dbc->query("SELECT * FROM module WHERE activer=1 AND installer=1");
+			$query = $dbc->select()->from("module")->where("activer", "=", 1, "AND")->where("installer", "=", 1)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];
@@ -74,7 +73,7 @@
 		public function getListeModule() {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM module");
+			$query = $dbc->select()->from("module")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];
@@ -103,7 +102,7 @@
 		public static function getModuleInstaller($nom_module) {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM module WHERE nom_module = ".$dbc->quote($nom_module));
+			$query = $dbc->select("installer")->from("module")->where("nom_module", "=", $dbc->quote($nom_module), "", true)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$installer = 0;
@@ -124,7 +123,7 @@
 		public static function getModuleActiver($nom_module) {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT activer FROM module WHERE nom_module = ".$dbc->quote($nom_module));
+			$query = $dbc->select("activer")->from("module")->where("nom_module", "=", $dbc->quote($nom_module), "", true)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -172,12 +171,7 @@
 		public static function setActiverDesactiverModule($activer, $url) {
 			$dbc = App::getDb();
 
-			$value = array(
-				"activer" => $activer,
-				"url" => $url
-			);
-
-			$dbc->prepare("UPDATE module SET activer=:activer WHERE url=:url", $value);
+			$dbc->update("activer", $activer)->from("module")->where("url", "=", $url)->set();
 
 			$nav = new Navigation();
 
