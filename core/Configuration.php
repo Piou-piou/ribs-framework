@@ -83,7 +83,8 @@
 		private function getConfigurationGenerale() {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM configuration WHERE ID_configuration=1");
+			$query = $dbc->select()->from("configuration")->where("ID_configuration", "=", 1)->get();
+
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					$this->nom_site = $obj->nom_site;
@@ -103,7 +104,8 @@
 		private function getConfigurationCompte() {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM configuration_compte WHERE ID_configuration_compte=1");
+			$query = $dbc->select()->from("configuration_compte")->where("ID_configuration_compte", "=", 1)->get();
+
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					$this->valider_inscription = $obj->valider_inscription;
@@ -124,12 +126,7 @@
 		public function setDateSaveToday() {
 			$dbc = App::getDb();
 
-			$value = array(
-				"date" => date("Y-m-d"),
-				"id_configuration" => 1
-			);
-
-			$dbc->prepare("UPDATE configuration SET last_save=:date WHERE ID_configuration=:id_configuration", $value);
+			$dbc->update("last_save", date("Y-m-d"))->from("configuration")->where("ID_configuration", "=", 1)->set();
 
 			$today = new \DateTime(date("Y-m-d"));
 			$today->sub(new \DateInterval('P32D'));
