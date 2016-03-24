@@ -52,7 +52,7 @@
 			$dbc = App::getDb();
 
 			//on regarde si il existe et un cache et si il faut ou non le remettre à jour
-			$query = $dbc->query("SELECT * FROM cache WHERE nom_fichier like '$this->page'");
+			$query = $dbc->select()->from("cache")->where("nom_fichier", " LIKE ", $this->page, "", true)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$this->reload_cache = 0;
@@ -62,11 +62,7 @@
 				}
 			}
 			else {
-				$value = [
-						"nom_fichier" => $this->page,
-						"reload_cache" => 0
-				];
-				$dbc->prepare("INSERT INTO cache (nom_fichier, reload_cache) VALUES (:nom_fichier, :reload_cache)", $value);
+				$dbc->insert("nom_fichier", $this->page)->insert("reload_cache", 0)->into("cache")->set();
 
 				$this->reload_cache = 0;
 			}
@@ -152,11 +148,7 @@
 
 			file_put_contents($fichier_cache, $contenu_fichier);
 
-			$value = [
-				"nom_fichier" => $this->page,
-			];
-
-			$dbc->prepare("UPDATE cache SET reload_cache=0 WHERE nom_fichier=:nom_fichier", $value);
+			$dbc->update("reload_cache", 0)->from("cache")->where("nom_fichier", "=", $this->page, "", true)->set();
 		}
 
 		/**
