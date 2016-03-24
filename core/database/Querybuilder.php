@@ -5,6 +5,8 @@
 		protected $select_champ = [];
 		protected $champs = [];
 		protected $value = [];
+		protected $champs_where = [];
+		protected $value_where = [];
 		protected $conditions = [];
 		protected $conditions_table = [];
 		protected $closure = [];
@@ -16,7 +18,7 @@
 		abstract public function prepare();
 
 		
-		//-------------------------- QUERY BUILDER in construction no test have been done --------------------------------------------//
+		//-------------------------- QUERY BUILDER --------------------------------------------//
 		/**
 		 * @param string $champs
 		 * @return $this
@@ -70,20 +72,6 @@
 		}
 
 		/**
-		 * @param $champ
-		 * @param $value
-		 *
-		 * fonction qui se cahrge d'ajouter les valeurs et les champs si non null dans leurs
-		 * tableaux respectifs (appellée dans this->insert et this->update
-		 */
-		private function add($champ, $value) {
-			if (($champ !== null) && ($value !== null)) {
-				$this->champs[] = $champ;
-				$this->value[] = $value;
-			}
-		}
-
-		/**
 		 * @param string $table
 		 * @return $this
 		 *
@@ -123,7 +111,7 @@
 			}
 			else {
 				$this->conditions[] = $cond;
-				$this->add($champ, $champ_test);
+				$this->addWhere($champ, $champ_test);
 			}
 
 			return $this;
@@ -151,23 +139,11 @@
 		 */
 		public function get() {
 			$values = [];
-			$datas = [];
 			$requete = $this->req_beginning . implode(",", $this->select_champ) . " FROM " . implode(",", $this->table);
 
 			if ((!empty($this->conditions)) || (!empty($this->conditions_table))) {
-				$values = array_combine(str_replace(".", "", $this->champs),$this->value);
-
-				$count = count($this->champs);
-
-				for ($i=0 ; $i<$count ; $i++) {
-					$datas[] = $this->champs[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs[$i])." ".$this->closure[$i]." ";
-				}
-
-				foreach ($this->conditions_table as $cond) {
-					$datas[] = $cond;
-				}
-
-				$requete .= " WHERE ". implode(" ", $datas);
+				$requete .= $this->getWhereConditions()[0];
+				$values = $this->getWhereConditions()[1];
 			}
 
 			$requete .= $this->order_by;
@@ -193,8 +169,10 @@
 			//si on a des conditions alors on sera dans un insert
 			$requete = $this->req_beginning . implode(",", $this->table) . " SET " . implode(", ", $datas);
 
-			if (!empty($this->conditions)) {
-				$requete .= " WHERE " . implode(" ", $this->conditions);
+			if ((!empty($this->conditions)) || (!empty($this->conditions_table))) {
+				$requete .= $this->getWhereConditions()[0];
+
+				$values = array_merge($values, $this->getWhereConditions()[1]);
 			}
 
 			$this->prepare($requete, $values);
@@ -205,14 +183,73 @@
 		 * fonction utilisée pour finir un delete
 		 */
 		public function del() {
+			$values = [];
 			$requete = $this->req_beginning . implode(",", $this->table);
 
 			if (!empty($this->conditions)) {
-				$requete .= " WHERE " . implode(" ", $this->conditions);
+				$requete .= $this->getWhereConditions()[0];
+
+				$values = array_merge($values, $this->getWhereConditions()[1]);
 			}
 
-			$this->query($requete);
+			$this->prepare($requete, $values);
 			$this->unsetQueryBuilder();
+		}
+
+
+
+		//-------------------------- PRIVATE FUNCTIONS --------------------------------------------//
+		/**
+		 * @param $champ
+		 * @param $value
+		 *
+		 * fonction qui se cahrge d'ajouter les valeurs et les champs si non null dans leurs
+		 * tableaux respectifs (appellée dans this->insert et this->update
+		 */
+		private function add($champ, $value) {
+			if (($champ !== null) && ($value !== null)) {
+				$this->champs[] = $champ;
+				$this->value[] = $value;
+			}
+		}
+
+		/**
+		 * @param $champ
+		 * @param $value
+		 *
+		 * fonction qui se cahrge d'ajouter les valeurs et les champs si non null dans leurs
+		 * tableaux respectifs (appellée dans this->insert et this->update
+		 */
+		private function addWhere($champ, $value) {
+			if (($champ !== null) && ($value !== null)) {
+				$this->champs_where[] = $champ;
+				$this->value_where[] = $value;
+			}
+		}
+
+		/**
+		 * @return array
+		 * crée les tableau et renvoi la clause where
+		 */
+		private function getWhereConditions() {
+			$values = [];
+			if ((!empty($this->conditions))) {
+				$values = array_combine(str_replace(".", "", $this->champs_where), $this->value_where);
+
+				$count = count($this->champs_where);
+
+				for ($i=0 ; $i<$count ; $i++) {
+					$datas[] = $this->champs_where[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs_where[$i])." ".$this->closure[$i]." ";
+				}
+			}
+
+			if ((!empty($this->conditions_table))) {
+				foreach ($this->conditions_table as $cond) {
+					$datas[] = $cond;
+				}
+			}
+
+			return [" WHERE ". implode(" ", $datas), $values];
 		}
 
 		/**
@@ -223,6 +260,8 @@
 			$this->select_champ = [];
 			$this->champs = [];
 			$this->value = [];
+			$this->champs_where = [];
+			$this->value_where = [];
 			$this->conditions = [];
 			$this->conditions_table = [];
 			$this->closure = [];
