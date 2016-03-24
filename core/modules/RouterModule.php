@@ -33,7 +33,7 @@
 			$dbc = App::getDb();
 			$module = "";
 
-			$query = $query = $dbc->query("SELECT * FROM module");
+			$query = $dbc->select()->from("module")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -86,8 +86,7 @@
 		 */
 		public function getRouteModuleExist($url) {
 			$dbc = \core\App::getDb();
-
-			$query = $dbc->query("SELECT * FROM module");
+			$query = $dbc->select()->from("module")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
