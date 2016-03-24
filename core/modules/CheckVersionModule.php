@@ -19,7 +19,7 @@
 		public static function getModuleAJour($nom_module) {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT mettre_jour FROM module WHERE nom_module = ".$dbc->quote($nom_module));
+			$query = $dbc->select("mettre_jour")->from("module")->where("nom_module", "=", $dbc->quote($nom_module))->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -31,7 +31,7 @@
 		public function getListeModuleMettreJour() {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM module WHERE mettre_jour=1");
+			$query = $dbc->select()->from("module")->where("mettre_jour", "=", 1)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$nom_module = [];
@@ -58,7 +58,14 @@
 			$dbc = App::getDb();
 			$today = date("Y-m-d");
 
-			$query = $dbc->query("SELECT next_check_version, version, url_telechargement, mettre_jour, delete_old_version, ID_module FROM module");
+			$query = $dbc->select("next_check_version")
+				->select("version")
+				->select("url_telechargement")
+				->select("mettre_jour")
+				->select("delete_old_version")
+				->select("ID_module")
+				->from("module")
+				->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -97,12 +104,10 @@
 			$dbc = App::getDb();
 			$today_o = new \DateTime(date("Y-m-d"));
 
-			$value = [
-				"next_check" => $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"),
-				"id_module" => $id_module
-			];
-
-			$dbc->prepare("UPDATE module SET next_check_version=:next_check WHERE ID_module=:id_module", $value);
+			$dbc->update("nex_check", $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"))
+				->from("module")
+				->where("ID_module", "=", $id_module)
+				->set();
 		}
 
 		/**
@@ -125,16 +130,15 @@
 				//en passant la valeur update a 1 dans la table module pour ce module
 				// au client de mettre a jour sa version sinon on met la next check a la semaine pro
 				if ($version_online > $version_site) {
-					$value = [
-						"update" => 1,
-						"online_version" => $version_online_txt,
-						"id_module" => $id_module
-					];
-
 					//on met la notification admin à 1
-					$dbc->query("UPDATE notification SET admin=1 WHERE ID_notification=1");
+					$dbc->update("admin", 1)->from("notification")->where("ID_notification", "=", 1)->set();
 
 					$dbc->prepare("UPDATE module SET mettre_jour=:update, online_version=:online_version WHERE ID_module=:id_module", $value);
+					$dbc->update("mettre_jour", 1)
+						->update("online_version", $version_online_txt)
+						->from("module")
+						->where("ID_module", "=", $id_module)
+						->set();
 				}
 			}
 		}
