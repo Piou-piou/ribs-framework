@@ -54,10 +54,16 @@
 			$dbc = \core\App::getDb();
 
 			if ($id_page != 0) {
-				$query = $dbc->query("SELECT balise_title, meta_description, ID_page FROM page WHERE ID_page=".$id_page);
+				$query = $dbc->select("balise_title")->select("meta_description")->select("ID_page")
+					->from("page")
+					->where("ID_page", "=", $id_page)
+					->get();
 			}
 			else {
-				$query = $dbc->query("SELECT balise_title, meta_description, ID_page FROM page WHERE url LIKE '$url'");
+				$query = $dbc->select("balise_title")->select("meta_description")->select("ID_page")
+					->from("page")
+					->where("url", " LIKE ", $url)
+					->get();
 			}
 
 			if (RedirectError::testRedirect404($query, $url) === true) {
@@ -81,8 +87,7 @@
 			if ($id_page == null) {
 				$id_page = $this->id_page;
 			}
-
-			$query = $dbc->query("SELECT * FROM page WHERE ID_page=".$id_page);
+			$query = $dbc->select()->from("page")->where("ID_page", "=", $id_page)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
