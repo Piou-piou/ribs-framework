@@ -56,7 +56,7 @@
 		private function getParentId($parent) {
 			$dbc = \core\App::getDb();
 
-			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"')->get();
+			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"', true)->get();
 
 			if ((is_array($query)) && (count($query) == 1)) {
 				foreach ($query as $obj) {

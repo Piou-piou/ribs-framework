@@ -16,7 +16,7 @@
 				$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
 			}
 			else {
-				$query = $dbc->select()->from("navigation")->where("ID_page", " IS NOT ", "NULL")->orderBy("ordre")->get();
+				$query = $dbc->select()->from("navigation")->where("ID_page", " IS NOT ", "NULL", "", true)->orderBy("ordre")->get();
 			}
 
 			if (is_array($query) && (count($query) > 0)) {
@@ -49,7 +49,7 @@
 			$query = $dbc->select()
 				->from("navigation")
 				->from("page")
-				->where("navigation.ID_page", "=", "page.ID_page", "AND")
+				->where("navigation.ID_page", "=", "page.ID_page", "AND", true)
 				->where("page.ID_page", "=", $id_page, "AND")
 				->where("page.affiche", "=", 1, "AND")
 				->where("page.parent", "=", 0)
@@ -87,7 +87,7 @@
 			$query = $dbc->select()
 				->from("navigation")
 				->from("module")
-				->where("navigation.ID_module", "=", "module.ID_module", "AND")
+				->where("navigation.ID_module", "=", "module.ID_module", "AND", true)
 				->where("module.ID_module", "=", $id_module, "AND")
 				->where("module.installer", "=", 1, "AND")
 				->where("module.activer", "=", 1)

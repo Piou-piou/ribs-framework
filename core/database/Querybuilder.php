@@ -6,9 +6,11 @@
 		protected $champs = [];
 		protected $value = [];
 		protected $conditions = [];
+		protected $conditions_table = [];
 		protected $closure = [];
 		protected $table = [];
 		protected $order_by;
+		protected $limit;
 
 		abstract public function query();
 		abstract public function prepare();
@@ -108,40 +110,21 @@
 		 * @param $champ
 		 * @param $cond
 		 * @param $champ_test
-		 * @param null $closure
+		 * @param string $closure
+		 * @param null $no_bind
 		 * @return $this
-		 *
 		 * pour intialiser la ou les clauses where d'une requete
 		 */
-		public function where($champ, $cond, $champ_test, $closure = null) {
-			if ( $closure === null) {
-				$this->conditions[] = $champ.$cond.$champ_test;
+		public function where($champ, $cond, $champ_test, $closure = "", $no_bind = null) {
+			$this->closure[] = $closure;
+
+			if ($no_bind !== null) {
+				$this->conditions_table[] = $champ.$cond.$champ_test;
 			}
 			else {
-				$this->conditions[] = $champ.$cond.$champ_test." ".$closure;
+				$this->conditions[] = $cond;
+				$this->add($champ, $champ_test);
 			}
-
-			return $this;
-		}
-
-		public function whereTest($champ, $cond, $champ_test, $closure = null) {
-			/*if ( $closure === null) {
-				$this->conditions[] = $champ.$cond.$champ_test;
-			}
-			else {
-				$this->conditions[] = $champ.$cond.$champ_test." ".$closure;
-			}*/
-
-			if ( $closure === null) {
-				$this->closure[] = "";
-			}
-			else {
-				$this->closure[] = $closure;
-			}
-
-			$this->conditions[] = $cond;
-
-			$this->add($champ, $champ_test);
 
 			return $this;
 		}
@@ -150,7 +133,13 @@
 		 * @param $order
 		 */
 		public function orderBy($order) {
-			$this->order_by = " ORDER BY ".$order;
+			$this->order_by = " ORDER BY ".$order." ";
+
+			return $this;
+		}
+
+		public function limit($debut, $fin) {
+			$this->limit = " LIMIT ".$debut.", ".$fin." ";
 
 			return $this;
 		}
@@ -161,45 +150,29 @@
 		 * fonction qui permet de récupérer un select fait sur une table
 		 */
 		public function get() {
-			$requete = $this->req_beginning . implode(",", $this->select_champ) . " FROM " . implode(",", $this->table);
-
-			if (!empty($this->conditions)) {
-				$requete .= " WHERE ". implode(" ", $this->conditions);
-			}
-
-			if (!empty($this->order_by)) {
-				$requete .= $this->order_by;
-			}
-
-			$this->unsetQueryBuilder();
-			return $this->query($requete);
-		}
-
-		public function getTest() {
 			$values = [];
+			$datas = [];
 			$requete = $this->req_beginning . implode(",", $this->select_champ) . " FROM " . implode(",", $this->table);
 
-			if (!empty($this->conditions)) {
+			if ((!empty($this->conditions)) || (!empty($this->conditions_table))) {
 				$values = array_combine(str_replace(".", "", $this->champs),$this->value);
 
-				$datas = [];
 				$count = count($this->champs);
+
 				for ($i=0 ; $i<$count ; $i++) {
 					$datas[] = $this->champs[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs[$i])." ".$this->closure[$i]." ";
+				}
+
+				foreach ($this->conditions_table as $cond) {
+					$datas[] = $cond;
 				}
 
 				$requete .= " WHERE ". implode(" ", $datas);
 			}
 
-			if (!empty($this->order_by)) {
-				$requete .= $this->order_by;
-			}
-			echo("<pre>");
-			print_r($values);
-			echo("</pre>");
-			echo("<br>");
+			$requete .= $this->order_by;
 
-			echo($requete."<br><br>");
+			$requete .= $this->limit;
 
 			$this->unsetQueryBuilder();
 			return $this->prepare($requete, $values);
@@ -251,8 +224,10 @@
 			$this->champs = [];
 			$this->value = [];
 			$this->conditions = [];
+			$this->conditions_table = [];
 			$this->closure = [];
 			$this->table = [];
 			$this->order_by = "";
+			$this->limit = "";
 		}
 	}
