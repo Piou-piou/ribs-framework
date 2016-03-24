@@ -84,7 +84,7 @@
 		}
 
 		/**
-		 * @param $table
+		 * @param string $table
 		 * @return $this
 		 *
 		 * pour initialiser la les listes des tables ou il faudra aler chercher les données
@@ -96,7 +96,7 @@
 		}
 
 		/**
-		 * @param $table
+		 * @param string $table
 		 *
 		 * pour initialiser la table dans laquelle on va insérer les données
 		 */
@@ -108,10 +108,10 @@
 
 		/**
 		 * @param $champ
-		 * @param $cond
+		 * @param string $cond
 		 * @param $champ_test
 		 * @param string $closure
-		 * @param null $no_bind
+		 * @param bool $no_bind
 		 * @return $this
 		 * pour intialiser la ou les clauses where d'une requete
 		 */
@@ -130,7 +130,7 @@
 		}
 
 		/**
-		 * @param $order
+		 * @param string $order
 		 */
 		public function orderBy($order) {
 			$this->order_by = " ORDER BY ".$order." ";
