@@ -49,7 +49,7 @@
 			$dbc = \core\App::getDb();
 			$this->setAllUser(null, null, null, null, null, null, null);
 
-			$query = $dbc->query("SELECT * FROM identite WHERE archiver = $archiver AND ID_identite > 1");
+			$query = $dbc->select()->from("identite")->where("archiver", "=", $archiver, "AND")->where("ID_identite", ">", 1)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
@@ -97,7 +97,7 @@
 		public function getunUser($id_identite) {
 			$dbc = \core\App::getDb();
 
-			$query = $dbc->query("SELECT * FROM identite WHERE ID_identite=".$id_identite);
+			$query = $dbc->select()->from("identite")->where("ID_identite", "=", $id_identite);
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -118,7 +118,7 @@
 		public function getNotification() {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT admin FROM notification");
+			$query = $dbc->select("admin")->from("notification");
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
