@@ -71,10 +71,10 @@
 		 * recupere la listes des modules ajouter par un autre admin
 		 * fonction utilisée uniquement dans la config
 		 */
-		public function getListeModule($systeme = 0) {
+		public function getListeModule() {
 			$dbc = App::getDb();
 
-			$query = $dbc->query("SELECT * FROM module WHERE systeme=".$dbc->quote($systeme));
+			$query = $dbc->query("SELECT * FROM module");
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_module = [];

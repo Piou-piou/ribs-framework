@@ -45,7 +45,7 @@
 						</td>
 						<td>
 							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page->getNom()[$i]) == 1) { ?>
-								<a class="supprimer open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?systeme=0&id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
+								<a class="supprimer open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
 							<?php } else { ?>
 								<a href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>

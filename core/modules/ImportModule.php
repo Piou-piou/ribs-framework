@@ -32,7 +32,7 @@
 		 * @param $id_module
 		 * permets de récupérer des informations sur un module
 		 */
-		private function getInfoModule($id_module) {echo($id_module);
+		private function getInfoModule($id_module) {
 			$dbc = App::getDb();
 
 			$query = $dbc->select()->from("module")->where("ID_module", "=", $id_module)->get();
