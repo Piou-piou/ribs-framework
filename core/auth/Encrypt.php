@@ -22,7 +22,7 @@
 				$dbc = App::getDb();
 				$params = "";
 
-				$query = $dbc->query("SELECT mdp_params FROM identite WHERE ID_identite=".$id_identite);
+				$query = $dbc->select("mdp_params")->from("identite")->where("ID_identite", "=", $id_identite)->get();
 				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) {
 						$params = $obj->mdp_params;
@@ -114,12 +114,7 @@
 		public static function setSaveParams($params, $id_identite) {
 			$dbc = App::getDb();
 
-			$value = array(
-				"params" => $params,
-				"id_identite" => $id_identite
-			);
-
-			$dbc->prepare("UPDATE identite SET mdp_params=:params WHERE ID_identite=:id_identite", $value);
+			$dbc->update("mdp_params", $params)->from("identite")->where("ID_identite", "=", $id_identite)->set();
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
