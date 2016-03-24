@@ -25,50 +25,6 @@
 	</div>
 
 	<div class="contenu modifier-contenu gestion-comptes configuration">
-		<h2>Modules système</h2>
-		<table>
-			<thead>
-				<tr>
-					<td>Nom du module</td>
-					<td>Activer</td>
-					<td>Installer | Supprimer</td>
-					<td>Mise à jour</td>
-				</tr>
-			</thead>
-			<tbody>
-				<?php for ($i = 0; $i < count($gestion_module_page_syst->getIdModule()); $i++):?>
-					<tr>
-						<td><?=$gestion_module_page_syst->getNom()[$i]?></td>
-						<td>
-							<label for="<?=$gestion_module_page_syst->getUrl()[$i]?>" class="checkbox-perso switched">
-								<input type="checkbox" class="test-check" id="<?=$gestion_module_page_syst->getUrl()[$i]?>" <?php if (\core\modules\GestionModule::getModuleActiver($gestion_module_page_syst->getNom()[$i]) === true): ?>checked<?php endif; ?> <?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) === false):?>disabled<?php endif; ?>>
-							</label>
-						</td>
-						<td>
-							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) == 1) { ?>
-								<a class="open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?systeme=1&id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>">Supprimer</a>
-							<?php } else { ?>
-								<a class="installer-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page_syst->getUrlTelechargement()[$i]?>">Installer</a>
-							<?php }?>
-						</td>
-						<td>
-							<?php if ((\core\modules\GestionModule::getModuleInstaller($gestion_module_page_syst->getNom()[$i]) == 1) && (\core\modules\GestionModule::getModuleActiver($gestion_module_page_syst->getNom()[$i]) == true)) { ?>
-								<?php if (\core\modules\GestionModule::getModuleAJour($gestion_module_page_syst->getNom()[$i]) == 1) { ?>
-									<a href="<?=ADMWEBROOT?>controller/core/modules/installation/update?id_module=<?=$gestion_module_page_syst->getIdModule()[$i]?>" class="open-popup" popup="popup-update-module">Mettre à jour</a>
-								<?php } else {?>
-									Module à jour
-								<?php }?>
-							<?php } else {?>
-								Module non installé et/ou activé
-							<?php }?>
-						</td>
-					</tr>
-				<?php endfor; ?>
-			</tbody>
-		</table>
-	</div>
-
-	<div class="contenu modifier-contenu gestion-comptes configuration">
 		<h2>Modules ajoutés</h2>
 		<table>
 			<thead>

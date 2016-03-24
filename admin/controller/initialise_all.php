@@ -98,9 +98,6 @@
 
 	//---------- actif pour la configuration des modules ------------------------------------//
 	if ($page == "configuration/module") {
-		$gestion_module_page_syst = new \core\modules\GestionModule();
-		$gestion_module_page_syst->getListeModule(1);
-
 		$gestion_module_page = new \core\modules\GestionModule();
 		$gestion_module_page->getListeModule();
 	}

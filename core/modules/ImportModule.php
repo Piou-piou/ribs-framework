@@ -32,10 +32,10 @@
 		 * @param $id_module
 		 * permets de récupérer des informations sur un module
 		 */
-		private function getInfoModule($id_module) {
+		private function getInfoModule($id_module) {echo($id_module);
 			$dbc = App::getDb();
 
-			$query = $dbc->query("select * from module WHERE ID_module=".$dbc->quote($id_module));
+			$query = $dbc->select()->from("module")->where("ID_module", "=", $id_module)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -48,8 +48,8 @@
 			}
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
-		
-		
+
+
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		private function setInstallModule($url_module) {
 			$zip = new \ZipArchive();
@@ -120,16 +120,14 @@
 					$today = date("Y-m-d");
 					$today = new \DateTime($today);
 
-					$value = [
-						"next_check" => $today->add(new \DateInterval("P1W"))->format("Y-m-d"),
-						"version" => $this->version_ok,
-						"online_version" => "",
-						"mettre_jour" => "",
-						"delete_old_version" => 1,
-						"id_module" => $id_module
-					];
-
-					$dbc->prepare("UPDATE module SET next_check_version=:next_check, version=:version, online_version=:online_version, mettre_jour=:mettre_jour, delete_old_version=:delete_old_version WHERE ID_module=:id_module", $value);
+					$dbc->update("next_check_version", $today->add(new \DateInterval("P1W"))->format("Y-m-d"))
+						->update("version", $this->version_ok)
+						->update("online_version", "")
+						->update("mettre_jour", "")
+						->update("delete_old_version", "1")
+						->from("module")
+						->where("ID_module", "=", $id_module)
+						->set();
 
 					FlashMessage::setFlash("Votre module a bien été mis à jour", "success");
 				}
@@ -156,29 +154,14 @@
 		 * @param $id_module
 		 * fonction qui permet de supprimer un module (suppression des tables + appel fonction supprimer dossier)
 		 */
-		public function setSupprimerModule($id_module, $systeme) {
+		public function setSupprimerModule($id_module) {
 			$dbc = App::getDb();
 			$this->getInfoModule($id_module);
 
-			if ($systeme == 1) {
-				$value = array(
-					"id_module" => $id_module,
-					"activer" => 0,
-					"installer" => 0,
-				);
-
-				$dbc->prepare("UPDATE module SET activer=:activer, installer=:installer WHERE ID_module=:id_module", $value);
-			}
-			else {
-				$value = array(
-					"id_module" => $id_module,
-				);
-
-				$dbc->prepare("DELETE FROM module WHERE ID_module=:id_module", $value);
-			}
+			$dbc->delete()->from("module")->where("ID_module", "=", $id_module)->del();
 
 			$requete = "";
-			require_once($this->url_module."uninstall.php");
+			require_once(MODULEROOT.$this->url_module."uninstall.php");
 			$dbc->query($requete);
 
 			$this->supprimerDossier(str_replace("/", "", $this->url_module));
@@ -195,12 +178,7 @@
 
 			$this->supprimerDossier(MODULEROOT.$this->dossier_module);
 
-			$value = [
-				"id_module" => $this->id_module,
-				"delete_old_version" => ""
-			];
-
-			$dbc->prepare("UPDATE module SET delete_old_version=:delete_old_version WHERE ID_module=:id_module", $value);
+			$dbc->update("delete_old_version", "")->from("module")->where("ID_module", "=", $this->id_module)->set();
 		}
 
 		/**
