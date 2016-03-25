@@ -29,7 +29,8 @@
 		public function getParentTexte($parent) {
 			$dbc = \core\App::getDb();
 
-			$query = $dbc->query("SELECT titre FROM page WHERE ID_page=".$parent);
+			$query = $dbc->select("titre")->from("page")->where("ID_page", "=", $parent)->get();
+
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) $this->parent_texte = $obj->titre;
 			}
@@ -42,7 +43,7 @@
 				$dbc = \core\App::getDb();
 				$ordre = "";
 
-				$query = $dbc->query("SELECT ordre FROM page ORDER BY ordre DESC LIMIT 1");
+				$query = $dbc->select("ordre")->from("page")->orderBy("ordre", "DESC")->limit(0, 1)->get();
 				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) {
 						$ordre = $obj->ordre;
@@ -123,18 +124,17 @@
 			if (App::getErreur() !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
-					$value = array(
-						"balise_title" => $balise_title,
-						"url" => $url,
-						"meta_description" => $meta_description,
-						"titre" => $titre_page,
-						"parent" => $parent,
-						"contenu" => $contenu,
-						"ordre" => $this->getOrdrePage($parent),
-						"affiche" => $affiche
-					);
+					$dbc->insert("titre", $titre_page)
+						->insert("contenu", $contenu)
+						->insert("url", $url)
+						->insert("meta_description", $meta_description)
+						->insert("balise_title", $balise_title)
+						->insert("ordre", $this->getOrdrePage($parent))
+						->insert("parent", $parent)
+						->insert("affiche", $affiche)
+						->into("page")
+						->set();
 
-					$dbc->prepare("INSERT INTO page (titre, contenu, url, meta_description, balise_title, ordre, parent, affiche) VALUES (:titre, :contenu, :url, :meta_description, :balise_title, :ordre, :parent, :affiche)", $value);
 					$this->id_page = $dbc->lastInsertId();
 					$this->setAjoutLienNavigation("ID_page", $this->id_page , 1);
 				}
@@ -194,18 +194,18 @@
 
 					rename($filename, $new_filename);
 
-					$value = array(
-						"id_page" => $id_page,
-						"balise_title" => $balise_title,
-						"url" => $url,
-						"meta_description" => $meta_description,
-						"titre_page" => $titre_page,
-						"parent" => $this->getParentId($parent),
-						"contenu" => $contenu,
-						"affiche" => $affiche
-					);
+					$parent = $this->getParentId($parent);
+					$dbc->update("titre", $titre_page)
+						->update("contenu", $contenu)
+						->update("url", $url)
+						->update("meta_description", $meta_description)
+						->update("balise_title", $balise_title)
+						->update("parent", $parent)
+						->update("affiche", $affiche)
+						->from("page")
+						->where("ID_page", "=", $id_page,"",true)
+						->set();
 
-					$dbc->prepare("UPDATE page SET titre=:titre_page, contenu=:contenu, url=:url, meta_description=:meta_description, balise_title=:balise_title, parent=:parent, affiche=:affiche WHERE ID_page=:id_page", $value);
 					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
 				}
 				else {
@@ -237,7 +237,7 @@
 				if (file_exists($filename)) {
 					unlink($filename);
 
-					$dbc->prepare("DELETE FROM page WHERE ID_page=:id_page", ["id_page" => $id_page]);
+					$dbc->delete()->from("page")->where("ID_page", "=", $id_page)->del();
 
 					$nav = new Navigation();
 					$nav->setSupprimerLien("ID_page", $id_page);

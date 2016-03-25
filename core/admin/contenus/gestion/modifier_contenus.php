@@ -4,13 +4,13 @@
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 
 	if ($droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_POST['id_page']) == true) {
-		if (($droit_acces->getModifSeo() != 0) && ($droit_acces->getModifContenu() != 0) && ($droit_acces->getModifNavigation() != 0)) {
+		if ((($droit_acces->getModifSeo() != 0) && ($droit_acces->getModifContenu() != 0) && ($droit_acces->getModifNavigation() != 0)) || $droit_acces->getSuperAdmin() == 1) {
 			$balise_title = $_POST['balise_title'];
 			$url = $_POST['url'];
 			$meta_description = $_POST['meta_description'];
 			$titre_page = $_POST['titre_page'];
 			$parent = $_POST['parent_texte'];
-			$contenu = $_POST['contenu'];
+			$contenu = $_POST['contenu'];echo("dgfdgf");
 		}
 		else {
 			$contenu_class->getHeadPage($_POST['id_page']);
