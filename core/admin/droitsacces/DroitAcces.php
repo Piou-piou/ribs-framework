@@ -41,25 +41,25 @@
     
     
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getLogged(){
+		public function getLogged() {
 			return $this->logged;
 		}
-		public function getSuperAdmin(){
+		public function getSuperAdmin() {
 			return $this->super_admin;
 		}
-		public function getIdListeDroitAcces(){
+		public function getIdListeDroitAcces() {
 			return $this->id_liste_droit_acces;
 		}
-		public function getModifSeo(){
+		public function getModifSeo() {
 			return $this->modif_seo;
 		}
-		public function getModifContenu(){
+		public function getModifContenu() {
 			return $this->modif_contenu;
 		}
-		public function getModifNavigation(){
+		public function getModifNavigation() {
 			return $this->modif_navigation;
 		}
-		public function getSupprimerPage(){
+		public function getSupprimerPage() {
 			return $this->supprimer_page;
 		}
 
@@ -137,7 +137,7 @@
 			//page sans droit dans admin
 			$all_access = array("gestion-comptes/mon-compte", "index");
 
-			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces()))|| (in_array($page, $all_access))) {
+			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces())) || (in_array($page, $all_access))) {
 				return true;
 			}
 			else {

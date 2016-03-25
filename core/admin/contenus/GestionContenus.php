@@ -3,7 +3,6 @@
 
 	use core\App;
 	use core\contenus\Contenus;
-	use core\admin\droitsacces\DroitAcces;
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
 	use core\Navigation;
@@ -72,6 +71,14 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+
+		/**
+		 * @param string $url
+		 * @param string $err_balise_title
+		 * @param string $err_url
+		 * @param string $err_meta_description
+		 * @param string $err_titre_page
+		 */
 		private function setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page) {
 			$_SESSION['balise_title'] = $balise_title;
 			$_SESSION['url'] = $url;
@@ -136,7 +143,7 @@
 						->set();
 
 					$this->id_page = $dbc->lastInsertId();
-					$this->setAjoutLienNavigation("ID_page", $this->id_page , 1);
+					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
 				}
 				else {
 					FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
@@ -203,7 +210,7 @@
 						->update("parent", $parent)
 						->update("affiche", $affiche)
 						->from("page")
-						->where("ID_page", "=", $id_page,"",true)
+						->where("ID_page", "=", $id_page, "", true)
 						->set();
 
 					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
@@ -261,6 +268,10 @@
 			}
 		}
 
+		/**
+		 * @param string $id
+		 * @param integer $affiche
+		 */
 		private function setModifierLienNavigation($id, $id_page, $parent, $affiche) {
 			if ($parent != "") {
 				$nav = new Navigation();

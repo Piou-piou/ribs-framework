@@ -7,11 +7,11 @@
 						<ul>
 							<?php foreach ($nav[4] as $snav):?>
 								<li><a href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$snav[0]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>
-							<?php endforeach;?>
+							<?php endforeach; ?>
 						</ul>
-					<?php endif;?>
+					<?php endif; ?>
 				</li>
-			<?php endforeach;?>
+			<?php endforeach; ?>
 		</ul>
 	</div>
 </nav>

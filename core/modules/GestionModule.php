@@ -66,9 +66,6 @@
 		}
 
 		/**
-		 * @param null $systeme
-		 * recupere la listes des modules ajouter par un autre admin
-		 * fonction utilisée uniquement dans la config
 		 */
 		public function getListeModule() {
 			$dbc = App::getDb();
