@@ -107,7 +107,7 @@
 			$this->closure[] = $closure;
 
 			if ($no_bind === true) {
-				$this->conditions_table[] = $champ.$cond.$champ_test;
+				$this->conditions_table[] = $champ.$cond.$champ_test." ".$closure;
 			}
 			else {
 				$this->conditions[] = $cond;
