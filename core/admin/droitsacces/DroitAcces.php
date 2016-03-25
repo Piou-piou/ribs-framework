@@ -27,7 +27,7 @@
 			$this->id_identite = $_SESSION["idlogin".CLEF_SITE];
 
 			//on test voir si super admin
-			$query = $dbc->query("SELECT super_admin,liste_droit FROM identite WHERE ID_identite=".$this->id_identite);
+			$query = $dbc->select("super_admin")->select("liste_droit")->from("identite")->where("ID_identite", "=", $this->id_identite)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
@@ -71,11 +71,13 @@
 
 			$liste_droit_acces = [];
 
-			$query = $dbc->query("SELECT * FROM droit_acces, liste_droit_acces, liaison_liste_droit WHERE
-								droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = liaison_liste_droit.ID_liste_droit_acces AND
-								liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-				");
+			$query = $dbc->select()->from("droit_acces")
+				->from("liste_droit_acces")
+				->from("liaison_liste_droit")
+				->where("liste_droit_acces.ID_liste_droit_acces", "=", $this->id_liste_droit_acces, "AND")
+				->where("droit_acces.ID_droit_acces", "=", "liaison_liste_droit.ID_droit_acces", "AND", true)
+				->where("liste_droit_acces.ID_liste_droit_acces", "=", "liaison_liste_droit.ID_liste_droit_acces", "", true)
+				->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
@@ -91,7 +93,7 @@
 			$dbc = App::getDb();
 			$droit_acces = [];
 
-			$query = $dbc->query("SELECT droit_acces FROM droit_acces WHERE page LIKE '%$page%'");
+			$query = $dbc->select("droit_acces")->from("droit_acces")->where("page", " LIKE ", $page, "", true)->get();
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) $droit_acces = $obj->droit_acces;
 			}
@@ -106,11 +108,12 @@
 			$dbc = App::getDb();
 
 			//on check si il a le droit de modifier ou supprimer cette page
-			$query = $dbc->query("SELECT * FROM droit_acces_page, liste_droit_acces WHERE
-									droit_acces_page.ID_liste_droit_acces = liste_droit_acces.ID_liste_droit_acces AND
-									droit_acces_page.ID_page = $id_page AND
-									liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-					");
+			$query = $dbc->select()->from("droit_acces_page")
+				->from("liste_droit_acces")
+				->where("droit_acces_page.ID_page", "=", $id_page, "AND")
+				->where("liste_droit_acces.ID_liste_droit_acces", "=", $this->id_liste_droit_acces, "AND")
+				->where("droit_acces_page.ID_liste_droit_acces", "=", "liste_droit_acces.ID_liste_droit_acces", "", true)
+				->get();
 
 			//si on a un resultat
 			if ((is_array($query)) && (count($query) > 0)) {
