@@ -119,6 +119,7 @@
 
 		/**
 		 * @param string $order
+		 * @param string $type
 		 */
 		public function orderBy($order, $type = null) {
 			if ($type === null) $type = "ASC";
@@ -128,6 +129,10 @@
 			return $this;
 		}
 
+		/**
+		 * @param integer $debut
+		 * @param integer $fin
+		 */
 		public function limit($debut, $fin) {
 			$this->limit = " LIMIT ".$debut.", ".$fin." ";
 
@@ -141,7 +146,7 @@
 		 */
 		public function get() {
 			$values = [];
-			$requete = $this->req_beginning . implode(",", $this->select_champ) . " FROM " . implode(",", $this->table);
+			$requete = $this->req_beginning.implode(",", $this->select_champ)." FROM ".implode(",", $this->table);
 
 			if ((!empty($this->conditions)) || (!empty($this->conditions_table))) {
 				$requete .= $this->getWhereConditions()[0];
@@ -163,12 +168,12 @@
 			$values = array_combine($this->champs, $this->value);
 			$datas = [];
 			$count = count($this->champs);
-			for ($i=0 ; $i<$count ; $i++) {
+			for ($i = 0; $i < $count; $i++) {
 				$datas[] = $this->champs[$i]."=:".$this->champs[$i];
 			}
 
 			//si on a des conditions alors on sera dans un insert
-			$requete = $this->req_beginning . implode(",", $this->table) . " SET " . implode(", ", $datas);
+			$requete = $this->req_beginning.implode(",", $this->table)." SET ".implode(", ", $datas);
 
 			if ((!empty($this->conditions)) || (!empty($this->conditions_table))) {
 				$requete .= $this->getWhereConditions()[0];
@@ -185,7 +190,7 @@
 		 */
 		public function del() {
 			$values = [];
-			$requete = $this->req_beginning . implode(",", $this->table);
+			$requete = $this->req_beginning.implode(",", $this->table);
 
 			if (!empty($this->conditions)) {
 				$requete .= $this->getWhereConditions()[0];
@@ -241,7 +246,7 @@
 
 				$count = count($this->champs_where);
 
-				for ($i=0 ; $i<$count ; $i++) {
+				for ($i = 0; $i < $count; $i++) {
 					$datas[] = $this->champs_where[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs_where[$i])." ".$this->closure[$i]." ";
 				}
 			}
@@ -252,7 +257,7 @@
 				}
 			}
 
-			return [" WHERE ". implode(" ", $datas), $values];
+			return [" WHERE ".implode(" ", $datas), $values];
 		}
 
 		/**

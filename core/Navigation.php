@@ -12,7 +12,7 @@
 			$navigation = [];
 			$last_ordre = "";
 
-			if($no_module === null) {
+			if ($no_module === null) {
 				$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
 			}
 			else {
@@ -74,7 +74,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title,];
+					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, ];
 				}
 			}
 
@@ -111,7 +111,7 @@
 		public function setAjoutLien($id, $value_id) {
 			$dbc = App::getDb();
 
-			$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre+1)->into("navigation")->set();
+			$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre + 1)->into("navigation")->set();
 		}
 
 		public function setSupprimerLien($id, $value_id) {
