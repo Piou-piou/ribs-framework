@@ -74,23 +74,20 @@
 		public function setInscrireUtilisateur() {
 			$dbc = App::getDb();
 
-			$value = array(
-				"pseudo" => $this->pseudo,
-				"nom" => $this->nom,
-				"prenom" => $this->prenom,
-				"mail" => $this->mail,
-				"mdp" => Encrypt::setEncryptMdp($this->mdp),
-				"mdp_params" => Encrypt::getParams(),
-				"last_change_mdp" => date("Y-m-d"),
-				"img_profil" => "profil/defaut.png",
-				"img_profil_blog" => "profil/defaut_blog.png",
-				"valide" => 1,
-				"acces_admin" => $this->acces_administration,
-				"liste_droit" => $this->id_liste_droit_acces
-			);
-
-
-			$dbc->prepare("INSERT INTO identite (pseudo, nom, prenom, mail, mdp, mdp_params, last_change_mdp, img_profil, img_profil_blog, valide, acces_admin, liste_droit) VALUES (:pseudo, :nom, :prenom, :mail, :mdp, :mdp_params, :last_change_mdp, :img_profil, :img_profil_blog, :valide, :acces_admin, :liste_droit)", $value);
+			$dbc->insert("pseudo", $this->pseudo)
+				->insert("nom", $this->nom)
+				->insert("prenom", $this->prenom)
+				->insert("mail", $this->mail)
+				->insert("mdp", Encrypt::setEncryptMdp($this->mdp))
+				->insert("mdp_params", Encrypt::getParams())
+				->insert("last_change_mdp", date("Y-m-d"))
+				->insert("img_profil", "profil/defaut.png")
+				->insert("img_profil_blog", "profil/defaut_blog.png")
+				->insert("valide", 1)
+				->insert("acces_admin", $this->acces_administration)
+				->insert("liste_droit", $this->id_liste_droit_acces)
+				->into("identite")
+				->set();
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
