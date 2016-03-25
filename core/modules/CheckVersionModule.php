@@ -104,7 +104,7 @@
 			$dbc = App::getDb();
 			$today_o = new \DateTime(date("Y-m-d"));
 
-			$dbc->update("nex_check", $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"))
+			$dbc->update("next_check_version", $today_o->add(new \DateInterval("P1W"))->format("Y-m-d"))
 				->from("module")
 				->where("ID_module", "=", $id_module)
 				->set();
@@ -133,7 +133,6 @@
 					//on met la notification admin à 1
 					$dbc->update("admin", 1)->from("notification")->where("ID_notification", "=", 1)->set();
 
-					$dbc->prepare("UPDATE module SET mettre_jour=:update, online_version=:online_version WHERE ID_module=:id_module", $value);
 					$dbc->update("mettre_jour", 1)
 						->update("online_version", $version_online_txt)
 						->from("module")
