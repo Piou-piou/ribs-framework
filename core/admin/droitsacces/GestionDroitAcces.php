@@ -87,7 +87,7 @@
 
 			//pour affichage de la liste des listes de droit d'acces
 			//récupération des droits d'acces génériques
-			$query = $dbc->query("SELECT * FROM liste_droit_acces");
+			$query = $dbc->select()->from("liste_droit_acces")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_liste_droit_acces = [];
@@ -121,9 +121,11 @@
 		public function getListeDroitAccesDetailDroit() {
 			$dbc = \core\App::getDb();
 
-			$query = $dbc->query("SELECT * FROM droit_acces, liaison_liste_droit WHERE
-										droit_acces.ID_droit_acces = liaison_liste_droit.ID_droit_acces AND
-										liaison_liste_droit.ID_liste_droit_acces =".$this->id_liste_droit_acces);
+			$query = $dbc->select()->from("droit_acces")
+				->from("liaison_liste_droit")
+				->where("liaison_liste_droit.ID_liste_droit_acces", "=", $this->id_liste_droit_acces, "AND")
+				->where("droit_acces.ID_droit_acces", "=", "liaison_liste_droit.ID_droit_acces", "", true)
+				->get();
 			if ((is_array($query)) && (count($query) > 0)) {
 				$droit_acces = [];
 
@@ -143,7 +145,7 @@
 			$dbc = \core\App::getDb();
 
 			//récupératin des utilisateurs qui sont dans cette liste
-			$query = $dbc->query("SELECT * FROM identite WHERE liste_droit=".$this->id_liste_droit_acces);
+			$query = $dbc->select()->from("identite")->where("liste_droit", "=", $this->id_liste_droit_acces)->get();
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
 				$pseudo = [];
@@ -169,11 +171,14 @@
 			$dbc = \core\App::getDb();
 
 			//récupération des droits d'acces pour les pages
-			$query = $dbc->query("SELECT * FROM liste_droit_acces, droit_acces_page, page WHERE
-									liste_droit_acces.ID_liste_droit_acces = droit_acces_page.ID_liste_droit_acces AND
-									droit_acces_page.ID_page = page.ID_page AND
-									liste_droit_acces.ID_liste_droit_acces = $this->id_liste_droit_acces
-			");
+			$query = $dbc->select()->from("liste_droit_acces")
+				->from("droit_acces_page")
+				->from("page")
+				->where("liste_droit_acces.ID_liste_droit_acces", "=", $this->id_liste_droit_acces, "AND")
+				->where("liste_droit_acces.ID_liste_droit_acces", "=", "droit_acces_page.ID_liste_droit_acces", "AND", true)
+				->where("droit_acces_page.ID_page", "=", "page.ID_page", "", true)
+				->get();
+
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_page = [];
 				$titre_page = [];
