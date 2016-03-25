@@ -10,7 +10,7 @@
 			$meta_description = $_POST['meta_description'];
 			$titre_page = $_POST['titre_page'];
 			$parent = $_POST['parent_texte'];
-			$contenu = $_POST['contenu'];echo("dgfdgf");
+			$contenu = $_POST['contenu'];
 		}
 		else {
 			$contenu_class->getHeadPage($_POST['id_page']);
