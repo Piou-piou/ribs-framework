@@ -120,8 +120,10 @@
 		/**
 		 * @param string $order
 		 */
-		public function orderBy($order) {
-			$this->order_by = " ORDER BY ".$order." ";
+		public function orderBy($order, $type = null) {
+			if ($type === null) $type = "ASC";
+
+			$this->order_by = " ORDER BY ".$order." ".$type." ";
 
 			return $this;
 		}
@@ -159,7 +161,6 @@
 		 */
 		public function set() {
 			$values = array_combine($this->champs, $this->value);
-
 			$datas = [];
 			$count = count($this->champs);
 			for ($i=0 ; $i<$count ; $i++) {
