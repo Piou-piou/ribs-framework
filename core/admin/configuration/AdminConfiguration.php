@@ -31,16 +31,14 @@
 		public function setModifierConfiguration($nom_site, $url_site, $gerant_site, $mail_site, $mail_administrateur) {
 			$dbc = App::getDb();
 
-			$value = [
-				"nom_site" => $nom_site,
-				"url_site" => $url_site,
-				"gerant_site" => $gerant_site,
-				"mail_site" => $mail_site,
-				"mail_administrateur" => $mail_administrateur,
-				"id_configuration" => 1
-			];
-
-			$dbc->prepare("UPDATE configuration SET nom_site=:nom_site, url_site=:url_site, gerant_site=:gerant_site, mail_site=:mail_site, mail_administrateur=:mail_administrateur WHERE ID_configuration=:id_configuration", $value);
+			$dbc->update("nom_site", $nom_site)
+				->update("url_site", $url_site)
+				->update("gerant_site", $gerant_site)
+				->update("mail_site", $mail_site)
+				->update("mail_administrateur", $mail_administrateur)
+				->from("configuration")
+				->where("ID_configuration", "=", 1)
+				->set();
 
 			$_SESSION['nom_site'] = $nom_site;
 			$_SESSION['url_site'] = $url_site;
@@ -60,12 +58,7 @@
 		public function setModificerOption($option, $activer) {
 			$dbc = App::getDb();
 
-			$value = [
-				$option => $activer,
-				"id_config" => 1
-			];
-
-			$dbc->prepare("UPDATE configuration SET $option=:$option WHERE ID_configuration=:id_config", $value);
+			$dbc->update($option, $activer)->from("configuration")->where("ID_configuration", "=", 1)->set();
 
 			FlashMessage::setFlash("L'option $option a bien été modifiée", "success");
 		}
