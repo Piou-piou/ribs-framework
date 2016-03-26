@@ -1,0 +1,598 @@
+@font-face {
+	font-family: lobster;
+	src: url(../polices/lobster.ttf);
+}
+
+@font-face {
+	font-family: noto-sans;
+	src: url(../polices/noto-sans.ttf);
+}
+
+/*----couleurs générales ----*/
+$bg-general: #2F3B4C;
+$bg-notification: #f34336;
+
+/*----pour la page de login ----*/
+$color-error-input-login: #F34336;
+
+/*----couleurs pour les liens ----*/
+$color-lien: #AFBDC4;
+$color-lien-page: #2196F3;
+$color-lien-hover-page: #217ED3;
+$bg-lien-supprimer: #F34336;
+$bg-lien-supprimer-hover: #DD2A2A;
+
+/*----couleurs pour les labels et titres + polices ----*/
+$color-titre: #AFBDC4;
+$clr-texte-label: #bfbfbf;
+$police-princ: noto-sans;
+$police-sec: lobster;
+
+/*---- barre de menu à gauche ----*/
+$menug-bg-header: #00BEE7;
+$menug-clr-header: #0082A8;
+$menug-clr-border-lien: #2BA5CA;
+$menug-ombre-header: #2C3747;
+$bg-lien-hover-menu: #2A3344;
+
+/*---- pour les pages ----*/
+$bg-header-page: #ffffff;
+$bg-page: #fff;
+
+/*---- pour les modules ----*/
+$bg-categorie: rgba(47, 59, 76, 0.8);
+$clr-categorie: #fff;
+
+@import "../../../../libs/input_file/css/style";
+
+@mixin button-txt {
+	border: none;
+	color: $color-lien-page;
+	text-transform: uppercase;
+	background-color: inherit;
+	transition: all 0.3s ease;
+	font-size: 16px;
+
+	&:hover {
+		cursor: pointer;
+		color: $color-lien-hover-page;
+	}
+}
+
+
+body {
+	font-family: $police-princ;
+	background-color: #EBEDF1;
+}
+
+.inner {
+	width: 1180px;
+	margin: auto;
+}
+
+.colonne {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.espacement {
+	width: 100%;
+	height: 20px;
+}
+
+.clear {
+	clear: both;
+}
+
+a {
+	text-decoration: none;
+	color: $color-lien-page;
+	animation: all 0.3s ease;
+
+	&:hover {
+		cursor: pointer;
+		color: $color-lien-hover-page;
+	}
+}
+
+
+
+/*------------------------------ LOGIN -------------------------------------------------------*/
+@keyframes cardEnter {
+	0%, 20%, 40%, 60%, 80%, 100% {
+		-webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	}
+	0% {
+		opacity: 0;
+		-webkit-transform: scale3d(0.3, 0.3, 0.3);
+		-ms-transform: scale3d(0.3, 0.3, 0.3);
+		transform: scale3d(0.3, 0.3, 0.3);
+	}
+	20% {
+		-webkit-transform: scale3d(1.1, 1.1, 1.1);
+		-ms-transform: scale3d(1.1, 1.1, 1.1);
+		transform: scale3d(1.1, 1.1, 1.1);
+	}
+	40% {
+		-webkit-transform: scale3d(0.9, 0.9, 0.9);
+		-ms-transform: scale3d(0.9, 0.9, 0.9);
+		transform: scale3d(0.9, 0.9, 0.9);
+	}
+	60% {
+		opacity: 1;
+		-webkit-transform: scale3d(1.03, 1.03, 1.03);
+		-ms-transform: scale3d(1.03, 1.03, 1.03);
+		transform: scale3d(1.03, 1.03, 1.03);
+	}
+	80% {
+		-webkit-transform: scale3d(0.97, 0.97, 0.97);
+		-ms-transform: scale3d(0.97, 0.97, 0.97);
+		transform: scale3d(0.97, 0.97, 0.97);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: scale3d(1, 1, 1);
+		-ms-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+.installation {
+	background-color: $bg-general;
+
+	#particles-js{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+
+	.installation-form {
+		opacity: 0;
+		height: 0;
+		max-width: 350px;
+		border-radius: 2px;
+		background-color: #EBEDF1;
+		box-shadow: 0 10px 20px rgba(0, 0, 0, .19),
+		0 6px 6px rgba(0, 0, 0, .23);
+		display: none;
+
+		&.active {
+			-webkit-animation: cardEnter 0.75s ease-in-out 0.5s;
+			animation: cardEnter 0.75s ease-in-out 0.5s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+			height: auto;
+			margin: 0px auto;
+			padding: 20px;
+			opacity: 1;
+			display: block;
+			position: relative;
+			top: 50px;
+		}
+
+		h1 {
+			color: $color-titre;
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: -10px;
+		}
+
+		p {
+			margin-top: 30px;
+		}
+
+		img	{
+			margin-left: 75px;
+		}
+
+		.submit-contenu {
+			margin-top: 30px;
+			margin-bottom: 10px;
+		}
+
+		.bloc {
+			position: relative;
+			padding: 16px 0 8px 0;
+
+			.label {
+				position: relative;
+				margin: 0;
+				display: block;
+				color: #A7A7A7;
+				line-height: 16px;
+				font-size: 16px;
+				font-weight: 400;
+				transform: translateY(32px);
+				transition: transform 0.3s, font-size 0.3s;
+
+				&.label-textarea {
+					transform: translateY(37px);
+					margin-left: 10px;
+				}
+			}
+
+			input {
+				position: relative;
+				display: block;
+				width: 100%;
+				min-width: inherit;
+				height: 32px;
+				padding: 8px 3px 3px 3px;
+				margin: 0;
+				line-height: 16px;
+				font-size: 16px;
+				background: transparent;
+				border: none;
+				-webkit-appearance: none;
+				outline: none;
+			}
+
+			&:not(.no-input) {
+				&::before, &::after {
+					content: '';
+					height: 2px;
+					width: 100%;
+					position: absolute;
+					bottom: 6px;
+					left: 0;
+					background-color: #A7A7A7;
+				}
+
+				&::after {
+					background-color: $color-lien-page;
+					transform: scaleX(0);
+					transition: transform 0.3s ease;
+				}
+			}
+
+			/*appellee dans le js*/
+			&.is-focused {
+				.label {
+					color: $color-lien-page
+				}
+
+				&::after {
+					transform: scaleX(1);
+				}
+			}
+			/*appelee par le js egalement*/
+			&.has-label {
+				.label {
+					transform: translateY(0);
+					font-size: 14px;
+					margin-left: 0;
+				}
+
+				&.invalid {
+					.label::after {
+						top: 65px;
+					}
+				}
+			}
+
+			/*appelle par le js*/
+			&.invalid {
+				&::after {
+					transform: scaleX(1);
+					background-color: $color-error-input-login;
+				}
+
+				.label::after {
+					color: $color-error-input-login;
+					content: attr(data-error);
+					opacity: 1;
+					position: absolute;
+					top: 35px;
+					left: 0;
+				}
+			}
+		}
+
+		.lien {
+			a {
+				color: #A7A7A7;
+				transition: all 0.3s ease;
+
+				&:hover {
+					color: $color-lien-hover-page
+				}
+			}
+		}
+	}
+}
+
+/*------------------------------ AFFICHAGE CONTENU -------------------------------------------------------*/
+.submit-contenu {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	margin: 10px;
+	padding: 10px 20px;
+	min-width: 64px;
+	line-height: 18px;
+	background-color: $color-lien-page;
+	color: #fff;
+	border: none;
+	transition: 0.3s all ease;
+	font-size: 14px;
+	font-family: $police-princ;
+	color: #fff;
+	text-align: center;
+	display: block;
+	box-shadow: 1px 1px 3px #b4b4b4;
+
+	&.submit-standard {
+		position: inherit;
+		right: inherit;
+		top: inherit;
+	}
+
+	&.no-shadow {
+		box-shadow: none;
+	}
+
+	&.full-width {
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	&.inline {
+		display: inline-block;
+	}
+
+	&.link {
+		padding: 11px 20px;
+	}
+
+	i {
+		margin-right: 5px;
+		transition: 0.3s all ease;
+	}
+
+	&:hover {
+		background-color: $color-lien-hover-page;
+		transition: 0.3s all ease;
+		cursor: pointer;
+	}
+
+	&.supprimer-page {
+		right: 120px;
+		background-color: $bg-lien-supprimer;
+
+		&:hover {
+			background-color: $bg-lien-supprimer-hover;
+			transition: 0.3s all ease;
+		}
+	}
+
+	&.pr130 {
+		right: 130px;
+	}
+
+	&.ml0 {
+		margin-left: 0;
+	}
+}
+
+
+
+/*
+.contenu {
+	margin-top: 30px;
+	background-color: $bg-page;
+	padding: 20px;
+	border-radius: 3px;
+
+	h3 {
+		color: $color-lien;
+	}
+
+	.bloc {
+		margin: 10px;
+	}
+
+	&.modif-compte {
+		input {
+			-webkit-appearance: none;
+			box-shadow: none;
+		}
+
+		button {
+			@include button-txt();
+		}
+	}
+
+
+	!*pour la modifs des comptes client et tous les tableau de l'admin*!
+	&.gestion-comptes {
+		table {
+			width: 100%;
+			margin-top: 20px;
+
+			thead {
+				td {
+					border-top: none;
+				}
+			}
+
+			td {
+				padding: 10px;
+				border: 1px solid #D9E3E7;
+				margin: 10px;
+				vertical-align: middle;
+
+				a {
+					color: $color-lien-page;
+					text-decoration: none;
+					transition: 0.3s all ease;
+
+					&:hover {
+						color: $color-lien-hover-page;
+						transition: 0.3s all ease;
+					}
+				}
+			}
+		}
+	}
+
+	!*pour la modifs des contenus du site*!
+	&.modifier-contenu {
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	}
+
+
+	&.seo-galeriephoto {
+		display: none;
+	}
+}
+*/
+
+
+
+/*------------------------------ AFFICHAGE DU BLOG ++ LIVRE D'OR -------------------------------------------------------*/
+/*
+.blog, .livre-or, .droit-acces, .galerie-photo, .added-module {
+	.bloc {
+		margin-top: 30px;
+		background-color: $bg-page;
+		padding: 10px;
+		border-radius: 3px;
+		width: 370px;
+		max-width: 370px;
+		height: 470px;
+		margin: 15px;
+		position: relative;
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		
+		float: left;
+		display: inline;
+
+		.header {
+			position: relative;
+			overflow: hidden;
+			max-height: 235px;
+
+			.categorie {
+				position: fixed;
+				z-index: 5;
+
+				ul {
+					max-width: 370px;
+
+					li {
+						display: inline-block;
+						background-color: $bg-categorie;
+						padding: 5px;
+						color: $clr-categorie;
+						margin-bottom: 5px;
+					}
+				}
+			}
+
+			.date {
+				margin-top: -26px;
+				float: left;
+				background-color: $bg-categorie;
+				padding: 5px;
+				color: $clr-categorie;
+			}
+
+			img {
+				float: left;
+				margin-top: -40px;
+			}
+		}
+
+		h2 {
+			position: relative;
+			z-index: 100;
+			margin-top: 10px;
+		}
+
+		h3 {
+			font-weight: normal;
+			margin: 0px;
+			color: #ccc;
+		}
+
+		h4 {
+			margin-top: 20px;
+			color: #B3B3B3;
+
+			i {
+				transition: all 0.3s ease;
+				margin-right: 5px;
+			}
+
+			&.droit:hover {
+				cursor: pointer;
+				i {
+					margin-right: 10px;
+				}
+			}
+		}
+
+		.separation {
+			width: 100%;
+			height: 1px;
+			background-color: #CCCCCC;
+			margin: 20px 0;
+		}
+
+		.liste-droit {
+			max-height: 165px;
+			height: 150px;
+			position: relative;
+			overflow-y: auto;
+			overflow-x: hidden;
+
+			div {
+				visibility: hidden;
+				transform: translateX(500px);
+				transition: all 0.3s ease-in;
+				position: absolute;
+				width: 100%;
+
+				&.active {
+					visibility: visible;
+					transform: translateX(0px);
+					transition: all 0.4s ease-out;
+				}
+			}
+		}
+	}
+
+	.liste-element {
+		div {
+			padding: 10px;
+			margin: 10px 10px;
+			border: 2px solid #e6e6e6;
+			float: left;
+
+			p,a {
+				display: inline-block;
+				margin: 0 10px;
+			}
+
+			a {
+				text-transform: uppercase;
+				color: $color-lien-page;
+				transition: all 0.3s ease;
+
+				&:hover {
+					color: $color-lien-hover-page;
+				}
+
+				&.supprimer {
+					&:hover {
+						color: $bg-lien-supprimer-hover;
+					}
+				}
+			}
+		}
+	}
+}*/

@@ -10,12 +10,12 @@ RewriteRule 403 app/views/template/error_pages/404.php [L,QSA]
 
 
 #--------------------------- PARTIE INSTALLATION --------------------------------------#
-RewriteCond %{REQUEST_URI} installation$
-RewriteRule ([a-zA-Z0-9\-\_\/]*)$ installation.php [L,QSA]
+RewriteCond %{REQUEST_URI} installation-ribs$
+RewriteRule ([a-zA-Z0-9\-\_\/]*)$ installation.php?page=index [L,QSA]
 
 #page installation/qqch
-#RewriteCond %{REQUEST_URI} installation/(.*)$
-#RewriteRule installation/([a-zA-Z0-9\-\_\/]*) installation.php?page=$1 [L,QSA]
+RewriteCond %{REQUEST_URI} installation-ribs/(.*)$
+RewriteRule installation-ribs/([a-zA-Z0-9\-\_\/]*)$ installation.php?page=$1 [L,QSA]
 
 
 
