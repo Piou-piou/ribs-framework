@@ -194,19 +194,9 @@ CREATE TABLE IF NOT EXISTS `module` (
   `installer` int(1) NOT NULL,
   `mettre_jour` int(1) DEFAULT NULL,
   `delete_old_version` int(1) DEFAULT NULL,
-  `systeme` int(1) DEFAULT NULL,
   `icone` varchar(255) DEFAULT NULL,
   `url_telechargement` varchar(255) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Contenu de la table `module`
---
-
-INSERT INTO `module` (`ID_module`, `url`, `nom_module`, `version`,  `activer`, `installer`, `systeme`, `icone`, `url_telechargement`) VALUES
-(1, 'livre_or/', 'livre d''or', '1.0', 0, 0, 1, 'fa-book', 'http://library.clicand.com/livre_or.zip'),
-(2, 'blog/', 'blog', '1.0', 0, 0, 1, 'fa-newspaper-o', 'http://library.clicand.com/blog.zip'),
-(3, 'galerie_photo/', 'galerie photo', '1.0', 0, 0, 1, 'fa-photo', 'http://library.clicand.com/galerie_photo.zip');
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -390,7 +380,7 @@ MODIFY `ID_liste_droit_acces` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `module`
 --
 ALTER TABLE `module`
-MODIFY `ID_module` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `ID_module` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT pour la table `page`
 --
