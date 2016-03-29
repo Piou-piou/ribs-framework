@@ -11,19 +11,20 @@
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 
 
-<form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/modifier_contenus" method="post">
-	<?php if (($droit_acces->getModifSeo() == 1) || ($droit_acces->getModifNavigation() == 1) || ($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
-		<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
-	<?php endif; ?>
-	<input type="hidden" name="id_page" value="<?=$id_page_courante?>">
-	<?php if (($_GET['id'] != 1) && (($droit_acces->getSupprimerPage() == 1) || ($droit_acces->getSuperAdmin() == 1))):?>
-		<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/supprimer_page?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Supprimer cette page</button>
-	<?php endif; ?>
 
-	<?php require_once(ROOT."app/views/".$url.".php");?>
-</form>
+<?php if (($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
+	<button type="button" class="submit-contenu"><i class="fa fa-check"></i>Valider</button>
+<?php endif; ?>
+<input type="hidden" id="id_page" name="id_page" value="<?=$id_page_courante?>">
+<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Annuler</button>
 
-<script src="<?=LIBSWEBROOT?>ckeditor_new/ckeditor.js"></script>
+
+<div id="admin-page">
+	<?=$contenu_page?>
+</div>
+
+
+<script src="<?=LIBSWEBROOT?>ckeditor/ckeditor.js"></script>
 <script src="<?=LIBSWEBROOT?>ckfinder/ckfinder.js"></script>
 
 <script>
@@ -34,3 +35,4 @@
 	var editor2 = CKEDITOR.inline( 'editor2' );
 	CKFinder.setupCKEditor( editor2, "<?=LIBSWEBROOT?>ckfinder/" );
 </script>
+<?php require_once(ROOT."admin/views/gestion-contenus/js/inline.php");?>

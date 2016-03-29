@@ -227,6 +227,16 @@
 		}
 
 		/**
+		 * @param $id_page
+		 * @param $contenu
+		 */
+		public function setModifierContenu($id_page, $contenu) {
+			$dbc = \core\App::getDb();
+
+			$dbc->update("contenu", $contenu)->from("page")->where("ID_page", "=", $id_page)->set();
+		}
+
+		/**
 		 * fonction qui permet de supprimer une page, test si fichier exist, si oui on delete
 		 * @param $id_page
 		 */

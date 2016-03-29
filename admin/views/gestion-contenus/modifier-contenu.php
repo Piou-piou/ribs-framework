@@ -21,7 +21,6 @@
 	<?php endif; ?>
 
 	<div class="inner">
-		<!--<a href="<?/*=ADMWEBROOT*/?>gestion-contenus/inline.php?id=<?/*=$id_page_courante*/?>">Modifier en inline</a>-->
 		<?php if (($droit_acces->getModifSeo() == 0) && ($droit_acces->getModifNavigation() == 0) && ($droit_acces->getModifContenu() == 0) && ($droit_acces->getSuperAdmin() != 1)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Vous n'avez pas l'autorisation de modifier cette page</h2>
@@ -79,6 +78,9 @@
 		<?php if (($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant l'affichage dans le navigateur</h2>
+
+				<a href="<?=ADMWEBROOT?>gestion-contenus/inline.php?id=<?=$id_page_courante?>">Modifier en inline</a>
+
 				<div class="bloc">
 					<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1) { ?>
 						<?php $ckeditor->editor('contenu', $contenu_page); ?>
