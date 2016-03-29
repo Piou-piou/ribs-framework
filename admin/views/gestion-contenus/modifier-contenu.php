@@ -21,7 +21,8 @@
 	<?php endif; ?>
 
 	<div class="inner">
-		<?php if (($droit_acces->getModifSeo() == 0) && ($droit_acces->getModifNavigation() == 0) && ($droit_acces->getModifContenu() == 0)):?>
+		<!--<a href="<?/*=ADMWEBROOT*/?>gestion-contenus/inline.php?id=<?/*=$id_page_courante*/?>">Modifier en inline</a>-->
+		<?php if (($droit_acces->getModifSeo() == 0) && ($droit_acces->getModifNavigation() == 0) && ($droit_acces->getModifContenu() == 0) && ($droit_acces->getSuperAdmin() != 1)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Vous n'avez pas l'autorisation de modifier cette page</h2>
 

@@ -53,7 +53,7 @@
 
 
 	//---------- pour les pages sur la modification de contenus ----------------------------------------------//
-	if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/creer-une-page")) {
+	if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/creer-une-page") || ($page == "gestion-contenus/inline")) {
 		if (isset($_SESSION['err_modification_contenu'])) {
 			if (isset($_GET['id'])) {
 				$id_page_courante = $_GET['id'];
@@ -68,7 +68,7 @@
 
 			unset($_SESSION['err_modification_contenu']);
 		}
-		else if ($page == "gestion-contenus/modifier-contenu") {
+		else if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/inline")) {
 			$id_page_courante = $_GET['id'];
 
 			$contenu->getHeadPage($id_page_courante);
@@ -81,6 +81,10 @@
 			$parent_courant = $contenu->getParent();
 			$texte_parent_courant = $gestion_contenu->getParentTexte($parent_courant);
 			$contenu_page = $contenu->getContenu();
+
+			if ($url == "") {
+				$url = "index";
+			}
 		}
 		else {
 			$balise_title = null;
