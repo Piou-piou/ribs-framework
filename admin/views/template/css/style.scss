@@ -306,14 +306,19 @@ a {
 	z-index: 10;
 	float: left;
 	transition: all 0.5s ease;
-	overflow: hidden;
+	margin-left: -400px;
 
 	/*pour quand le menu est actif*/
 	&.active {
 		width: 314px;
+		margin-left: 0px;
 		transition: width 0.5s ease;
 
 		.titre {
+			width: 294px;
+			margin-left: 0;
+			transition: width 0.5s ease;
+
 			h1 {
 				margin-left: 0px;
 				transition: all 0.3s 0.2s ease-out;
@@ -334,7 +339,7 @@ a {
 		}
 
 		.logout {
-			width: 96.5%;
+			width: 294px;
 		}
 	}
 
@@ -351,6 +356,9 @@ a {
 		padding: 10px;
 		box-shadow: -3px 3px 3px $menug-ombre-header;
 		height: 38px;
+		width: 55px;
+		margin-left: 400px;
+		transition: all 0.5s ease;
 
 		h1 {
 			margin-left: -300px;
@@ -362,7 +370,6 @@ a {
 			margin-top: -30px;
 			margin-right: 10px;
 			color: #fff;
-			transition: all 0.3s ease;
 
 			&:hover {
 				transform: Scale(1.2);
@@ -395,20 +402,12 @@ a {
 				color: $color-lien;
 				transition: all 0.3s ease-out;
 				margin-left: -300px;
-
-
 			}
 
 			&:hover {
 				background-color: $bg-lien-hover-menu;
 				border-left: 3px solid $menug-clr-border-lien;
 				cursor: pointer;
-
-				i {
-					color: $menug-clr-border-lien;
-					transition: 0.3s all ease;
-					cursor: pointer;
-				}
 			}
 
 			&.active {
@@ -418,19 +417,31 @@ a {
 			&.support {
 				position: absolute;
 				bottom: 36px;
-				width: 100%;
+				width: 294px;
+
+				&:hover {
+					width: 291px;
+				}
 			}
 
 			&.configuration {
 				position: absolute;
 				bottom: 74px;
-				width: 100%;
+				width: 294px;
+
+				&:hover {
+					width: 291px;
+				}
 			}
 
 			&.notification {
 				position: absolute;
 				bottom: 112px;
-				width: 100%;
+				width: 294px;
+
+				&:hover {
+					width: 291px;
+				}
 
 				&.non-vue {
 					background-color: $bg-notification;
@@ -441,12 +452,13 @@ a {
 				position: absolute;
 				bottom: 0px;
 				background-color: #252B35;
-				width: 82.5%;
+				width: 294px;
 
 				&:hover {
 					background-color: #131922;
 					border-left: 3px solid #FF0000;
 					color: #fff;
+					width: 291px;
 
 					i {
 						color: #FF0000;
