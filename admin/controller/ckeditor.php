@@ -1,6 +1,6 @@
 <?php
-	include_once(ROOT.'libs/ckeditor/ckeditor.php');
+	include_once(ROOT.'libs/ckeditor_new/ckeditor.php');
 	require_once(ROOT.'libs/ckfinder/ckfinder.php');
 	$ckeditor = new CKEditor();
-	$ckeditor->basePath	= WEBROOT.'libs/ckeditor/';
+	$ckeditor->basePath	= WEBROOT.'libs/ckeditor_new/';
 	CKFinder::SetupCKEditor($ckeditor, WEBROOT.'libs/ckfinder/');

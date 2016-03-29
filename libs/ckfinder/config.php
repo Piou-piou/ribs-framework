@@ -65,9 +65,7 @@ ATTENTION: The trailing slash is required.
 
 //$baseUrl = $_SERVER['DOCUMENT_ROOT']."/app/images/pages";
 //$baseUrl = "/plugins/NEW_MVC/app/images/pages";
-
-require_once("../../../../../config/initialise.php");
-$baseUrl = ROOTCKFINDER;
+$baseUrl = "/app/images/pages";
 
 
 /*
