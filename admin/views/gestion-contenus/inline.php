@@ -18,7 +18,7 @@
 <input type="hidden" id="id_page" name="id_page" value="<?=$id_page_courante?>">
 <button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Annuler</button>
 
-
+<link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/page.css">
 <div id="admin-page">
 	<?=$contenu_page?>
 </div>

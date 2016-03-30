@@ -3,10 +3,6 @@
 	src: url('../police/impact.ttf');
 }*/
 
-$bg-general: #222;
-$bg-lien: #ff6600;
-$bg-lien-hover: #1090e2;
-$color-lien: #fff;
 
 body {
 	font-family: verdana;
@@ -35,3 +31,12 @@ a {
 	width: 100%;
 	height: 20px;
 }
+
+
+
+/*--------------------------------------------- HEADER STYLES --------------------------------------------------- */
+
+
+
+/*--------------------------------------------- PAGES STYLES --------------------------------------------------- */
+@import "page.scss";
