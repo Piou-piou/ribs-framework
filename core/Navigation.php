@@ -87,10 +87,10 @@
 			$query = $dbc->select()
 				->from("navigation")
 				->from("module")
-				->where("navigation.ID_module", "=", "module.ID_module", "AND", true)
 				->where("module.ID_module", "=", $id_module, "AND")
 				->where("module.installer", "=", 1, "AND")
-				->where("module.activer", "=", 1)
+				->where("module.activer", "=", 1, "AND")
+				->where("navigation.ID_module", "=", "module.ID_module", "", true)
 				->get();
 
 			if (is_array($query) && (count($query) > 0)) {
