@@ -64,7 +64,6 @@
 			$meta_description = $_SESSION['meta_description'];
 			$titre_courant = $_SESSION['titre_page'];
 			$parent_courant = $_SESSION['parent'];
-			$contenu_page = $_SESSION['contenu'];
 
 			unset($_SESSION['err_modification_contenu']);
 		}

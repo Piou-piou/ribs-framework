@@ -55,18 +55,6 @@
 				</div>
 			</div>
 		</section>
-
-		<section class="contenu modifier-contenu">
-			<h2>Partie concernant l'affichage dans le navigateur</h2>
-			<div class="bloc">
-				<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1) { ?>
-					<?php $ckeditor->editor('contenu', $contenu_page); ?>
-				<?php } else {?>
-					<p>Vous n'êtes pas autorisé à créer / modifier des contenus sur ce site internet</p>
-					<p>Pour y avoir accès, contactez votre administrateur</p>
-				<?php }?>
-			</div>
-		</section>
 	</div>
 </form>
 

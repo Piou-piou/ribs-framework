@@ -94,13 +94,12 @@
 		 * @param string $err_meta_description
 		 * @param string $err_titre_page
 		 */
-		private function setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page) {
+		private function setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page) {
 			$_SESSION['balise_title'] = $balise_title;
 			$_SESSION['url'] = $url;
 			$_SESSION['meta_description'] = $meta_description;
 			$_SESSION['titre_page'] = $titre_page;
 			$_SESSION['parent'] = $parent;
-			$_SESSION['contenu'] = $contenu;
 			$_SESSION['err_modification_contenu'] = true;
 
 			$message = "<ul>".$err_balise_title.$err_url.$err_meta_description.$err_titre_page."</ul>";
@@ -116,7 +115,7 @@
 		 * @param $parent
 		 * @param $contenu
 		 */
-		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = 1) {
+		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
 
 			$url = ChaineCaractere::setUrl($url);
@@ -147,7 +146,6 @@
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
 					$dbc->insert("titre", $titre_page)
-						->insert("contenu", $contenu)
 						->insert("url", $url)
 						->insert("meta_description", $meta_description)
 						->insert("balise_title", $balise_title)
@@ -166,7 +164,7 @@
 				}
 			}
 			else {
-				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
 			}
 		}
 
@@ -180,7 +178,7 @@
 		 * @param $parent
 		 * @param $contenu
 		 */
-		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $affiche = 1) {
+		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
 
 			//on trouve l'ancien fichier à parir de la fin de l'url
@@ -218,7 +216,6 @@
 
 					$parent = $this->getParentId($parent);
 					$dbc->update("titre", $titre_page)
-						->update("contenu", $contenu)
 						->update("url", $url)
 						->update("meta_description", $meta_description)
 						->update("balise_title", $balise_title)
@@ -231,7 +228,7 @@
 					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
 				}
 				else {
-					$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $contenu, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+					$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
 				}
 			}
 			//sinon on renvoi une erreur en disant que le fichier n'existe pas et qu'il faut contacter un administrateur
