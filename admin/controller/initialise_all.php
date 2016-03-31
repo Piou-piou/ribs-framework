@@ -81,10 +81,7 @@
 			$parent_courant = $contenu->getParent();
 			$texte_parent_courant = $gestion_contenu->getParentTexte($parent_courant);
 			$contenu_page = $contenu->getContenu();
-
-			if ($url == "") {
-				$url = "index";
-			}
+			$bloc_editable = $gestion_contenu->getBlocEditable($id_page_courante);
 		}
 		else {
 			$balise_title = null;
