@@ -224,6 +224,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `ordre` int(11) DEFAULT NULL,,
   `parent` int(11) DEFAULT NULL,
   `affiche` int(11) NOT NULL DEFAULT '1'
+  `bloc_editable` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
