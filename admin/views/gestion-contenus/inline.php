@@ -18,10 +18,12 @@
 <input type="hidden" id="id_page" name="id_page" value="<?=$id_page_courante?>">
 <button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Annuler</button>
 
+
 <?php if ($config->getResponsive() == 1){?>
 	<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/foundation-inline.css">
 <?php }?>
 <link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/page.css">
+
 <div id="admin-page">
 	<?=$contenu_page?>
 </div>
@@ -32,10 +34,10 @@
 
 <script>
 	CKEDITOR.disableAutoInline = true;
-	var editor = CKEDITOR.inline( 'editor1' );
-	CKFinder.setupCKEditor( editor, "<?=LIBSWEBROOT?>ckfinder/" );
 
-	var editor2 = CKEDITOR.inline( 'editor2' );
-	CKFinder.setupCKEditor( editor2, "<?=LIBSWEBROOT?>ckfinder/" );
+	<?php for($i=0 ; $i<$bloc_editable ; $i++):?>
+		var editor<?=$i?> = CKEDITOR.inline("editor<?=$i?>", { customConfig: "<?=WEBROOT?>config/config_ckeditor.js" });
+		CKFinder.setupCKEditor( editor<?=$i?>, "<?=LIBSWEBROOT?>ckfinder/" );
+	<?php endfor;?>
 </script>
 <?php require_once(ROOT."admin/views/gestion-contenus/js/inline.php");?>

@@ -5,7 +5,6 @@
 	</div>
 </header>
 <?php include("header.php"); ?>
-<?php require_once("admin/controller/ckeditor.php"); ?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
 <script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
@@ -79,16 +78,11 @@
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant l'affichage dans le navigateur</h2>
 
-				<a href="<?=ADMWEBROOT?>gestion-contenus/inline.php?id=<?=$id_page_courante?>">Modifier en inline</a>
+				<p>En cliquant sur le lien ci-dessous, vous verrez un aperçu de la page. Pour modifier des contenus, il vous suffira de cliquer
+					sur du texte, et si il est modifiable, vous pourrez l'éditer.
+				</p>
 
-				<div class="bloc">
-					<?php if ($droit_acces->getDroitAccesAction("GESTION_CONTENU_DANS_PAGE") == 1) { ?>
-						<?php $ckeditor->editor('contenu', $contenu_page); ?>
-					<?php } else {?>
-						<p>Vous n'êtes pas autorisé à créer / modifier des contenus sur ce site internet</p>
-						<p>Pour y avoir accès, contactez votre administrateur</p>
-					<?php }?>
-				</div>
+				<a class="submit-contenu submit-standard inline no-shadow ml0" href="<?=ADMWEBROOT?>gestion-contenus/inline.php?id=<?=$id_page_courante?>">Modifier les contenus</a>
 			</section>
 		<?php endif; ?>
 	</div>

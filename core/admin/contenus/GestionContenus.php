@@ -37,6 +37,21 @@
 			return $this->parent_texte;
 		}
 
+		public function getBlocEditable($id_page_courante) {
+			$dbc= App::getDb();
+			$bloc_editable = 0;
+
+			$query = $dbc->select("bloc_editable")->from("page")->where("ID_page", "=", $id_page_courante)->get();
+
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$bloc_editable = $obj->bloc_editable;
+				}
+			}
+
+			return $bloc_editable;
+		}
+
 		private function getOrdrePage($parent) {
 			if (($parent != "") || ($parent != 0)) {
 				$dbc = \core\App::getDb();
