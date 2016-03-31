@@ -18,6 +18,9 @@
 <input type="hidden" id="id_page" name="id_page" value="<?=$id_page_courante?>">
 <button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="<?=ADMWEBROOT?>gestion-contenus/modifier-contenu?id=<?=$id_page_courante?>"><i class="fa fa-times"></i>Annuler</button>
 
+<?php if ($config->getResponsive() == 1){?>
+	<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/foundation-inline.css">
+<?php }?>
 <link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/page.css">
 <div id="admin-page">
 	<?=$contenu_page?>
