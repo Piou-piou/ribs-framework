@@ -93,7 +93,7 @@
 			$dbc = App::getDb();
 			$droit_acces = [];
 
-			$query = $dbc->select("droit_acces")->from("droit_acces")->where("page", " LIKE ", $page, "", true)->get();
+			$query = $dbc->select("droit_acces")->from("droit_acces")->where("page", " LIKE ", "'%".$page."%'", "", true)->get();
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) $droit_acces = $obj->droit_acces;
 			}
