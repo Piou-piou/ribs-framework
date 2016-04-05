@@ -345,7 +345,7 @@ a {
 
 	.principal {
 		max-height: 740px;
-		overflow: hidden;
+		/*overflow: hidden;*/
 	}
 
 	.titre {
@@ -391,6 +391,22 @@ a {
 			transition: 0.3s all ease;
 			height: 36px;
 
+			ul {
+				>li {
+					position: relative;
+					left: 0px;
+					top: -57px;
+					background-color: $bg-general;
+					z-index: -1;
+					display: none;
+					transition: all 3s ease;
+
+					&:hover {
+						display: block;
+					}
+				}
+			}
+
 			i {
 				color: $color-lien;
 				margin-right: 5px;
@@ -408,6 +424,14 @@ a {
 				background-color: $bg-lien-hover-menu;
 				border-left: 3px solid $menug-clr-border-lien;
 				cursor: pointer;
+
+				ul {
+					li {
+						display: block;
+						left: 300px;
+						transition: all 0.3s ease;
+					}
+				}
 			}
 
 			&.active {

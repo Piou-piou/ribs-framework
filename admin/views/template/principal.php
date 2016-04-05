@@ -17,7 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>scrollbar/css/scrollbar.css">
 		<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 		<script src="<?=LIBSWEBROOT?>input_type_admin/js/effet_input.js"></script>
-		<script src="<?=LIBSWEBROOT?>scrollbar/js/scrollbar.js"></script>
+		<!--<script src="<?/*=LIBSWEBROOT*/?>scrollbar/js/scrollbar.js"></script>-->
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body>
@@ -32,7 +32,13 @@
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
 					<?php if ($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
-						<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a></li>
+						<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a>
+							<ul>
+								<?php if ($droit_acces->getDroitAccesAction("CREATION COMPTE ADMIN")):?>
+									<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/creer-utilisateur">Créer un utilisateur</a></li>
+								<?php endif;?>
+							</ul>
+						</li>
 					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
@@ -42,7 +48,13 @@
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
 					<?php if ($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
-						<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a></li>
+						<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a>
+							<ul>
+								<?php if ($droit_acces->getDroitAccesAction("CREATION PAGE")):?>
+									<li><i class="fa fa-newspaper-o"></i><a href="<?=ADMWEBROOT?>gestion-contenus/creer-une-page">Créer une page</a></li>
+								<?php endif; ?>
+							</ul>
+						</li>
 					<?php endif; ?>
 
 					<!-- pour afficher le menu des modules -->
@@ -65,7 +77,13 @@
 						</li>
 					<?php endif; ?>
 					<?php if ($droit_acces->getSuperAdmin() == 1):?>
-						<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a></li>
+						<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a>
+							<ul>
+								<li><a href="<?=ADMWEBROOT?>configuration/module">Modules</a></li>
+								<li><a href="<?=ADMWEBROOT?>configuration/infos-generales">Infos générales</a></li>
+								<li><a href="<?=ADMWEBROOT?>configuration/base-de-donnees">Base de données</a></li>
+							</ul>
+						</li>
 					<?php endif; ?>
 					<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMWEBROOT?>contacter-support">Contacter le support</a></li>
 					<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout">Déconexion</a></li>
