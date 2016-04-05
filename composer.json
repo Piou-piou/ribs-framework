@@ -17,6 +17,8 @@
     },
     "require": {
       "php": ">=5.3.0",
-        "ifsnop/mysqldump-php": "2.1"
+        "ifsnop/mysqldump-php": "2.1",
+        "intervention/image": "^2.3",
+        "nette/mail": "^2.3"
     }
 }
