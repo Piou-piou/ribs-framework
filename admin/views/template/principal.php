@@ -14,7 +14,6 @@
 		<!-- Les librairies utlisées -->
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>input_type_admin/css/style.css">
-		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>scrollbar/css/scrollbar.css">
 		<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 		<script src="<?=LIBSWEBROOT?>input_type_admin/js/effet_input.js"></script>
 	</head>
