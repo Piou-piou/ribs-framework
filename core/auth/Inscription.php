@@ -2,6 +2,8 @@
 
 	namespace core\auth;
 
+	use Egulias\EmailValidator\EmailValidator;
+
 	class Inscription {
 		protected $erreur;
 
@@ -178,12 +180,14 @@
 		 * @return bool
 		 */
 		protected function setVerifMail($value, $required = null) {
+			$validator = new EmailValidator();
+
 			//test avec le required, si le champe est vide et que le required est != null on return fa	lse sinon on va tester
 			if (($required != null) && ($this->getTestRequired($value) === false)) {
 				$this->erreur .= "<li>Le champs E-mail ne peut pas être vide</li>";
 				return false;
 			}
-			else if (($value != "") && (filter_var($value, FILTER_VALIDATE_EMAIL) == false)) {
+			else if (!$validator->isValid($value)) {
 				$this->erreur .= "<li>Le champs E-mail doit être une adresse E-mail valide</li>";
 				return false;
 			}
