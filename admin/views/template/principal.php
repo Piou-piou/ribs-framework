@@ -17,7 +17,6 @@
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>scrollbar/css/scrollbar.css">
 		<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 		<script src="<?=LIBSWEBROOT?>input_type_admin/js/effet_input.js"></script>
-		<!--<script src="<?/*=LIBSWEBROOT*/?>scrollbar/js/scrollbar.js"></script>-->
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body>
@@ -96,16 +95,5 @@
 
 		<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
 		<script src="<?=WEBROOT?>libs/input_file/js/input_file.js"></script>
-
-		<script>
-			(function($){
-				$(window).load(function(){
-					$(".menu .principal").mCustomScrollbar({
-						theme: "minimal-dark",
-						mouseWheel:{scrollAmount: 200}
-					});
-				});
-			})(jQuery);
-		</script>
 	</body>
 </html>
