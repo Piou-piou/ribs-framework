@@ -147,7 +147,9 @@
 						->set();
 
 					$this->id_page = $dbc->lastInsertId();
-					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
+					if ($parent != "") {
+						$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
+					}
 				}
 				else {
 					FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
