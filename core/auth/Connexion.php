@@ -111,7 +111,6 @@
 					foreach ($query as $obj) {
 						//si le compte est archivé on déconnecte la session et le cookie
 						if ($obj->archiver == 1) {
-							setcookie("auth".CLEF_SITE, NULL, -1);
 							self::setDeconnexion($page_retour);
 						}
 						else {
