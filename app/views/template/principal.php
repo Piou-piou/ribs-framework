@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>libs/font_awesome/css/animate.css">
 		<?php if ($config->getResponsive() == 1){?>
+			<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 			<link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/foundation.css">
 			<link rel="stylesheet" type="text/css" href="<?=TPLWEBROOT?>css/nav-responsive.css">
 		<?php } else {?>
