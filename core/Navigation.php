@@ -57,7 +57,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, $this->getSousMenu($id_page)];
+					return [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page", $this->getSousMenu($id_page)];
 				}
 			}
 		}
@@ -74,7 +74,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, ];
+					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page"];
 				}
 			}
 
@@ -95,7 +95,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->ID_module, $obj->nom_module, $obj->url];
+					return [$obj->ID_module, $obj->nom_module, $obj->url, $obj->nom_module, "page"];
 				}
 			}
 		}
