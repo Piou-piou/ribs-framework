@@ -105,7 +105,7 @@
 
 
 
-	//---------- actif pour la configuration des modules ------------------------------------//
+	//---------- actif pour la configuration des infos générales ------------------------------------//
 	if ($page == "configuration/infos-generales") {
 		if (isset($_SESSION['err_modification_infos_config'])) {
 			$nom_site = $_SESSION['nom_site'];
@@ -134,7 +134,7 @@
 			$cache_config = $config->getCache();
 		}
 	}
-	//---------- fin actif pour la configuration des modules ------------------------------------//
+	//---------- fin actif pour la configuration des infos générales ------------------------------------//
 
 
 
