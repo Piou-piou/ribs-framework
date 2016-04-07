@@ -44,7 +44,7 @@
 						<li><i class="fa fa-lock"></i><a href="<?=ADMWEBROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
 					<?php endif; ?>
 
-					<!-- Pour avoir accès à la gestion des autres comptes -->
+					<!-- Pour avoir accès à la gestion des contenus -->
 					<?php if ($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
 						<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a>
 							<ul>
@@ -52,6 +52,12 @@
 									<li><i class="fa fa-newspaper-o"></i><a href="<?=ADMWEBROOT?>gestion-contenus/creer-une-page">Créer une page</a></li>
 								<?php endif; ?>
 							</ul>
+						</li>
+					<?php endif; ?>
+
+					<!-- Pour avoir accès à la gestion de la navigation -->
+					<?php if ($droit_acces->getDroitAccesPage(",navigation/index") == true):?>
+						<li><i class="fa fa-link"></i><a href="<?=ADMWEBROOT?>gestion-navigation/index">Gestion de la navigation</a>
 						</li>
 					<?php endif; ?>
 
