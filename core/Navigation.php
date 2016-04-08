@@ -95,7 +95,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->ID_module, $obj->nom_module, $obj->url, $obj->nom_module, "page"];
+					return [$obj->ID_module, $obj->nom_module, $obj->url, $obj->nom_module, "module"];
 				}
 			}
 		}
