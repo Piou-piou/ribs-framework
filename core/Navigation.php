@@ -7,6 +7,11 @@
 		
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
+		/**
+		 * Navigation constructor.
+		 * @param null $no_module
+		 * to init get navigation link (if no module != null) whe only get page it's for admin content gestion pages
+		 */
 		public function __construct($no_module = null) {
 			$dbc = App::getDb();
 			$navigation = [];
@@ -43,6 +48,11 @@
 			return $this->navigation;
 		}
 
+		/**
+		 * @param $id_page
+		 * @return array
+		 * to get the navigation link of pages of the website
+		 */
 		private function getLienNavigationPage($id_page) {
 			$dbc = App::getDb();
 
@@ -62,6 +72,11 @@
 			}
 		}
 
+		/**
+		 * @param $id_page
+		 * @return array
+		 * to get the sub navigation of a page which have it
+		 */
 		private function getSousMenu($id_page) {
 			$dbc = App::getDb();
 			$sous_menu = [];
@@ -81,6 +96,11 @@
 			return $sous_menu;
 		}
 
+		/**
+		 * @param $id_module
+		 * @return array
+		 * to get the navigation link of modules of the website
+		 */
 		private function getLienNavigationModule($id_module) {
 			$dbc = App::getDb();
 
@@ -108,12 +128,22 @@
 			$this->navigation = $navigation;
 		}
 
+		/**
+		 * @param $id
+		 * @param $value_id
+		 * to add a link in navigation table
+		 */
 		public function setAjoutLien($id, $value_id) {
 			$dbc = App::getDb();
 
 			$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre + 1)->into("navigation")->set();
 		}
 
+		/**
+		 * @param $id
+		 * @param $value_id
+		 * to delete a link in navigation table
+		 */
 		public function setSupprimerLien($id, $value_id) {
 			$dbc = App::getDb();
 
