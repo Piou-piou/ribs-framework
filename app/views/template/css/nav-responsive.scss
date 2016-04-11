@@ -1,0 +1,94 @@
+$bg-color:  rgba(0, 0, 0, 0.8);
+$color-txt: #ffffff;
+$border-color-hover: #2BA5CA;
+
+/*pour le i*/
+$color-i: #000;
+$color-i-activated: #fff;
+
+
+
+.nav-responsive {
+	background-color: $bg-color;
+	width: 300px;
+	color: $color-txt;
+	position: fixed;
+	top: 0;
+	height: 100%;
+	left: -300px;
+	transition: all 0.3s ease-in-out;
+	z-index: 999;
+	display: none;
+
+	/*pour l'icone de la navigation*/
+	i {
+		transition: all 0.3s ease;
+		cursor: pointer;
+		margin: 20px;
+		margin-left: 310px;
+		color: $color-i;
+
+		&:hover {
+			transform: scale(1.2);
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+
+		&.desactiver {
+			display: none;
+		}
+
+		li {
+			list-style: none;
+			margin: 0;
+			text-transform: uppercase;
+			border-top: 1px solid #ffffff;
+			border-left: 0px solid transparent;
+			transition: 0.3s all ease;
+
+			&:last-child {
+				border-bottom: 1px solid #ffffff;
+			}
+
+			&:hover {
+				color: $color-txt;
+				border-left: 5px solid $border-color-hover;
+			}
+
+			a {
+				color: inherit;
+				display: block;
+				padding: 5px;
+				padding-left: 20px;
+
+				&:hover {
+					color: inherit;
+				}
+			}
+		}
+	}
+
+	/*quand la nav est active*/
+	&.active {
+		left: 0;
+
+		i {
+			margin-left: 20px;
+			color: $color-i-activated;
+		}
+	}
+}
+
+
+@media screen and (max-width: 700px) {
+	.nav-no-respsonsive {
+		display: none;
+	}
+
+	.nav-responsive {
+		display: block;
+	}
+}
