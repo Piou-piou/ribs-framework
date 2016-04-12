@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `identite` (
 --
 
 INSERT INTO `identite` (`ID_identite`, `pseudo`, `nom`, `prenom`, `mail`, `mdp`, `mdp_params`, `last_change_mdp`, `img_profil`, `img_profil_blog`, `valide`, `acces_admin`, `liste_droit`, `super_admin`) VALUES
-(1, 'adminclicandcom', 'admin', 'admin', NULL, 'y5zlsrif018ltajtjd8le9e5rkd0a29v3kdivmunz3e3lpiqca64xm9z5c33r6sdb57e7eeba9fefab7azveth658f1647671e152a8v1cfshakl867dizzjmvn529dvmc7123h1ycsfgvqpz93l72sb7kj6gbubtpm36wueyjzuaeqik321rcn2m9', '16, 86, 10, 16, 65, vl7wkz7sqq6x8ks0y602', '2016-01-20', 'profil/defaut.png', 'profil/defaut_blog.png', 1, 1, 0, 1);
+(1, 'admin', 'admin', 'admin', NULL, 'r3rvxzmgw41s22zimxpa00f15nne795cecfb134ea35cgz6y5annuxx71rveus2zif7iehb7suv6q8murcjbqyetdpfwcc4al1pus268l31byc3a56d484fd636171akb9m2kumhph78285pnh504h0cef6bxjxevhgwet21zdywrrdyp1k9nstj6v', '16, 110, 25, 16, 27, annuxx71rveus2zif7ie', '2016-01-20', 'profil/defaut.png', 'profil/defaut_blog.png', 1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
