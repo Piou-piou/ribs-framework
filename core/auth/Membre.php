@@ -117,10 +117,6 @@
 				$err = "Vos mots de passe sont différents";
 				$this->erreur = $err;
 			}
-			else if ($this->testpassword($new_mdp) == false) {
-				$err = "Votre mot de passe est trop simple, il doit contenir 5 caractères et au moins un chiffre";
-				$this->erreur = $err;
-			}
 			else {
 				$mdpok = Encrypt::setEncryptMdp($new_mdp, $this->id_identite);
 				//le nouveau mdp est bon on update
@@ -130,23 +126,4 @@
 			}
 		}
 		//------------------------------ fin setter -----------------------------------
-
-
-		//-------------------------- FONCTIONS SPECIFIQUES ----------------------------------------------------------------------------//
-		//-------------------------- FONCTIONS POUR TESTER SECURITE D'UN MDP ----------------------------------------------------------------------------//
-		/**
-		 * Fonction  qui permet de verifier la securite d'un mdp
-		 * @param string $mdp
-		 * @return integer
-		 */
-		private function testpassword($mdp) {
-			if (strlen($mdp) < 5) {
-				return false;
-			}
-
-			if (!preg_match("#[0-9]+#", $mdp)) {
-				return false;
-			}
-		}
-		//-------------------------- FIN FONCTIONS POUR TESTER SECURITE D'UN MDP ----------------------------------------------------------------------------//
 	}
