@@ -58,5 +58,13 @@
 
 		<?php require($page.".php"); ?>
 
+		<script>
+			$(document).ready(function() {
+				$("div").each(function() {
+					$(this).removeAttr("contenteditable").blur();
+				})
+			})
+		</script>
+
 	</body>
 </html>
