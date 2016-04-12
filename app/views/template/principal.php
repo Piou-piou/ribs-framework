@@ -44,11 +44,6 @@
 						<?php if ($config->getActiverInscription() == 1):?>
 							<li><a href="">Inscription</a></li>
 						<?php endif;?>
-
-						<!-- pour afficher le menu des modules -->
-						<?php /*for ($i=0 ; $i<count($gestion_module->getUrl()) ; $i++):*/?>
-							<?php /*if(\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true)require_once(MODULEROOT.$gestion_module->getUrl()[$i]."app/views/nav.php");*/?>
-						<?php /*endfor;*/?>
 					</ul>
 				</div>
 			</nav>
