@@ -36,6 +36,10 @@
 	CKEDITOR.disableAutoInline = true;
 
 	<?php for($i=0 ; $i<$bloc_editable ; $i++):?>
+		$(document).ready(function() {
+			console.log("editor<?=$i?>");
+			$("#editor<?=$i?>").attr("contenteditable", true);
+		})
 		var editor<?=$i?> = CKEDITOR.inline("editor<?=$i?>", { customConfig: "<?=WEBROOT?>config/config_ckeditor.js" });
 		CKFinder.setupCKEditor( editor<?=$i?>, "<?=LIBSWEBROOT?>ckfinder/" );
 	<?php endfor;?>
