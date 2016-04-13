@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>reset_css/reset.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<script src="<?=WEBROOT?>admin/views/template/js/menu.js"></script>
+		<?php require_once(ROOT."admin/views/template/js/menu.php");?>
 
 		<!-- Les librairies utlisées -->
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
@@ -19,7 +19,7 @@
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body>
-		<nav class="menu active">
+		<nav class="menu <?php if ($_SESSION["menu_plie".CLEF_SITE] == "deplie"):?>active<?php endif;?>">
 			<div class="titre">
 				<h1>Ribs V2.3.5.2</h1>
 				<i class="fa fa-bars"></i>
