@@ -1,18 +1,145 @@
-<!-- inclut de base dans l'admin -->
-<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>slider/css/slider.css">
-<script src="<?=LIBSWEBROOT?>slider/js/ease.js"></script>
-<script src="<?=LIBSWEBROOT?>slider/js/slider.js"></script>
+<!DOCTYPE html>
+<head>
 
-<div class="slider" id="slider">
-	<section class="contenu-slider">
-		<div id="slide1"  class="slide courant">
-			<div class="inner">
-				<div>
-					<h3>Karaté Do</h3>
-					<p>Découvrez toutes nos activités</p>
+<title>jquery.sldr</title>
+
+<link href="css/styles.css" rel="stylesheet">
+<!--[if lt IE 9]><link href="css/ie8.css" rel="stylesheet"><![endif]-->
+<!--[if lt IE 8]><link href="css/ie7.css" rel="stylesheet"><![endif]-->
+
+</head>
+
+<body>
+
+<div class="stage">
+
+	<h1>jQuery.sldr</h1>
+	<p><small>A fully responsive image slider. View on <a href="https://github.com/devowhippit/jquery.sldr">GitHub</a>.</small></p>
+
+	<div id="SLDR-ONE" class="sldr">
+		<ul class="wrp animate">
+			<li class="elmnt-one">
+				<div class="skew">
+					<div class="wrap">
+						<img src="img/Lake.jpg" width="1000" height="563">
+					</div>
 				</div>
-			</div>
-			<img src="images/slider.jpg" alt="">
-		</div>
-	</section>
+			</li>
+			<li class="elmnt-two"><div class="skew"><div class="wrap"><img src="img/Mountain-Range.jpg" width="1000" height="563"></div></div></li>
+			<li class="elmnt-three"><div class="skew"><div class="wrap"><img src="img/Mt-Fuji.jpg" width="1000" height="563"></div></div></li>
+			<li class="elmnt-four"><div class="skew"><div class="wrap"><img src="img/Pink-Forest.jpg" width="1000" height="563"></div></div></li>
+		</ul>
+	</div>
+
+	<div class="clear"></div>
+
+	<div class="captions">
+	 <div class="focalPoint"><p><small>Lake</small></p></div>
+	 <div><p><small>Mountain Range</small></p></div>
+	 <div><p><small>Mt. Fuji</small></p></div>
+	 <div><p><small>Pink Forest</small></p></div>
+	</div>
+
+	<ul class="selectors">
+		<li class="focalPoint"><a href="">•</a></li><li><a href="">•</a></li><li><a href="">•</a></li><li><a href="">•</a></li>
+	</ul>
+
+	<button class="sldr-prv sldr-nav prev">Prev</button>
+	<button class="sldr-nxt sldr-nav next">Next</button>
+
+	<p>Scale browser to see responsive demo.</p>
+	<p style="float:left;">&#8596;&nbsp;</p>
+	<p style="float:right;">&nbsp;&#8596;</p>
+
+	<p><small>These images are jpgs masked using a CSS transform method (and a filter method for IE). They are completely responsive and support the following desktop browsers; Chrome, Safari, Firefox, IE 8+, and mobile browsers; IOS 3+, Android 4+.</small></p>
+
+	<div class="clear"></div>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
 </div>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery.sldr.js"></script>
+<script>
+
+$( window ).load( function() {
+
+	$( '.sldr' ).each( function() {
+		var th = $( this );
+		th.sldr({
+			focalClass    : 'focalPoint',
+			offset        : th.width() / 2,
+			sldrWidth     : 'responsive',
+			nextSlide     : th.nextAll( '.sldr-nav.next:first' ),
+			previousSlide : th.nextAll( '.sldr-nav.prev:first' ),
+			selectors     : th.nextAll( '.selectors:first' ).find( 'li' ),
+			toggle        : th.nextAll( '.captions:first' ).find( 'div' ),
+			sldrInit      : sliderInit,
+			sldrStart     : slideStart,
+			sldrComplete  : slideComplete,
+			sldrLoaded    : sliderLoaded,
+			sldrAuto      : true,
+			sldrTime      : 5000,
+			hasChange     : true
+		});
+	});
+
+});
+
+/**
+ * Sldr Callbacks
+ */
+
+/**
+ * When the sldr is initiated, before the DOM is manipulated
+ * @param {object} args the slides, callback, and config of the slider
+ * @return null
+ */
+function sliderInit( args ) {
+
+}
+
+/**
+ * When individual slides are loaded
+ * @param {object} args the slides, callback, and config of the slider
+ * @return null
+ */
+function slideLoaded( args ) {
+
+}
+
+/**
+ * When the full slider is loaded, after the DOM is manipulated
+ * @param {object} args the slides, callback, and config of the slider
+ * @return null
+ */
+function sliderLoaded( args ) {
+
+}
+
+/**
+ * Before the slides change focal points
+ * @param {object} args the slides, callback, and config of the slider
+ * @return null
+ */
+function slideStart( args ) {
+
+}
+
+/**
+ * After the slides are done changing focal points
+ * @param {object} args the slides, callback, and config of the slider
+ * @return null
+ */
+function slideComplete( args ) {
+
+}
+
+</script>
+
+</body>
