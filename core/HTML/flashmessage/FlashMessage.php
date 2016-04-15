@@ -44,6 +44,10 @@
 					//definit le chemin sachant que l'on part de index.php
 					$chemin = str_replace("\\", "/", str_replace("index.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");
 				}
+				else if  (strstr($_SERVER['SCRIPT_NAME'], "installation.php")) {
+					//definit le chemin sachant que l'on part de admin.php
+					$chemin = str_replace("\\", "/", str_replace("installation.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");
+				}
 				else {
 					//definit le chemin sachant que l'on part de admin.php
 					$chemin = str_replace("\\", "/", str_replace("admin.php", "", $_SERVER['SCRIPT_NAME']).__NAMESPACE__."/view/");

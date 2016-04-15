@@ -37,6 +37,10 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
+		public function getErreur() {
+			return $this->erreur;
+		}
+
 		/**
 		 * server adress not ok
 		 */
