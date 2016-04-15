@@ -25,7 +25,6 @@
 	}
 	else {
 		$page = "installation/views/index";
-		require("installation/controller/initialise_all.php");
 		require("installation/views/template/principal.php");
 	}
 	//--------------------------------------------- FIN ROUTING -------------------------------------------------------//
