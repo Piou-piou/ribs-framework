@@ -20,6 +20,7 @@
 			require_once("installation/controller/".$lien.".php");
 		}
 		else {
+			require("installation/controller/initialise_all.php");
 			require("installation/views/template/principal.php");
 		}
 	}

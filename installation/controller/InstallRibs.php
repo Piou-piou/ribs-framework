@@ -1,6 +1,5 @@
 <?php
 	namespace installation\controller;
-	use core\App;
 	use core\HTML\flashmessage\FlashMessage;
 
 	class InstallRibs {
@@ -54,7 +53,7 @@
 		 * seerver type not correct
 		 */
 		private function getErreur0() {
-			FlashMessage::setFlash("Le type : ".$this->db_type." n'est pas un type de base de données cprrect");
+			FlashMessage::setFlash("Le type : ".$this->db_type." n'est pas un type de base de données correct");
 
 			$this->erreur = true;
 		}
@@ -63,7 +62,7 @@
 		 * couldn't find database
 		 */
 		private function getErreur1049() {
-
+			//si on ne trouve pas la bdd on la créée
 		}
 
 		/**
