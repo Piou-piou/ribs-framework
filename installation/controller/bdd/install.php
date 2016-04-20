@@ -11,3 +11,6 @@
 
 		header("location:".WEBROOT."installation-ribs/bdd");
 	}
+	else {
+		echo("dgf");
+	}

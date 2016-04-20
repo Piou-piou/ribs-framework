@@ -1,5 +1,6 @@
 <?php
 	namespace installation\controller;
+	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
 
 	class InstallRibs {
@@ -24,6 +25,8 @@
 
 			try {
 				$this->dbc = new \PDO($this->db_type.':host='.$this->db_host.';dbname='.$this->db_name, $this->db_user, $this->db_pass);
+
+				$this->setinstallbdd();
 			}
 			catch (\PDOException $e) {
 				//on tente de créer la bdd
@@ -63,6 +66,13 @@
 		 */
 		private function getErreur1049() {
 			//si on ne trouve pas la bdd on la créée
+			$dbc = new \PDO($this->db_type.':host='.$this->db_host, $this->db_user, $this->db_pass);
+
+			$dbc->query("CREATE DATABASE ".$this->db_name." DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci");
+
+			$this->dbc = new \PDO($this->db_type.':host='.$this->db_host.';dbname='.$this->db_name, $this->db_user, $this->db_pass);
+
+			$this->setinstallbdd();
 		}
 
 		/**
@@ -87,8 +97,8 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setCreerBdd() {
-			$this->dbc->query("CREATE DATABASE ".$this->db_name);
+		private function setinstallbdd() {
+			$this->dbc->query(file_get_contents(ROOT.'ribs.sql'));
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}
