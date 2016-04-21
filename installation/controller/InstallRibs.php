@@ -98,7 +98,7 @@
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		private function setinstallbdd() {
-			$this->dbc->query(file_get_contents(ROOT.'ribs.sql'));
+			$this->dbc->query(file_get_contents(ROOT.'installation/controller/sq/install.sql'));
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}
