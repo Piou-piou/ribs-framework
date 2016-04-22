@@ -2,6 +2,7 @@
 	namespace installation\controller;
 
 	use core\App;
+	use core\HTML\flashmessage\FlashMessage;
 
 	class InstallConfiguration {
 		

@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `contenu_dynamique` int(1) DEFAULT '1',
   `responsive` int(1) DEFAULT NULL,
   `cache` int(1) DEFAULT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `configuration_compte` (
   `valider_inscription` int(1) DEFAULT NULL,
   `activer_inscription` int(1) DEFAULT NULL,
   `activer_connexion` int(1) DEFAULT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `identite` (
   `acces_admin` int(11) DEFAULT NULL,
   `liste_droit` int(11) DEFAULT NULL,
   `super_admin` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -324,12 +324,12 @@ MODIFY `ID_cache` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `configuration`
 --
 ALTER TABLE `configuration`
-MODIFY `ID_configuration` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID_configuration` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `configuration_compte`
 --
 ALTER TABLE `configuration_compte`
-MODIFY `ID_configuration_compte` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID_configuration_compte` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `droit_acces`
 --
@@ -344,7 +344,7 @@ MODIFY `ID_droit_acces_page` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT pour la table `identite`
 --
 ALTER TABLE `identite`
-MODIFY `ID_identite` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `ID_identite` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `liaison_liste_droit`
 --

@@ -37,3 +37,18 @@
 			$mail_administrateur = null;
 		}
 	}
+
+	if ($page == "utilisateur") {
+		if (isset($_SESSION['err_user'])) {
+			$nom = $_SESSION['nom'];
+			$prenom = $_SESSION['prenom'];
+			$pseudo = $_SESSION['pseudo'];
+
+			unset($_SESSION['err_user']);
+		}
+		else {
+			$nom = null;
+			$prenom = null;
+			$pseudo = null;
+		}
+	}

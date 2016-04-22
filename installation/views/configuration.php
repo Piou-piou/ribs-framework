@@ -1,6 +1,6 @@
 <div class="inner">
 	<div class="installation-form active" id="login">
-		<form  action="<?=WEBROOT?>installation-ribs/controller/bdd/install" method="POST">
+		<form  action="<?=WEBROOT?>installation-ribs/controller/configuration/info_generales" method="POST">
 			<img src="<?=WEBROOT?>admin/views/template/images/ribs.png" alt="">
 
 			<h1>Initialisation de la base de données</h1>

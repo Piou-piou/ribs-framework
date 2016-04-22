@@ -12,5 +12,5 @@
 		header("location:".WEBROOT."installation-ribs/bdd");
 	}
 	else {
-		header("location:".WEBROOT."installation/configuration");
+		header("location:".WEBROOT."installation-ribs/configuration");
 	}
