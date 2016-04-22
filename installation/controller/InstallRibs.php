@@ -101,25 +101,8 @@
 		private function setinstallbdd() {
 			$this->dbc->query(file_get_contents(ROOT.'installation/controller/sql/install.sql'));
 
-			$dev_info = [
-				$this->db_type,
-				$this->db_name,
-				$this->db_user,
-				$this->db_pass,
-				$this->db_host,
-				"/app/images/",
-				"/app/images/pages"
-			];
-
-			$prod_info = [
-				"",
-				"",
-				"",
-				"",
-				"",
-				"/app/images/",
-				"/app/images/pages"
-			];
+			$dev_info = [$this->db_type, $this->db_name, $this->db_user, $this->db_pass, $this->db_host, "/app/images/", "/app/images/pages"];
+			$prod_info = ["", "", "", "", "", "/app/images/", "/app/images/pages"];
 
 			$ini = new IniParser();
 			$ini->setModifierConfigIni("on", $dev_info, $prod_info);
