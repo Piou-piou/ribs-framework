@@ -52,7 +52,7 @@
 			}
 
 			$this->erreur = true;
-			return "<li>Votre ". $champ ." doit être de trois caractère minimum</li>";
+			return "<li>Votre ".$champ." doit être de trois caractère minimum</li>";
 		}
 
 		/**

@@ -30,7 +30,7 @@
 		}
 
 		public function getBlocEditable($id_page_courante) {
-			$dbc= App::getDb();
+			$dbc = App::getDb();
 			$bloc_editable = 0;
 
 			$query = $dbc->select("bloc_editable")->from("page")->where("ID_page", "=", $id_page_courante)->get();
@@ -276,6 +276,11 @@
 			}
 		}
 
+		/**
+		 * @param string $id
+		 * @param $value_id
+		 * @param integer $affiche
+		 */
 		private function setAjoutLienNavigation($id, $value_id, $affiche) {
 			if ($affiche !== null) {
 				$nav = new Navigation();
