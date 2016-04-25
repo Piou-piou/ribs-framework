@@ -73,6 +73,31 @@
 
 			return 0;
 		}
+
+		/**
+		 * @param $nom_table
+		 * @param $nom_id_table
+		 * @param $champ
+		 * @param $value
+		 * @param $limit_char
+		 * @param $err_char
+		 * @param $err_egalite
+		 * @param null $value_id_table
+		 * @return string
+		 * fonction qui permet de vérifier qu'il n'y ait pas d'erreur dans le champ spécifié ni de doublons
+		 */
+		public static function getVerifChamp($nom_table, $nom_id_table, $champ, $value, $limit_char, $err_char, $err_egalite, $value_id_table = null) {
+			$dbc = App::getDb();
+
+			if (strlen(utf8_decode($value)) > $limit_char) {
+				self::$erreur = true;
+				return "<li>$err_char</li>";
+			}
+			else if ($dbc->rechercherEgalite($nom_table, $champ, $value, $nom_id_table, $value_id_table) == true) {
+				self::$erreur = true;
+				return "<li>$err_egalite</li>";
+			}
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
@@ -119,19 +144,19 @@
 
 			$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
 			$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
-			$err_balise_title = App::getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite);
+			$err_balise_title = $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite);
 
 			$err_url_char = "L'url ne doit pas dépasser 92 caractères";
 			$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
-			$err_url = App::getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite);
+			$err_url = $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite);
 
 			$err_meta_description_char = "La description de cette page ne doit pas dépasser 158 caractères";
 			$err_meta_description_egalite = "Cette description est déjà présent en base de données, merci d'en choisir une autre pour optimiser le référencement de votre site";
-			$err_meta_description = App::getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite);
+			$err_meta_description = $this->getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite);
 
 			$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
 			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
-			$err_titre_page = App::getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
+			$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
 
 			if (App::getErreur() !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
@@ -187,19 +212,19 @@
 
 				$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
 				$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
-				$err_balise_title = App::getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite, $this->id_page);
+				$err_balise_title = $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite, $this->id_page);
 
 				$err_url_char = "L'url ne doit pas dépasser 92 caractères";
 				$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
-				$err_url = App::getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite, $this->id_page);
+				$err_url = $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite, $this->id_page);
 
 				$err_meta_description_char = "La description de cette page ne doit pas dépasser 158 caractères";
 				$err_meta_description_egalite = "Cette description est déjà présent en base de données, merci d'en choisir une autre pour optimiser le référencement de votre site";
-				$err_meta_description = App::getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite, $this->id_page);
+				$err_meta_description = $this->getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite, $this->id_page);
 
 				$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
 				$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
-				$err_titre_page = App::getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite, $this->id_page);
+				$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite, $this->id_page);
 
 				if (App::getErreur() !== true) {
 					$new_url = explode("/", $url);
