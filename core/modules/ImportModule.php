@@ -164,7 +164,7 @@
 			require_once(MODULEROOT.$this->url_module."uninstall.php");
 			$dbc->query($requete);
 
-			$this->supprimerDossier(str_replace("/", "", $this->url_module));
+			App::supprimerDossier(str_replace("/", "", $this->url_module));
 		}
 
 		/**
@@ -176,26 +176,9 @@
 
 			$this->getInfoModule($id_module);
 
-			$this->supprimerDossier(MODULEROOT.$this->dossier_module);
+			App::supprimerDossier(MODULEROOT.$this->dossier_module);
 
 			$dbc->update("delete_old_version", "")->from("module")->where("ID_module", "=", $this->id_module)->set();
-		}
-
-		/**
-		 * @param string $url
-		 * fonction qui permet de supprmer un dossier avec toute son abrorescence en fonction d'une URL
-		 */
-		private function supprimerDossier($url) {
-			if (is_dir($url)) {
-				$objects = scandir($url);
-				foreach ($objects as $object) {
-					if ($object != "." && $object != "..") {
-						if (filetype($url."/".$object) == "dir") $this->supprimerDossier($url."/".$object); else unlink($url."/".$object);
-					}
-				}
-				reset($objects);
-				rmdir($url);
-			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
