@@ -8,27 +8,27 @@
 			<div class="modifier-contenu">
 				<div class="bloc">
 					<label for="nom" class="label"  data-error="Le nom de votre site doit être entre 3 et 50 caractères">Votre nom</label>
-					<input type="text" name="nom" type-val="string" min="3" max="50" value="<?=$nom?>">
+					<input type="text" name="nom" type-val="string" min="3" max="50" value="<?=$nom?>" required>
 				</div>
 
 				<div class="bloc">
 					<label for="prenom" class="label"  data-error="L'url de votre site doit être entre 3 et 50 caractères">Votre prénom</label>
-					<input type="text" name="prenom" type-val="string" min="3" max="50" value="<?=$prenom?>">
+					<input type="text" name="prenom" type-val="string" min="3" max="50" value="<?=$prenom?>" required>
 				</div>
 
 				<div class="bloc">
 					<label for="pseudo" class="label"  data-error="Le nom du gérant du site doit être entre 3 et 50 caractères">Votre pseudo (utilisé pour le login)</label>
-					<input type="text" name="pseudo" type-val="string" min="3" max="50" value="<?=$pseudo?>">
+					<input type="text" name="pseudo" type-val="string" min="3" max="50" value="<?=$pseudo?>" required>
 				</div>
 
 				<div class="bloc">
 					<label for="mdp" class="label"  data-error="Le mail administrateur doit être entre 3 et 100 caractères">Votre mot de passe</label>
-					<input type="password" name="mdp" type-val="string" min="3" max="100">
+					<input type="password" name="mdp" type-val="string" min="3" max="100" required>
 				</div>
 
 				<div class="bloc">
 					<label for="verif_mdp" class="label"  data-error="Le mail administrateur doit être entre 3 et 100 caractères">Votre mot de passe</label>
-					<input type="password" name="verif_mdp" type-val="string" min="3" max="100">
+					<input type="password" name="verif_mdp" type-val="string" min="3" max="100" required>
 				</div>
 			</div>
 
