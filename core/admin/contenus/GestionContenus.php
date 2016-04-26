@@ -8,25 +8,14 @@
 	use core\Navigation;
 
 	class GestionContenus extends Contenus {
-		private $parent_texte;
+		use ParentTexte;
+
 		private $erreur;
 
 
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public function getErreur() {
 			return $this->erreur;
-		}
-
-		public function getParentTexte($parent) {
-			$dbc = \core\App::getDb();
-
-			$query = $dbc->select("titre")->from("page")->where("ID_page", "=", $parent)->get();
-
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) $this->parent_texte = $obj->titre;
-			}
-
-			return $this->parent_texte;
 		}
 
 		public function getBlocEditable($id_page_courante) {
