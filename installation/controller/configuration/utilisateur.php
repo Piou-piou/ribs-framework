@@ -10,5 +10,7 @@
 		header("location:".WEBROOT."installation-ribs/utilisateur");
 	}
 	else {
+		\core\App::supprimerDossier(ROOT."installation");
+
 		header("location:".WEBROOT."administrator");
 	}
