@@ -379,6 +379,24 @@ a {
 		}
 	}
 
+	.mon-compte {
+		margin: 10px 0 10px 10px;
+
+		.image {
+			width: 60px;
+			height: 60px;
+			border-radius: 120px;
+			overflow: hidden;
+			margin-right: 10px;
+		}
+
+		.info {
+			h3 {
+				color: $color-lien;
+			}
+		}
+	}
+
 	ul {
 		li {
 			padding: 0px 10px;

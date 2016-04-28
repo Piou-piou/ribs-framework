@@ -24,6 +24,20 @@
 				<h1>Ribs V2.3.5.3</h1>
 				<i class="fa fa-bars"></i>
 			</div>
+
+			<div class="mon-compte">
+				<div class="colonne">
+					<div class="image">
+						<img src="<?=WEBROOT?>app/images/profil/defaut.png" alt="">
+					</div>
+				</div>
+				<div class="colonne">
+					<div class="info">
+						<h3>Anthony Pilloud</h3>
+					</div>
+				</div>
+			</div>
+
 			<ul>
 				<div class="principal">
 					<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/mon-compte">Mon compte</a></li>
