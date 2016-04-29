@@ -97,7 +97,7 @@
 		 * @param int $obj_connecte si = 1 on est obligge d'être connecte pour avoir acces à la page
 		 * @param string $page_retour page sur laquel rediriger le mec qui a clique sur déconnexion
 		 */
-		public static function setConnexion($obj_connecte, $page_retour) {
+		public static function setConnexion($page_retour) {
 			$dbc = App::getDb();
 
 			//si le user n'a rien mis dans login on lui de pense a se connecter
@@ -110,26 +110,23 @@
 				if ((is_array($query)) && (count($query) > 0)) {
 					foreach ($query as $obj) {
 						//si le compte est archivé on déconnecte la session et le cookie
-						if ($obj->archiver == 1) {
-							self::setDeconnexion($page_retour);
-						}
-						else {
-							$key = sha1($obj->pseudo.$obj->mdp);
+						self::setTestParamCompte($obj->valide, $obj->archiver, $page_retour);
 
-							if ($key == $auth[1]) {
-								$_SESSION['login'] = $obj->pseudo;
-								$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
+						$key = sha1($obj->pseudo.$obj->mdp);
 
-								setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-							}
-							else if ($obj_connecte == 1) {
-								self::setDeconnexion($page_retour);
-							}
+						if ($key == $auth[1]) {
+							$_SESSION['login'] = $obj->pseudo;
+							$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
+
+							setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
 						}
 					}
 				}
 			}
-			else if ((!isset($_SESSION["idlogin".CLEF_SITE])) && ($obj_connecte == 1)) {
+		}
+
+		public static function setObgConnecte($page_retour) {
+			if (!isset($_SESSION["idlogin".CLEF_SITE])) {
 				FlashMessage::setFlash("Vous devez être connecté pour accéder à cette page");
 				header("location:".$page_retour);
 			}

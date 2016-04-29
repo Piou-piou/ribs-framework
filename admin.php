@@ -82,7 +82,7 @@
 		}
 		else {
 			if (!isset($_SESSION["idlogin".CLEF_SITE])) {
-				Connexion::setConnexion(1, WEBROOT."administrator/login");
+				Connexion::setObgConnecte(WEBROOT."administrator/login");
 			}
 			else {
 				if (\core\functions\ChaineCaractere::FindInString($page, "modules/") == true) {
@@ -123,10 +123,10 @@
 		}
 	}
 	else {
-		Connexion::setConnexion(1, WEBROOT."administrator/login");
+		Connexion::setObgConnecte(WEBROOT."administrator/login");
 
 		if (!isset($_SESSION["idlogin".CLEF_SITE])) {
-			Connexion::setConnexion(1, WEBROOT."administrator/login");
+			Connexion::setObgConnecte(WEBROOT."administrator/login");
 		}
 		else {
 			$page = "index";
