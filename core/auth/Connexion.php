@@ -35,6 +35,26 @@
 			}
 		}
 
+		private function setTestConnexion($query, $auth, $page_retour) {
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					//si le compte est archivé on déconnecte la session et le cookie
+					self::setTestParamCompte($obj->valide, $obj->archiver, $page_retour);
+
+					$key = sha1($obj->pseudo.$obj->mdp);
+
+					if ($key == $auth[1]) {
+						$_SESSION['login'] = $obj->pseudo;
+						$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
+
+						setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
+
+						return true;
+					}
+				}
+			}
+		}
+
 
 		/**
 		 * Fonction de connexions a un espace membre ou prive avec un login / mdp
@@ -92,6 +112,13 @@
 			}
 		}
 
+		public static function setObgConnecte($page_retour) {
+			if (!isset($_SESSION["idlogin".CLEF_SITE])) {
+				FlashMessage::setFlash("Vous devez être connecté pour accéder à cette page");
+				header("location:".$page_retour);
+			}
+		}
+
 		/**
 		 * Fonction pour lancer une connexoin avec un compte
 		 * @param string $page_retour page sur laquel rediriger le mec qui a clique sur déconnexion
@@ -106,28 +133,8 @@
 				$auth = explode("-----", $auth);
 
 				$query = $dbc->select()->from("identite")->where("ID_identite", "=", $auth[0])->get();
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						//si le compte est archivé on déconnecte la session et le cookie
-						self::setTestParamCompte($obj->valide, $obj->archiver, $page_retour);
 
-						$key = sha1($obj->pseudo.$obj->mdp);
-
-						if ($key == $auth[1]) {
-							$_SESSION['login'] = $obj->pseudo;
-							$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
-
-							setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
-						}
-					}
-				}
-			}
-		}
-
-		public static function setObgConnecte($page_retour) {
-			if (!isset($_SESSION["idlogin".CLEF_SITE])) {
-				FlashMessage::setFlash("Vous devez être connecté pour accéder à cette page");
-				header("location:".$page_retour);
+				self::setTestConnexion($query, $auth, $page_retour);
 			}
 		}
 
