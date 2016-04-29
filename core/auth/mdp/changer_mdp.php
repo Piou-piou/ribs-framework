@@ -12,7 +12,7 @@
 
 		if ($membre->getErreur() != "") {
 			FlashMessage::setFlash($membre->getErreur());
-			header("location:".ADMWEBROOT."gestion-comptes/mon-compte");
+			header("location:".ADMWEBROOT."configuration/mon-compte");
 		}
 		else {
 			\core\auth\Connexion::setDeconnexion(WEBROOT."administrator/login");

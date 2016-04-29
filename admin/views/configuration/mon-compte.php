@@ -4,6 +4,8 @@
 		<h1>Mon compte</h1>
 	</div>
 </header>
+<?php require_once('header.php'); ?>
+
 <div class="inner">
 	<section class="contenu modifier-contenu modif-compte">
 		<h2>Changer mon mot de passe</h2>

@@ -346,7 +346,6 @@ a {
 
 	.principal {
 		max-height: 740px;
-		/*overflow: hidden;*/
 	}
 
 	.titre {
@@ -381,6 +380,7 @@ a {
 
 	.mon-compte {
 		margin: 10px 0 10px 10px;
+		transition: all 0.5s ease;
 
 		.image {
 			width: 60px;
@@ -390,9 +390,39 @@ a {
 			margin-right: 10px;
 		}
 
-		.info {
+		.info-compte {
 			h3 {
 				color: $color-lien;
+				margin-bottom: 10px;
+				margin-top: 10px;
+			}
+		}
+
+		.fonctions {
+			a {
+				padding: 0;
+
+				i {
+					margin-right: 20px;
+					color: $color-lien;
+					transition: all 0.3s ease;
+
+					&:hover {
+						color: $menug-clr-border-lien;
+					}
+				}
+			}
+
+			.notif {
+				&.non-vue i {
+					color: $bg-notification;
+				}
+			}
+
+			.logout {
+				i:hover {
+					color: #FF0000;
+				}
 			}
 		}
 	}
@@ -459,54 +489,11 @@ a {
 
 			&.support {
 				position: absolute;
-				bottom: 36px;
-				width: 294px;
-
-				&:hover {
-					width: 291px;
-				}
-			}
-
-			&.configuration {
-				position: absolute;
-				bottom: 74px;
-				width: 294px;
-
-				&:hover {
-					width: 291px;
-				}
-			}
-
-			&.notification {
-				position: absolute;
-				bottom: 112px;
-				width: 294px;
-
-				&:hover {
-					width: 291px;
-				}
-
-				&.non-vue {
-					background-color: $bg-notification;
-				}
-			}
-
-			&.logout {
-				position: absolute;
 				bottom: 0px;
-				background-color: #252B35;
 				width: 294px;
 
 				&:hover {
-					background-color: #131922;
-					border-left: 3px solid #FF0000;
-					color: #fff;
 					width: 291px;
-
-					i {
-						color: #FF0000;
-						transition: 0.3s all ease;
-					}
 				}
 			}
 		}

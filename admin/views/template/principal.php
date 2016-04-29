@@ -32,16 +32,35 @@
 					</div>
 				</div>
 				<div class="colonne">
-					<div class="info">
+					<div class="info-compte">
 						<h3>Anthony Pilloud</h3>
+						<div class="fonctions">
+							<?php if ($droit_acces->getSuperAdmin() == 1):?>
+								<div class="colonne">
+									<div class="notif <?php if ($admin->getNotification() == 1): ?> non-vue<?php endif; ?>">
+										<a href="<?=ADMWEBROOT?>notifications"><i class="fa fa-bell  <?php if ($admin->getNotification() == 1):?> animated infinite swing<?php endif; ?>"></i></a>
+									</div>
+								</div>
+							<?php endif;?>
+							<?php if (($droit_acces->getSuperAdmin() == 1) || ($droit_acces->getDroitAccesPage("configuration/mon-compte"))):?>
+								<div class="colonne">
+									<div class="config">
+										<a href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-gear"></i></a>
+									</div>
+								</div>
+							<?php endif;?>
+							<div class="colonne">
+								<div class="logout">
+									<a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout"><i class="fa fa-sign-out animated activate swing infinite"></i></a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<ul>
 				<div class="principal">
-					<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/mon-compte">Mon compte</a></li>
-
 					<!-- Pour avoir accès à la gestion des autres comptes -->
 					<?php if ($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
 						<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a>
@@ -70,7 +89,7 @@
 					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion de la navigation -->
-					<?php if ($droit_acces->getDroitAccesPage(",navigation/index") == true):?>
+					<?php if ($droit_acces->getDroitAccesPage("navigation/index") == true):?>
 						<li><i class="fa fa-link"></i><a href="<?=ADMWEBROOT?>gestion-navigation/index">Gestion de la navigation</a>
 						</li>
 					<?php endif; ?>
@@ -87,24 +106,7 @@
 				</div>
 
 				<div class="speciaux">
-					<!-- lien fixes en bas de la page -->
-					<?php if ($droit_acces->getSuperAdmin() == 1):?>
-						<li class="notification <?php if ($admin->getNotification() == 1): ?> non-vue<?php endif; ?>">
-							<i class="fa fa-exclamation <?php if ($admin->getNotification() == 1):?> animated infinite swing<?php endif; ?>"></i>
-							<a href="<?=ADMWEBROOT?>notifications">Notifications systèmes</a>
-						</li>
-					<?php endif; ?>
-					<?php if ($droit_acces->getSuperAdmin() == 1):?>
-						<li class="configuration"><i class="fa fa-gear"></i><a href="<?=ADMWEBROOT?>configuration/index">Configuration</a>
-							<ul>
-								<li><a href="<?=ADMWEBROOT?>configuration/module">Modules</a></li>
-								<li><a href="<?=ADMWEBROOT?>configuration/infos-generales">Infos générales</a></li>
-								<li><a href="<?=ADMWEBROOT?>configuration/base-de-donnees">Base de données</a></li>
-							</ul>
-						</li>
-					<?php endif; ?>
 					<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMWEBROOT?>contacter-support">Contacter le support</a></li>
-					<li class="logout"><i class="fa fa-times animated activate swing infinite"></i><a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout">Déconexion</a></li>
 				</div>
 			</ul>
 		</nav>

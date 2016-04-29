@@ -135,7 +135,7 @@
 		 */
 		public function getDroitAccesPage($page) {
 			//page sans droit dans admin
-			$all_access = array("gestion-comptes/mon-compte", "index", "contacter-support");
+			$all_access = array("configuration/mon-compte", "index", "contacter-support");
 
 			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces())) || (in_array($page, $all_access))) {
 				return true;
