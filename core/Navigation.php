@@ -119,6 +119,18 @@
 				}
 			}
 		}
+
+		private function getLienPageExist($id_page) {
+			$dbc = App::getDb();
+
+			$query = $dbc->select("ID_page")->from("navigation")->where("ID_page", "=", $id_page)->get();
+
+			if (count($query) < 1) {
+				return false;
+			}
+
+			return true;
+		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		
 		
@@ -136,7 +148,9 @@
 		public function setAjoutLien($id, $value_id) {
 			$dbc = App::getDb();
 
-			$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre + 1)->into("navigation")->set();
+			if ($this->getLienPageExist($id) === false) {
+				$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre + 1)->into("navigation")->set();
+			}
 		}
 
 		/**

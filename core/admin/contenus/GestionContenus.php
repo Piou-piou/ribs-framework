@@ -161,7 +161,7 @@
 						->set();
 
 					$this->id_page = $dbc->lastInsertId();
-					if ($parent != "") {
+					if ($parent == "") {
 						$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
 					}
 				}
