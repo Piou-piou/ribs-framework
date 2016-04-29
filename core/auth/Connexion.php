@@ -94,7 +94,6 @@
 
 		/**
 		 * Fonction pour lancer une connexoin avec un compte
-		 * @param int $obj_connecte si = 1 on est obligge d'être connecte pour avoir acces à la page
 		 * @param string $page_retour page sur laquel rediriger le mec qui a clique sur déconnexion
 		 */
 		public static function setConnexion($page_retour) {
