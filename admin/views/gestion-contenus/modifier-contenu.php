@@ -6,8 +6,6 @@
 </header>
 <?php include("header.php"); ?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
-<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
-<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/modifier_contenus" method="post">

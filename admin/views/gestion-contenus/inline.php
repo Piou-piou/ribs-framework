@@ -7,8 +7,6 @@
 <?php include("header.php"); ?>
 <?php require_once("admin/controller/ckeditor.php"); ?>
 <?php $droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']); ?>
-<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
-<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 
 
 

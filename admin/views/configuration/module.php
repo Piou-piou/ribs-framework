@@ -5,8 +5,6 @@
 </header>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 <script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
-<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
-<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 <?php require_once(ROOT."admin/views/configuration/js/configuration.php"); ?>
 <?php require_once('header.php'); ?>
 

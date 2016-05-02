@@ -3,9 +3,6 @@
 		<h1>Configuration | Infos Générales</h1>
 	</div>
 </header>
-
-<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
-<script src="<?=LIBSWEBROOT?>popup/js/popup.js"></script>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 <script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
 <?php require_once('header.php'); ?>
