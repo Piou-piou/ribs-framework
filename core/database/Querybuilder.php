@@ -147,7 +147,6 @@
 		public function get() {
 			$values = [];
 			$requete = $this->req_beginning.implode(",", $this->select_champ)." FROM ".implode(",", $this->table);
-
 			if ((!empty($this->conditions)) || (!empty($this->conditions_table))) {
 				$requete .= $this->getWhereConditions()[0];
 				$values = $this->getWhereConditions()[1];

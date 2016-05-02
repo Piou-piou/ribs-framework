@@ -36,7 +36,7 @@
 		private function getOrdrePage($parent) {
 			if (($parent != "") || ($parent != 0)) {
 				$dbc = \core\App::getDb();
-				$ordre = "";
+				$ordre = 1;
 
 				$query = $dbc->select("ordre")->from("page")->orderBy("ordre", "DESC")->limit(0, 1)->get();
 				if ((is_array($query)) && (count($query) > 0)) {
@@ -52,7 +52,9 @@
 		private function getParentId($parent) {
 			$dbc = \core\App::getDb();
 
-			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"', true)->get();
+			if ($parent == "") return 0;
+
+			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"', "", true)->get();
 
 			if ((is_array($query)) && (count($query) == 1)) {
 				foreach ($query as $obj) {
@@ -75,15 +77,15 @@
 		 * @return string
 		 * fonction qui permet de vérifier qu'il n'y ait pas d'erreur dans le champ spécifié ni de doublons
 		 */
-		public static function getVerifChamp($nom_table, $nom_id_table, $champ, $value, $limit_char, $err_char, $err_egalite, $value_id_table = null) {
+		private function getVerifChamp($nom_table, $nom_id_table, $champ, $value, $limit_char, $err_char, $err_egalite, $value_id_table = null) {
 			$dbc = App::getDb();
 
 			if (strlen(utf8_decode($value)) > $limit_char) {
-				self::$erreur = true;
+				$this->erreur = true;
 				return "<li>$err_char</li>";
 			}
 			else if ($dbc->rechercherEgalite($nom_table, $champ, $value, $nom_id_table, $value_id_table) == true) {
-				self::$erreur = true;
+				$this->erreur = true;
 				return "<li>$err_egalite</li>";
 			}
 		}
@@ -150,11 +152,13 @@
 			if (App::getErreur() !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
+					$parent = intval($this->getParentId($parent));
+					$ordre = intval($this->getOrdrePage($parent));
 					$dbc->insert("titre", $titre_page)
 						->insert("url", $url)
 						->insert("meta_description", $meta_description)
 						->insert("balise_title", $balise_title)
-						->insert("ordre", $this->getOrdrePage($parent))
+						->insert("ordre", $ordre)
 						->insert("parent", $parent)
 						->insert("affiche", $affiche)
 						->into("page")
@@ -172,6 +176,7 @@
 			}
 			else {
 				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				$this->erreur = true;
 			}
 		}
 
@@ -221,7 +226,7 @@
 
 					rename($filename, $new_filename);
 
-					$parent = $this->getParentId($parent);
+					$parent = intval($this->getParentId($parent));
 					$dbc->update("titre", $titre_page)
 						->update("url", $url)
 						->update("meta_description", $meta_description)
