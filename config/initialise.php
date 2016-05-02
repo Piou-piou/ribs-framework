@@ -43,8 +43,9 @@
 		$ini = $ini_parse->getParse("config/config.ini");
 
 		//si l'installation est à 1 cela veut dire que l'on doit ainstaller le site
-		if ($ini["installation"] == 1) {
-			header("location:".WEBROOT."installation");
+		$array_install = ["installation-ribs/index", "installation-ribs/bdd", "installation-ribs/utilisateur", "installation-ribs/configuration"];
+		if (($ini["installation"] == 1) && (!in_array($page_root, $array_install))) {
+			header("location:".WEBROOT."installation-ribs");
 		}
 	}
 	else {
