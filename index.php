@@ -33,22 +33,14 @@
 
 		if ((isset($_GET['page'])) && ($_GET['page'] != null)) {
 			$page = $_GET['page'];
-			//récupération des balises
 			$contenu->getHeadPage(0, $page);
-			$titre_page = $contenu->getBaliseTitle();
-			$description_page = $contenu->getMetaDescription();
-
-			$contenu->getContenuPage();
-			$contenu_page = $contenu->getContenu();
 		}
 		else {
 			$contenu->getHeadPage(1);
-			$titre_page = $contenu->getBaliseTitle();
-			$description_page = $contenu->getMetaDescription();
-
-			$contenu->getContenuPage();
-			$contenu_page = $contenu->getContenu();
 		}
+
+		$titre_page = $contenu->getBaliseTitle();
+		$description_page = $contenu->getMetaDescription();
 	}
 
 	//--------------------------------------------- FIN GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
@@ -99,6 +91,9 @@
 				}
 			}
 			else {
+				$contenu->getContenuPage();
+				$contenu_page = $contenu->getContenu();
+
 				$explode = explode("/", $page);
 				$page = "app/views/".end($explode);
 
@@ -115,6 +110,9 @@
 		}
 	}
 	else {
+		$contenu->getContenuPage();
+		$contenu_page = $contenu->getContenu();
+
 		$page = "app/views/index";
 		require("app/controller/initialise_all.php");
 		require("app/views/template/principal.php");
