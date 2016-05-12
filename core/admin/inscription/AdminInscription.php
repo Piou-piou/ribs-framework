@@ -84,6 +84,7 @@
 				->insert("img_profil", "profil/defaut.png")
 				->insert("img_profil_blog", "profil/defaut_blog.png")
 				->insert("valide", 1)
+				->insert("archiver", 0)
 				->insert("acces_admin", $this->acces_administration)
 				->insert("liste_droit", $this->id_liste_droit_acces)
 				->into("identite")
