@@ -65,8 +65,8 @@
 	define('DB_HOST', $ini[$tab]["DB_HOST"]);
 
 	//pour les images ajoutées par des utilisateurs
-	define('IMGROOT', "http://".$_SERVER['SERVER_NAME'].$ini[$tab]["IMGROOT"]);
-	define('ROOTCKFINDER', $ini[$tab]["ROOTCKFINDER"]);
+	define('IMGROOT', "http://".$_SERVER['SERVER_NAME']."/app/images/");
+	define('ROOTCKFINDER', "/app/images/pages");
 	//-------------------------- FIN CONSTANTE BDD ----------------------------------------------------------------------------//
 
 

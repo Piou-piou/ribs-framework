@@ -48,17 +48,13 @@
 				dev[DB_USER] = $dev_info[2]
 				dev[DB_PASS] = $dev_info[3]
 				dev[DB_HOST] = $dev_info[4]
-				dev[IMGROOT] = $dev_info[5]
-				dev[ROOTCKFINDER] = $dev_info[6]
 
 				[prod]
 				prod[DB_TYPE] = $prod_info[0]
 				prod[DB_NAME] = $prod_info[1]
 				prod[DB_USER] = $prod_info[2]
 				prod[DB_PASS] = $prod_info[3]
-				prod[DB_HOST] = $prod_info[4]
-				prod[IMGROOT] = $prod_info[5]
-				prod[ROOTCKFINDER] = $prod_info[6]";
+				prod[DB_HOST] = $prod_info[4]";
 
 			$value = str_replace("\t", "", $value);
 
