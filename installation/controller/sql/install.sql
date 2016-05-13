@@ -125,7 +125,6 @@ CREATE TABLE IF NOT EXISTS `identite` (
   `mdp_params` varchar(255) DEFAULT NULL,
   `last_change_mdp` date NOT NULL,
   `img_profil` varchar(255) NOT NULL,
-  `img_profil_blog` varchar(255) DEFAULT NULL,
   `valide` int(11) DEFAULT NULL,
   `archiver` int(11) DEFAULT NULL,
   `acces_admin` int(11) DEFAULT NULL,
