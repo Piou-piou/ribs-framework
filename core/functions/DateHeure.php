@@ -87,32 +87,28 @@
 				return $jours[date("w")]." ".date("j").(date("j") == 1 ? "er" : " ").$mois[date("n") - 1]." ".date("Y");
 			}
 			else if ((strpos($date, "-") > 0) || (strpos($date, "/") > 0)) {
-				$pos = strpos($date, "-");
+				$explode = explode("/", $date);
+				$jour_d = $explode[0];
+				$mois_d = $explode[1];
+				$annee_d = $explode[2];
 
 				//si $pos > 0 cela veut dire qu'on est en YYYY-mm-jj
+				$pos = strpos($date, "-");
 				if ($pos > 0) {
 					$explode = explode("-", $date);
 					$jour_d = $explode[2];
 					$mois_d = $explode[1];
 					$annee_d = $explode[0];
 				}
-				else {
-					$explode = explode("/", $date);
-					$jour_d = $explode[0];
-					$mois_d = $explode[1];
-					$annee_d = $explode[2];
-				}
 
 				$jour_semaine = $jours[date("w", mktime(0, 0, 0, $mois_d, $jour_d, $annee_d))];
 
 				return $jour_semaine." ".$jour_d." ".$mois[$mois_d - 1]." ".$annee_d;
+			}
 
-			}
-			else {
-				FlashMessage::setFlash("Format de date passé en paramètre ne correspond pas à YYYY-mm-jj ou jj/mm/YYYY");
-				FlashMessage::getFlash();
-				die();
-			}
+			FlashMessage::setFlash("Format de date passé en paramètre ne correspond pas à YYYY-mm-jj ou jj/mm/YYYY");
+			FlashMessage::getFlash();
+			die();
 		}
 
 		/**
