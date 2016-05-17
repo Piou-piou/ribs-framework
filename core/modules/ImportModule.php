@@ -56,7 +56,7 @@
 
 			if (($this->extension == "zip") &&
 				(file_exists(MODULEROOT.$this->nom_dossier) == false) &&
-				(file_put_contents(TEMPROOT.$this->nom_fichier, fopen($url_module, 'r')) != false) &&
+				(file_put_contents(TEMPROOT.$this->nom_fichier, fopen($url_module, 'r')) != 0) &&
 				($zip->open(TEMPROOT.$this->nom_fichier) == true) &&
 				($zip->extractTo(TEMPROOT) == true) &&
 				(rename(TEMPROOT.$this->nom_dossier, MODULEROOT.$this->nom_dossier) == true)) {
