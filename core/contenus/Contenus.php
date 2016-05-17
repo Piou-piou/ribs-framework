@@ -67,12 +67,10 @@
 			}
 
 			if (RedirectError::testRedirect404($query, $url) === true) {
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						$this->id_page = $obj->ID_page;
-						$this->meta_description = $obj->meta_description;
-						$this->balise_title = $obj->balise_title;
-					}
+				foreach ($query as $obj) {
+					$this->id_page = $obj->ID_page;
+					$this->meta_description = $obj->meta_description;
+					$this->balise_title = $obj->balise_title;
 				}
 			}
 		}
