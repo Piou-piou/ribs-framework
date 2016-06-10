@@ -6,11 +6,27 @@
 </header>
 <?php include("header.php"); ?>
 <?php include("admin/controller/ckeditor.php"); ?>
+<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
 
 <form action="<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/creer_page" method="post">
 	<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
 
 	<div class="inner">
+		<section class="contenu modifier-contenu gestion-comptes">
+			<h2>Parti concernant la redirection d'url</h2>
+
+			<table>
+				<tr>
+					<td>Est ce que cette page doit renvoyer vers une page externe au site</td>
+					<td>
+						<label for="redirect" class="checkbox-perso switched">
+							<input type="checkbox" class="test-check" id="redirect">
+						</label>
+					</td>
+				</tr>
+			</table>
+		</section>
+
 		<section class="contenu modifier-contenu">
 			<h2>Partie concernant le référencement SEO</h2>
 			<div class="colonne">
@@ -57,9 +73,4 @@
 		</section>
 	</div>
 </form>
-
-<script>
-	$(function() {
-		$( "#datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
-	});
-</script>
+<script src="<?=LIBSWEBROOT?>checkbox/js/anim.js"></script>
