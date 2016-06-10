@@ -4,12 +4,6 @@
 	$gestion_module->getListeModuleActiver();
 	//---------- fin actif pour toutes les pages ------------------------------------//
 
-	//---------- partie pour la page d'accueil ------------------------------------//
-	if ($page == "index") {
-		$gestion_module->getCheckModuleVersion();
-	}
-	//---------- fin partie pour la page d'accueil ------------------------------------//
-
 
 
 	//---------- partie pour les droite d'acces ------------------------------------//

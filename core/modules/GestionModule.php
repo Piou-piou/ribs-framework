@@ -4,8 +4,6 @@
 	use core\Navigation;
 
 	class GestionModule {
-		use CheckVersionModule;
-
 		private $id_module;
 		private $url;
 		private $icone;
