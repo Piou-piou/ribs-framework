@@ -33,7 +33,7 @@
 				</div>
 				<div class="colonne">
 					<div class="info-compte">
-						<h3>Anthony Pilloud</h3>
+						<h3><?=$nom_user?></h3>
 						<div class="fonctions">
 							<?php if ($droit_acces->getSuperAdmin() == 1):?>
 								<div class="colonne">

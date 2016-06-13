@@ -2,6 +2,9 @@
 	//---------- actif pour toutes les pages ------------------------------------//
 	$gestion_module = new \core\modules\GestionModule();
 	$gestion_module->getListeModuleActiver();
+
+	$membre = new \core\auth\Membre($_SESSION["idlogin".CLEF_SITE]);
+	$nom_user = $membre->getPrenom()." ".$membre->getNom();
 	//---------- fin actif pour toutes les pages ------------------------------------//
 
 
