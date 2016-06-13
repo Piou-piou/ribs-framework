@@ -63,6 +63,11 @@
 	define('DB_USER', $ini[$tab]["DB_USER"]);
 	define('DB_PASS', $ini[$tab]["DB_PASS"]);
 	define('DB_HOST', $ini[$tab]["DB_HOST"]);
+	define('SMTP_HOST', $ini[$tab]["SMTP_HOST"]);
+	define('SMTP_USER', $ini[$tab]["SMTP_USER"]);
+	define('SMTP_PASS', $ini[$tab]["SMTP_PASS"]);
+	define('SMTP_SECURE', $ini[$tab]["SMTP_SECURE"]);
+	define('SMTP_PORT', $ini[$tab]["SMTP_PORT"]);
 
 	//pour les images ajoutées par des utilisateurs
 	define('IMGROOT', "http://".$_SERVER['SERVER_NAME']."/app/images/");
