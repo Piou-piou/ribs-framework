@@ -194,7 +194,8 @@ CREATE TABLE IF NOT EXISTS `module` (
   `mettre_jour` int(1) DEFAULT NULL,
   `delete_old_version` int(1) DEFAULT NULL,
   `icone` varchar(255) DEFAULT NULL,
-  `url_telechargement` varchar(255) NOT NULL
+  `url_telechargement` varchar(255) NOT NULL,
+  `target` varchar(100) DEFAULT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

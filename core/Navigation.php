@@ -89,7 +89,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->target, $obj->balise_title, "page"];
+					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page", $obj->target];
 				}
 			}
 
