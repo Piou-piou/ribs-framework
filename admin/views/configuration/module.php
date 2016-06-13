@@ -19,7 +19,6 @@
 			</div>
 			<button type="submit" class="submit-contenu submit-standard no-shadow inline" type="submit"><i class="fa fa-check"></i>Valider</button>
 		</form>
-
 	</div>
 
 	<div class="contenu modifier-contenu gestion-comptes configuration">
@@ -29,7 +28,7 @@
 				<tr>
 					<td>Nom du module</td>
 					<td>Activer</td>
-					<td>Installer | Supprimer</td>
+					<td>Supprimer</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,8 +43,6 @@
 						<td>
 							<?php if (\core\modules\GestionModule::getModuleInstaller($gestion_module_page->getNom()[$i]) == 1) { ?>
 								<a class="supprimer open-popup" popup="popup-delete-module" href="<?=ADMWEBROOT?>controller/core/modules/installation/supprimer?id_module=<?=$gestion_module_page->getIdModule()[$i]?>">Supprimer</a>
-							<?php } else { ?>
-								<a href="<?=ADMWEBROOT?>controller/core/modules/installation/installer?url=<?=$gestion_module_page->getUrlTelechargement()[$i]?>">Installer</a>
 							<?php }?>
 						</td>
 					</tr>

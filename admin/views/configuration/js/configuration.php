@@ -38,20 +38,6 @@
 			ajaxDeleteUpdateModule(href, id_module);
 		});
 
-		//pour installer un module systeme
-		$(".installer-module").click(function(e) {
-			e.preventDefault();
-
-			$(".progress").css({display: "block"});
-
-			var href = $(this).attr("href");
-
-			var split = href.split("=");
-			var url = split[1];
-
-			ajaxInstallModule(href, url);
-		});
-
 		//pour installer un module non systeme
 		$("#form-install").submit(function(e) {
 			e.preventDefault();
