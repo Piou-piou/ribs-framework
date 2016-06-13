@@ -67,7 +67,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page", $this->getSousMenu($id_page)];
+					return [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page", $obj->target, $this->getSousMenu($id_page)];
 				}
 			}
 		}
@@ -89,7 +89,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page"];
+					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->target, $obj->balise_title, "page"];
 				}
 			}
 
