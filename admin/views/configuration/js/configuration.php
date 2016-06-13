@@ -38,20 +38,6 @@
 			ajaxDeleteUpdateModule(href, id_module);
 		});
 
-		//pour mettre à jour un module
-		$("#config-update-ajax").click(function(e) {
-			e.preventDefault();
-
-			$(".progress").css({display: "block"});
-
-			var href = $(this).attr("href");
-
-			var split = href.split("=");
-			var id_module = split[1];
-
-			ajaxDeleteUpdateModule(href, id_module);
-		});
-
 		//pour installer un module systeme
 		$(".installer-module").click(function(e) {
 			e.preventDefault();

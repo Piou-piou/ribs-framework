@@ -102,42 +102,6 @@
 		}
 
 		/**
-		 * @param $id_module
-		 * permet de mettre à jour un module en gardant une copie de l'ancienne version pendant une semaine
-		 */
-		Public function setUpdateModule($id_module) {
-			$dbc = App::getDb();
-
-			$this->getInfoModule($id_module);
-
-			//on rename le dossier actuel du module
-			if (rename(MODULEROOT.$this->dossier_module, MODULEROOT.$this->dossier_module."_OLDVERSION")) {
-				$this->setImportModule($this->url_telechargement, true);
-
-				//si pas d'erreur on met la date de next check a la semaine pro ++ on dit
-				//de delete l'ancienne version au next check
-				if (($this->erreur !== true) || (!isset($this->erreur))) {
-					$today = date("Y-m-d");
-					$today = new \DateTime($today);
-
-					$dbc->update("next_check_version", $today->add(new \DateInterval("P1W"))->format("Y-m-d"))
-						->update("version", $this->version_ok)
-						->update("online_version", "")
-						->update("mettre_jour", "")
-						->update("delete_old_version", "1")
-						->from("module")
-						->where("ID_module", "=", $id_module)
-						->set();
-
-					FlashMessage::setFlash("Votre module a bien été mis à jour", "success");
-				}
-			}
-			else {
-				FlashMessage::setFlash("Impossible de télécharger la mise à jour, veuillez réesseyer dans un instant");
-			}
-		}
-
-		/**
 		 * @return bool
 		 * fonction qui après l'installation d'un module supprime les fichier temporaires
 		 */
@@ -165,20 +129,6 @@
 			$dbc->query($requete);
 
 			App::supprimerDossier(str_replace("/", "", $this->url_module));
-		}
-
-		/**
-		 * @param $id_module
-		 * fonction qui permet de supprimer le dossier d'une vielle version d'un module une semaine après son ajout
-		 */
-		public function setSupprimerOldModule($id_module) {
-			$dbc = App::getDb();
-
-			$this->getInfoModule($id_module);
-
-			App::supprimerDossier(MODULEROOT.$this->dossier_module);
-
-			$dbc->update("delete_old_version", "")->from("module")->where("ID_module", "=", $this->id_module)->set();
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
