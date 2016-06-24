@@ -82,7 +82,6 @@
 				->insert("mdp_params", Encrypt::getParams())
 				->insert("last_change_mdp", date("Y-m-d"))
 				->insert("img_profil", "profil/defaut.png")
-				->insert("img_profil_blog", "profil/defaut_blog.png")
 				->insert("valide", 1)
 				->insert("archiver", 0)
 				->insert("acces_admin", $this->acces_administration)
