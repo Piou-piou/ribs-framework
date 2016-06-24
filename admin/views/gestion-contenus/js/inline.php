@@ -7,7 +7,7 @@
 			var contenu = $("#admin-page").html();
 
 			$.ajax({
-				method: 'GET',
+				method: 'POST',
 				url:"<?=ADMWEBROOT?>controller/core/admin/contenus/gestion/contenus_inline.php",
 				data: "id_page="+id_page+"&contenu="+contenu,
 				success: function(){
