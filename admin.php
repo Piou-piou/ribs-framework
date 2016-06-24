@@ -105,7 +105,7 @@
 					header("location:".WEBROOT."administrator");
 				}
 
-				if ($droit_acces->getDroitAccesPage($page) == false) {
+				if (($droit_acces->getDroitAccesPage($page) == false) && (!isset($page_module))) {
 					FlashMessage::setFlash("Vous n'avez pas les droits pour accéder à cette page, contacter votre gérant pour y avoir accès");
 					header("location:".WEBROOT."administrator");
 				}
