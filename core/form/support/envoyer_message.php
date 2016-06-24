@@ -14,14 +14,7 @@
 		$demande = $_POST['demande'];
 		include("message.inc.php");
 
-		$mail_test = new \Nette\Mail\Message();
-		$mail_test->setFrom($config->getMailSite())
-			->addTo($config->getMailAdministrateur())
-			->setSubject($objet)
-			->setHtmlBody($message);
-
-		$mailer = new \Nette\Mail\SmtpMailer();
-		$mailer->send($mail_test);
+		\core\App::envoyerMail($config->getMailSite(), $config->getMailAdministrateur(), $objet, $message);
 
 		\core\HTML\flashmessage\FlashMessage::setFlash("Votre message a été correctement envoyé au support et sera traité au plus vite", "success");
 	}

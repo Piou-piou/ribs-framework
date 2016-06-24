@@ -62,6 +62,35 @@
 				rmdir($url);
 			}
 		}
+
+		/**
+		 * @param $from
+		 * @param $to
+		 * @param $sujet
+		 * @param $message
+		 */
+		public static function envoyerMail($from, $to, $sujet, $message) {
+			$mail = new \Nette\Mail\Message();
+			$mail->setFrom($from)
+				->addTo($to)
+				->setSubject($sujet)
+				->setHtmlBody($message);
+
+			if (SMTP_HOST != "") {
+				$mailer = new \Nette\Mail\SmtpMailer([
+					'host' => SMTP_HOST,
+					'username' => SMTP_USER,
+					'password' => SMTP_PASS,
+					'secure' => SMTP_SECURE,
+					'port' => SMTP_PORT
+				]);
+			}
+			else {
+				$mailer = new \Nette\Mail\SmtpMailer();
+			}
+
+			$mailer->send($mail);
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
     
     
