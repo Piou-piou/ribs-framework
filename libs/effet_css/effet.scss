@@ -1,0 +1,49 @@
+/**
+	-------------------------------------- EFFECT CSS FILE ---------------------------------------
+
+	In this file you will find some effect wich will be user on some elements to animate them
+*/
+
+/*used to hide elements after some animation*/
+.cache {
+	opacity: 0;
+	display: none;
+}
+
+/*---------------------------------- TRANSITION DURATION AND TYPE CLASS ------------------------------------------------*/
+/*regroup class used to animate elemnts*/
+.animate {
+	-webkit-transition: 0.3s all ease;
+	-moz-transition: 0.3s all ease;
+	-ms-transition: 0.3s all ease;
+	-o-transition: 0.3s all ease;
+	transition: 0.3s all ease;
+}
+
+
+
+/*---------------------------------- EFFECT AND TRANSFORM CLASS ------------------------------------------------*/
+/*regroup class used to animate and transform element elemnts*/
+.rotateY0 {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
+	transform: rotateY(0deg);
+}
+
+.rotateY90 {
+	-webkit-transform: rotateY(90deg);
+	-moz-transform: rotateY(90deg);
+	-ms-transform: rotateY(90deg);
+	-o-transform: rotateY(90deg);
+	transform: rotateY(90deg);
+}
+
+.scale0 {
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+}

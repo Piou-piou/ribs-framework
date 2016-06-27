@@ -120,7 +120,6 @@
 		 * @param $meta_description
 		 * @param $titre_page
 		 * @param $parent
-		 * @param $contenu
 		 */
 		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
@@ -176,6 +175,53 @@
 			}
 			else {
 				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				$this->erreur = true;
+			}
+		}
+
+		/**
+		 * function that will create a redirection on an other site
+		 * @param $balise_title
+		 * @param $url
+		 * @param $titre_page
+		 * @param $parent
+		 */
+		public function setCreerPageRedirect($balise_title, $url, $titre_page, $parent, $affiche = 1) {
+			$dbc = \core\App::getDb();
+
+			$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
+			$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
+			$err_balise_title = $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite);
+
+			$err_url_char = "L'url ne doit pas dépasser 92 caractères";
+			$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
+			$err_url = $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite);
+
+			$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
+			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
+			$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
+
+			if (App::getErreur() !== true) {
+				//si le fichier n'existe pas et que la copy est ok on insert en bdd
+				$parent = intval($this->getParentId($parent));
+				$ordre = intval($this->getOrdrePage($parent));
+				$dbc->insert("titre", $titre_page)
+					->insert("url", $url)
+					->insert("balise_title", $balise_title)
+					->insert("ordre", $ordre)
+					->insert("parent", $parent)
+					->insert("affiche", $affiche)
+					->insert("target", "_blanck")
+					->into("page")
+					->set();
+
+				$this->id_page = $dbc->lastInsertId();
+				if ($parent == "") {
+					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
+				}
+			}
+			else {
+				$this->setErreurContenus($balise_title, $url, $titre_page, $parent, $err_balise_title, $err_url, $err_titre_page);
 				$this->erreur = true;
 			}
 		}
