@@ -1,4 +1,5 @@
 @import "variables";
+@import "../../../../libs/effet_css/effet";
 @import "../../../../libs/input_file/css/style";
 
 
@@ -566,7 +567,7 @@ header {
 	padding: 10px 20px;
 	min-width: 64px;
 	line-height: 18px;
-	background-color: $color-lien-page;
+	background: $color-lien-page;
 	color: #fff;
 	border: none;
 	transition: 0.3s all ease;
