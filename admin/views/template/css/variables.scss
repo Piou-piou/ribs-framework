@@ -1,0 +1,48 @@
+@font-face {
+	font-family: lobster;
+	src: url(../polices/lobster.ttf);
+}
+
+@font-face {
+	font-family: noto-sans;
+	src: url(../polices/noto-sans.ttf);
+}
+
+
+/*----- MAIN COLOR -----*/
+$bg-general: #2F3B4C;
+$bg-notification: #f34336;
+$bg-header-page: #ffffff;
+$bg-page: #fff;
+
+
+/*----- FOR LOGIN PAGE -----*/
+$color-error-input-login: #F34336;
+
+
+/*----- LINK COLORS -----*/
+$color-lien: #AFBDC4;
+$color-lien-page: #2196F3;
+$color-lien-hover-page: #217ED3;
+$bg-lien-supprimer: #F34336;
+$bg-lien-supprimer-hover: #DD2A2A;
+
+
+/*----- COLOR FRO LABELS? TITLES AND FONTS -----*/
+$color-titre: #AFBDC4;
+$clr-texte-label: #bfbfbf;
+$police-princ: noto-sans;
+$police-sec: lobster;
+
+
+/*----- LEFT SIDE NAV -----*/
+$menug-bg-header: #00BEE7;
+$menug-clr-header: #0082A8;
+$menug-clr-border-lien: #2BA5CA;
+$menug-ombre-header: #2C3747;
+$bg-lien-hover-menu: #2A3344;
+
+
+/*----- FOR ALL MODULES -----*/
+$bg-categorie: rgba(47, 59, 76, 0.8);
+$clr-categorie: #fff;
