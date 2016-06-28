@@ -567,7 +567,7 @@ header {
 	padding: 10px 20px;
 	min-width: 64px;
 	line-height: 18px;
-	background: $color-lien-page;
+	background-color: $color-lien-page;
 	color: #fff;
 	border: none;
 	transition: 0.3s all ease;
@@ -575,7 +575,6 @@ header {
 	font-family: $police-princ;
 	color: #fff;
 	text-align: center;
-	display: block;
 	box-shadow: 1px 1px 3px #b4b4b4;
 
 	&.submit-standard {
@@ -609,20 +608,10 @@ header {
 		transition: 0.3s all ease;
 	}
 
-	&:hover {
-		background-color: $color-lien-hover-page;
-		transition: 0.3s all ease;
-		cursor: pointer;
-	}
-
 	&.supprimer-page {
 		right: 120px;
-		background-color: $bg-lien-supprimer;
 
-		&:hover {
-			background-color: $bg-lien-supprimer-hover;
-			transition: 0.3s all ease;
-		}
+		@include hbgtranslate($bg-lien-supprimer, $bg-lien-supprimer-hover, top, bottom);
 	}
 
 	&.pr130 {
@@ -632,6 +621,8 @@ header {
 	&.ml0 {
 		margin-left: 0;
 	}
+
+	@include hbgtranslate($color-lien-page, $color-lien-hover-page, top, bottom);
 }
 
 

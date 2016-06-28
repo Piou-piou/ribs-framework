@@ -7,7 +7,6 @@
 <?php include("header.php"); ?>
 <?php include("admin/controller/ckeditor.php"); ?>
 <link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>checkbox/css/style.css">
-<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>effet_css/effet.css">
 
 <div class="inner">
 	<section class="contenu modifier-contenu gestion-comptes">

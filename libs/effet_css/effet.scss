@@ -12,6 +12,10 @@
 	display: none;
 }
 
+
+
+
+/*---------------------------------- USED WITH JS ------------------------------------------------*/
 /*---------------------------------- TRANSITION DURATION AND TYPE CLASS ------------------------------------------------*/
 /*regroup class used to animate elemnts*/
 .animate {
@@ -48,4 +52,50 @@
 	-ms-transform: scale(0);
 	-o-transform: scale(0);
 	transform: scale(0);
+}
+
+
+
+/*---------------------------------- USED WHEN OVER ELEMENT ------------------------------------------------*/
+/*properties to add background transition to an element
+	- $bg => define background color of the element wich is not hovered
+	- $bg-hover => define background color of the element when it is hovered
+	- $pos-bg => define the position of the background (could be top, right, bottom, left and center)
+	- $pos-bg-hover => define the position of the background when hover (could be top, right, bottom, left and center)
+*/
+@mixin hbgtranslate($bg, $bg-hover, $pos-bg, $pos-bg-hover) {
+	background: linear-gradient($bg, $bg) no-repeat $pos-bg,
+	linear-gradient($bg-hover, $bg-hover) no-repeat $pos-bg-hover;
+
+	@if ($pos-bg-hover == left) {
+		background-size: 100% 100%, 0% 100%;
+	}
+	@else if ($pos-bg-hover == right) {
+		background-size: 100% 100%, 0% 100%;
+	}
+	@else if ($pos-bg-hover == bottom) {
+		background-size: 100% 100%, 100% 0%;
+	}
+	@else if ($pos-bg-hover == top) {
+		background-size: 100% 100%, 100% 0%;
+	}
+
+	background-color: $bg;
+	transition: 0.3s all ease;
+	cursor: pointer;
+
+	&:hover {
+		@if ($pos-bg-hover == left) {
+			background-size: 0% 100%, 100% 100%;
+		}
+		@else if ($pos-bg-hover == right) {
+			background-size: 0% 100%, 100% 100%;
+		}
+		@else if ($pos-bg-hover == bottom) {
+			background-size: 100% 0%, 100% 100%;
+		}
+		@else if ($pos-bg-hover == top) {
+			background-size: 100% 0%, 100% 100%;
+		}
+	}
 }
