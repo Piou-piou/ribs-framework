@@ -11,4 +11,5 @@ vendor/*
 *.scssc
 modules/*
 *.ini
+*.lock
 !modules/creer-module.md
