@@ -190,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `meta_description` varchar(160) DEFAULT NULL,
   `balise_title` varchar(70) DEFAULT NULL,
   `ordre` int(11) DEFAULT NULL,
+  `target` varchar(100S) DEFAULT NULL,
   `parent` int(11) DEFAULT NULL,
   `affiche` int(11) NOT NULL DEFAULT '1',
   `bloc_editable` int(11) DEFAULT NULL
