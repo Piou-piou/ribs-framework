@@ -1,5 +1,7 @@
 <?php
 	namespace core;
+	use core\functions\ChaineCaractere;
+
 	class Navigation {
 		private $navigation;
 		private $last_ordre;
@@ -67,7 +69,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page", $obj->target, $this->getSousMenu($id_page)];
+					return [$obj->ID_page, $obj->titre, $this->getLienPage($obj->url), $obj->balise_title, "page", $obj->target, $this->getSousMenu($id_page)];
 				}
 			}
 		}
@@ -89,7 +91,7 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$sous_menu[] = [$obj->ID_page, $obj->titre, $obj->url, $obj->balise_title, "page", $obj->target];
+					$sous_menu[] = [$obj->ID_page, $obj->titre, $this->getLienPage($obj->url), $obj->balise_title, "page", $obj->target];
 				}
 			}
 
@@ -115,11 +117,12 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					return [$obj->ID_module, $obj->nom_module, $obj->url, $obj->nom_module, "module"];
+					return [$obj->ID_module, $obj->nom_module, $this->getLienPage($obj->url), $obj->nom_module, "module"];
 				}
 			}
 		}
 
+		/*to verify if page exist*/
 		private function getLienPageExist($id_page) {
 			$dbc = App::getDb();
 
@@ -130,6 +133,15 @@
 			}
 
 			return true;
+		}
+
+		private function getLienPage($url) {
+			if (ChaineCaractere::FindInString($url, "http://")) {
+				return $url;
+			}
+			else {
+				return WEBROOT.$url;
+			}
 		}
 		//-------------------------- END GETTER ----------------------------------------------------------------------------//
 		

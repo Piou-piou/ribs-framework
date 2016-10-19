@@ -3,11 +3,11 @@
 		<ul>
 			<?php if ($config->getContenusDynamique() == 1):?>
 				<?php foreach (\core\App::getNav()->getNavigation() as $nav):?>
-					<li><a href="<?=WEBROOT.$nav[2]?>" title="<?=$nav[3]?>" target="<?=$nav[5]?>"><?=$nav[1]?></a>
+					<li><a href="<?=$nav[2]?>" title="<?=$nav[3]?>" target="<?=$nav[5]?>"><?=$nav[1]?></a>
 						<?php if ((isset($nav[6]) && count($nav[6]) > 0)):?>
 							<ul>
 								<?php foreach ($nav[6] as $snav):?>
-									<li><a href="<?=WEBROOT.$snav[2]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>
+									<li><a href="<?=$snav[2]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>
 								<?php endforeach;?>
 							</ul>
 						<?php endif;?>
