@@ -22,6 +22,7 @@
         "intervention/image": "^2.3",
         "nette/mail": "^2.3",
         "egulias/email-validator": "^1.2",
-        "spipu/html2pdf": "^4.6"
+        "spipu/html2pdf": "^4.6",
+        "twig/twig" : "^1.27.0"
     }
 }
