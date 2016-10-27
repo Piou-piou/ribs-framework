@@ -12,7 +12,7 @@
 	* app
 		* controller
     	* views
-    	    * nav.php
+    	    * nav.html
 	* router
 		* config.php
 		* routes.php
@@ -160,7 +160,7 @@ define('BLOGROOT', str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."m
 
 
 
-###File : app/views/nav.php
+###File : app/views/nav.html
 
 This file include the config for the module and the css necessary for the module.
 
@@ -171,9 +171,11 @@ Example :
 
 
 ```php
-<?php require_once(MODULEROOT."blog/router/config.php"); ?>
-<link rel="stylesheet" href="<?=BLOGWEBROOT?>css/style.css"/>
-<li><a href="<?=WEBROOT?>blog">Blog</a></li>
+<link rel="stylesheet" href="{{MODULEROOT}}messagerie/css/style.css"/>
+<li><a href="{{WEBROOT}}messagerie">Boite de réception</a></li>
+<li><a href="{{WEBROOT}}messagerie/messages-envoyes">Messages envoyés</a></li>
+<li><a href="{{WEBROOT}}messagerie/messages-supprimes">Messages supprimés</a></li>
+<li><a href="{{WEBROOT}}messagerie/ecrire-message">Ecrire un message</a></li>
 ```
 
 
