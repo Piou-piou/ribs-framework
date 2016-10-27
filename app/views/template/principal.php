@@ -23,7 +23,7 @@
 		<?php if ($config->getResponsive() == 1) require_once(ROOT."app/views/template/nav_responsive.php");?>
 
 
-		<?php require($page.".php"); ?>
+		<?php echo $twig->render($page.".html", array_merge($arr, $constant)); ?>
 
 		<script>
 			$(document).ready(function() {
@@ -32,6 +32,5 @@
 				})
 			})
 		</script>
-
 	</body>
 </html>

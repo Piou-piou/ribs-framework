@@ -18,13 +18,14 @@
 	//--------------------------------------------- INITIALISATION DES CLASS -------------------------------------------------------//
 	$login = new Connexion();
 	$config = new Configuration();
+	$arr = [];
 
 	if (isset($_SESSION["idlogin".CLEF_SITE])) {
 		$membre = new \core\auth\Membre($_SESSION["idlogin".CLEF_SITE]);
 		$img_profil = $membre->getImg();
 	}
 	//--------------------------------------------- FIN INITIALISATION DES CLASS -------------------------------------------------------//
-	
+
 
 	//--------------------------------------------- GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
 	if ($config->getContenusDynamique() == 1) {
@@ -89,15 +90,25 @@
 				if ($router_module->getController() != "") {
 					require_once(MODULEROOT.$router_module->getController());
 				}
+
+				$loader = new Twig_Loader_Filesystem('modules/'.$router_module->getModule()."/app/views");
+				$twig = new Twig_Environment($loader);
+
+				$page = $router_module->getPage();
 			}
 			else {
 				$contenu->getContenuPage();
 				$contenu_page = $contenu->getContenu();
 
 				$explode = explode("/", $page);
-				$page = "app/views/".end($explode);
 
-				if (!file_exists(ROOT.$page.".php")) {
+				$loader = new Twig_Loader_Filesystem('app/views');
+				$twig = new Twig_Environment($loader);
+
+				$arr = ["contenu_page" => $contenu_page];
+				$page = end($explode);
+
+				if (!file_exists(ROOT."app/views/".$page.".html")) {
 					\core\RedirectError::Redirect(404);
 				}
 			}
@@ -113,8 +124,14 @@
 		$contenu->getContenuPage();
 		$contenu_page = $contenu->getContenu();
 
-		$page = "app/views/index";
 		require("app/controller/initialise_all.php");
+
+		$loader = new Twig_Loader_Filesystem('app/views');
+		$twig = new Twig_Environment($loader);
+
+		$arr = ["contenu_page" => $contenu_page];
+		$page = "index";
+
 		require("app/views/template/principal.php");
 	}
 	//--------------------------------------------- FIN ROUTING -------------------------------------------------------//
