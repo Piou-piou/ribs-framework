@@ -1,1 +1,0 @@
-<?=$contenu_page?>

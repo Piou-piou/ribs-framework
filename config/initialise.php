@@ -80,3 +80,22 @@
 	//definit la clef du site, utilisée lors des sessions de connexions
 	define("CLEF_SITE", "65cbdfdd5b9219753f26b98419f52ddc");
 	//-------------------------- FIN AUTRES CONSTANTE ----------------------------------------------------------------------------//
+
+
+
+	//CONSTANT FOR TWIG
+	$constant = [
+		'WEBROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_NAME']),
+		'ROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME']),
+		'TPLWEBROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."app/views/template/",
+		'LIBSWEBROOT'=> str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."libs/",
+		'LIBSROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."libs/",
+		'ADMWEBROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."administrator/",
+		'MODULEROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."modules/",
+		'MODULEWEBROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."modules/",
+		'MODULEADMWEBROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_NAME'])."administrator/modules/",
+		'TEMPROOT' => str_replace("$page_root", '', $_SERVER['SCRIPT_FILENAME'])."temp/",
+		'IMGROOT' => "http://".$_SERVER['SERVER_NAME']."/app/images/",
+		'ROOTCKFINDER' => "/app/images/pages",
+		"CLEF_SITE" => "65cbdfdd5b9219753f26b98419f52ddc"
+	];
