@@ -1,5 +1,5 @@
-<div class="module-flashmessage">
-	<div class="notification <?=$_SESSION['flash']['type']?>">
+<div class="module-flashmessage <?=$_SESSION['flash']['type']?>">
+	<div class="notification">
 		<div class="left">
 			<div class="icone">
 				<?=$_SESSION['flash']['icone']?>

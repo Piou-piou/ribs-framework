@@ -45,28 +45,29 @@ $clr-txt: #fff;
 	margin: 0px;
 	padding: 0;
 	display: none;
-	position: absolute;
+	position: fixed;
+	min-height: 70px;
 	top: 20px;
 	right: 20px;
 	z-index: 999;
 	border-radius: 2px;
 	overflow: hidden;
 	box-shadow: 0px 4px 20px rgba(0,0,0, 0.5);
-
+	
 	.notification {
 		cursor: pointer;
 		position: relative;
 		min-height: 60px;
-
+		padding: 10px 10px;
+		
 		.left {
 			position: absolute;
 			height: 100%;
-			width: 30px;
 			padding: 0 10px;
 			top: 0;
 			left: 0;
 			border-right: 1px solid rgba(0, 0, 0, 0.2);
-
+			
 			/*pour les ciones*/
 			.icone {
 				font-size: 30px;
@@ -75,19 +76,18 @@ $clr-txt: #fff;
 				text-align: center;
 			}
 		}
-
+		
 		.right {
 			margin-left: 50px;
-
+			
 			p {
 				padding: inherit;
 				margin: inherit;
-				padding: 10px 10px;
 				font-family: "Arial", arial;
 				clear: both;
 				margin-left: 0px;
 			}
-
+			
 			ul {
 				li {
 					padding: inherit;
@@ -96,7 +96,7 @@ $clr-txt: #fff;
 					float: left;
 					font-family: "Arial", arial;
 					clear: both;
-
+					
 					&:first-child {
 						margin-top: -16px;
 					}
@@ -105,13 +105,13 @@ $clr-txt: #fff;
 					}
 				}
 			}
-
+			
 			/*pour un affichage avec des blocs*/
 			.bloc {
 				float: left;
 				margin: 0px 5px;
 				font-family: "Arial", arial;
-
+				
 				a {
 					display: block;
 					padding: 17px;
