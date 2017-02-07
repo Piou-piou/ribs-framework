@@ -7,6 +7,8 @@
 		private static $database;
 		private static $nav;
 		private static $erreur;
+		
+		private static $values = [];
     
     
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -20,6 +22,14 @@
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public static function getErreur() {
 			return self::$erreur;
+		}
+		
+		/**
+		 * @return array
+		 * get array of all values wich will be used in the page
+		 */
+		public static function getValues() {
+			return self::$values;
 		}
 
 		/**
@@ -96,5 +106,12 @@
     
     
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $values
+		 * can set values while keep older infos
+		 */
+		public static function setValues($values) {
+			self::$values = array_merge(self::$values, $values);
+		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
