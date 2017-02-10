@@ -63,4 +63,19 @@
 				return true;
 			}
 		}
+		
+		
+		/**
+		 * @param $string
+		 * @param int $lenght
+		 * @return bool
+		 * fonction qui test si la taille minimale de
+		 */
+		public static function testMinLenght($string, $lenght = 0) {
+			if (strlen($string) > $lenght) {
+				return true;
+			}
+			
+			return false;
+		}
 	}
