@@ -112,7 +112,16 @@
 		</nav>
 		<div class="clear"></div>
 
-		<?php require("admin/views/".$page.".php"); ?>
+		<?php
+			if ($twig_page === true) {
+				if (!isset($arr)) $arr = [];
+				
+				echo $twig->render($page, array_merge($arr, $constant));
+			}
+			else {
+				require("admin/views/".$page.".php");
+			}
+		?>
 
 		<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
 		<script src="<?=WEBROOT?>libs/input_file/js/input_file.js"></script>

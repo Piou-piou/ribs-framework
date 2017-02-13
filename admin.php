@@ -90,8 +90,12 @@
 					$page_module = $page;
 
 					$explode = explode("/", $page, 3);
+					
+					$loader = new Twig_Loader_Filesystem($explode[0]."/".$explode[1]."/admin/views/");
+					$twig = new Twig_Environment($loader);
 
-					$page = "../../".$explode[0]."/".$explode[1]."/admin/views/".$explode[2];
+					$page = $explode[2].".html";
+					$twig_page = true;
 				}
 
 				//pour les pages normales
