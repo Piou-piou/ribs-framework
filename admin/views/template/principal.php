@@ -116,7 +116,7 @@
 			if ($twig_page === true) {
 				if (!isset($arr)) $arr = [];
 				
-				echo $twig->render($page, array_merge($arr, $constant));
+				echo $twig->render($page.".html", array_merge($arr, $constant));
 			}
 			else {
 				require("admin/views/".$page.".php");

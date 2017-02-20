@@ -12,6 +12,7 @@
 		private $parametre;
 		private $module; //varialbe qui contiendra le nom d'un module
 		private $page;
+		private $admin; //permet de savoir si on est dans l'administration du site ou pas et de charger lebon router
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
@@ -48,12 +49,13 @@
 		}
 		
 		/**
+		 * @param $url
+		 * @param null $admin
+		 * @return string
 		 * Permets de générer l'url pour aller charger la page concernee pour le module blog
 		 * appele également l'actoin à effectur dans la page
-		 * @param $url
-		 * @return string
 		 */
-		public function getUrl($url) {
+		public function getUrl($url, $admin=null) {
 			$explode = explode("/", $url);
 			$count = count($explode);
 			$debut_url = "";
@@ -86,6 +88,7 @@
 				}
 			}
 			
+			$this->admin = $admin;
 			$this->setActionPage();
 			
 			return $centre_url."/".$this->parametre;
@@ -123,8 +126,12 @@
 		 */
 		private function setActionPage() {
 			//on require le fichier routes.php dans /modules/nom_module/router/routes.php
-			
-			require_once(MODULEROOT.$this->module."/router/routes.php");
+			if ($this->admin !== null) {
+				require_once(MODULEROOT.$this->module."/router/admin_routes.php");
+			}
+			else {
+				require_once(MODULEROOT.$this->module."/router/routes.php");
+			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
