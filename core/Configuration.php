@@ -101,7 +101,7 @@
 					$this->contenu_dynamique = $obj->contenu_dynamique;
 					$this->responsive = $obj->responsive;
 					$this->cache = $obj->cache;
-					$this->desactiver_navigation = $obj->desativer_navigation;
+					$this->desactiver_navigation = $obj->desactiver_navigation;
 				}
 			}
 		}
