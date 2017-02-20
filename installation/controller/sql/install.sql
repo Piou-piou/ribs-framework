@@ -50,7 +50,8 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `acces_admin` int(1) DEFAULT '1',
   `contenu_dynamique` int(1) DEFAULT '1',
   `responsive` int(1) DEFAULT NULL,
-  `cache` int(1) DEFAULT NULL
+  `cache` int(1) DEFAULT NULL,
+  `desactiver_navigation` int(1) DEFAULT NULL,
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
