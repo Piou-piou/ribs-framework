@@ -13,6 +13,7 @@
 		private $contenu_dynamique; //->savoir si es contenus sont dynamique (stockés in DB)
 		private $responsive; //-> si == 1 alors le site est reponsive et on charge foundation
 		private $cache; //-> si == 1 alors on mets les pages du site en cache
+		private $desactiver_navigation; //-> si == 1 alors on n'affichera pas la nav dans principal.php
 
 		//pour la configuration des comptes
 		private $valider_inscription;
@@ -68,6 +69,9 @@
 		public function getCache() {
 			return $this->cache;
 		}
+		public function getDesactiverNavigation(){
+		    return $this->desactiver_navigation;
+		}
 
 		//pour la configuration des comptes
 		public function getValiderInscription() {
@@ -97,6 +101,7 @@
 					$this->contenu_dynamique = $obj->contenu_dynamique;
 					$this->responsive = $obj->responsive;
 					$this->cache = $obj->cache;
+					$this->desactiver_navigation = $obj->desativer_navigation;
 				}
 			}
 		}
