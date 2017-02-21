@@ -716,7 +716,7 @@ header {
 
 
 /*------------------------------ AFFICHAGE DU BLOG ++ LIVRE D'OR -------------------------------------------------------*/
-.blog, .livre-or, .droit-acces, .galerie-photo, .added-module {
+.droit-acces, .added-module {
 	.bloc {
 		margin-top: 30px;
 		background-color: $bg-page;
@@ -731,52 +731,35 @@ header {
 		
 		float: left;
 		display: inline;
-
-		.header {
-			position: relative;
-			overflow: hidden;
+		
+		.image {
 			max-height: 235px;
-
-			.categorie {
-				position: fixed;
-				z-index: 5;
-
-				ul {
-					max-width: 370px;
-
-					li {
-						display: inline-block;
-						background-color: $bg-categorie;
-						padding: 5px;
-						color: $clr-categorie;
-						margin-bottom: 5px;
-					}
+			overflow: hidden;
+		}
+		
+		
+		.categorie {
+			ul {
+				max-width: 370px;
+				
+				li {
+					display: inline-block;
+					background-color: $bg-categorie;
+					padding: 5px;
+					color: $clr-categorie;
+					margin-bottom: 5px;
 				}
-			}
-
-			.date {
-				margin-top: -26px;
-				float: left;
-				background-color: $bg-categorie;
-				padding: 5px;
-				color: $clr-categorie;
-			}
-
-			img {
-				float: left;
-				margin-top: -40px;
 			}
 		}
 
 		h2 {
-			position: relative;
-			z-index: 100;
 			margin-top: 10px;
 		}
 
 		h3 {
 			font-weight: normal;
 			margin: 0px;
+			margin-bottom: 20px;
 			color: #ccc;
 		}
 
@@ -795,13 +778,6 @@ header {
 					margin-right: 10px;
 				}
 			}
-		}
-
-		.separation {
-			width: 100%;
-			height: 1px;
-			background-color: #CCCCCC;
-			margin: 20px 0;
 		}
 
 		.liste-droit {
