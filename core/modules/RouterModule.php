@@ -78,8 +78,9 @@
 			}
 			else {
 				$file = ROOT."modules/".$debut_url."/app/views/".$centre_url;
+				$file_admin = ROOT."modules/".$debut_url."/admin/views/".$centre_url;
 				
-				if (!file_exists($file.".html")) {
+				if (!file_exists($file.".html") && !file_exists($file_admin.".html")) {
 					$centre_url = explode("/", $file);
 					$this->parametre = array_pop($centre_url);
 					$this->page = end($centre_url);
