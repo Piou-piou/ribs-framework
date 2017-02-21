@@ -13,3 +13,4 @@ modules/*
 *.ini
 *.lock
 !modules/creer-module.md
+*.map
