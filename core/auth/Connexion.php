@@ -151,7 +151,6 @@
 			setcookie("auth".CLEF_SITE, NULL, -1);
 
 			session_start();
-			FlashMessage::setFlash("Vous avez été déconnecté avec succès", "success");
 
 			header("location:".$page_retour);
 		}
