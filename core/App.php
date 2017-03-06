@@ -8,6 +8,9 @@
 		private static $nav;
 		private static $erreur;
 		
+		private static $title;
+		private static $description;
+		
 		private static $values = [];
     
     
@@ -54,6 +57,22 @@
 			}
 
 			return self::$nav;
+		}
+		
+		/**
+		 * @return mixed
+		 * function tu get the title of the page
+		 */
+		public static function getTitle() {
+			return self::$title;
+		}
+		
+		/**
+		 * @return mixed
+		 * function to get description of the page
+		 */
+		public static function getDescription() {
+			return self::$description;
 		}
 
 		/**
@@ -112,6 +131,22 @@
 		 */
 		public static function setValues($values) {
 			self::$values = array_merge(self::$values, $values);
+		}
+		
+		/**
+		 * @param $title
+		 * function to set title of the page
+		 */
+		public static function setTitle($title) {
+			self::$title = $title;
+		}
+		
+		/**
+		 * @param $description
+		 * function to set description of the page
+		 */
+		public static function setDescription($description) {
+			self::$description = $description;
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}

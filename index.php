@@ -40,8 +40,8 @@
 			$contenu->getHeadPage(1);
 		}
 
-		$titre_page = $contenu->getBaliseTitle();
-		$description_page = $contenu->getMetaDescription();
+		\core\App::setTitle($contenu->getBaliseTitle());
+		\core\App::setDescription($contenu->getMetaDescription());
 	}
 
 	//--------------------------------------------- FIN GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
