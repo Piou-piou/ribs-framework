@@ -12,7 +12,7 @@ Ribs still under development, updates are committed on all the core
 
 You can install it with composer with this command : 
 ```
-$composer create-project piou-piou/ribs-framework my_project_name
+$ composer create-project piou-piou/ribs-framework my_project_name
 ```
 
 ## Licence
