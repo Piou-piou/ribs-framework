@@ -1,4 +1,6 @@
 # Ribs Framework
+
+[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Build Status](https://scrutinizer-ci.com/g/Piou-piou/ribs-framwork/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Piou-piou/ribs-framwork/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Piou-piou/ribs-framwork/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Piou-piou/ribs-framwork/?branch=master)
 
