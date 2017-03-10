@@ -8,7 +8,7 @@ In this framework you can add an illimited number of modules created by yourself
 
 Ribs still under development, updates are committed on all the core
 
-## Instal
+## Install
 
 You can install it with composer with this command : 
 ```
