@@ -167,14 +167,9 @@ CREATE TABLE IF NOT EXISTS `module` (
   `url` varchar(255) NOT NULL,
   `nom_module` varchar(255) NOT NULL,
   `version` varchar(15) NOT NULL,
-  `online_version` varchar(15) DEFAULT NULL,
-  `next_check_version` date DEFAULT NULL,
   `activer` int(1) NOT NULL,
   `installer` int(1) NOT NULL,
-  `mettre_jour` int(1) DEFAULT NULL,
-  `delete_old_version` int(1) DEFAULT NULL,
   `icone` varchar(255) DEFAULT NULL,
-  `url_telechargement` varchar(255) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
