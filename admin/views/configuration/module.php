@@ -12,13 +12,7 @@
 	<?php require_once(LIBSROOT."barre_chargement/index.php"); ?>
 	<div class="contenu modifier-contenu">
 		<h2>Ajouter un module</h2>
-		<form action="<?=ADMWEBROOT?>controller/core/modules/installation/installer" method="get" id="form-install">
-			<div class="bloc">
-				<label for="url" class="label">Entre ici l'url du fichier zip de votre module à installer</label>
-				<input type="text" name="url">
-			</div>
-			<button type="submit" class="submit-contenu submit-standard no-shadow inline" type="submit"><i class="fa fa-check"></i>Valider</button>
-		</form>
+		<p>To come</p>
 	</div>
 
 	<div class="contenu modifier-contenu gestion-comptes configuration">
