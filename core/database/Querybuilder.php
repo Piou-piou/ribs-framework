@@ -12,6 +12,7 @@
 		protected $closure = [];
 		protected $table = [];
 		protected $order_by;
+		protected $group_by;
 		protected $limit;
 		
 		abstract public function query();
@@ -145,6 +146,12 @@
 			return $this;
 		}
 		
+		public function groupBy($name) {
+			$this->group_by = " GROUP BY ".$name." ";
+			
+			return $this;
+		}
+		
 		/**
 		 * @return array
 		 *
@@ -157,6 +164,8 @@
 				$requete .= $this->getWhereConditions()[0];
 				$values = $this->getWhereConditions()[1];
 			}
+			
+			$requete .= $this->group_by;
 			
 			$requete .= $this->order_by;
 			
@@ -286,6 +295,7 @@
 			$this->closure = [];
 			$this->table = [];
 			$this->order_by = "";
+			$this->group_by = "";
 			$this->limit = "";
 		}
 	}
