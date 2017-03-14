@@ -87,21 +87,6 @@
 		}
 
 		/**
-		 * @return array
-		 */
-		private function getListeDroitPage($page) {
-			$dbc = App::getDb();
-			$droit_acces = [];
-
-			$query = $dbc->select("droit_acces")->from("droit_acces")->where("page", " LIKE ", "'%".$page."%'", "", true)->get();
-			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) $droit_acces = $obj->droit_acces;
-			}
-
-			return $droit_acces;
-		}
-
-		/**
 		 * @param $id_page
 		 */
 		private function getListeDroitModificationContenu($id_page) {
@@ -123,25 +108,6 @@
 					$this->modif_navigation = $obj->navigation;
 					$this->supprimer_page = $obj->supprimer;
 				}
-			}
-		}
-
-		//autres getter
-		/**
-		 * pour savoir si en fonction des droits d'accès de l'utilisateur il peu ou non accéder à cete page
-		 * on passe outre les test si on est super admin
-		 * @param string $page
-		 * @return bool
-		 */
-		public function getDroitAccesPage($page) {
-			//page sans droit dans admin
-			$all_access = array("configuration/mon-compte", "index", "contacter-support");
-
-			if (($this->super_admin == 1) || (in_array($this->getListeDroitPage($page), $this->getListeDroitAcces())) || (in_array($page, $all_access))) {
-				return true;
-			}
-			else {
-				return false;
 			}
 		}
 
@@ -176,7 +142,7 @@
 		 * @param $droit_acces
 		 * @return bool
 		 */
-		public function getDroitAccesAction($droit_acces) {
+		public function getDroitAcces($droit_acces) {
 			$liste_droit_acces = $this->getListeDroitAcces();
 
 			if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {

@@ -13,7 +13,7 @@
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 	$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
 
-	if ($droit_acces->getDroitAccesAction("GESTION CONTENUS")) {
+	if ($droit_acces->getDroitAcces("GESTION CONTENUS")) {
 		$contenu = new \core\contenus\Contenus();
 		$gestion_contenu = new \core\admin\contenus\GestionContenus();
 	}

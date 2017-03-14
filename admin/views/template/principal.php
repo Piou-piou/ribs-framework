@@ -42,13 +42,11 @@
 									</div>
 								</div>
 							<?php endif;?>
-							<?php if (($droit_acces->getSuperAdmin() == 1) || ($droit_acces->getDroitAccesPage("configuration/mon-compte"))):?>
-								<div class="colonne">
-									<div class="config">
-										<a href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-gear"></i></a>
-									</div>
+							<div class="colonne">
+								<div class="config">
+									<a href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-gear"></i></a>
 								</div>
-							<?php endif;?>
+							</div>
 							<div class="colonne">
 								<div class="logout">
 									<a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout"><i class="fa fa-sign-out animated activate swing infinite"></i></a>
@@ -62,10 +60,10 @@
 			<ul>
 				<div class="principal">
 					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<?php if ($droit_acces->getDroitAccesPage("gestion-comptes/index") == true):?>
+					<?php if ($droit_acces->getDroitAcces("GESTION COMPTES") == true):?>
 						<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a>
 							<ul>
-								<?php if ($droit_acces->getDroitAccesAction("CREATION COMPTE ADMIN")):?>
+								<?php if ($droit_acces->getDroitAcces("CREATION COMPTE ADMIN")):?>
 									<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/creer-utilisateur">Créer un utilisateur</a></li>
 								<?php endif;?>
 							</ul>
@@ -73,15 +71,15 @@
 					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<?php if ($droit_acces->getDroitAccesPage("gestion-droits-acces/index") == true):?>
+					<?php if ($droit_acces->getDroitAcces("GESTION DROIT ACCES") == true):?>
 						<li><i class="fa fa-lock"></i><a href="<?=ADMWEBROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
 					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion des contenus -->
-					<?php if ($droit_acces->getDroitAccesPage("gestion-contenus/index") == true):?>
+					<?php if ($droit_acces->getDroitAcces("GESTION CONTENUS") == true):?>
 						<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a>
 							<ul>
-								<?php if ($droit_acces->getDroitAccesAction("CREATION PAGE")):?>
+								<?php if ($droit_acces->getDroitAcces("CREATION PAGE")):?>
 									<li><i class="fa fa-newspaper-o"></i><a href="<?=ADMWEBROOT?>gestion-contenus/creer-une-page">Créer une page</a></li>
 								<?php endif; ?>
 							</ul>
@@ -89,14 +87,14 @@
 					<?php endif; ?>
 
 					<!-- Pour avoir accès à la gestion de la navigation -->
-					<?php if ($droit_acces->getDroitAccesPage("navigation/index") == true):?>
+					<?php if ($droit_acces->getDroitAcces("GESTION CONTENUS") == true):?>
 						<li><i class="fa fa-link"></i><a href="<?=ADMWEBROOT?>gestion-navigation/index">Gestion de la navigation</a>
 						</li>
 					<?php endif; ?>
 
 					<!-- pour afficher le menu des modules -->
 					<?php for ($i = 0; $i < count($gestion_module->getUrl()); $i++):?>
-						<?php if ((\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true) && ($droit_acces->getDroitAccesPage($gestion_module->getUrl()[$i]."index") == true)):?>
+						<?php if (\core\modules\GestionModule::getModuleActiver($gestion_module->getNom()[$i]) == true):?>
 							<li>
 								<i class="fa <?=$gestion_module->getIcone()[$i]?>"></i>
 								<a href="<?=MODULEADMWEBROOT.$gestion_module->getUrl()[$i]?>index">Gestion <?=$gestion_module->getNom()[$i]?> (V<?=$gestion_module->getVersion()[$i]?>)</a>

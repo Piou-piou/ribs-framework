@@ -203,10 +203,10 @@ Example :
 		<ul>
 			<li><a href="">Articles</a>
 				<ul>
-					<?php if ($droit_acces->getDroitAccesAction("AJOUTER ARTICLE BLOG") == true):?>
+					<?php if ($droit_acces->getDroitAcces("AJOUTER ARTICLE BLOG") == true):?>
 						<li><a href="<?=ADMWEBROOT?>modules/blog/ajouter-article">Ajouter un article</a></li>
 					<?php endif;?>
-					<?php if ($droit_acces->getDroitAccesAction("MODIFIER ARTICLE BLOG") == true):?>
+					<?php if ($droit_acces->getDroitAcces("MODIFIER ARTICLE BLOG") == true):?>
 						<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Modifier un article</a></li>
 					<?php endif;?>
 					<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Liste des articles</a></li>
@@ -342,10 +342,10 @@ This is very simple, just add the div whith notification class.
 		<ul>
 			<li><a href="">Articles</a>
 				<ul>
-					<?php if ($droit_acces->getDroitAccesAction("AJOUTER ARTICLE BLOG") == true):?>
+					<?php if ($droit_acces->getDroitAcces("AJOUTER ARTICLE BLOG") == true):?>
 						<li><a href="<?=ADMWEBROOT?>modules/blog/ajouter-article">Ajouter un article</a></li>
 					<?php endif;?>
-					<?php if ($droit_acces->getDroitAccesAction("MODIFIER ARTICLE BLOG") == true):?>
+					<?php if ($droit_acces->getDroitAcces("MODIFIER ARTICLE BLOG") == true):?>
 						<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Modifier un article</a></li>
 					<?php endif;?>
 					<li><a href="<?=ADMWEBROOT?>modules/blog/liste-article">Liste des articles</a></li>
