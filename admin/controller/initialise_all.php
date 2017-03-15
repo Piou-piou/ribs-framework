@@ -106,7 +106,6 @@
 	if ($page == "configuration/infos-generales") {
 		if (isset($_SESSION['err_modification_infos_config'])) {
 			$nom_site = $_SESSION['nom_site'];
-			$url_site = $_SESSION['url_site'];
 			$gerant_site = $_SESSION['gerant_site'];
 			$mail_site = $_SESSION['mail_site'];
 			$mail_administrateur = $_SESSION['mail_administrateur'];
@@ -121,7 +120,6 @@
 		else {
 			$config = new \core\Configuration();
 			$nom_site = $config->getNomSite();
-			$url_site = $config->getUrlSite();
 			$gerant_site = $config->getGerantSite();
 			$mail_site = $config->getMailSite();
 			$mail_administrateur = $config->getMailAdministrateur();

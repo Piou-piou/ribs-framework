@@ -6,7 +6,6 @@
 		private $nom_site; //-> nom du site
 		private $mail_site; //-> pour le gérant du site contact@nomdedomaine;com
 		private $gerant_site; //->nom du gérant du site
-		private $url_site; //-> url de site
 		private $mail_administrateur; //-> mail de l'administrateur web@clicand.com
 		private $last_save; //-> derniere sauvegarde de la bdd
 		private $acces_admin; //-> si == 1 on a acces à l'admin
@@ -46,9 +45,6 @@
 		}
 		public function getGerantSite() {
 			return $this->gerant_site;
-		}
-		public function getUrlSite() {
-			return $this->url_site;
 		}
 		public function getMailAdministrateur() {
 			return $this->mail_administrateur;
@@ -90,7 +86,6 @@
 					$this->nom_site = $obj->nom_site;
 					$this->mail_site = $obj->mail_site;
 					$this->gerant_site = $obj->gerant_site;
-					$this->url_site = $obj->url_site;
 					$this->mail_administrateur = $obj->mail_administrateur;
 					$this->last_save = $obj->last_save;
 					$this->acces_admin = $obj->acces_admin;
