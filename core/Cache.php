@@ -17,19 +17,15 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($page, $admin = null) {
+		public function __construct($page) {
 			$config = new Configuration();
 			$this->cache_active = 0;
-			$this->dossier_cache = ROOT."cache/app/";
+			$this->dossier_cache = ROOT."cache/";
 
 			//on test si le cache est bien active
 			if ($config->getCache() == 1) {
 				$this->cache_active = 1;
 				$this->setCreerDossier();
-			}
-
-			if ($admin != null) {
-				$this->dossier_cache = ROOT."cache/admin/";
 			}
 
 			$page = ChaineCaractere::setUrl($page);
