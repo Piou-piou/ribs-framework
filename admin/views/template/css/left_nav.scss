@@ -1,0 +1,201 @@
+.menu {
+	width: 55px;
+	height: 100%;
+	background-color: $bg-general;
+	position: fixed;
+	z-index: 10;
+	float: left;
+	transition: all 0.5s ease;
+	margin-left: -400px;
+	
+	/*pour quand le menu est actif*/
+	&.active {
+		width: 314px;
+		margin-left: 0px;
+		transition: width 0.5s ease;
+		
+		.titre {
+			width: 294px;
+			margin-left: 0;
+			transition: width 0.5s ease;
+			
+			h1 {
+				margin-left: 0px;
+				transition: all 0.3s 0.2s ease-out;
+			}
+			
+			i {
+				margin-top: -30px;
+			}
+		}
+		
+		a {
+			margin-left: 0px;
+			transition: all 0.3s 0.2s ease-out;
+			width: 90%;
+			height: 100%;
+			padding: 10px 0px;
+			display: inline-block;
+		}
+		
+		.logout {
+			width: 294px;
+		}
+	}
+	
+	.principal {
+		max-height: 740px;
+	}
+	
+	.titre {
+		font-family: $police-sec;
+		font-size: 25px;
+		background-color: $menug-bg-header;
+		color: $menug-clr-header;
+		padding: 10px;
+		box-shadow: -3px 3px 3px $menug-ombre-header;
+		height: 38px;
+		width: 55px;
+		margin-left: 400px;
+		transition: all 0.5s ease;
+		
+		h1 {
+			margin-left: -300px;
+			transition: all 0.3s ease-out;
+		}
+		
+		i {
+			float: right;
+			margin-top: -30px;
+			margin-right: 10px;
+			color: #fff;
+			
+			&:hover {
+				transform: Scale(1.2);
+				cursor: pointer;
+			}
+		}
+	}
+	
+	.mon-compte {
+		margin: 10px 0 10px 10px;
+		transition: all 0.5s ease;
+		overflow: hidden;
+		
+		.image {
+			width: 60px;
+			height: 60px;
+			border-radius: 120px;
+			overflow: hidden;
+			margin-right: 10px;
+		}
+		
+		.info-compte {
+			h3 {
+				color: $color-lien;
+				margin-bottom: 10px;
+				margin-top: 10px;
+			}
+		}
+		
+		.fonctions {
+			a {
+				padding: 0;
+				
+				i {
+					margin-right: 20px;
+					color: $color-lien;
+					transition: all 0.3s ease;
+					
+					&:hover {
+						color: $menug-clr-border-lien;
+					}
+				}
+			}
+			
+			.notif {
+				&.non-vue i {
+					color: $bg-notification;
+				}
+			}
+			
+			.logout {
+				i:hover {
+					color: #FF0000;
+				}
+			}
+		}
+	}
+	
+	ul {
+		li {
+			padding: 0px 10px;
+			font-size: 14px;
+			display: block;
+			transition: 0.3s all ease;
+			text-transform: uppercase;
+			border-top: 1px solid rgba(255,255,255,0.05);
+			border-bottom: 1px solid #2b333c;
+			border-left: 0px solid transparent;
+			transition: 0.3s all ease;
+			height: 36px;
+			
+			ul {
+				>li {
+					position: relative;
+					left: 0px;
+					top: -57px;
+					background-color: $bg-general;
+					z-index: -1;
+					display: none;
+					transition: all 3s ease;
+					
+					&:hover {
+						display: block;
+					}
+				}
+			}
+			
+			i {
+				color: $color-lien;
+				margin-right: 5px;
+				margin-top: 10px;
+				transition: 0.3s all ease;
+			}
+			
+			a {
+				color: $color-lien;
+				transition: all 0.3s ease-out;
+				margin-left: -300px;
+			}
+			
+			&:hover {
+				background-color: $bg-lien-hover-menu;
+				border-left: 3px solid $menug-clr-border-lien;
+				cursor: pointer;
+				
+				ul {
+					li {
+						display: block;
+						left: 300px;
+						transition: all 0.3s ease;
+					}
+				}
+			}
+			
+			&.active {
+				background-color: $bg-lien-hover-menu;
+			}
+			
+			&.support {
+				position: absolute;
+				bottom: 0px;
+				width: 294px;
+				
+				&:hover {
+					width: 291px;
+				}
+			}
+		}
+	}
+}
