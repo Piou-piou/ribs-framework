@@ -122,14 +122,10 @@
 					header("location:".WEBROOT."administrator");
 				}
 				else {
-					$cache = new \core\Cache($page, 1);
 					$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
-
-					if ($cache->setStart() == false) {
-						require(ROOT."admin/controller/initialise_all.php");
-						require(ROOT."admin/views/template/principal.php");
-					}
-					$cache->setEnd();
+					
+					require(ROOT."admin/controller/initialise_all.php");
+					require(ROOT."admin/views/template/principal.php");
 				}
 			}
 		}
