@@ -44,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `nom_site` varchar(255) NOT NULL,
   `mail_site` varchar(255) NOT NULL,
   `gerant_site` varchar(255) NOT NULL,
-  `url_site` varchar(255) NOT NULL,
   `mail_administrateur` varchar(255) NOT NULL,
   `last_save` date DEFAULT NULL,
   `acces_admin` int(1) DEFAULT '1',
