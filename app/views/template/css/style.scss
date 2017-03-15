@@ -1,23 +1,8 @@
-/*@font-face {
-	font-family: Impact;
-	src: url('../police/impact.ttf');
-}*/
-
 @import "variables.scss";
 
 
 body {
 	font-family: verdana;
-}
-
-.inner {
-	width: 1180px;
-	margin: auto;
-}
-
-.colonne {
-	display: table-cell;
-	vertical-align: top;
 }
 
 .clear {
@@ -37,8 +22,12 @@ a {
 
 
 /*--------------------------------------------- HEADER STYLES --------------------------------------------------- */
-
+@import "nav-responsive";
 
 
 /*--------------------------------------------- PAGES STYLES --------------------------------------------------- */
 @import "page.scss";
+
+
+/*--------------------------------------------- MODULES STYLES --------------------------------------------------- */
+@import "../../../../modules/modules";

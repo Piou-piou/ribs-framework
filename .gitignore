@@ -14,3 +14,4 @@ modules/*
 *.lock
 !modules/creer-module.md
 *.map
+node_modules/*
