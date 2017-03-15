@@ -19,7 +19,7 @@
 	<body>
 		<nav class="menu <?php if (($_SESSION["menu_plie".CLEF_SITE] == "deplie") || (!isset($_SESSION["menu_plie".CLEF_SITE]))):?>active<?php endif;?>">
 			<div class="titre">
-				<h1>Ribs V2.3.5.6</h1>
+				<h1>Ribs V0.1</h1>
 				<i class="fa fa-bars"></i>
 			</div>
 
