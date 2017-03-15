@@ -4,9 +4,7 @@
 		<title><?=$titre_page?></title>
 		<meta charset="utf-8">
 		<meta name="description" content="<?=$description_page?>">
-		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>font_awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>font_awesome/css/animate.css">
-		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>reset_css/reset.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<?php require_once(ROOT."admin/views/template/js/menu.php");?>
@@ -49,7 +47,7 @@
 							</div>
 							<div class="colonne">
 								<div class="logout">
-									<a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout"><i class="fa fa-sign-out animated activate swing infinite"></i></a>
+									<a href="<?=WEBROOT?>administrator/controller/core/auth/connexion/logout"><i class="fa fa-sign-out"></i></a>
 								</div>
 							</div>
 						</div>
