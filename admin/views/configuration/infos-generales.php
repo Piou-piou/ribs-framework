@@ -73,8 +73,8 @@
 				<tr>
 					<td>Cache</td>
 					<td>
-						<label for="cache_config" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="cache_config" <?php if ($cache_config == 1): ?>checked<?php endif; ?>>
+						<label for="cache" class="checkbox-perso switched">
+							<input type="checkbox" class="test-check" id="cache" <?php if ($cache_config == 1): ?>checked<?php endif; ?>>
 						</label>
 					</td>
 				</tr>
