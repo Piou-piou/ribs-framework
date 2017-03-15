@@ -72,14 +72,6 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>Responsive</td>
-					<td>
-						<label for="responsive" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="responsive" <?php if ($responsive == 1): ?>checked<?php endif; ?>>
-						</label>
-					</td>
-				</tr>
-				<tr>
 					<td>Contenu dynamique</td>
 					<td>
 						<label for="contenu_dynamique" class="checkbox-perso switched">

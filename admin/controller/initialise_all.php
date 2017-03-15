@@ -127,7 +127,6 @@
 			$mail_administrateur = $config->getMailAdministrateur();
 
 			$contenu_dynamique = $config->getContenusDynamique();
-			$responsive = $config->getResponsive();
 			$cache_config = $config->getCache();
 		}
 	}

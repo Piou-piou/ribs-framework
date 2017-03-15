@@ -11,7 +11,6 @@
 		private $last_save; //-> derniere sauvegarde de la bdd
 		private $acces_admin; //-> si == 1 on a acces à l'admin
 		private $contenu_dynamique; //->savoir si es contenus sont dynamique (stockés in DB)
-		private $responsive; //-> si == 1 alors le site est reponsive et on charge foundation
 		private $cache; //-> si == 1 alors on mets les pages du site en cache
 		private $desactiver_navigation; //-> si == 1 alors on n'affichera pas la nav dans principal.php
 
@@ -63,9 +62,6 @@
 		public function getContenusDynamique() {
 			return $this->contenu_dynamique;
 		}
-		public function getResponsive() {
-			return $this->responsive;
-		}
 		public function getCache() {
 			return $this->cache;
 		}
@@ -99,7 +95,6 @@
 					$this->last_save = $obj->last_save;
 					$this->acces_admin = $obj->acces_admin;
 					$this->contenu_dynamique = $obj->contenu_dynamique;
-					$this->responsive = $obj->responsive;
 					$this->cache = $obj->cache;
 					$this->desactiver_navigation = $obj->desactiver_navigation;
 				}
