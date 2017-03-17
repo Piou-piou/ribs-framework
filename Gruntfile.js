@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+	var path_srv = grunt.file.readJSON("path_srv.json");
 	require('load-grunt-tasks')(grunt);
 	
 	// Project configuration.
@@ -16,6 +17,51 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		//personnal use for ftp deploy to delete
+        'sftp-deploy': {
+            'one': {
+                auth: {
+                    host: path_srv.server.dest1.host,
+                    port: 22,
+                    authKey: 'key1'
+                },
+                src: path_srv.local.path,
+                dest: path_srv.server.dest1.path,
+                exclusions: path_srv.exclusions,
+                serverSep: '/',
+                localSep: '/',
+                concurrency: 4,
+                progress: true
+            },
+            'two': {
+                auth: {
+                    host: path_srv.server.dest2.host,
+                    port: 22,
+                    authKey: 'key1'
+                },
+                src: path_srv.local.path,
+                dest: path_srv.server.dest2.path,
+                exclusions: path_srv.exclusions,
+                serverSep: '/',
+                localSep: '/',
+                concurrency: 4,
+                progress: true
+            },
+            'three': {
+                auth: {
+                    host: path_srv.server.dest3.host,
+                    port: 22,
+                    authKey: 'key1'
+                },
+                src: path_srv.local.path,
+                dest: path_srv.server.dest3.path,
+                exclusions: path_srv.exclusions,
+                serverSep: '/',
+                localSep: '/',
+                concurrency: 4,
+                progress: true
+            }
+        },
         watch: {
             styles: {
                 files: '**/*.scss', // tous les fichiers Sass de n'importe quel dossier

@@ -15,3 +15,5 @@ modules/*
 !modules/creer-module.md
 *.map
 node_modules/*
+.ftppass
+path_srv.json
