@@ -183,7 +183,7 @@
 			}
 			else {
 				FlashMessage::setFlash("le mot de passe de $this->pseudo ne peu pas être réinitialisé car il ne possède pas d'E-mail");
-				$this->erreur = true;
+				$this->erreur = "le mot de passe de $this->pseudo ne peu pas être réinitialisé car il ne possède pas d'E-mail";
 			}
 		}
 
