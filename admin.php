@@ -82,16 +82,6 @@
 				Connexion::setObgConnecte(WEBROOT."administrator/login");
 			}
 			else {
-				/*if (\core\functions\ChaineCaractere::FindInString($page, "modules/") == true) {
-					$explode = explode("/", $page, 3);
-					
-					$loader = new Twig_Loader_Filesystem($explode[0]."/".$explode[1]."/admin/views/");
-					$twig = new Twig_Environment($loader);
-					
-					$page = $explode[2];
-					$twig_page = true;
-				}*/
-				
 				$router_module = new \core\modules\RouterModule();
 				if ($router_module->getRouteModuleExist($page)) {
 					$page = $router_module->getUrl($page, 1);
