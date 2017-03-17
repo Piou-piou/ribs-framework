@@ -10,9 +10,6 @@
 	use \core\HTML\flashmessage\FlashMessage;
 	use \core\admin\droitsacces\DroitAcces;
 
-	require("core/Autoloader.class.php");
-	Autoloader::register();
-
 	require("config/initialise.php");
 
 	$login = new Connexion();

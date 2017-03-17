@@ -31,9 +31,9 @@
 			$page = ChaineCaractere::setUrl($page);
 			$page = str_replace("/", "-", $page);
 
-			$this->page = $page.".php";
+			$this->page = $page.".html";
 			$this->chemin_cache = $this->dossier_cache.$this->page;
-			$this->chemin_page = $page.".php";
+			$this->chemin_page = $page.".hmtl";
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 		
@@ -48,8 +48,8 @@
 			$dbc = App::getDb();
 
 			//on regarde si il existe et un cache et si il faut ou non le remettre à jour
-			$query = $dbc->select()->from("cache")->where("nom_fichier", " LIKE ", $this->page, "", true)->get();
-
+			$query = $dbc->select()->from("cache")->where("nom_fichier", "=", $this->page)->get();
+			
 			if ((is_array($query)) && (count($query) > 0)) {
 				$this->reload_cache = 0;
 				foreach ($query as $obj) {
@@ -59,7 +59,7 @@
 			}
 			else {
 				$dbc->insert("nom_fichier", $this->page)->insert("reload_cache", 0)->into("cache")->set();
-
+			
 				$this->reload_cache = 0;
 			}
 		}
@@ -72,7 +72,7 @@
 		 */
 		private function getCache() {
 			$this->getTestCache();
-
+			
 			if ((file_exists($this->chemin_cache)) && ($this->reload_cache == 0) && ($this->no_cache == null)) {
 				return true;
 			}
@@ -86,8 +86,6 @@
 			//on crée les dossier du cache si ils n'existent pas deja
 			if (!file_exists(ROOT."cache")) {
 				mkdir(ROOT."cache");
-				mkdir(ROOT."cache/admin");
-				mkdir(ROOT."cache/app");
 			}
 		}
 
@@ -101,14 +99,14 @@
 			if ($this->cache_active == 1) {
 				if ($this->getCache() == true) {
 					require_once($this->chemin_cache);
-
+			
 					return true;
 				}
 				else {
 					if ($this->no_cache == null) {
 						ob_start();
 					}
-
+			
 					return false;
 				}
 			}
@@ -125,9 +123,9 @@
 			if ($this->cache_active == 1) {
 				if (($this->getCache() != true) && ($this->no_cache == null)) {
 					$contenu = ob_get_clean();
-
+			
 					$this->setCache($contenu);
-
+			
 					echo $contenu;
 				}
 			}
@@ -144,7 +142,7 @@
 
 			file_put_contents($fichier_cache, $contenu_fichier);
 
-			$dbc->update("reload_cache", 0)->from("cache")->where("nom_fichier", "=", $this->page, "", true)->set();
+			$dbc->update("reload_cache", 0)->from("cache")->where("nom_fichier", "=", $this->page)->set();
 		}
 
 		/**
@@ -154,15 +152,15 @@
 		 */
 		public static function setReloadCache($nom_fichier) {
 			$dbc = App::getDb();
-
+			
 			$nom_fichier = ChaineCaractere::setUrl($nom_fichier);
 			$nom_fichier = str_replace("/", "-", $nom_fichier);
-
+			
 			$value = [
 				"reload" => 1,
 				"nom_fichier" => $nom_fichier
 			];
-
+			
 			$dbc->prepare("UPDATE cache SET reload_cache=:reload WHERE nom_fichier LIKE :nom_fichier", $value);
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
