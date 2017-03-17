@@ -16,7 +16,7 @@
 		protected $limit;
 		
 		abstract public function query();
-		abstract public function prepare();
+		abstract public function prepare($req, $value);
 		
 		
 		//-------------------------- QUERY BUILDER --------------------------------------------//
