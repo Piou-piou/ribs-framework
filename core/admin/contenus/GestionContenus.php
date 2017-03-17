@@ -221,7 +221,7 @@
 				}
 			}
 			else {
-				$this->setErreurContenus($balise_title, $url, $titre_page, $parent, $err_balise_title, $err_url, $err_titre_page);
+				$this->setErreurContenus($balise_title, $url, "", $titre_page, $parent, $err_balise_title, $err_url, "", $err_titre_page);
 				$this->erreur = true;
 			}
 		}
