@@ -7,6 +7,8 @@
 		private $id_module;
 		private $url;
 		private $icone;
+		private $nom;
+		private $version;
 		private $url_telechargement;
 		
 		
@@ -26,9 +28,6 @@
 		}
 		public function getVersion() {
 			return $this->version;
-		}
-		public function getOnlineVersion() {
-			return $this->online_version;
 		}
 		public function getIcone() {
 			return $this->icone;
