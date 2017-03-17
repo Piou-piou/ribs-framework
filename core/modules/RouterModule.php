@@ -59,6 +59,7 @@
 			$explode = explode("/", $url);
 			$count = count($explode);
 			$debut_url = "";
+			$centre_url = [];
 			
 			for ($i = 0; $i < $count; $i++) {
 				if (in_array($explode[$i], $this->getAllModules())) {
