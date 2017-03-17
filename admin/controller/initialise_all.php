@@ -114,7 +114,6 @@
 
 			$config = new \core\Configuration();
 			$contenu_dynamique = $config->getContenusDynamique();
-			$responsive = $config->getResponsive();
 			$cache_config = $config->getCache();
 		}
 		else {
