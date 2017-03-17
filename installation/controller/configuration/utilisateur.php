@@ -1,7 +1,7 @@
 <?php
 	$user = new \installation\controller\InstallUtilisateur($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['mdp'], $_POST['verif_mdp']);
 
-	if ($user->getErreur() == true) {
+	if ($user->getErreur() === true) {
 		$_SESSION['nom'] = $_POST['nom'];
 		$_SESSION['prenom'] = $_POST['prenom'];
 		$_SESSION['pseudo'] = $_POST['pseudo'];

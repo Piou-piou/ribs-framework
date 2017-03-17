@@ -100,11 +100,11 @@
 
 				//pour les pages normales
 				//pour l'acces a la gestion des comptes, si pas activée oin renvoi une erreur
-				if (($droit_acces->getDroitAcces("GESTION COMPTES") == false) && ($page == "gestion-comptes")) {
+				if (($droit_acces->getDroitAcces("GESTION COMPTES") === false) && ($page == "gestion-comptes")) {
 					FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
 					header("location:".WEBROOT."administrator");
 				}
-				else if (($droit_acces->getDroitAcces("GESTION DROIT ACCES") == false) && ($page == "gestion-droits-acces")) {
+				else if (($droit_acces->getDroitAcces("GESTION DROIT ACCES") === false) && ($page == "gestion-droits-acces")) {
 					FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
 					header("location:".WEBROOT."administrator");
 				}
