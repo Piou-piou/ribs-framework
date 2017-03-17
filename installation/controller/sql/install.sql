@@ -169,6 +169,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `activer` int(1) NOT NULL,
   `installer` int(1) NOT NULL,
   `icone` varchar(255) DEFAULT NULL,
+  `target` varchar(255) DEFAULT NULL,
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
