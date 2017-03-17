@@ -84,7 +84,7 @@
 			else {
 				$router_module = new \core\modules\RouterModule();
 				if ($router_module->getRouteModuleExist($page)) {
-					$page = $router_module->getUrl($page, 1);
+					$page = $router_module->getUrl($page, "admin");
 					
 					if ($router_module->getController() != "") {
 						require_once(MODULEROOT.$router_module->getController());

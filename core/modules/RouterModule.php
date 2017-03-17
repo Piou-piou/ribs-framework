@@ -55,11 +55,11 @@
 		 * Permets de générer l'url pour aller charger la page concernee pour le module blog
 		 * appele également l'actoin à effectur dans la page
 		 */
-		public function getUrl($url, $admin=null) {
+		public function getUrl($url, $admin="app") {
 			$explode = explode("/", $url);
 			$count = count($explode);
 			$debut_url = "";
-			$centre_url = [];
+			$centre_url = "";
 			
 			for ($i = 0; $i < $count; $i++) {
 				if (in_array($explode[$i], $this->getAllModules())) {
@@ -74,14 +74,13 @@
 			$centre_url = implode("/", $centre_url);
 			$this->page = $centre_url;
 			
-			if (!isset($centre_url) || ($centre_url == "")) {
+			if ($centre_url == "") {
 				$this->page = "index";
 			}
 			else {
-				$file = ROOT."modules/".$debut_url."/app/views/".$centre_url;
-				$file_admin = ROOT."modules/".$debut_url."/admin/views/".$centre_url;
+				$file = ROOT."modules/".$debut_url."/".$admin."/views/".$centre_url;
 				
-				if (!file_exists($file.".html") && !file_exists($file_admin.".html")) {
+				if (!file_exists($file.".html")) {
 					$centre_url = explode("/", $file);
 					$this->parametre = array_pop($centre_url);
 					$this->page = end($centre_url);
@@ -128,7 +127,7 @@
 		 */
 		private function setActionPage() {
 			//on require le fichier routes.php dans /modules/nom_module/router/routes.php
-			if ($this->admin !== null) {
+			if ($this->admin !== "app") {
 				require_once(MODULEROOT.$this->module."/router/admin_routes.php");
 			}
 			else {
