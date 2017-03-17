@@ -11,7 +11,7 @@
 		protected $img;
 		protected $mdp;
 		protected $valide;
-		protected $erreur;
+		protected $erreur = "";
 		
 		private $debut_lien;
 		
