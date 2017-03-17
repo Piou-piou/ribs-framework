@@ -50,7 +50,7 @@
 
 			<div class="login-form" id="mdp-oublie">
 				<form  action="" method="POST">
-					<img src="<?=WEBROOT?>admin/views/template/images/ribs1.png" alt="">
+					<img src="<?=WEBROOT?>admin/views/template/images/ribs.png" alt="">
 
 					<h1>Mot de passe oublié</h1>
 
