@@ -1,0 +1,47 @@
+<header>
+	<div class="inner">
+		<h1>Configuration | modules</h1>
+	</div>
+</header>
+<link rel="stylesheet" type="text/css" href="{{LIBSWEBROOT}}checkbox/css/style.css">
+<script src="{{LIBSWEBROOT}}checkbox/js/anim.js"></script>
+{% include("configuration/js/configuration.html") %}
+{% include("configuration/header.html") %}
+
+<div class="inner">
+	{#<?php require_once(LIBSROOT."barre_chargement/index.php"); }}#}
+	<div class="contenu modifier-contenu">
+		<h2>Ajouter un module</h2>
+		<p>To come</p>
+	</div>
+
+	<div class="contenu modifier-contenu gestion-comptes configuration">
+		<h2>Modules ajoutés</h2>
+		<table>
+			<thead>
+				<tr>
+					<td>Nom du module</td>
+					<td>Activer</td>
+					<td>Supprimer</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in app.active_modules %}
+					<tr>
+						<td>{{ i.nom }}</td>
+						<td>
+							<label for="{{ i.url }}" class="checkbox-perso switched">
+								<input type="checkbox" class="test-check" id="{{ i.url }}" {% if i.activer == true %}checked{%   endif %}>
+							</label>
+						</td>
+						<td>
+							{% if i.installer == 1 %}
+								<a class="supprimer open-popup" popup="popup-delete-module" href="{{ADMWEBROOT}}controller/core/modules/installation/supprimer?id_module={{ i.id_module}}">Supprimer</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>

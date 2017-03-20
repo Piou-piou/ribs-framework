@@ -32,7 +32,7 @@
 		 * get array of all values wich will be used in the page
 		 */
 		public static function getValues() {
-			return self::$values;
+			return ["app" => self::$values];
 		}
 
 		/**

@@ -169,3 +169,7 @@
 		}
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
+$arr = \core\App::getValues();
+//echo("<pre>");
+//	print_r($arr);
+//echo("</pre>");

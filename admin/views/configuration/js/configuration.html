@@ -11,7 +11,7 @@
 
 			$.ajax({
 				method: 'GET',
-				url:"<?=ADMWEBROOT?>controller/core/modules/activation/activer_desactiver.php",
+				url:"{{ADMWEBROOT}}controller/core/modules/activation/activer_desactiver.php",
 				data: "activer="+activer+"&url_module="+url_module,
 				success: function(data){
 					if (data == "success") {
