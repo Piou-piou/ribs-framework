@@ -112,7 +112,12 @@
 					$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
 					require(ROOT."admin/controller/initialise_all.php");
 					
-					$twig_ok_page = ["contacter-support", "configuration/index", "configuration/module"];
+					$twig_ok_page = [
+						"contacter-support",
+						"configuration/index",
+						"configuration/module",
+						"configuration/infos-generales"
+					];
 					
 					if (in_array($page, $twig_ok_page)) {
 						$loader = new Twig_Loader_Filesystem("admin/views/");

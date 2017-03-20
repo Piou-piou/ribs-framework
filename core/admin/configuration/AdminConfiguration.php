@@ -38,12 +38,6 @@
 				->where("ID_configuration", "=", 1)
 				->set();
 
-			$_SESSION['nom_site'] = $nom_site;
-			$_SESSION['gerant_site'] = $gerant_site;
-			$_SESSION['mail_site'] = $mail_site;
-			$_SESSION['mail_administrateur'] = $mail_administrateur;
-			$_SESSION['err_modification_infos_config'] = true;
-
 			FlashMessage::setFlash("la configuration de votre site a été correctement mse à jour", "success");
 		}
 

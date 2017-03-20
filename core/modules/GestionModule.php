@@ -63,6 +63,7 @@
 		}
 
 		/**
+		 * fonction qui renvoi la liste de tous les modules
 		 */
 		public function getListeModule() {
 			$dbc = App::getDb();
@@ -84,7 +85,7 @@
 					];
 				}
 				
-				App::setValues(["test" => "test","active_modules" => $values]);
+				App::setValues(["active_modules" => $values]);
 			}
 		}
 

@@ -96,39 +96,9 @@
 
 	//---------- actif pour la configuration des modules ------------------------------------//
 	if ($page == "configuration/module") {
-		$gestion_module_page = new \core\modules\GestionModule();
-		$gestion_module_page->getListeModule();
+		$gestion_module->getListeModule();
 	}
 	//---------- fin actif pour la configuration des modules ------------------------------------//
-
-
-
-	//---------- actif pour la configuration des infos générales ------------------------------------//
-	if ($page == "configuration/infos-generales") {
-		if (isset($_SESSION['err_modification_infos_config'])) {
-			$nom_site = $_SESSION['nom_site'];
-			$gerant_site = $_SESSION['gerant_site'];
-			$mail_site = $_SESSION['mail_site'];
-			$mail_administrateur = $_SESSION['mail_administrateur'];
-
-			unset($_SESSION['err_modification_infos_config']);
-
-			$config = new \core\Configuration();
-			$contenu_dynamique = $config->getContenusDynamique();
-			$cache_config = $config->getCache();
-		}
-		else {
-			$config = new \core\Configuration();
-			$nom_site = $config->getNomSite();
-			$gerant_site = $config->getGerantSite();
-			$mail_site = $config->getMailSite();
-			$mail_administrateur = $config->getMailAdministrateur();
-
-			$contenu_dynamique = $config->getContenusDynamique();
-			$cache_config = $config->getCache();
-		}
-	}
-	//---------- fin actif pour la configuration des infos générales ------------------------------------//
 
 
 
@@ -169,7 +139,7 @@
 		}
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
-$arr = \core\App::getValues();
-//echo("<pre>");
-//	print_r($arr);
-//echo("</pre>");
+	$arr = \core\App::getValues();
+echo("<pre>");
+	print_r($arr);
+echo("</pre>");

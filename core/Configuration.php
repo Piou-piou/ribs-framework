@@ -3,9 +3,7 @@
 
 	class Configuration {
 		//pour la configuration générale du site
-		private $nom_site; //-> nom du site
 		private $mail_site; //-> pour le gérant du site contact@nomdedomaine;com
-		private $gerant_site; //->nom du gérant du site
 		private $mail_administrateur; //-> mail de l'administrateur web@clicand.com
 		private $last_save; //-> derniere sauvegarde de la bdd
 		private $acces_admin; //-> si == 1 on a acces à l'admin
@@ -22,29 +20,23 @@
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
 		public function __construct() {
 			//pour la configuration générale du site
-			$this->getConfigurationGenerale();
+			$arr = $this->getConfigurationGenerale();
 
 			//pour la configuration des comptes
-			$this->getConfigurationCompte();
+			$arr1 = $this->getConfigurationCompte();
+			
+			App::setValues(["configuration" => array_merge($arr, $arr1)]);
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
 
 
 
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		//pour la configuration générale du site
-		public function getNomSite() {
-			return $this->nom_site;
-		}
-
 		/**
 		 * @return string|null
 		 */
 		public function getMailSite() {
 			return $this->mail_site;
-		}
-		public function getGerantSite() {
-			return $this->gerant_site;
 		}
 		public function getMailAdministrateur() {
 			return $this->mail_administrateur;
@@ -83,15 +75,25 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$this->nom_site = $obj->nom_site;
 					$this->mail_site = $obj->mail_site;
-					$this->gerant_site = $obj->gerant_site;
 					$this->mail_administrateur = $obj->mail_administrateur;
 					$this->last_save = $obj->last_save;
 					$this->acces_admin = $obj->acces_admin;
 					$this->contenu_dynamique = $obj->contenu_dynamique;
 					$this->cache = $obj->cache;
 					$this->desactiver_navigation = $obj->desactiver_navigation;
+					
+					return [
+						"nom_site" => $obj->nom_site,
+						"mail_site" => $obj->mail_site,
+						"gerant_site" => $obj->gerant_site,
+						"mail_administrateur" => $obj->mail_administrateur,
+						"last_save" => $obj->last_save,
+						"acces_admin" => $obj->acces_admin,
+						"contenu_dynamique" => $obj->contenu_dynamique,
+						"cache" => $obj->cache,
+						"desactiver_navigation" => $obj->desactiver_navigation
+					];
 				}
 			}
 		}
@@ -106,6 +108,12 @@
 					$this->valider_inscription = $obj->valider_inscription;
 					$this->activer_inscription = $obj->activer_inscription;
 					$this->activer_connexion = $obj->activer_connexion;
+					
+					return [
+						"valider_inscription" => $obj->valider_inscription,
+						"activer_inscription" => $obj->activer_inscription,
+						"activer_connexion" => $obj->activer_connexion,
+					];
 				}
 			}
 		}
