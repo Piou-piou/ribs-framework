@@ -113,6 +113,7 @@
 					require(ROOT."admin/controller/initialise_all.php");
 					
 					$twig_ok_page = [
+						"index",
 						"contacter-support",
 						"configuration/index",
 						"configuration/module",
