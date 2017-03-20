@@ -21,45 +21,29 @@ module.exports = function(grunt) {
         'sftp-deploy': {
             'one': {
                 auth: {
-                    host: path_srv.server.dest1.host,
+                    host: path_srv.server.dest.host,
                     port: 22,
                     authKey: 'key1'
                 },
                 src: path_srv.local.path,
-                dest: path_srv.server.dest1.path,
+                dest: path_srv.server.dest.path,
                 exclusions: path_srv.exclusions,
                 serverSep: '/',
                 localSep: '/',
                 concurrency: 4,
                 progress: true
-            },
-            'two': {
-                auth: {
-                    host: path_srv.server.dest2.host,
-                    port: 22,
-                    authKey: 'key1'
-                },
-                src: path_srv.local.path,
-                dest: path_srv.server.dest2.path,
-                exclusions: path_srv.exclusions,
-                serverSep: '/',
-                localSep: '/',
-                concurrency: 4,
-                progress: true
-            },
-            'three': {
-                auth: {
-                    host: path_srv.server.dest3.host,
-                    port: 22,
-                    authKey: 'key1'
-                },
-                src: path_srv.local.path,
-                dest: path_srv.server.dest3.path,
-                exclusions: path_srv.exclusions,
-                serverSep: '/',
-                localSep: '/',
-                concurrency: 4,
-                progress: true
+            }
+        },
+        sync: {
+            main: {
+                files: [{
+                    cwd: path_srv.local.path,
+                    src: ['admin/**', 'core/**', 'libs/**', 'index.php', 'admin.php', 'config/initialise.php'],
+                    dest: path_srv.local.path_bataille
+                }],
+                verbose: true, // Default: false
+                pretend: false, // Don't do any disk operations - just write log. Default: false
+                failOnError: true, // Fail the task when copying is not possible. Default: false
             }
         },
         watch: {
