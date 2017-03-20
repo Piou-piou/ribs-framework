@@ -7,7 +7,6 @@
 		use GetDetailListeAcces;
 
 		//pour les droit_acces standard
-		private $id_liste_droit_acces;
 		private $nom_liste;
 		private $droit_acces;
 		private $nb_droit_acces;
@@ -18,7 +17,6 @@
 		private $nb_droit_acces_page;
 
 		//pour la table identite
-		private $id_identite;
 		private $pseudo;
 		private $nom;
 		private $prenom;

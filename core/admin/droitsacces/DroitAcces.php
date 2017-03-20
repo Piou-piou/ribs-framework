@@ -7,11 +7,11 @@
 		private $logged;
 
 		//pour la table identite
-		private $id_identite;
+		protected $id_identite;
 		private $super_admin;
 
 		//pour la table liste_droit_acces
-		private $id_liste_droit_acces;
+		protected $id_liste_droit_acces;
 
 		//pour des droits pour la gestion des contenus
 		private $modif_seo;
