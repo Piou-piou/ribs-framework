@@ -66,12 +66,6 @@
 						<input liste-deroulante="true" multi="false" type="text" name="parent" value="<?=$parent_courant?>"/>
 					</div>
 					<div class="liste-deroulante">
-						<li>test
-							<ul>
-								<li>tedgf</li>
-							</ul>
-						</li>
-						<li>test 1</li>
 					</div>
 				</div>
 			</section>

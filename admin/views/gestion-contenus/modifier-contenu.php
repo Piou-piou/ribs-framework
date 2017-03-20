@@ -45,11 +45,12 @@
 						<input type="text" name="url" type-val="string" min="3" max="92" value="<?=$url?>" <?php if ($id_page_courante == 1): ?>disabled<?php endif; ?>/>
 					</div>
 				</div>
-
-				<div class="bloc no-input">
-					<label class="label label-textarea" for="meta_description" data-error="La description doit être comprise entre 10 et 158 caractères">Description de votre site pour le navigateur (maximum 256 caractères)</label>
-					<textarea name="meta_description" type-val="string" min="10" max="158" required=""><?=$meta_description?></textarea>
-				</div>
+				<?php if ($redirect_page == false):?>
+					<div class="bloc no-input">
+						<label class="label label-textarea" for="meta_description" data-error="La description doit être comprise entre 10 et 158 caractères">Description de votre site pour le navigateur (maximum 256 caractères)</label>
+						<textarea name="meta_description" type-val="string" min="10" max="158" required=""><?=$meta_description?></textarea>
+					</div>
+				<?php endif;?>
 			</section>
 		<?php endif; ?>
 
@@ -72,7 +73,7 @@
 			</section>
 		<?php endif; ?>
 
-		<?php if (($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)):?>
+		<?php if ((($droit_acces->getModifContenu() == 1) || ($droit_acces->getSuperAdmin() == 1)) && ($redirect_page == false)):?>
 			<section class="contenu modifier-contenu">
 				<h2>Partie concernant l'affichage dans le navigateur</h2>
 

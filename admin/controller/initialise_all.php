@@ -78,6 +78,7 @@
 			$texte_parent_courant = $gestion_contenu->getParentTexte($parent_courant);
 			$contenu_page = $contenu->getContenu();
 			$bloc_editable = $gestion_contenu->getBlocEditable($id_page_courante);
+			$redirect_page = $gestion_contenu->getTestRedirectPage($url);
 		}
 		else {
 			$balise_title = null;
