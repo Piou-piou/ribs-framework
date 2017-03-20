@@ -19,7 +19,7 @@
 		}
 		
 		public function getTestRedirectPage($url) {
-			if ((ChaineCaractere::FindInString($url, "http://") == true) || (ChaineCaractere::FindInString($url, "https://") == true)) {
+			if ((ChaineCaractere::FindInString($url, "http://") === true) || (ChaineCaractere::FindInString($url, "https://") === true)) {
 				return true;
 			}
 			
