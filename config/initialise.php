@@ -50,13 +50,8 @@
 	else {
 		header("location:".WEBROOT."installation");
 	}
-
-	if ($ini["developpment"] == 1) {
-		$tab = "dev";
-	}
-	else {
-		$tab = "prod";
-	}
+	
+	$tab = "dev";
 
 	define('DB_TYPE', $ini[$tab]["DB_TYPE"]);
 	define('DB_NAME', $ini[$tab]["DB_NAME"]);

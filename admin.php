@@ -119,7 +119,8 @@
 						"configuration/index",
 						"configuration/module",
 						"configuration/infos-generales",
-						"configuration/mon-compte"
+						"configuration/mon-compte",
+						"configuration/base-de-donnees"
 					];
 					
 					if (in_array($page, $twig_ok_page)) {
