@@ -118,7 +118,8 @@
 						"contacter-support",
 						"configuration/index",
 						"configuration/module",
-						"configuration/infos-generales"
+						"configuration/infos-generales",
+						"configuration/mon-compte"
 					];
 					
 					if (in_array($page, $twig_ok_page)) {
