@@ -114,6 +114,7 @@
 					
 					$twig_ok_page = [
 						"index",
+						"notifications",
 						"contacter-support",
 						"configuration/index",
 						"configuration/module",
