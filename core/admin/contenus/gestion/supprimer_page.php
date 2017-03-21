@@ -17,22 +17,15 @@
 		}
 		else {
 			\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas le droit de supprimer cette page");
-
-			if (isset($_GET['id'])) {
-				header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
-			}
-			else {
-				header("location:".ADMWEBROOT."gestion-contenus/index");
-			}
 		}
 	}
 	else {
 		\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas le droit de supprimer cette page");
-
-		if (isset($_GET['id'])) {
-			header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
-		}
-		else {
-			header("location:".ADMWEBROOT."gestion-contenus/index");
-		}
+	}
+	
+	if (isset($_GET['id'])) {
+		header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']);
+	}
+	else {
+		header("location:".ADMWEBROOT."gestion-contenus/index");
 	}
