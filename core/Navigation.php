@@ -57,6 +57,7 @@
 		 */
 		private function getLienNavigationPage($id_page) {
 			$dbc = App::getDb();
+			$nav = [];
 
 			$query = $dbc->select()
 				->from("navigation")
@@ -69,6 +70,15 @@
 
 			if (is_array($query) && (count($query) > 0)) {
 				foreach ($query as $obj) {
+					$nav[] = [
+						"id_page" => $obj->ID_page,
+						"titre" => $obj->titre,
+						"lien_page" => $this->getLienPage($obj->url),
+						"balise_title" => $obj->balise_title,
+						"type_page" => "page",
+						"target" => $obj->target,
+					];
+					App::setValues(["navigation" => $nav]);
 					return [$obj->ID_page, $obj->titre, $this->getLienPage($obj->url), $obj->balise_title, "page", $obj->target, $this->getSousMenu($id_page)];
 				}
 			}

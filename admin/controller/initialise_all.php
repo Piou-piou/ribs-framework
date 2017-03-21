@@ -91,6 +91,14 @@
 		}
 	}
 	//---------- fin pour les pages sur la modification de contenus ----------------------------------------------//
+	
+	
+	
+	//---------- actif pour la configuration de la navigation ------------------------------------//
+	if ($page == "gestion-navigation/index") {
+		$nav = new \core\Navigation();
+	}
+	//---------- fin actif pour la configuration de la navigation ------------------------------------//
 
 
 
