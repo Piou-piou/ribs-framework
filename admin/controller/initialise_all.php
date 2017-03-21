@@ -118,4 +118,4 @@
 		}
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
-	$arr = \core\App::getValues();
+	$arr_admin = \core\App::getValues();

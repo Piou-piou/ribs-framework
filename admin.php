@@ -82,6 +82,7 @@
 				Connexion::setObgConnecte(WEBROOT."administrator/login");
 			}
 			else {
+				$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
 				$router_module = new \core\modules\RouterModule();
 				if ($router_module->getRouteModuleExist($page)) {
 					$page = $router_module->getUrl($page, "admin");
@@ -96,41 +97,40 @@
 					$page = $router_module->getPage();
 					$twig_page = true;
 				}
-				
-
-				//pour les pages normales
-				//pour l'acces a la gestion des comptes, si pas activée oin renvoi une erreur
-				if (($droit_acces->getDroitAcces("GESTION COMPTES") === false) && ($page == "gestion-comptes")) {
-					FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
-					header("location:".WEBROOT."administrator");
-				}
-				else if (($droit_acces->getDroitAcces("GESTION DROIT ACCES") === false) && ($page == "gestion-droits-acces")) {
-					FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
-					header("location:".WEBROOT."administrator");
-				}
 				else {
-					$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
-					require(ROOT."admin/controller/initialise_all.php");
-					
-					$twig_ok_page = [
-						"index",
-						"notifications",
-						"contacter-support",
-						"configuration/index",
-						"configuration/module",
-						"configuration/infos-generales",
-						"configuration/mon-compte",
-						"configuration/base-de-donnees"
-					];
-					
-					if (in_array($page, $twig_ok_page)) {
-						$loader = new Twig_Loader_Filesystem("admin/views/");
-						$twig = new Twig_Environment($loader);
-						$twig_page = true;
+					//pour les pages normales
+					//pour l'acces a la gestion des comptes, si pas activée oin renvoi une erreur
+					if (($droit_acces->getDroitAcces("GESTION COMPTES") === false) && ($page == "gestion-comptes")) {
+						FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
+						header("location:".WEBROOT."administrator");
 					}
-					
-					require(ROOT."admin/views/template/principal.php");
+					else if (($droit_acces->getDroitAcces("GESTION DROIT ACCES") === false) && ($page == "gestion-droits-acces")) {
+						FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
+						header("location:".WEBROOT."administrator");
+					}
+					else {
+						$twig_ok_page = [
+							"index",
+							"notifications",
+							"contacter-support",
+							"configuration/index",
+							"configuration/module",
+							"configuration/infos-generales",
+							"configuration/mon-compte",
+							"configuration/base-de-donnees"
+						];
+						
+						if (in_array($page, $twig_ok_page)) {
+							$loader = new Twig_Loader_Filesystem("admin/views/");
+							$twig = new Twig_Environment($loader);
+							$twig_page = true;
+						}
+						
+						
+					}
 				}
+				require(ROOT."admin/controller/initialise_all.php");
+				require(ROOT."admin/views/template/principal.php");
 			}
 		}
 	}
