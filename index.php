@@ -101,8 +101,8 @@
 
 				$loader = new Twig_Loader_Filesystem('app/views');
 				$twig = new Twig_Environment($loader);
-
-				$arr = ["contenu_page" => $contenu_page];
+				
+				$arr_page = ["contenu_page" => $contenu_page];
 				$page = end($explode);
 
 				if (!file_exists(ROOT."app/views/".$page.".html")) {
@@ -124,7 +124,7 @@
 		$loader = new Twig_Loader_Filesystem('app/views');
 		$twig = new Twig_Environment($loader);
 
-		$arr = ["contenu_page" => $contenu_page];
+		$arr_page = ["contenu_page" => $contenu_page];
 		$page = "index";
 		
 		$cache = new \core\Cache($page);

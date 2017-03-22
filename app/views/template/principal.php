@@ -21,7 +21,7 @@
 		?>
 
 
-		<?php echo $twig->render($page.".html", array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION)); ?>
+		<?php echo $twig->render($page.".html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_page)); ?>
 
 		<script>
 			$(document).ready(function() {
