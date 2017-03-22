@@ -3,7 +3,7 @@
 		<h1>Gestion de la navigation</h1>
 	</div>
 </header>
-<?php include("header.php"); ?>
+{% include("gestion-navigation/header.html") %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <script>
@@ -13,7 +13,7 @@
 			update: function() {
 				$.ajax({
 					type: "POST",
-					url: "<?=ADMWEBROOT?>controller/core/admin/navigation/ordre/set.php",
+					url: "{{ ADMWEBROOT }}controller/core/admin/navigation/ordre/set.php",
 					data: $(this).sortable("serialize"),
 					success: function(data) {
 						$("body").prepend(data);
@@ -25,21 +25,20 @@
 	});
 </script>
 
-
 <div class="inner">
 	<div class="contenu modifier-contenu gestion-navigation">
 		<ul id="sortable">
-			<?php foreach (\core\App::getNav()->getNavigation() as $nav):?>
-				<li id="lien_<?=$nav[0]?>.<?=$nav[4]?>"><a href="<?=$nav[0]?>" title="<?=$nav[3]?>"=><?=$nav[1]?></a>
-					<?php if ((isset($nav[5]) && count($nav[5]) > 0)):?>
+			{% for i in app.navigation %}
+				<li id="lien_{{ i.id }}.{{ i.type }}"><a>{{ i.titre }}</a>
+					{% if i.sous_menu|length > 0 %}
 						<ul>
-							<?php foreach ($nav[5] as $snav):?>
-								<li><a href="<?=$snav[0]?>" title="<?=$snav[3]?>"><?=$snav[1]?></a></li>
-							<?php endforeach; ?>
+							{% for x in i.sous_menu %}
+								<li><a>{{ x.titre }}</a></li>
+							{% endfor %}
 						</ul>
-					<?php endif; ?>
+					{% endif %}
 				</li>
-			<?php endforeach; ?>
+			{% endfor %}
 		</ul>
 	</div>
 </div>

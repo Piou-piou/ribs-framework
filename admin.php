@@ -117,7 +117,8 @@
 							"configuration/module",
 							"configuration/infos-generales",
 							"configuration/mon-compte",
-							"configuration/base-de-donnees"
+							"configuration/base-de-donnees",
+							"gestion-navigation/index"
 						];
 						
 						if (in_array($page, $twig_ok_page)) {
