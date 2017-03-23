@@ -4,7 +4,9 @@
 	</div>
 </header>
 <div class="inner">
-	<a class="submit-contenu" href="{{ ADMWEBROOT }}gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
+	{% if app.super_admin == 1 or "CREATION COMPTE ADMIN" in app.droit_acces_user %}
+		<a class="submit-contenu" href="{{ ADMWEBROOT }}gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
+	{% endif %}
 	<div class="contenu modifier-contenu gestion-comptes">
 		<h2>Comptes actifs sur le site</h2>
 		<table>
@@ -29,7 +31,11 @@
 						<td>{{ i.pseudo }}</td>
 						{% if app.configuration.valider_inscription == 1 %}
 							<td>
-								validation à refaire
+								{% if i.valide != 1 %}
+									<a href="{{ ADMWEBROOT }}controller/core/admin/comptes/valider_compte?id_identite={{ i.id_identite }}">Valider cet utilisateur</a>
+								{% else %}
+									Utilisateur validé
+								{% endif %}
 							</td>
 						{% endif %}
 						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/reinitialiser_mdp?id_identite={{ i.id_identite }}">Réinitialiser le mot de passe</a></td>
