@@ -34,6 +34,7 @@
 					$this->super_admin = $obj->super_admin;
 					$this->id_liste_droit_acces = $obj->liste_droit;
 				}
+				App::setValues(["super_admin" => $this->super_admin]);
 			}
 		}
 		//-------------------------- FIN CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -82,14 +83,15 @@
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
 			}
-
+			
+			App::setValues(["droit_acces_user" => $liste_droit_acces]);
 			return $liste_droit_acces;
 		}
 
 		/**
 		 * @param $id_page
 		 */
-		private function getListeDroitModificationContenu($id_page) {
+		public function getListeDroitModificationContenu($id_page) {
 			$dbc = App::getDb();
 
 			//on check si il a le droit de modifier ou supprimer cette page
@@ -108,6 +110,13 @@
 					$this->modif_navigation = $obj->navigation;
 					$this->supprimer_page = $obj->supprimer;
 				}
+				
+				App::setValues(["droit_acces_page" => [
+					"seo" => $this->modif_seo,
+					"contenu" => $this->modif_contenu,
+					"navigation" => $this->modif_navigation,
+					"supprimer" => $this->supprimer_page
+				]]);
 			}
 		}
 
