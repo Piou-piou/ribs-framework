@@ -4,7 +4,6 @@
 	use core\App;
 
 	class DroitAcces {
-		private $logged;
 
 		//pour la table identite
 		protected $id_identite;
@@ -42,9 +41,6 @@
     
     
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getLogged() {
-			return $this->logged;
-		}
 		public function getSuperAdmin() {
 			return $this->super_admin;
 		}
