@@ -49,7 +49,7 @@
 			$dbc = \core\App::getDb();
 			$this->setAllUser(null, null, null, null, null, null, null);
 
-			$query = $dbc->select()->from("identite")->where("archiver", "=", $archiver, "AND")->where("ID_identite", ">", 1)->get();
+			$query = $dbc->select()->from("identite")->where("ID_identite", ">", 1)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$id_identite = [];
@@ -59,6 +59,7 @@
 				$mail = [];
 				$img_profil = [];
 				$valide = "";
+				$values = [];
 
 				foreach ($query as $obj) {
 					$id_identite[] = $obj->ID_identite;
@@ -68,10 +69,21 @@
 					$mail[] = $obj->mail;
 					$img_profil[] = $obj->img_profil;
 					$valide[] = $this->getValideCompteLien($obj->valide, $obj->ID_identite);
-
+					
+					$values[] = [
+						"id_identite" => $obj->ID_identite,
+						"nom" => $obj->nom,
+						"prenom" => $obj->prenom,
+						"pseudo" => $obj->pseudo,
+						"mail" => $obj->mail,
+						"img_profil" => $obj->img_profil,
+						"valide" => $obj->valide,
+						"archiver" => $obj->archiver
+					];
 				}
 
 				$this->setAllUser($id_identite, $nom, $prenom, $mail, $pseudo, $img_profil, $valide);
+				App::setValues(["all_users" => $values]);
 			}
 		}
 
@@ -204,7 +216,7 @@
 		public function setActiverCompte($id_identite) {
 			$dbc = \core\App::getDb();
 
-			$dbc->update("archiver", "null")->from("identite")->where("ID_identite", "=", $id_identite)->set();
+			$dbc->update("archiver", "0")->from("identite")->where("ID_identite", "=", $id_identite)->set();
 		}
 
 		/**

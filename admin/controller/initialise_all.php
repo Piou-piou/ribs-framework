@@ -25,6 +25,10 @@
 
 
 	//---------- partie pour la gestion des comptes ------------------------------------//
+	if ($page == "gestion-comptes/index") {
+		$all_users = $admin->getAllUser();
+	}
+	
 	if ($page == "gestion-comptes/creer-utilisateur") {
 		if (isset($_SESSION['err_ajout_utilisateur'])) {
 			$nom = $_SESSION['nom'];
@@ -125,3 +129,7 @@
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
 	$arr_admin = \core\App::getValues();
+	
+	echo("<pre>");
+	print_r($arr_admin);
+	echo("</pre>");

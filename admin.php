@@ -109,7 +109,8 @@
 						"configuration/infos-generales",
 						"configuration/mon-compte",
 						"configuration/base-de-donnees",
-						"gestion-navigation/index"
+						"gestion-navigation/index",
+						"gestion-comptes/index"
 					];
 					
 					if (in_array($page, $twig_ok_page)) {
