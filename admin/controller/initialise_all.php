@@ -125,7 +125,3 @@
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
 	$arr_admin = \core\App::getValues();
-	
-	echo("<pre>");
-	print_r($arr_admin);
-	echo("</pre>");
