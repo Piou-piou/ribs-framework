@@ -3,7 +3,6 @@
 	use core\functions\ChaineCaractere;
 
 	class Navigation {
-		private $navigation;
 		private $last_ordre;
 		
 		
@@ -38,7 +37,6 @@
 				}
 
 				$this->last_ordre = $last_ordre;
-				$this->setNavigation($navigation);
 				
 				App::setValues(["navigation" => $navigation]);
 			}
@@ -48,10 +46,6 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getNavigation() {
-			return $this->navigation;
-		}
-
 		/**
 		 * @param $id_page
 		 * @return array
@@ -70,6 +64,7 @@
 				->get();
 
 			if (is_array($query) && (count($query) > 0)) {
+				$nav = [];
 				foreach ($query as $obj) {
 					$nav = [
 						"id" => $obj->ID_page,
@@ -80,10 +75,9 @@
 						"type" => "page",
 						"target" => $obj->target,
 					];
-					
-					//return [$obj->ID_page, $obj->titre, $this->getLienPage($obj->url), $obj->balise_title, "page", $obj->target, $this->getSousMenu($id_page)];
-					return $nav;
 				}
+				
+				return $nav;
 			}
 		}
 
@@ -147,7 +141,6 @@
 					];
 					
 					return $nav;
-					//return [$obj->ID_module, $obj->nom_module, $this->getLienPage($obj->url), $obj->nom_module, "module"];
 				}
 			}
 		}
@@ -178,10 +171,6 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setNavigation($navigation) {
-			$this->navigation = $navigation;
-		}
-
 		/**
 		 * @param $id
 		 * @param $value_id
