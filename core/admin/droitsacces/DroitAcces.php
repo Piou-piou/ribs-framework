@@ -145,22 +145,6 @@
 				return false;
 			}
 		}
-
-		/**
-		 * pour savoir si un utilisateur à le droit de supprimer, modifier ou ajouter des trucs
-		 * @param $droit_acces
-		 * @return bool
-		 */
-		public function getDroitAcces($droit_acces) {
-			$liste_droit_acces = $this->getListeDroitAcces();
-
-			if (($this->super_admin == 1) || (in_array($droit_acces, $liste_droit_acces))) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
     
     

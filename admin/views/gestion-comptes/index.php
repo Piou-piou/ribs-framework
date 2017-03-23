@@ -4,9 +4,7 @@
 	</div>
 </header>
 <div class="inner">
-	<?php if ($droit_acces->getDroitAcces("CREATION COMPTE ADMIN")):?>
-		<a class="submit-contenu" href="<?=ADMWEBROOT?>gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
-	<?php endif; ?>
+	<a class="submit-contenu" href="<?=ADMWEBROOT?>gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
 	<div class="contenu modifier-contenu gestion-comptes">
 		<h2>Comptes actifs sur le site</h2>
 		<?php $admin->getAllUser(); ?>

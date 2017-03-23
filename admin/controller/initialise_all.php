@@ -12,11 +12,9 @@
 	//---------- partie pour les droite d'acces ------------------------------------//
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 	$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
-
-	if ($droit_acces->getDroitAcces("GESTION CONTENUS")) {
-		$contenu = new \core\contenus\Contenus();
-		$gestion_contenu = new \core\admin\contenus\GestionContenus();
-	}
+	
+	$contenu = new \core\contenus\Contenus();
+	$gestion_contenu = new \core\admin\contenus\GestionContenus();
 
 	//pour les pages sur les droits d'acces
 	if (($page == "gestion-droits-acces/ajouter-liste") || ($page == "gestion-droits-acces/modifier-liste")) {
@@ -127,3 +125,7 @@
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
 	$arr_admin = \core\App::getValues();
+	
+	echo("<pre>");
+	print_r($arr_admin);
+	echo("</pre>");

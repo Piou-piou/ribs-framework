@@ -1,0 +1,31 @@
+{# Pour avoir accès à la gestion des autres comptes #}
+{% if app.super_admin == 1 or "GESTION COMPTES" in app.droit_acces_user %}
+	<li><i class="fa fa-users"></i><a href="{{ ADMWEBROOT}}gestion-comptes/index">Gestion des comptes</a>
+		<ul>
+			{% if app.super_admin == 1 or "CREATION COMPTE ADMIN" in app.droit_acces_user %}
+				<li><i class="fa fa-user"></i><a href="{{ ADMWEBROOT}}gestion-comptes/creer-utilisateur">Créer un utilisateur</a></li>
+			{% endif %}
+		</ul>
+	</li>
+{% endif %}
+
+{# Pour avoir accès à la gestion des autres comptes #}
+{% if app.super_admin == 1 or "GESTION DROIT ACCES" in app.droit_acces_user %}
+	<li><i class="fa fa-lock"></i><a href="{{ ADMWEBROOT}}gestion-droits-acces/index">Gestion des droits d'accès</a></li>
+{% endif %}
+
+{# Pour avoir accès à la gestion des contenus #}
+{% if app.super_admin == 1 or "GESTION CONTENUS" in app.droit_acces_user %}
+	<li><i class="fa fa-file-text"></i><a href="{{ ADMWEBROOT}}gestion-contenus/index">Gestion des contenus</a>
+		<ul>
+			{% if app.super_admin == 1 or "CREATION PAGE" in app.droit_acces_user %}
+				<li><i class="fa fa-newspaper-o"></i><a href="{{ ADMWEBROOT}}gestion-contenus/creer-une-page">Créer une page</a></li>
+			{% endif %}
+		</ul>
+	</li>
+{% endif %}
+
+{# Pour avoir accès à la gestion de la navigation #}
+{% if app.super_admin == 1 or "GESTION CONTENUS" in app.droit_acces_user %}
+	<li><i class="fa fa-link"></i><a href="{{ ADMWEBROOT}}gestion-navigation/index">Gestion de la navigation</a></li>
+{% endif %}

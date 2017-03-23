@@ -91,7 +91,7 @@
 						require_once(MODULEROOT.$router_module->getController());
 					}
 					
-					$loader = new Twig_Loader_Filesystem('modules/'.$router_module->getModule()."/admin/views");
+					$loader = new Twig_Loader_Filesystem(['modules/'.$router_module->getModule()."/admin/views", "admin/views"]);
 					$twig = new Twig_Environment($loader);
 					
 					$page = $router_module->getPage();
@@ -100,34 +100,22 @@
 				else {
 					//pour les pages normales
 					//pour l'acces a la gestion des comptes, si pas activée oin renvoi une erreur
-					if (($droit_acces->getDroitAcces("GESTION COMPTES") === false) && ($page == "gestion-comptes")) {
-						FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
-						header("location:".WEBROOT."administrator");
-					}
-					else if (($droit_acces->getDroitAcces("GESTION DROIT ACCES") === false) && ($page == "gestion-droits-acces")) {
-						FlashMessage::setFlash("L'accès à cette page n'est pas activé, veuillez contacter votre administrateur pour y avoir accès");
-						header("location:".WEBROOT."administrator");
-					}
-					else {
-						$twig_ok_page = [
-							"index",
-							"notifications",
-							"contacter-support",
-							"configuration/index",
-							"configuration/module",
-							"configuration/infos-generales",
-							"configuration/mon-compte",
-							"configuration/base-de-donnees",
-							"gestion-navigation/index"
-						];
-						
-						if (in_array($page, $twig_ok_page)) {
-							$loader = new Twig_Loader_Filesystem("admin/views/");
-							$twig = new Twig_Environment($loader);
-							$twig_page = true;
-						}
-						
-						
+					$twig_ok_page = [
+						"index",
+						"notifications",
+						"contacter-support",
+						"configuration/index",
+						"configuration/module",
+						"configuration/infos-generales",
+						"configuration/mon-compte",
+						"configuration/base-de-donnees",
+						"gestion-navigation/index"
+					];
+					
+					if (in_array($page, $twig_ok_page)) {
+						$loader = new Twig_Loader_Filesystem("admin/views");
+						$twig = new Twig_Environment($loader);
+						$twig_page = true;
 					}
 				}
 				require(ROOT."admin/controller/initialise_all.php");
