@@ -15,6 +15,7 @@
 	//--------------------------------------------- INITIALISATION DES CLASS -------------------------------------------------------//
 	$login = new Connexion();
 	$config = new Configuration();
+	$nav = new \core\Navigation();
 	$arr = [];
 
 	if (isset($_SESSION["idlogin".CLEF_SITE])) {
@@ -79,7 +80,6 @@
 		}
 		else {
 			$cache = new \core\Cache($page);
-			$nav = new \core\Navigation();
 
 			$router_module = new RouterModule();
 			if ($router_module->getRouteModuleExist($page)) {
@@ -103,7 +103,7 @@
 				$loader = new Twig_Loader_Filesystem('app/views');
 				$twig = new Twig_Environment($loader);
 				
-				$arr_page = [\core\App::getValues(), "contenu_page" => $contenu_page];
+				$arr_page = array_merge(core\App::getValues(), ["contenu_page" => $contenu_page]);
 				$page = end($explode);
 
 				if (!file_exists(ROOT."app/views/".$page.".html")) {
@@ -125,7 +125,7 @@
 		$loader = new Twig_Loader_Filesystem('app/views');
 		$twig = new Twig_Environment($loader);
 
-		$arr_page = ["contenu_page" => $contenu_page];
+		$arr_page = array_merge(core\App::getValues(), ["contenu_page" => $contenu_page]);
 		$page = "index";
 		
 		$cache = new \core\Cache($page);
