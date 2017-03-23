@@ -1,0 +1,35 @@
+<nav class="nav-no-respsonsive">
+	<div class="inner">
+		<ul>
+			{% for i in app.navigation %}
+				<li id="lien_{{ i.id }}.{{ i.type }}"><a href="{{ i.lien_page }}" title="{{ i.balise_title }}"  target="{{ i.target }}">{{ i.titre }}</a>
+					{% if i.sous_menu|length > 0 %}
+						<ul>
+							{% for x in i.sous_menu %}
+								<li><a  href="{{ x.lien_page }}"  title="{{ x.balise_title }}" target="{{ x.target }}">{{ x.titre }}</a></li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</nav>
+
+<nav class="nav-responsive">
+	<i class="fa fa-bars fa-3x"></i>
+	
+	<ul>
+		{% for i in app.navigation %}
+			<li id="lien_{{ i.id }}.{{ i.type }}"><a href="{{ i.lien_page }}" title="{{ i.balise_title }} reponsive"  target="{{ i.target }}">{{ i.titre }}</a>
+				{% if i.sous_menu|length > 0 %}
+					<ul>
+						{% for x in i.sous_menu %}
+							<li><a  href="{{ x.lien_page }}"  title="{{ x.balise_title }}" target="{{ x.target }} reponsive">{{ x.titre }}</a></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+</nav>

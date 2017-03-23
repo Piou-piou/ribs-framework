@@ -15,11 +15,11 @@
 	<body>
 		<?php
 			if ($config->getDesactiverNavigation() != 1) {
-				require_once(ROOT."app/views/template/navigation.php");
-				require_once(ROOT."app/views/template/nav_responsive.php");
+				echo $twig->render("template/navigation.html", $arr_page);
 			}
+			
+			unset($arr_page["app"]["navigation"]);
 		?>
-
 
 		<?php echo $twig->render($page.".html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_page)); ?>
 

@@ -79,6 +79,7 @@
 		}
 		else {
 			$cache = new \core\Cache($page);
+			$nav = new \core\Navigation();
 
 			$router_module = new RouterModule();
 			if ($router_module->getRouteModuleExist($page)) {
@@ -88,9 +89,9 @@
 					require_once(MODULEROOT.$router_module->getController());
 				}
 
-				$loader = new Twig_Loader_Filesystem('modules/'.$router_module->getModule()."/app/views");
+				$loader = new Twig_Loader_Filesystem(['modules/'.$router_module->getModule()."/app/views", "app/views"]);
 				$twig = new Twig_Environment($loader);
-
+				$arr_page = \core\App::getValues();
 				$page = $router_module->getPage();
 			}
 			else {
@@ -102,7 +103,7 @@
 				$loader = new Twig_Loader_Filesystem('app/views');
 				$twig = new Twig_Environment($loader);
 				
-				$arr_page = ["contenu_page" => $contenu_page];
+				$arr_page = [\core\App::getValues(), "contenu_page" => $contenu_page];
 				$page = end($explode);
 
 				if (!file_exists(ROOT."app/views/".$page.".html")) {
