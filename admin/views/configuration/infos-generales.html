@@ -9,76 +9,84 @@
 {% include("configuration/js/infos_generales.html") %}
 {% include("configuration/header.html") %}
 
-<div class="inner">
-	{#<?php require_once(LIBSROOT."barre_chargement/index.php"); }}#}
-	<a class="submit-contenu supprimer-page link" href="{{ADMWEBROOT}}configuration/index"><i class="fa fa-times"></i>Annuler</a>
-	<form action="{{ADMWEBROOT}}controller/core/admin/configuration/modifier/modifier_infos_generales" method="post">
-		<div class="contenu modifier-contenu">
-
-			<h2>Gestion des infos</h2>
-
-			<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
-
-			<div>
-				<div class="colonne">
-					<div class="bloc">
-						<label for="nom_site" class="label"  data-error="Le nom de votre site doit être entre 3 et 50 caractères">Nom de votre site</label>
-						<input type="text" name="nom_site" type-val="string" min="3" max="50" value="{{app.configuration.nom_site}}">
+{% if super_admin == 1 %}
+	<div class="inner">
+		{#<?php require_once(LIBSROOT."barre_chargement/index.php"); }}#}
+		<a class="submit-contenu supprimer-page link" href="{{ADMWEBROOT}}configuration/index"><i class="fa fa-times"></i>Annuler</a>
+		<form action="{{ADMWEBROOT}}controller/core/admin/configuration/modifier/modifier_infos_generales" method="post">
+			<div class="contenu modifier-contenu">
+	
+				<h2>Gestion des infos</h2>
+	
+				<button type="submit" class="submit-contenu" type="submit"><i class="fa fa-check"></i>Valider</button>
+	
+				<div>
+					<div class="colonne">
+						<div class="bloc">
+							<label for="nom_site" class="label"  data-error="Le nom de votre site doit être entre 3 et 50 caractères">Nom de votre site</label>
+							<input type="text" name="nom_site" type-val="string" min="3" max="50" value="{{app.configuration.nom_site}}">
+						</div>
+					</div>
+					<div class="colonne">
+						<div class="bloc">
+							<label for="gerant_site" class="label"  data-error="Le nom du gérant du site doit être entre 3 et 50 caractères">Nom du gérant du site</label>
+							<input type="text" name="gerant_site" type-val="string" min="3" max="50" value="{{app.configuration.gerant_site}}">
+						</div>
 					</div>
 				</div>
-				<div class="colonne">
-					<div class="bloc">
-						<label for="gerant_site" class="label"  data-error="Le nom du gérant du site doit être entre 3 et 50 caractères">Nom du gérant du site</label>
-						<input type="text" name="gerant_site" type-val="string" min="3" max="50" value="{{app.configuration.gerant_site}}">
+	
+				<div>
+					<div class="colonne">
+						<div class="bloc">
+							<label for="mail_site" class="label"  data-error="Le mail du gérant de votre site doit être entre 3 et 90 caractères">Mail du gérant du site</label>
+							<input type="text" name="mail_site" type-val="string" min="3" max="90" value="{{app.configuration.mail_site}}">
+						</div>
+					</div>
+					<div class="colonne">
+						<div class="bloc">
+							<label for="mail_administrateur" class="label"  data-error="Le mail administrateur doit être entre 3 et 50 caractères">Mail du développeur web  du site </label>
+							<input type="text" name="mail_administrateur" type-val="string" min="3" max="50" value="{{app.configuration.mail_administrateur}}">
+						</div>
 					</div>
 				</div>
 			</div>
-
-			<div>
-				<div class="colonne">
-					<div class="bloc">
-						<label for="mail_site" class="label"  data-error="Le mail du gérant de votre site doit être entre 3 et 90 caractères">Mail du gérant du site</label>
-						<input type="text" name="mail_site" type-val="string" min="3" max="90" value="{{app.configuration.mail_site}}">
-					</div>
-				</div>
-				<div class="colonne">
-					<div class="bloc">
-						<label for="mail_administrateur" class="label"  data-error="Le mail administrateur doit être entre 3 et 50 caractères">Mail du développeur web  du site </label>
-						<input type="text" name="mail_administrateur" type-val="string" min="3" max="50" value="{{app.configuration.mail_administrateur}}">
-					</div>
-				</div>
-			</div>
+		</form>
+	
+		<div class="contenu modifier-contenu gestion-comptes">
+			<h2>Gestion des options</h2>
+	
+			<table>
+				<thead>
+					<tr>
+						<td>Nom de l'option</td>
+						<td>Activer / déasctiver</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Contenu dynamique</td>
+						<td>
+							<label for="contenu_dynamique" class="checkbox-perso switched">
+								<input type="checkbox" class="test-check" id="contenu_dynamique" {% if app.configuration.contenu_dynamique == 1 %}checked {% endif %}>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td>Cache</td>
+						<td>
+							<label for="cache" class="checkbox-perso switched">
+								<input type="checkbox" class="test-check" id="cache" {% if app.configuration.cache == 1 %}checked{% endif %}>
+							</label>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-	</form>
-
-	<div class="contenu modifier-contenu gestion-comptes">
-		<h2>Gestion des options</h2>
-
-		<table>
-			<thead>
-				<tr>
-					<td>Nom de l'option</td>
-					<td>Activer / déasctiver</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Contenu dynamique</td>
-					<td>
-						<label for="contenu_dynamique" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="contenu_dynamique" {% if app.configuration.contenu_dynamique == 1 %}checked {% endif %}>
-						</label>
-					</td>
-				</tr>
-				<tr>
-					<td>Cache</td>
-					<td>
-						<label for="cache" class="checkbox-perso switched">
-							<input type="checkbox" class="test-check" id="cache" {% if app.configuration.cache == 1 %}checked{% endif %}>
-						</label>
-					</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
-</div>
+{% else %}
+	<div class="inner">
+		<div class="contenu modifier-contenu">
+			<h2>Vous n'avez pas accès à cette fonctionnalité</h2>
+		</div>
+	</div>
+{% endif %}

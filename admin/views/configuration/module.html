@@ -8,40 +8,48 @@
 {% include("configuration/js/configuration.html") %}
 {% include("configuration/header.html") %}
 
-<div class="inner">
-	{#<?php require_once(LIBSROOT."barre_chargement/index.php"); }}#}
-	<div class="contenu modifier-contenu">
-		<h2>Ajouter un module</h2>
-		<p>To come</p>
-	</div>
-
-	<div class="contenu modifier-contenu gestion-comptes configuration">
-		<h2>Modules ajoutés</h2>
-		<table>
-			<thead>
-				<tr>
-					<td>Nom du module</td>
-					<td>Activer</td>
-					<td>Supprimer</td>
-				</tr>
-			</thead>
-			<tbody>
-				{% for i in app.active_modules %}
+{% if super_admin == 1 %}
+	<div class="inner">
+		{#<?php require_once(LIBSROOT."barre_chargement/index.php"); }}#}
+		<div class="contenu modifier-contenu">
+			<h2>Ajouter un module</h2>
+			<p>To come</p>
+		</div>
+	
+		<div class="contenu modifier-contenu gestion-comptes configuration">
+			<h2>Modules ajoutés</h2>
+			<table>
+				<thead>
 					<tr>
-						<td>{{ i.nom }}</td>
-						<td>
-							<label for="{{ i.url }}" class="checkbox-perso switched">
-								<input type="checkbox" class="test-check" id="{{ i.url }}" {% if i.activer == true %}checked{%   endif %}>
-							</label>
-						</td>
-						<td>
-							{% if i.installer == 1 %}
-								<a class="supprimer open-popup" popup="popup-delete-module" href="{{ADMWEBROOT}}controller/core/modules/installation/supprimer?id_module={{ i.id_module}}">Supprimer</a>
-							{% endif %}
-						</td>
+						<td>Nom du module</td>
+						<td>Activer</td>
+						<td>Supprimer</td>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for i in app.active_modules %}
+						<tr>
+							<td>{{ i.nom }}</td>
+							<td>
+								<label for="{{ i.url }}" class="checkbox-perso switched">
+									<input type="checkbox" class="test-check" id="{{ i.url }}" {% if i.activer == true %}checked{%   endif %}>
+								</label>
+							</td>
+							<td>
+								{% if i.installer == 1 %}
+									<a class="supprimer open-popup" popup="popup-delete-module" href="{{ADMWEBROOT}}controller/core/modules/installation/supprimer?id_module={{ i.id_module}}">Supprimer</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
+{% else %}
+	<div class="inner">
+		<div class="contenu modifier-contenu">
+			<h2>Vous n'avez pas accès à cette fonctionnalité</h2>
+		</div>
+	</div>
+{% endif %}
