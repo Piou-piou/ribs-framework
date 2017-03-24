@@ -4,41 +4,50 @@
 	</div>
 </header>
 {% include("gestion-navigation/header.html") %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-<script>
-	$(function() {
-		$("#sortable").sortable({
-			revert: true,
-			update: function() {
-				$.ajax({
-					type: "POST",
-					url: "{{ ADMWEBROOT }}controller/core/admin/navigation/ordre/set.php",
-					data: $(this).sortable("serialize"),
-					success: function(data) {
-						$("body").prepend(data);
-					}
-				})
-			}
+{% if app.super_admin == 1 or "GESTION CONTENUS" in app.droit_acces_user  %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	
+	<script>
+		$(function() {
+			$("#sortable").sortable({
+				revert: true,
+				update: function() {
+					$.ajax({
+						type: "POST",
+						url: "{{ ADMWEBROOT }}controller/core/admin/navigation/ordre/set.php",
+						data: $(this).sortable("serialize"),
+						success: function(data) {
+							$("body").prepend(data);
+						}
+					})
+				}
+			});
+			$("#sortable").disableSelection();
 		});
-		$("#sortable").disableSelection();
-	});
-</script>
-
-<div class="inner">
-	<div class="contenu modifier-contenu gestion-navigation">
-		<ul id="sortable">
-			{% for i in app.navigation %}
-				<li id="lien_{{ i.id }}.{{ i.type }}"><a>{{ i.titre }}</a>
-					{% if i.sous_menu|length > 0 %}
-						<ul>
-							{% for x in i.sous_menu %}
-								<li><a>{{ x.titre }}</a></li>
-							{% endfor %}
-						</ul>
-					{% endif %}
-				</li>
-			{% endfor %}
-		</ul>
+	</script>
+	
+	<div class="inner">
+		<div class="contenu modifier-contenu gestion-navigation">
+			<ul id="sortable">
+				{% for i in app.navigation %}
+					<li id="lien_{{ i.id }}.{{ i.type }}"><a>{{ i.titre }}</a>
+						{% if i.sous_menu|length > 0 %}
+							<ul>
+								{% for x in i.sous_menu %}
+									<li><a>{{ x.titre }}</a></li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
 	</div>
-</div>
+
+{% else %}
+	<div class="inner">
+		<div class="contenu modifier-contenu">
+			<h2>Vous n'avez pas accès à cette fonctionnalité</h2>
+		</div>
+	</div>
+{% endif %}
