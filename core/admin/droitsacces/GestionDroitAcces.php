@@ -186,13 +186,6 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		private function setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user) {
-			$this->id_liste_droit_acces = $id_liste_droit_acces;
-			$this->nom_liste = $nom_liste;
-			$this->nb_droit_acces = $nb_droit_acces;
-			$this->nb_droit_acces_page = $nb_droit_acces_page;
-			$this->nb_user = $nb_user;
-		}
 		private function setListeDroitAccesDetailDroit($droit_acces) {
 			$this->droit_acces = $droit_acces;
 		}
