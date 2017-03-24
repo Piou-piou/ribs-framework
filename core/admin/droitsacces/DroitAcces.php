@@ -33,6 +33,7 @@
 					$this->super_admin = $obj->super_admin;
 					$this->id_liste_droit_acces = $obj->liste_droit;
 				}
+				$this->getListeDroitAcces();
 				App::setValues(["super_admin" => $this->super_admin]);
 			}
 		}

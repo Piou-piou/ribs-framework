@@ -10,7 +10,6 @@
 
 
 	//---------- partie pour les droite d'acces ------------------------------------//
-	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 	$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
 	
 	$contenu = new \core\contenus\Contenus();

@@ -1,0 +1,14 @@
+<header>
+	<div class="inner">
+		<h1>Gestion des droits d'accès</h1>
+	</div>
+</header>
+{% if app.super_admin == 1 or "GESTION DROIT ACCES" in app.droit_acces_user  %}
+	{% include("gestion-droits-acces/header.html") %}
+{% else %}
+	<div class="inner">
+		<div class="contenu modifier-contenu">
+			<h2>Vous n'avez pas accès à cette fonctionnalité</h2>
+		</div>
+	</div>
+{% endif %}

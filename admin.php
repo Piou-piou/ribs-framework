@@ -111,7 +111,8 @@
 						"configuration/base-de-donnees",
 						"gestion-navigation/index",
 						"gestion-comptes/index",
-						"gestion-comptes/creer-utilisateur"
+						"gestion-comptes/creer-utilisateur",
+						"gestion-droits-acces/index"
 					];
 					
 					if (in_array($page, $twig_ok_page)) {
