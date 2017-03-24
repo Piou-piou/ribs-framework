@@ -4,102 +4,108 @@
 	</div>
 </header>
 <div class="inner">
-	{% if app.super_admin == 1 or "CREATION COMPTE ADMIN" in app.droit_acces_user %}
-		<a class="submit-contenu" href="{{ ADMWEBROOT }}gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
-	{% endif %}
-	<div class="contenu modifier-contenu gestion-comptes">
-		<h2>Comptes actifs sur le site</h2>
-		<table>
-			<thead>
-				<tr>
-					<td>Image du profil</td>
-					<td>Prénom Nom</td>
-					<td>Pseudo</td>
-					{% if app.configuration.valider_inscription == 1 %}
-						<td>Valider le compte</td>
-					{% endif %}
-					<td>Réinitialiser le mot de passe</td>
-					<td>Archiver le compte</td>
-					<td>Supprimer le compte</td>
-				</tr>
-			</thead>
-			{% for i in app.all_users %}
-				{% if i.archiver == 0 %}
+	{% if app.super_admin == 1 or "GESTION COMPTES" in app.droit_acces_user  %}
+		{% if app.super_admin == 1 or "CREATION COMPTE ADMIN" in app.droit_acces_user %}
+			<a class="submit-contenu" href="{{ ADMWEBROOT }}gestion-comptes/creer-utilisateur"><i class="fa fa-user"></i>Créer un utilisateur</a>
+		{% endif %}
+		<div class="contenu modifier-contenu gestion-comptes">
+			<h2>Comptes actifs sur le site</h2>
+			<table>
+				<thead>
 					<tr>
-						<td><img src="{{ IMGROOT }}{{ i.img_profil }}"></td>
-						<td>{{ i.prenom }} {{ i.nom }}</td>
-						<td>{{ i.pseudo }}</td>
+						<td>Image du profil</td>
+						<td>Prénom Nom</td>
+						<td>Pseudo</td>
 						{% if app.configuration.valider_inscription == 1 %}
-							<td>
-								{% if i.valide != 1 %}
-									<a href="{{ ADMWEBROOT }}controller/core/admin/comptes/valider_compte?id_identite={{ i.id_identite }}">Valider cet utilisateur</a>
-								{% else %}
-									Utilisateur validé
-								{% endif %}
-							</td>
+							<td>Valider le compte</td>
 						{% endif %}
-						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/reinitialiser_mdp?id_identite={{ i.id_identite }}">Réinitialiser le mot de passe</a></td>
-						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/archiver_compte?id_identite={{ i.id_identite }}"  class="supprimer open-popup" popup="popup-archiver-utilisateur">Archiver ce compte</a></td>
-						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/supprimer_compte?id_identite={{ i.id_identite }}" class="supprimer open-popup" popup="popup-supprimer-utilisateur">Supprimer ce compte</a></td>
+						<td>Réinitialiser le mot de passe</td>
+						<td>Archiver le compte</td>
+						<td>Supprimer le compte</td>
 					</tr>
-				{% endif %}
-			{% endfor %}
-		</table>
-	</div>
-
-	<div class="contenu modifier-contenu gestion-comptes">
-		<h2>Comptes archivés sur le site</h2>
-
-		<table>
-			<thead>
-				<tr>
-					<td>Image du profil</td>
-					<td>Prénom Nom</td>
-					<td>Pseudo</td>
-					<td>Réinitialiser le mot de passe</td>
-					<td>Activer le compte</td>
-					<td>Supprimer le compte</td>
-				</tr>
-			</thead>
-			{% for i in app.all_users %}
-				{% if i.archiver == 1 %}
+				</thead>
+				{% for i in app.all_users %}
+					{% if i.archiver == 0 %}
+						<tr>
+							<td><img src="{{ IMGROOT }}{{ i.img_profil }}"></td>
+							<td>{{ i.prenom }} {{ i.nom }}</td>
+							<td>{{ i.pseudo }}</td>
+							{% if app.configuration.valider_inscription == 1 %}
+								<td>
+									{% if i.valide != 1 %}
+										<a href="{{ ADMWEBROOT }}controller/core/admin/comptes/valider_compte?id_identite={{ i.id_identite }}">Valider cet utilisateur</a>
+									{% else %}
+										Utilisateur validé
+									{% endif %}
+								</td>
+							{% endif %}
+							<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/reinitialiser_mdp?id_identite={{ i.id_identite }}">Réinitialiser le mot de passe</a></td>
+							<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/archiver_compte?id_identite={{ i.id_identite }}"  class="supprimer open-popup" popup="popup-archiver-utilisateur">Archiver ce compte</a></td>
+							<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/supprimer_compte?id_identite={{ i.id_identite }}" class="supprimer open-popup" popup="popup-supprimer-utilisateur">Supprimer ce compte</a></td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</table>
+		</div>
+	
+		<div class="contenu modifier-contenu gestion-comptes">
+			<h2>Comptes archivés sur le site</h2>
+	
+			<table>
+				<thead>
 					<tr>
-						<td><img src="{{ IMGROOT }}{{ i.img_profil }}"></td>
-						<td>{{ i.prenom }} {{ i.nom }}</td>
-						<td>{{ i.pseudo }}</td>
-						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/reinitialiser_mdp?id_identite={{ i.id_identite }}">Réinitialiser le mot de passe</a></td>
-						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/activer_compte?id_identite={{ i.id_identite }}"  class="supprimer open-popup" popup="popup-archiver-utilisateur">Activer ce compte</a></td>
-						<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/supprimer_compte?id_identite={{ i.id_identite }}" class="supprimer open-popup" popup="popup-supprimer-utilisateur">Supprimer ce compte</a></td>
+						<td>Image du profil</td>
+						<td>Prénom Nom</td>
+						<td>Pseudo</td>
+						<td>Réinitialiser le mot de passe</td>
+						<td>Activer le compte</td>
+						<td>Supprimer le compte</td>
 					</tr>
-				{% endif %}
-			{% endfor %}
-		</table>
-	</div>
-</div>
-
-<div class="popup" id="popup-archiver-utilisateur">
-	<div class="content">
-		<h2>Etes-vous sûr de vouloir archiver cet utilisateur ?</h2>
-		<p>Si vous l'archivez, tous ses informations seront conservées mais tous ces accès au site seront suspendus.</p>
-
-		<div class="lien">
-			<a class="annuler">Annuler</a>
-			<a href="" class="valider">Valider</a>
+				</thead>
+				{% for i in app.all_users %}
+					{% if i.archiver == 1 %}
+						<tr>
+							<td><img src="{{ IMGROOT }}{{ i.img_profil }}"></td>
+							<td>{{ i.prenom }} {{ i.nom }}</td>
+							<td>{{ i.pseudo }}</td>
+							<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/reinitialiser_mdp?id_identite={{ i.id_identite }}">Réinitialiser le mot de passe</a></td>
+							<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/activer_compte?id_identite={{ i.id_identite }}"  class="supprimer open-popup" popup="popup-archiver-utilisateur">Activer ce compte</a></td>
+							<td><a href="{{ ADMWEBROOT }}controller/core/admin/comptes/supprimer_compte?id_identite={{ i.id_identite }}" class="supprimer open-popup" popup="popup-supprimer-utilisateur">Supprimer ce compte</a></td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</table>
 		</div>
-		<div class="clear"></div>
 	</div>
-</div>
-
-<div class="popup" id="popup-supprimer-utilisateur">
-	<div class="content">
-		<h2>Etes-vous sûr de vouloir supprimer cet utilisateur ?</h2>
-		<p>Si vous le supprimé, tous ses informations seront supprimées ainsi que tous ces accès au site.</p>
-		<p>Par contre ses commentaires sur le resteront mais son nom sera remplacé par "utilisateur supprimé".</p>
-
-		<div class="lien">
-			<a class="annuler">Annuler</a>
-			<a href="" class="valider">Valider</a>
+	
+	<div class="popup" id="popup-archiver-utilisateur">
+		<div class="content">
+			<h2>Etes-vous sûr de vouloir archiver cet utilisateur ?</h2>
+			<p>Si vous l'archivez, tous ses informations seront conservées mais tous ces accès au site seront suspendus.</p>
+	
+			<div class="lien">
+				<a class="annuler">Annuler</a>
+				<a href="" class="valider">Valider</a>
+			</div>
+			<div class="clear"></div>
 		</div>
-		<div class="clear"></div>
 	</div>
-</div>
+	
+	<div class="popup" id="popup-supprimer-utilisateur">
+		<div class="content">
+			<h2>Etes-vous sûr de vouloir supprimer cet utilisateur ?</h2>
+			<p>Si vous le supprimé, tous ses informations seront supprimées ainsi que tous ces accès au site.</p>
+			<p>Par contre ses commentaires sur le resteront mais son nom sera remplacé par "utilisateur supprimé".</p>
+	
+			<div class="lien">
+				<a class="annuler">Annuler</a>
+				<a href="" class="valider">Valider</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	{% else %}
+		<div class="contenu modifier-contenu">
+			<h2>Vous n'avez pas accès à cette fonctionnalité</h2>
+		</div>
+	{% endif %}
