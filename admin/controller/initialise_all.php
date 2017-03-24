@@ -31,20 +31,14 @@
 	
 	if ($page == "gestion-comptes/creer-utilisateur") {
 		if (isset($_SESSION['err_ajout_utilisateur'])) {
-			$nom = $_SESSION['nom'];
-			$prenom = $_SESSION['prenom'];
-			$pseudo = $_SESSION['pseudo'];
-			$mail = $_SESSION['mail'];
-			$acces_admin = $_SESSION['acces_admin'];
+			\core\App::setValues([
+				"nom" => $_SESSION['nom'],
+				"prenom" => $_SESSION['prenom'],
+				"pseudo" => $_SESSION['pseudo'],
+				"mail" => $_SESSION['mail'],
+			]);
 
 			unset($_SESSION['err_ajout_utilisateur']);
-		}
-		else {
-			$nom = null;
-			$prenom = null;
-			$pseudo = null;
-			$mail = null;
-			$acces_admin = null;
 		}
 	}
 	//---------- fin partie pour la gestion des comptes ------------------------------------//

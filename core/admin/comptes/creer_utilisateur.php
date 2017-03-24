@@ -15,13 +15,11 @@
 
 
 	if ($inscription->getErreur()) {
-		session_start();
 		$_SESSION['err_ajout_utilisateur'] = true;
-		$_SESSION['nom'] = $inscription->getNom();
-		$_SESSION['prenom'] = $inscription->getPrenom();
-		$_SESSION['pseudo'] = $inscription->getPseudo();
-		$_SESSION['mail'] = $inscription->getMail();
-		$_SESSION['acces_admin'] = $inscription->getAccesAdministration();
+		$_SESSION['nom'] = $_POST['nom'];
+		$_SESSION['prenom'] = $_POST['prenom'];
+		$_SESSION['pseudo'] = $_POST['pseudo'];
+		$_SESSION['mail'] = $_POST['mail'];
 
 		\core\HTML\flashmessage\FlashMessage::setFlash("<ul>".$inscription->getErreur()."</ul>");
 	}

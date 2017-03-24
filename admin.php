@@ -110,7 +110,8 @@
 						"configuration/mon-compte",
 						"configuration/base-de-donnees",
 						"gestion-navigation/index",
-						"gestion-comptes/index"
+						"gestion-comptes/index",
+						"gestion-comptes/creer-utilisateur"
 					];
 					
 					if (in_array($page, $twig_ok_page)) {
