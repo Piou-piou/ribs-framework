@@ -88,27 +88,19 @@
 			$query = $dbc->select()->from("liste_droit_acces")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
-				$id_liste_droit_acces = [];
-				$nom_liste = [];
-				$nb_droit_acces = [];
-				$nb_droit_acces_page = [];
-				$nb_user = [];
+				$values = [];
 
 				foreach ($query as $obj) {
-					$id_liste_droit_acces[] = $obj->ID_liste_droit_acces;
-					$nom_liste[] = $obj->nom_liste;
-
-					//récupération du nombre de droits d'acces pour cette liste
-					$nb_droit_acces = $this->getNombreDroitAccesListe($obj->ID_liste_droit_acces);
-
-					//récupération du nombre d'utilisateurs qui sont dans cette liste
-					$nb_user = $this->getNombreUtilisateurListe($obj->ID_liste_droit_acces);
-
-					//récupération du nombres de pages dans cette liste
-					$nb_droit_acces_page = $this-> getNombrePageListe($obj->ID_liste_droit_acces);
+					$values[] = [
+						"id_liste" => $obj->ID_liste_droit_acces,
+						"nom_liste" => $obj->nom_liste,
+						"nb_droit_acces" => $this->getNombreDroitAccesListe($obj->ID_liste_droit_acces),
+						"nb_droit_acces_page" => $this->getNombrePageListe($obj->ID_liste_droit_acces),
+						"nb_user" => $this->getNombreUtilisateurListe($obj->ID_liste_droit_acces),
+					];
 				}
 
-				$this->setListeDroitAcces($id_liste_droit_acces, $nom_liste, $nb_droit_acces, $nb_droit_acces_page, $nb_user);
+				App::setValues(["liste_droit_acces" => $values]);
 			}
 		}
 

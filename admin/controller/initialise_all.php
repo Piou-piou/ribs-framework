@@ -10,15 +10,12 @@
 
 
 	//---------- partie pour les droite d'acces ------------------------------------//
-	$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
+	if ($page == "gestion-droits-acces/index" || "gestion-droits-acces/liste-droits-acces") {
+		$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
+	}
 	
 	$contenu = new \core\contenus\Contenus();
 	$gestion_contenu = new \core\admin\contenus\GestionContenus();
-
-	//pour les pages sur les droits d'acces
-	if (($page == "gestion-droits-acces/ajouter-liste") || ($page == "gestion-droits-acces/modifier-liste")) {
-		require_once(ROOT."core/admin/droitsacces/initialise/ajout_modification.php");
-	}
 	//---------- fin partie pour les droite d'acces ------------------------------------//
 
 

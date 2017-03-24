@@ -1,10 +1,27 @@
 <header>
 	<div class="inner">
-		<h1>Gestion des droits d'accès</h1>
+		<h1>Gestion des droits d'accès | toutes les listes<</h1>
 	</div>
 </header>
 {% if app.super_admin == 1 or "GESTION DROIT ACCES" in app.droit_acces_user  %}
 	{% include("gestion-droits-acces/header.html") %}
+	
+	<div class="inner">
+		<div class="added-module">
+			{% for i in app.liste_droit_acces %}
+				<div class="bloc">
+					<h2>{{ i.nom_liste }}</h2>
+					
+					<h4><i class="fa fa-lock"></i> {{ i.nb_droit_acces }} droits d'accès pour cette liste</h4>
+					<h4><i class="fa fa-pencil-square-o"></i> {{ i.nb_droit_acces_page }} pages peuvent être modifiées et/ou supprimées par ce groupe</h4>
+					<h4><i class="fa fa-lock"></i> {{ i.nb_user }} utilisateurs sont dans cette liste</h4>
+					
+					<a href="{{ ADMWEBROOT }}gestion-droits-acces/modifier-liste?id_liste={{ i.id_liste }}" class="modifier">Modifier cette liste</a>
+					<a href="{{ ADMWEBROOT }}controller/core/admin/droitacces/liste/supprimer?id_liste={{ i.id_liste }}" class="supprimer popup-delete">Supprimer cette liste</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% else %}
 	<div class="inner">
 		<div class="contenu modifier-contenu">

@@ -112,7 +112,8 @@
 						"gestion-navigation/index",
 						"gestion-comptes/index",
 						"gestion-comptes/creer-utilisateur",
-						"gestion-droits-acces/index"
+						"gestion-droits-acces/index",
+						"gestion-droits-acces/liste-droits-acces"
 					];
 					
 					if (in_array($page, $twig_ok_page)) {
