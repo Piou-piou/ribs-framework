@@ -116,6 +116,7 @@
 						"gestion-droits-acces/liste-droits-acces",
 						"gestion-contenus/index",
 						"gestion-contenus/creer-une-page",
+						"gestion-contenus/modifier-contenu",
 					];
 					
 					if (in_array($page, $twig_ok_page)) {

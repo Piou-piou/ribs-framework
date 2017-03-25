@@ -10,11 +10,10 @@
 
 
 	//---------- partie pour les droite d'acces ------------------------------------//
-	if ($page == "gestion-droits-acces/index" || "gestion-droits-acces/liste-droits-acces") {
+	if ($page == "gestion-droits-acces/index" || $page == "gestion-droits-acces/liste-droits-acces") {
 		$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
 	}
 	
-	$contenu = new \core\contenus\Contenus();
 	$gestion_contenu = new \core\admin\contenus\GestionContenus();
 	//---------- fin partie pour les droite d'acces ------------------------------------//
 
@@ -43,12 +42,15 @@
 
 	//---------- pour les pages sur la modification de contenus ----------------------------------------------//
 	if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/creer-une-page") || ($page == "gestion-contenus/inline")) {
-		$av = new \core\Navigation("page only");
+		$nav = new \core\Navigation("page only");
+		
+		if (isset($_GET['id'])) {
+			$id_page = $_GET['id'];
+		}
+		
+		$droit_acces->getListeDroitModificationContenu($id_page);
+		
 		if (isset($_SESSION['err_modification_contenu'])) {
-			if (isset($_GET['id'])) {
-				$id_page_courante = $_GET['id'];
-			}
-			
 			\core\App::setValues([
 				"id_page" => $id_page_courante,
 				"balise_title" => $_SESSION['balise_title'],
@@ -58,27 +60,26 @@
 				"parent" => $_SESSION['parent'],
 			]);
 
-			$balise_title = $_SESSION['balise_title'];
-			$url = $_SESSION['url'];
-			$meta_description = $_SESSION['meta_description'];
-			$titre_courant = $_SESSION['titre_page'];
-			$parent_courant = $_SESSION['parent'];
-
 			unset($_SESSION['err_modification_contenu']);
+			unset($_SESSION['balise_title']);
+			unset($_SESSION['url']);
+			unset($_SESSION['meta_description']);
+			unset($_SESSION['titre_page']);
+			unset($_SESSION['parent']);
 		}
 		else if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/inline")) {
 			$id_page_courante = $_GET['id'];
 
-			$contenu->getHeadPage($id_page_courante);
-			$balise_title = $contenu->getBaliseTitle();
-			$meta_description = $contenu->getMetaDescription();
+			$gestion_contenu->getHeadPage($id_page_courante);
+			$balise_title = $gestion_contenu->getBaliseTitle();
+			$meta_description = $gestion_contenu->getMetaDescription();
 
-			$contenu->getContenuPage($id_page_courante);
-			$url = $contenu->getUrl();
-			$titre_courant = $contenu->getTitre();
-			$parent_courant = $contenu->getParent();
+			$gestion_contenu->getContenuPage($id_page_courante);
+			$url = $gestion_contenu->getUrl();
+			$titre_courant = $gestion_contenu->getTitre();
+			$parent_courant = $gestion_contenu->getParent();
 			$texte_parent_courant = $gestion_contenu->getParentTexte($parent_courant);
-			$contenu_page = $contenu->getContenu();
+			$contenu_page = $gestion_contenu->getContenu();
 			$bloc_editable = $gestion_contenu->getBlocEditable($id_page_courante);
 			$redirect_page = $gestion_contenu->getTestRedirectPage($url);
 		}
