@@ -45,9 +45,6 @@
 		public function getSuperAdmin() {
 			return $this->super_admin;
 		}
-		public function getIdListeDroitAcces() {
-			return $this->id_liste_droit_acces;
-		}
 		public function getModifSeo() {
 			return $this->modif_seo;
 		}
