@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{LIBSWEBROOT}}checkbox/css/style.css">
 <script src="{{LIBSWEBROOT}}checkbox/js/anim.js"></script>
 {% include("configuration/header.html") %}
-{% if super_admin == 1 %}
+{% if app.super_admin == 1 %}
 		<div class="inner">
 		<a class="submit-contenu supprimer-page link" href="{{ADMWEBROOT}}configuration/index"><i class="fa fa-times"></i>Annuler</a>
 	

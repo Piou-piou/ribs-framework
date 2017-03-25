@@ -1,7 +1,7 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			{% if super_admin == 1 %}
+			{% if app.super_admin == 1 %}
 				<li><a href="{{ADMWEBROOT}}configuration/module">Modules</a></li>
 				<li><a href="{{ADMWEBROOT}}configuration/infos-generales">Infos générales</a></li>
 				<li><a href="{{ADMWEBROOT}}configuration/base-de-donnees">Base de données</a></li>

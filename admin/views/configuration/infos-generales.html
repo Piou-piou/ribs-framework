@@ -9,7 +9,7 @@
 {% include("configuration/js/infos_generales.html") %}
 {% include("configuration/header.html") %}
 
-{% if super_admin == 1 %}
+{% if app.super_admin == 1 %}
 	<div class="inner">
 		{#<?php require_once(LIBSROOT."barre_chargement/index.php"); }}#}
 		<a class="submit-contenu supprimer-page link" href="{{ADMWEBROOT}}configuration/index"><i class="fa fa-times"></i>Annuler</a>
