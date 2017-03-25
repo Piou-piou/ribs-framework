@@ -43,6 +43,7 @@
 
 	//---------- pour les pages sur la modification de contenus ----------------------------------------------//
 	if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/creer-une-page") || ($page == "gestion-contenus/inline")) {
+		$av = new \core\Navigation("page only");
 		if (isset($_SESSION['err_modification_contenu'])) {
 			if (isset($_GET['id'])) {
 				$id_page_courante = $_GET['id'];

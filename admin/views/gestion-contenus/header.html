@@ -1,7 +1,17 @@
 <nav class="nav-page">
 	<div class="inner">
 		<ul>
-			
+			{% for i in app.navigation %}
+				<li><a href="{{ ADMWEBROOT }}gestion-contenus/modifier-contenu?id={{ i.id }}">{{ i.titre }}</a>
+					{% if i.sous_menu|length > 0 %}
+						<ul>
+							{% for x in i.sous_menu %}
+								<li><a href="{{ ADMWEBROOT }}gestion-contenus/modifier-contenu?id={{ x.id }}">{{ x.titre }}</a></li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</li>
+			{% endfor %}
 		</ul>
 	</div>
 </nav>
