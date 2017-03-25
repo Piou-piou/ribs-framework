@@ -137,8 +137,8 @@
 			$nom_page = explode("/", $url);
 			$nom_page = end($nom_page);
 
-			$page_type = ROOT."config/page_type/page_type.php";
-			$new_page = ROOT."app/views/".$nom_page.".php";
+			$page_type = ROOT."config/page_type/page_type.html";
+			$new_page = ROOT."app/views/".$nom_page.".html";
 
 			$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
 			$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
@@ -156,7 +156,7 @@
 			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
 			$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
 
-			if (App::getErreur() !== true) {
+			if ($this->erreur !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
 					$parent = intval($this->getParentId($parent));
@@ -209,7 +209,7 @@
 			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
 			$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
 
-			if (App::getErreur() !== true) {
+			if ($this->erreur !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				$parent = intval($this->getParentId($parent));
 				$ordre = intval($this->getOrdrePage($parent));
@@ -251,7 +251,7 @@
 			$this->getHeadPage($id_page);
 			$this->getContenuPage($id_page);
 			$old_url = explode("/", $this->url);
-			$filename = ROOT."app/views/".end($old_url).".php";
+			$filename = ROOT."app/views/".end($old_url).".html";
 
 			//si le fichier existe on modifie le tout
 			if (file_exists($filename) || ($id_page == 1)) {
@@ -274,7 +274,7 @@
 				$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
 				$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite, $this->id_page);
 
-				if (App::getErreur() !== true) {
+				if ($this->erreur !== true) {
 					$new_url = explode("/", $url);
 					$new_filename = ROOT."app/views/".end($new_url).".php";
 
@@ -326,7 +326,7 @@
 				$this->getContenuPage($id_page);
 
 				$url = explode("/", $this->url);
-				$filename = ROOT."app/views/".end($url).".php";
+				$filename = ROOT."app/views/".end($url).".html";
 
 				//si le fichier existe supprimer en bdd plus l fichier
 				if (file_exists($filename)) {

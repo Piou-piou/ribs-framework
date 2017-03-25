@@ -47,6 +47,15 @@
 			if (isset($_GET['id'])) {
 				$id_page_courante = $_GET['id'];
 			}
+			
+			\core\App::setValues([
+				"id_page" => $id_page_courante,
+				"balise_title" => $_SESSION['balise_title'],
+				"url" => $_SESSION['url'],
+				"meta_description" => $_SESSION['meta_description'],
+				"titre_page" => $_SESSION['titre_page'],
+				"parent" => $_SESSION['parent'],
+			]);
 
 			$balise_title = $_SESSION['balise_title'];
 			$url = $_SESSION['url'];
@@ -71,15 +80,6 @@
 			$contenu_page = $contenu->getContenu();
 			$bloc_editable = $gestion_contenu->getBlocEditable($id_page_courante);
 			$redirect_page = $gestion_contenu->getTestRedirectPage($url);
-		}
-		else {
-			$balise_title = null;
-			$url = null;
-			$meta_description = null;
-			$titre_courant = null;
-			$parent_courant = null;
-			$contenu_page = null;
-			$id_page_courante = null;
 		}
 	}
 	//---------- fin pour les pages sur la modification de contenus ----------------------------------------------//
