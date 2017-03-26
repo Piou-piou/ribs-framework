@@ -248,8 +248,6 @@
 			$dbc = \core\App::getDb();
 
 			//on trouve l'ancien fichier à parir de la fin de l'url
-			$this->getHeadPage($id_page);
-			$this->getContenuPage($id_page);
 			$old_url = explode("/", $this->url);
 			$filename = ROOT."app/views/".end($old_url).".html";
 
@@ -323,8 +321,6 @@
 
 			//le premier id_page sera tojours l'accueil donc on ne peut pas le delete
 			if ($id_page != 1) {
-				$this->getContenuPage($id_page);
-
 				$url = explode("/", $this->url);
 				$filename = ROOT."app/views/".end($url).".html";
 

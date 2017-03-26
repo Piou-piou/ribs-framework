@@ -33,16 +33,8 @@
 
 
 	//--------------------------------------------- GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
-	if ($config->getContenusDynamique() == 1) {
-		//initialisation des contenus
-		$contenu = new Contenus();
-		
-		$contenu->getHeadPage(0, $page);
-
-		\core\App::setTitle($contenu->getBaliseTitle());
-		\core\App::setDescription($contenu->getMetaDescription());
-	}
-
+	//initialisation des contenus
+	$contenu = new Contenus($page);
 	//--------------------------------------------- FIN GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
 
 
@@ -93,15 +85,12 @@
 			$page = $router_module->getPage();
 		}
 		else {
-			$contenu->getContenuPage();
-			$contenu_page = $contenu->getContenu();
-			
 			$explode = explode("/", $page);
 			
 			$loader = new Twig_Loader_Filesystem('app/views');
 			$twig = new Twig_Environment($loader);
 			
-			$arr_page = array_merge(core\App::getValues(), ["contenu_page" => $contenu_page]);
+			$arr_page = array_merge(core\App::getValues());
 			$page = end($explode);
 			
 			if (!file_exists(ROOT."app/views/".$page.".html")) {

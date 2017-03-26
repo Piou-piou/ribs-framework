@@ -1,4 +1,5 @@
 <?php
+	//a refaire
 	$gestion_contenu = new \core\admin\contenus\GestionContenus();
 	$contenu_class = new \core\contenus\Contenus();
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();

@@ -2,11 +2,11 @@
 	<div class="inner">
 		<ul>
 			{% for i in app.navigation %}
-				<li><a href="{{ ADMWEBROOT }}gestion-contenus/modifier-contenu?id={{ i.id }}">{{ i.titre }}</a>
+				<li><a href="{{ ADMWEBROOT }}gestion-contenus/modifier-contenu?id={{ i.id }}&url={{ i.url }}">{{ i.titre }}</a>
 					{% if i.sous_menu|length > 0 %}
 						<ul>
 							{% for x in i.sous_menu %}
-								<li><a href="{{ ADMWEBROOT }}gestion-contenus/modifier-contenu?id={{ x.id }}">{{ x.titre }}</a></li>
+								<li><a href="{{ ADMWEBROOT }}gestion-contenus/modifier-contenu?id={{ x.id }}&url={{ x.url }}">{{ x.titre }}</a></li>
 							{% endfor %}
 						</ul>
 					{% endif %}

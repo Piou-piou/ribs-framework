@@ -13,8 +13,6 @@
 	if ($page == "gestion-droits-acces/index" || $page == "gestion-droits-acces/liste-droits-acces") {
 		$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
 	}
-	
-	$gestion_contenu = new \core\admin\contenus\GestionContenus();
 	//---------- fin partie pour les droite d'acces ------------------------------------//
 
 
@@ -41,14 +39,16 @@
 
 
 	//---------- pour les pages sur la modification de contenus ----------------------------------------------//
-	if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/creer-une-page") || ($page == "gestion-contenus/inline")) {
+	if (($page == "gestion-contenus/index") || ($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/creer-une-page") || ($page == "gestion-contenus/inline")) {
 		$nav = new \core\Navigation("page only");
 		
 		if (isset($_GET['id'])) {
 			$id_page = $_GET['id'];
+			$url = $_GET['url'];
+			
+			$droit_acces->getListeDroitModificationContenu($id_page);
+			$gestion_contenu = new \core\admin\contenus\GestionContenus($url);
 		}
-		
-		$droit_acces->getListeDroitModificationContenu($id_page);
 		
 		if (isset($_SESSION['err_modification_contenu'])) {
 			\core\App::setValues([
@@ -66,22 +66,6 @@
 			unset($_SESSION['meta_description']);
 			unset($_SESSION['titre_page']);
 			unset($_SESSION['parent']);
-		}
-		else if (($page == "gestion-contenus/modifier-contenu") || ($page == "gestion-contenus/inline")) {
-			$id_page_courante = $_GET['id'];
-
-			$gestion_contenu->getHeadPage($id_page_courante);
-			$balise_title = $gestion_contenu->getBaliseTitle();
-			$meta_description = $gestion_contenu->getMetaDescription();
-
-			$gestion_contenu->getContenuPage($id_page_courante);
-			$url = $gestion_contenu->getUrl();
-			$titre_courant = $gestion_contenu->getTitre();
-			$parent_courant = $gestion_contenu->getParent();
-			$texte_parent_courant = $gestion_contenu->getParentTexte($parent_courant);
-			$contenu_page = $gestion_contenu->getContenu();
-			$bloc_editable = $gestion_contenu->getBlocEditable($id_page_courante);
-			$redirect_page = $gestion_contenu->getTestRedirectPage($url);
 		}
 	}
 	//---------- fin pour les pages sur la modification de contenus ----------------------------------------------//
