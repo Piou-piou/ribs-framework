@@ -57,27 +57,10 @@
 			
 			<ul>
 				<div class="principal">
-					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<li><i class="fa fa-users"></i><a href="<?=ADMWEBROOT?>gestion-comptes/index">Gestion des comptes</a>
-						<ul>
-							<li><i class="fa fa-user"></i><a href="<?=ADMWEBROOT?>gestion-comptes/creer-utilisateur">Créer un utilisateur</a></li>
-						</ul>
-					</li>
-					
-					<!-- Pour avoir accès à la gestion des autres comptes -->
-					<li><i class="fa fa-lock"></i><a href="<?=ADMWEBROOT?>gestion-droits-acces/index">Gestion des droits d'accès</a></li>
-					
-					<!-- Pour avoir accès à la gestion des contenus -->
-					<li><i class="fa fa-file-text"></i><a href="<?=ADMWEBROOT?>gestion-contenus/index">Gestion des contenus</a>
-						<ul>
-							<li><i class="fa fa-newspaper-o"></i><a href="<?=ADMWEBROOT?>gestion-contenus/creer-une-page">Créer une page</a></li>
-						</ul>
-					</li>
-					
-					
-					<!-- Pour avoir accès à la gestion de la navigation -->
-					<li><i class="fa fa-link"></i><a href="<?=ADMWEBROOT?>gestion-navigation/index">Gestion de la navigation</a>
-					</li>
+					<?php
+						if (!isset($arr)) $arr = [];
+						echo $twig->render("template/left-navigation.html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_admin));
+					?>
 					
 					<!-- pour afficher le menu des modules -->
 					<?php for ($i = 0; $i < count($gestion_module->getUrl()); $i++):?>
@@ -89,11 +72,6 @@
 						<?php endif; ?>
 					<?php endfor; ?>
 				</div>
-				
-				<?php
-					if (!isset($arr)) $arr = [];
-					//echo $twig->render("template/left-navigation.html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_admin));
-				?>
 				
 				<div class="speciaux">
 					<li class="support"><i class="fa fa-envelope"></i><a href="<?=ADMWEBROOT?>contacter-support">Contacter le support</a></li>
