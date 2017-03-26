@@ -1,5 +1,5 @@
 <?php
-	$gestion_contenu = new \core\admin\contenus\GestionContenus();
+	$gestion_contenu = new \core\admin\contenus\GestionContenus(0, 1);
 
 	$gestion_contenu->setCreerPage($_POST['balise_title'], $_POST['url'], $_POST['meta_description'], $_POST['titre_page'], $_POST['parent']);
 

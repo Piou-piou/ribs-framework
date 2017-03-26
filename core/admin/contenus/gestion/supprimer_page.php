@@ -3,7 +3,7 @@
 
 	if ($droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_GET['id']) == true) {
 		if (($droit_acces->getSupprimerPage() != 0) || ($droit_acces->getSuperAdmin() == 1)) {
-			$gestion_contenu = new \core\admin\contenus\GestionContenus();
+			$gestion_contenu = new \core\admin\contenus\GestionContenus(0, 1);
 
 			$gestion_contenu->setSupprimerPage($_GET['id']);
 

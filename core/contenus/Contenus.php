@@ -18,22 +18,24 @@
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
-		public function __construct($url) {
+		public function __construct($url, $admin_contenu = null) {
 			$dbc = \core\App::getDb();
 			
-			$query = $dbc->select()->from("page")->where("url", "=", $url)->get();
-			
-			if (RedirectError::testRedirect404($query, $url) === true) {
-				foreach ($query as $obj) {
-					App::setValues(["contenus" => [
-						"id_page" => $this->id_page = $obj->ID_page,
-						"meta_description" => $this->meta_description = $obj->meta_description,
-						"balise_title" => $this->balise_title = $obj->balise_title,
-						"url" => $this->url = $obj->url,
-						"titre" => $this->titre = $obj->titre,
-						"contenu" => $this->contenu = $obj->contenu,
-						"parent" => $this->parent = $obj->parent,
-					]]);
+			if ($admin_contenu === null) {
+				$query = $dbc->select()->from("page")->where("url", "=", $url)->get();
+				
+				if (RedirectError::testRedirect404($query, $url) === true) {
+					foreach ($query as $obj) {
+						App::setValues(["contenus" => [
+							"id_page" => $this->id_page = $obj->ID_page,
+							"meta_description" => $this->meta_description = $obj->meta_description,
+							"balise_title" => $this->balise_title = $obj->balise_title,
+							"url" => $this->url = $obj->url,
+							"titre" => $this->titre = $obj->titre,
+							"contenu" => $this->contenu = $obj->contenu,
+							"parent" => $this->parent = $obj->parent,
+						]]);
+					}
 				}
 			}
 		}

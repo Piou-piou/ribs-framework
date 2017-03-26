@@ -1,5 +1,5 @@
 <?php
-	$gestion_contenu = new \core\admin\contenus\GestionContenus();
+	$gestion_contenu = new \core\admin\contenus\GestionContenus(0, 1);
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 
 	if ((($droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_POST['id_page']) == true) &&  ($droit_acces->getModifContenu() != 0)) || ($droit_acces->getSuperAdmin() == 1)) {

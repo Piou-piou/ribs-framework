@@ -1,7 +1,7 @@
 <?php
 	//a refaire
-	$gestion_contenu = new \core\admin\contenus\GestionContenus();
-	$contenu_class = new \core\contenus\Contenus();
+	$gestion_contenu = new \core\admin\contenus\GestionContenus(0, 1);
+	$contenu_class = new \core\contenus\Contenus(0, 1);
 	$droit_acces = new \core\admin\droitsacces\DroitAcces();
 
 	if ($droit_acces->getDroitAccesContenu("GESTION CONTENU PAGE", $_POST['id_page']) == true) {
