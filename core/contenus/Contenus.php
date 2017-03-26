@@ -2,6 +2,7 @@
 	namespace core\contenus;
 
 	use core\App;
+	use core\functions\ChaineCaractere;
 	use core\RedirectError;
 
 
@@ -26,6 +27,11 @@
 				
 				if (RedirectError::testRedirect404($query, $url) === true) {
 					foreach ($query as $obj) {
+						$redirect = 0;
+						if (ChaineCaractere::FindInString($url, "http://") === true) {
+							$redirect = 1;
+						}
+						
 						App::setValues(["contenus" => [
 							"id_page" => $this->id_page = $obj->ID_page,
 							"meta_description" => $this->meta_description = $obj->meta_description,
@@ -34,6 +40,7 @@
 							"titre" => $this->titre = $obj->titre,
 							"contenu" => $this->contenu = $obj->contenu,
 							"parent" => $this->parent = $obj->parent,
+							"redirect_page" => $redirect
 						]]);
 					}
 				}

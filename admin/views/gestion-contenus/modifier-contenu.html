@@ -63,7 +63,7 @@
 				</section>
 			{% endif %}
 	
-			{% if app.super_admin == 1 or app.droit_acces_page.contenu == 1 and app.contenus.rediret_page != 1 %}
+			{% if (app.super_admin == 1 or app.droit_acces_page.contenu == 1) and app.contenus.redirect_page != 1 %}
 				<section class="contenu modifier-contenu">
 					<h2>Partie concernant l'affichage dans le navigateur</h2>
 	
