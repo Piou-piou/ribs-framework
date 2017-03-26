@@ -17,6 +17,8 @@
 		private $modif_contenu;
 		private $modif_navigation;
 		private $supprimer_page;
+		
+		private $liste_droits_acces;
 
 
 		//-------------------------- CONSTRUCTEUR ----------------------------------------------------------------------------//
@@ -33,7 +35,7 @@
 					$this->super_admin = $obj->super_admin;
 					$this->id_liste_droit_acces = $obj->liste_droit;
 				}
-				$this->getListeDroitAcces();
+				$this->liste_droits_acces = $this->getListeDroitAcces();
 				App::setValues(["super_admin" => $this->super_admin]);
 			}
 		}
@@ -56,6 +58,9 @@
 		}
 		public function getSupprimerPage() {
 			return $this->supprimer_page;
+		}
+		public function getListeDroitsAcces(){
+		    return $this->liste_droits_acces;
 		}
 
 		/**
@@ -99,18 +104,13 @@
 			//si on a un resultat
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$this->modif_seo = $obj->seo;
-					$this->modif_contenu = $obj->contenu;
-					$this->modif_navigation = $obj->navigation;
-					$this->supprimer_page = $obj->supprimer;
+					App::setValues(["droit_acces_page" => [
+						"seo" => $this->modif_seo = $obj->seo,
+						"contenu" => $this->modif_contenu = $obj->contenu,
+						"navigation" => $this->modif_navigation = $obj->navigation,
+						"supprimer" => $this->supprimer_page = $obj->supprimer
+					]]);
 				}
-				
-				App::setValues(["droit_acces_page" => [
-					"seo" => $this->modif_seo,
-					"contenu" => $this->modif_contenu,
-					"navigation" => $this->modif_navigation,
-					"supprimer" => $this->supprimer_page
-				]]);
 			}
 		}
 

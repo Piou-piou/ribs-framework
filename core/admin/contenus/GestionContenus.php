@@ -274,7 +274,7 @@
 
 				if ($this->erreur !== true) {
 					$new_url = explode("/", $url);
-					$new_filename = ROOT."app/views/".end($new_url).".php";
+					$new_filename = ROOT."app/views/".end($new_url).".html";
 
 					rename($filename, $new_filename);
 
@@ -290,6 +290,7 @@
 						->set();
 
 					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
+					$this->url = $url;
 				}
 				else {
 					$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
@@ -362,12 +363,12 @@
 		 * @param integer $affiche
 		 */
 		private function setModifierLienNavigation($id, $id_page, $parent, $affiche) {
+			$nav = new Navigation();
 			if ($parent != "") {
-				$nav = new Navigation();
 				$nav->setSupprimerLien($id, $id_page);
 			}
-			else if (($affiche == 1) && ($parent == "")) {
-				$this->setAjoutLienNavigation($id, $id_page, $affiche);
+			else if (($affiche == 0) && ($parent == "")) {
+				$nav->setSupprimerLien($id, $id_page);
 			}
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
