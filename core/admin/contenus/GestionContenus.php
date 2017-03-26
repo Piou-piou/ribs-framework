@@ -17,14 +17,6 @@
 		public function getErreur() {
 			return $this->erreur;
 		}
-		
-		public function getTestRedirectPage($url) {
-			if ((ChaineCaractere::FindInString($url, "http://") === true) || (ChaineCaractere::FindInString($url, "https://") === true)) {
-				return true;
-			}
-			
-			return false;
-		}
 
 		public function getBlocEditable($id_page_courante) {
 			$dbc = App::getDb();
