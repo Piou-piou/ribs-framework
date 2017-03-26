@@ -74,6 +74,12 @@
 					<a class="submit-contenu submit-standard inline no-shadow ml0" href="{{ADMWEBROOT}}gestion-contenus/inline.php?id={{app.contenus.id_page}}">Modifier les contenus</a>
 				</section>
 			{% endif %}
+			
+			{% if app.super_admin !=1 and app.droit_acces_page.navigation != 1 and app.droit_acces_page.seo != 1 %}
+				<div class="contenu modifier-contenu">
+					<h2>Vous n'avez pas lautorisation de modifier cette page</h2>
+				</div>
+			{% endif %}
 		</div>
 	</form>
 {% else %}
