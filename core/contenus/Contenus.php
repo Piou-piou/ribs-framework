@@ -40,7 +40,8 @@
 							"titre" => $this->titre = $obj->titre,
 							"contenu" => $this->contenu = $obj->contenu,
 							"parent" => $this->parent = $obj->parent,
-							"redirect_page" => $redirect
+							"redirect_page" => $redirect,
+							"bloc_editable" => $obj->bloc_editable
 						]]);
 					}
 				}
