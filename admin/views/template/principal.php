@@ -81,12 +81,7 @@
 		<div class="clear"></div>
 		
 		<?php
-			if ($twig_page === true) {
-				echo $twig->render($page.".html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_admin));
-			}
-			else {
-				require("admin/views/".$page.".php");
-			}
+			echo $twig->render($page.".html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_admin));
 		?>
 		
 		<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>

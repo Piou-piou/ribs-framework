@@ -95,36 +95,10 @@
 					$twig = new Twig_Environment($loader);
 					
 					$page = $router_module->getPage();
-					$twig_page = true;
 				}
 				else {
-					//pour les pages normales
-					//pour l'acces a la gestion des comptes, si pas activée oin renvoi une erreur
-					$twig_ok_page = [
-						"index",
-						"notifications",
-						"contacter-support",
-						"configuration/index",
-						"configuration/module",
-						"configuration/infos-generales",
-						"configuration/mon-compte",
-						"configuration/base-de-donnees",
-						"gestion-navigation/index",
-						"gestion-comptes/index",
-						"gestion-comptes/creer-utilisateur",
-						"gestion-droits-acces/index",
-						"gestion-droits-acces/liste-droits-acces",
-						"gestion-contenus/index",
-						"gestion-contenus/creer-une-page",
-						"gestion-contenus/modifier-contenu",
-						"gestion-contenus/inline",
-					];
-					
-					if (in_array($page, $twig_ok_page)) {
-						$loader = new Twig_Loader_Filesystem("admin/views");
-						$twig = new Twig_Environment($loader);
-						$twig_page = true;
-					}
+					$loader = new Twig_Loader_Filesystem("admin/views");
+					$twig = new Twig_Environment($loader);
 				}
 				require(ROOT."admin/controller/initialise_all.php");
 				require(ROOT."admin/views/template/principal.php");
