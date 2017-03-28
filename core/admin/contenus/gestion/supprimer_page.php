@@ -7,7 +7,7 @@
 		if (($droit_acces->getSupprimerPage() != 0) || ($droit_acces->getSuperAdmin() == 1)) {
 			$gestion_contenu = new \core\admin\contenus\GestionContenus($_GET['url']);
 			
-			$gestion_contenu->setSupprimerPage($_GET['id']);
+			$gestion_contenu->setSupprimerPage();
 			
 			if ($gestion_contenu->getErreur() !== true) {
 				\core\HTML\flashmessage\FlashMessage::setFlash("La page a bien été supprimée", "success");
