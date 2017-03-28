@@ -5,7 +5,6 @@
 	use core\contenus\Contenus;
 	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
-	use core\Navigation;
 
 	class GestionContenus extends Contenus {
 		use ParentTexte;
@@ -310,32 +309,23 @@
 		 * fonction qui permet de supprimer une page, test si fichier exist, si oui on delete
 		 * @param $id_page
 		 */
-		public function setSupprimerPage($id_page) {
-			$dbc = \core\App::getDb();
-
-			//le premier id_page sera tojours l'accueil donc on ne peut pas le delete
-			if ($id_page != 1) {
-				$url = explode("/", $this->url);
-				$filename = ROOT."app/views/".end($url).".html";
-
-				//si le fichier existe supprimer en bdd plus l fichier
-				if (file_exists($filename)) {
-					unlink($filename);
-
-					$dbc->delete()->from("page")->where("ID_page", "=", $id_page)->del();
-
-					$nav = new Navigation();
-					$nav->setSupprimerLien("ID_page", $id_page);
-				}
-				//sinon on renvoi une erreur en disant que le fichier n'existe pas et qu'il faut contacter un administrateur
-				else {
-					FlashMessage::setFlash("Impossible de supprimer cette page, veuillez contacter votre administrateur pour corriger ce problème");
-					$this->erreur = true;
-				}
+		public function setSupprimerPage() {
+			$url = explode("/", $this->url);
+			$filename = ROOT."app/views/".end($url).".html";
+			
+			if (file_exists($filename) && $this->id_page != 1) {
+				unlink($filename);
+				$this->setSupprimerLienNavigation();
+				
+				return true;
+			}
+			else if (ChaineCaractere::FindInString($this->url, "http://") === true) {
+				$this->setSupprimerLienNavigation();
 			}
 			else {
 				FlashMessage::setFlash("Impossible de supprimer cette page, veuillez contacter votre administrateur pour corriger ce problème");
 				$this->erreur = true;
+				return false;
 			}
 		}
 
@@ -346,8 +336,7 @@
 		 */
 		private function setAjoutLienNavigation($id, $value_id, $affiche) {
 			if ($affiche !== null) {
-				$nav = new Navigation();
-				$nav->setAjoutLien($id, $value_id);
+				App::getNav()->setAjoutLien($id, $value_id);
 			}
 		}
 
@@ -356,13 +345,23 @@
 		 * @param integer $affiche
 		 */
 		private function setModifierLienNavigation($id, $id_page, $parent, $affiche) {
-			$nav = new Navigation();
 			if ($parent != "") {
-				$nav->setSupprimerLien($id, $id_page);
+				App::getNav()->setSupprimerLien($id, $id_page);
 			}
 			else if (($affiche == 0) && ($parent == "")) {
-				$nav->setSupprimerLien($id, $id_page);
+				App::getNav()->setSupprimerLien($id, $id_page);
 			}
+		}
+		
+		/**
+		 * delete link in nav and delete page in table
+		 */
+		private function setSupprimerLienNavigation() {
+			$dbc = App::getDb();
+			
+			$dbc->delete()->from("page")->where("ID_page", "=", $this->id_page)->del();
+			
+			App::getNav()->setSupprimerLien("ID_page", $this->id_page);
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
