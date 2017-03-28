@@ -113,32 +113,6 @@
 				}
 			}
 		}
-
-		/**
-		 * fonction qui permet de gérer les droits d'accès sur les contenus :
-		 * - creer une page
-		 * - modifier du contenu (SEO, navigation, contenu)
-		 * - supprimer une page
-		 * si on est super admin on passe outre tous les tests
-		 * @param $droit
-		 * @param $id_page
-		 * @return bool|null
-		 */
-		public function getDroitAccesContenu($droit, $id_page) {
-			$liste_droit_acces = $this->getListeDroitAcces();
-
-			$this->getListeDroitModificationContenu($id_page);
-
-			$array_modif = [$this->modif_seo, $this->modif_contenu, $this->modif_navigation];
-
-			//si les trois sont différent de 0 on renvoit true soinon false
-			if (($this->super_admin == 1) || ((in_array($droit, $liste_droit_acces)) && in_array(1, $array_modif))) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
     
     
