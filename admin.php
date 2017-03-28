@@ -117,6 +117,7 @@
 						"gestion-contenus/index",
 						"gestion-contenus/creer-une-page",
 						"gestion-contenus/modifier-contenu",
+						"gestion-contenus/inline",
 					];
 					
 					if (in_array($page, $twig_ok_page)) {

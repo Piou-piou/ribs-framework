@@ -12,20 +12,25 @@
 	<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="{{ADMWEBROOT}}gestion-contenus/modifier-contenu?id={{app.contenus.id_page}}&url={{ app.contenus.url }}"><i class="fa fa-times"></i>Annuler</button>
 	
 	<link rel="stylesheet" type="text/css" href="{{ WEBROOT }}admin/views/template/css/foundation-inline.css">
-	<link rel="stylesheet" type="text/css" href="{{ TPLWEBROOT }}css/page.css">
+	<link rel="stylesheet" type="text/css" href="{{ TPLWEBROOT }}css/style.css">
 	
 	<div id="admin-page">
-		{{ app.contenus.contenu }}
+		{{ app.contenus.contenu|raw }}
 	</div>
 	
 	<script src="{{ LIBSWEBROOT }}ckeditor/ckeditor.js"></script>
 	<script src="{{ LIBSWEBROOT }}ckfinder/ckfinder.js"></script>
-	<script src="{{ WEBROOT }}config/config_ckeditor.js"></script>
 	<script>
+        CKEDITOR.disableAutoInline = true;
+        
         $(document).ready(function() {
-            var editor = CKEDITOR.replace('article');
-            CKFinder.setupCKEditor(editor, "/libs/ckfinder/");
-        });
+	        {% for i in 0..app.contenus.bloc_editable-1 %}
+	            $("#editor{{ loop.index0 }}").attr("contenteditable", true);
+	    
+	            var editor{{ loop.index0 }} = CKEDITOR.inline("editor{{ loop.index0 }}", { customConfig: "{{ WEBROOT}}config/config_ckeditor.js" });
+	            CKFinder.setupCKEditor( editor{{ loop.index0 }}, "{{ LIBSWEBROOT}}ckfinder/" );
+	        {% endfor %}
+        })
 	</script>
 {% else %}
 	<div class="inner">
@@ -34,21 +39,4 @@
 		</div>
 	</div>
 {% endif %}
-
-
-<script src="<?=LIBSWEBROOT?>ckeditor/ckeditor.js"></script>
-<script src="<?=LIBSWEBROOT?>ckfinder/ckfinder.js"></script>
-
-<script>
-	CKEDITOR.disableAutoInline = true;
-
-	<?php for($i=0 ; $i<$bloc_editable ; $i++):?>
-		$(document).ready(function() {
-			console.log("editor<?=$i?>");
-			$("#editor<?=$i?>").attr("contenteditable", true);
-		})
-		var editor<?=$i?> = CKEDITOR.inline("editor<?=$i?>", { customConfig: "<?=WEBROOT?>config/config_ckeditor.js" });
-		CKFinder.setupCKEditor( editor<?=$i?>, "<?=LIBSWEBROOT?>ckfinder/" );
-	<?php endfor;?>
-</script>
-<?php require_once(ROOT."admin/views/gestion-contenus/js/inline.php");?>
+{% include("gestion-contenus/js/inline.html") %}
