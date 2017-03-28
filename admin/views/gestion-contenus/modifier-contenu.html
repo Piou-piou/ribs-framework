@@ -16,7 +16,7 @@
 		<input type="hidden" name="url_avant" value="{{ app.contenus.url }}">
 		
 		{% if id != 1 and app.droit_acces_page.supprimer == 1 or app.super_admin == 1 %}
-			<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="{{ADMWEBROOT}}controller/core/admin/contenus/gestion/supprimer_page?id={{app.contenus.id_page}}"><i class="fa fa-times"></i>Supprimer cette page</button>
+			<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="{{ADMWEBROOT}}controller/core/admin/contenus/gestion/supprimer_page?id={{app.contenus.id_page}}&url={{ app.contenus.url }}"><i class="fa fa-times"></i>Supprimer cette page</button>
 		{% endif %}
 	
 		<div class="inner">
