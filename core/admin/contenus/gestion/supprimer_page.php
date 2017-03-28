@@ -18,7 +18,14 @@
 			}
 		}
 		else {
-			\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas le droit de supprimer cette page");
-			header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']."&url=".$_GET['url']);
+			$err_droit = true;
 		}
+	}
+	else {
+		$err_droit = true;
+	}
+	
+	if ($err_droit === true) {
+		\core\HTML\flashmessage\FlashMessage::setFlash("Vous n'avez pas le droit de supprimer cette page");
+		header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$_GET['id']."&url=".$_GET['url']);
 	}
