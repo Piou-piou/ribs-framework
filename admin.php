@@ -1,5 +1,6 @@
 <?php
 	$page_root = "admin.php";
+	$page = "index";
 
 	require("vendor/autoload.php");
 
@@ -32,6 +33,7 @@
 	if (isset($_GET['page'])) {
 		$titre_page = "Administration du site";
 		$description_page = "Administration du site";
+		$page = $_GET['page'];
 	}
 	else {
 		$titre_page = "Administration du site";
@@ -42,80 +44,63 @@
 
 
 	//--------------------------------------------- ROUTING -------------------------------------------------------//
-	if (isset($_GET['page'])) {
-		$page = $_GET['page'];
-
-		$find = 'controller/';
-		$pos = strpos($page, $find);
-
-		if ($pos !== false) {
-			//recherche savoir si le fichier appele fait parti du core du systeme pour construire le lien
-			$find_core = 'controller/core/';
-			$core = strpos($page, $find_core);
-
-			//recherche savoir si le fichier appele est un module du systeme pour construire le lien
-			$find_module = 'controller/modules/';
-			$module = strpos($page, $find_module);
-
-			$explode = explode("/", $page, 2);
-			foreach ($explode as $lien);
-
-			//si c'est un controleur de base on va cerhcer dans core/admin
-			if ($core !== false) {
-				require_once(ROOT.$lien.".php");
-			}
-			else if ($module !== false) {
-				$explode = explode("/", $lien, 3);
-
-				require_once(ROOT.$explode[0]."/".$explode[1]."/admin/controller/".$explode[2].".php");
-			}
-			else {
-				require_once("admin/controller/".$lien.".php");
-			}
+	$find = 'controller/';
+	$pos = strpos($page, $find);
+	
+	if ($pos !== false) {
+		//recherche savoir si le fichier appele fait parti du core du systeme pour construire le lien
+		$find_core = 'controller/core/';
+		$core = strpos($page, $find_core);
+		
+		//recherche savoir si le fichier appele est un module du systeme pour construire le lien
+		$find_module = 'controller/modules/';
+		$module = strpos($page, $find_module);
+		
+		$explode = explode("/", $page, 2);
+		foreach ($explode as $lien);
+		
+		//si c'est un controleur de base on va cerhcer dans core/admin
+		if ($core !== false) {
+			require_once(ROOT.$lien.".php");
 		}
-		//pour la page de login
-		else if ($page == "login") {
-			require("admin/views/template/login_admin.php");
+		else if ($module !== false) {
+			$explode = explode("/", $lien, 3);
+			
+			require_once(ROOT.$explode[0]."/".$explode[1]."/admin/controller/".$explode[2].".php");
 		}
 		else {
-			if (!isset($_SESSION["idlogin".CLEF_SITE])) {
-				Connexion::setObgConnecte(WEBROOT."administrator/login");
-			}
-			else {
-				$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
-				$router_module = new \core\modules\RouterModule();
-				if ($router_module->getRouteModuleExist($page)) {
-					$page = $router_module->getUrl($page, "admin");
-					
-					if ($router_module->getController() != "") {
-						require_once(MODULEROOT.$router_module->getController());
-					}
-					
-					$loader = new Twig_Loader_Filesystem(['modules/'.$router_module->getModule()."/admin/views", "admin/views"]);
-					$twig = new Twig_Environment($loader);
-					
-					$page = $router_module->getPage();
-				}
-				else {
-					$loader = new Twig_Loader_Filesystem("admin/views");
-					$twig = new Twig_Environment($loader);
-				}
-				require(ROOT."admin/controller/initialise_all.php");
-				require(ROOT."admin/views/template/principal.php");
-			}
+			require_once("admin/controller/".$lien.".php");
 		}
 	}
+	//pour la page de login
+	else if ($page == "login") {
+		require("admin/views/template/login_admin.php");
+	}
 	else {
-		Connexion::setObgConnecte(WEBROOT."administrator/login");
-
 		if (!isset($_SESSION["idlogin".CLEF_SITE])) {
 			Connexion::setObgConnecte(WEBROOT."administrator/login");
 		}
 		else {
-			$page = "index";
 			$admin = new Admin($_SESSION["idlogin".CLEF_SITE]);
+			$router_module = new \core\modules\RouterModule();
+			if ($router_module->getRouteModuleExist($page)) {
+				$page = $router_module->getUrl($page, "admin");
+				
+				if ($router_module->getController() != "") {
+					require_once(MODULEROOT.$router_module->getController());
+				}
+				
+				$loader = new Twig_Loader_Filesystem(['modules/'.$router_module->getModule()."/admin/views", "admin/views"]);
+				$twig = new Twig_Environment($loader);
+				
+				$page = $router_module->getPage();
+			}
+			else {
+				$loader = new Twig_Loader_Filesystem("admin/views");
+				$twig = new Twig_Environment($loader);
+			}
 			require(ROOT."admin/controller/initialise_all.php");
-			require("admin/views/template/principal.php");
+			require(ROOT."admin/views/template/principal.php");
 		}
 	}
 	//--------------------------------------------- FIN ROUTING -------------------------------------------------------//
