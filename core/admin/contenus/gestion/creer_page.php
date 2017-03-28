@@ -5,7 +5,7 @@
 
 	if ($gestion_contenu->getErreur() !== true) {
 		\core\HTML\flashmessage\FlashMessage::setFlash("La page ".$_POST['titre_page']." a bien été crée", "success");
-		header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$gestion_contenu->getIdPage());
+		header("location:".ADMWEBROOT."gestion-contenus/modifier-contenu?id=".$gestion_contenu->getIdPage()."&url=".$gestion_contenu->getUrl());
 	}
 	else {
 		header("location:".ADMWEBROOT."gestion-contenus/creer-une-page");
