@@ -75,24 +75,16 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$this->mail_site = $obj->mail_site;
-					$this->mail_administrateur = $obj->mail_administrateur;
-					$this->last_save = $obj->last_save;
-					$this->acces_admin = $obj->acces_admin;
-					$this->contenu_dynamique = $obj->contenu_dynamique;
-					$this->cache = $obj->cache;
-					$this->desactiver_navigation = $obj->desactiver_navigation;
-					
 					return [
 						"nom_site" => $obj->nom_site,
-						"mail_site" => $obj->mail_site,
+						"mail_site" => $this->mail_site = $obj->mail_site,
 						"gerant_site" => $obj->gerant_site,
-						"mail_administrateur" => $obj->mail_administrateur,
-						"last_save" => $obj->last_save,
-						"acces_admin" => $obj->acces_admin,
-						"contenu_dynamique" => $obj->contenu_dynamique,
-						"cache" => $obj->cache,
-						"desactiver_navigation" => $obj->desactiver_navigation
+						"mail_administrateur" => $this->mail_administrateur = $obj->mail_administrateur,
+						"last_save" => $this->last_save = $obj->last_save,
+						"acces_admin" => $this->acces_admin = $obj->acces_admin,
+						"contenu_dynamique" => $this->contenu_dynamique = $obj->contenu_dynamique,
+						"cache" => $this->cache = $obj->cache,
+						"desactiver_navigation" => $this->desactiver_navigation = $obj->desactiver_navigation
 					];
 				}
 			}
@@ -105,14 +97,10 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
-					$this->valider_inscription = $obj->valider_inscription;
-					$this->activer_inscription = $obj->activer_inscription;
-					$this->activer_connexion = $obj->activer_connexion;
-					
 					return [
-						"valider_inscription" => $obj->valider_inscription,
-						"activer_inscription" => $obj->activer_inscription,
-						"activer_connexion" => $obj->activer_connexion,
+						"valider_inscription" => $this->valider_inscription = $obj->valider_inscription,
+						"activer_inscription" => $this->activer_inscription = $obj->activer_inscription,
+						"activer_connexion" => $this->activer_connexion = $obj->activer_connexion,
 					];
 				}
 			}
