@@ -9,6 +9,7 @@
 {% if (app.super_admin == 1) or ("GESTION CONTENUS" in app.droit_acces_user and app.droit_acces_page.contenu == 1)  %}
 	<button type="button" class="submit-contenu"><i class="fa fa-check"></i>Valider</button>
 	<input type="hidden" id="id_page" name="id_page" value="{{ app.contenus.id_page }}">
+	<input type="hidden" id="url" name="url" value="{{ app.contenus.url }}">
 	<button id="supprimer-page-contenu" type="button" class="submit-contenu supprimer-page supprimer open-popup" popup="supprimer-page" href="{{ADMWEBROOT}}gestion-contenus/modifier-contenu?id={{app.contenus.id_page}}&url={{ app.contenus.url }}"><i class="fa fa-times"></i>Annuler</button>
 	
 	<link rel="stylesheet" type="text/css" href="{{ WEBROOT }}admin/views/template/css/foundation-inline.css">

@@ -4,12 +4,13 @@
 			e.preventDefault();
 
 			var id_page = $("#id_page").val();
+			var url = $("#url").val();
 			var contenu = $("#admin-page").html();
 
 			$.ajax({
 				method: 'POST',
 				url:"{{ ADMWEBROOT }}controller/core/admin/contenus/gestion/contenus_inline.php",
-				data: "id_page="+id_page+"&contenu="+contenu,
+				data: "id_page="+id_page+"&url="+url+"&contenu="+contenu,
 				success: function(){
 					window.location.reload(true);
 				}
