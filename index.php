@@ -34,7 +34,7 @@
 
 	//--------------------------------------------- GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
 	//initialisation des contenus
-	//$contenu = new Contenus($page);
+	$contenu = new Contenus($page);
 	//--------------------------------------------- FIN GENERATION META TITLE ++ DESCRIPTION -------------------------------------------------------//
 
 
@@ -42,7 +42,7 @@
 	//--------------------------------------------- ROUTING -------------------------------------------------------//
 	$controller = new \core\RouterController($page);
 	
-	if ($controller->getController() !== false) {
+	if ($controller->getErreur() === false) {
 		require_once($controller->getController());
 	}
 	else {

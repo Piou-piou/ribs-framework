@@ -6,28 +6,25 @@
 		private $page;
 		private $controller;
 		private $part;
+		private $erreur;
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
 		public function __construct($page, $admin = null) {
-			if (strpos($page, "controller") === false) {
-				$this->controller = false;
-				return false;
+			if (strpos($page, "controller") !== false) {
+				$this->part = "app";
+				if ($admin !== null) {
+					$this->part = "admin";
+				}
+				
+				$this->page = $page;
+				
+				if (($this->getTestCoreController() === false) && ($this->getTestModuleController()  === false)) {
+					$this->controller = $this->part."/".$this->page.".php";
+				}
+				
+				$this->getTestControllerExist();
+				$this->erreur = false;
 			}
-			
-			$this->part = "app";
-			if ($admin !== null) {
-				$this->part = "admin";
-			}
-			
-			$this->page = $page;
-			
-			if (($this->getTestCoreController() === false) && ($this->getTestModuleController()  === false)) {
-				$this->controller = $this->part."/".$this->page.".php";
-			}
-			
-			echo $this->controller;
-			
-			$this->getTestControllerExist();
 		}
 		//-------------------------- END BUILDER ----------------------------------------------------------------------------//
 		
@@ -35,6 +32,9 @@
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public function getController(){
 		    return $this->controller;
+		}
+		public function getErreur(){
+		    return $this->erreur;
 		}
 		
 		/**
