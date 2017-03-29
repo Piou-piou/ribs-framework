@@ -104,7 +104,7 @@
 			$dbc = \core\App::getDb();
 			$query = $dbc->select()->from("module")->get();
 			
-			if ((is_array($query)) && (count($query) > 0)) {
+			if (count($query) > 0) {
 				foreach ($query as $obj) {
 					$test_module = ChaineCaractere::FindInString($url, $obj->url);
 					$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);
