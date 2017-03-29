@@ -44,7 +44,7 @@
 			$query = $dbc->select()->from("module")->where("activer", "=", 1, "AND")->where("installer", "=", 1)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
-				$id_module = [];$url = [];$nom = [];$version = [];$icone = [];
+				$id_module = []; $url = []; $nom = []; $version = []; $icone = [];
 
 				foreach ($query as $obj) {
 					$id_module[] = $obj->ID_module;
