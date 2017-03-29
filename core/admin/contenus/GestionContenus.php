@@ -139,10 +139,8 @@
 			$dbc = \core\App::getDb();
 
 			$url = ChaineCaractere::setUrl($url);
-
 			$nom_page = explode("/", $url);
 			$nom_page = end($nom_page);
-
 			$page_type = ROOT."config/page_type/page_type.html";
 			$new_page = ROOT."app/views/".$nom_page.".html";
 			
@@ -159,15 +157,9 @@
 			if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
 				$parent = intval($this->getParentId($parent));
 				$ordre = intval($this->getOrdrePage($parent));
-				$dbc->insert("titre", $titre_page)
-					->insert("url", $url)
-					->insert("meta_description", $meta_description)
-					->insert("balise_title", $balise_title)
-					->insert("ordre", $ordre)
-					->insert("parent", $parent)
-					->insert("affiche", $affiche)
-					->into("page")
-					->set();
+				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("meta_description", $meta_description)
+					->insert("balise_title", $balise_title)->insert("ordre", $ordre)->insert("parent", $parent)
+					->insert("affiche", $affiche)->into("page")->set();
 				
 				$this->id_page = $dbc->lastInsertId();
 				$this->url = $url;
@@ -196,18 +188,11 @@
 			$err_titre_page = $this->getTestTitrePage($titre_page);
 			
 			if ($this->erreur !== true) {
-				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				$parent = intval($this->getParentId($parent));
 				$ordre = intval($this->getOrdrePage($parent));
-				$dbc->insert("titre", $titre_page)
-					->insert("url", $url)
-					->insert("balise_title", $balise_title)
-					->insert("ordre", $ordre)
-					->insert("parent", $parent)
-					->insert("affiche", $affiche)
-					->insert("target", "_blanck")
-					->into("page")
-					->set();
+				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("balise_title", $balise_title)
+					->insert("ordre", $ordre)->insert("parent", $parent)->insert("affiche", $affiche)
+					->insert("target", "_blanck")->into("page")->set();
 
 				$this->id_page = $dbc->lastInsertId();
 				if ($parent == "") {
@@ -232,49 +217,39 @@
 		 */
 		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
-
-			//on trouve l'ancien fichier à parir de la fin de l'url
+			
 			$old_url = explode("/", $this->url);
 			$filename = ROOT."app/views/".end($old_url).".html";
-
-			//si le fichier existe on modifie le tout
+			
 			if (file_exists($filename) || ($id_page == 1)) {
-				$this->id_page = $id_page;
-				$url = ChaineCaractere::setUrl($url);
-				
-				$err_balise_title = $this->getTestBaliseTitle($balise_title, $id_page);
-				$err_url = $this->getTestUrl($url, $id_page);
-				$err_meta_description = $this->getTestMetaDescription($meta_description , $id_page);
-				$err_titre_page = $this->getTestTitrePage($titre_page, $id_page);
-				
-				if ($this->erreur !== true) {
-					$new_url = explode("/", $url);
-					$new_filename = ROOT."app/views/".end($new_url).".html";
-
-					rename($filename, $new_filename);
-
-					$parent = intval($this->getParentId($parent));
-					$dbc->update("titre", $titre_page)
-						->update("url", $url)
-						->update("meta_description", $meta_description)
-						->update("balise_title", $balise_title)
-						->update("parent", $parent)
-						->update("affiche", $affiche)
-						->from("page")
-						->where("ID_page", "=", $id_page, "", true)
-						->set();
-
-					$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
-					$this->url = $url;
-				}
-				else {
-					$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
-				}
-			}
-			//sinon on renvoi une erreur en disant que le fichier n'existe pas et qu'il faut contacter un administrateur
-			else {
 				FlashMessage::setFlash("Impossible de modifier cette page, veuillez contacter votre administrateur pour corriger ce problème");
 				$this->erreur = true;
+				return false;
+			}
+			
+			$this->id_page = $id_page;
+			$url = ChaineCaractere::setUrl($url);
+			$err_balise_title = $this->getTestBaliseTitle($balise_title, $id_page);
+			$err_url = $this->getTestUrl($url, $id_page);
+			$err_meta_description = $this->getTestMetaDescription($meta_description , $id_page);
+			$err_titre_page = $this->getTestTitrePage($titre_page, $id_page);
+			
+			if ($this->erreur !== true) {
+				$new_url = explode("/", $url);
+				$new_filename = ROOT."app/views/".end($new_url).".html";
+				
+				rename($filename, $new_filename);
+				
+				$parent = intval($this->getParentId($parent));
+				$dbc->update("titre", $titre_page)->update("url", $url)->update("meta_description", $meta_description)
+					->update("balise_title", $balise_title)->update("parent", $parent)->update("affiche", $affiche)
+					->from("page")->where("ID_page", "=", $id_page, "", true)->set();
+				
+				$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
+				$this->url = $url;
+			}
+			else {
+				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
 			}
 		}
 
