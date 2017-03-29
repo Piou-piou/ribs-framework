@@ -2,6 +2,8 @@
 	namespace core\auth;
 
 
+	use core\App;
+	
 	class Membre {
 		protected $id_identite;
 		protected $nom;
@@ -18,25 +20,10 @@
 		//------------------------------ constructeur-----------------------------------
 		//Récupérer en base de données les infos du membre
 		public function __construct($id_identite = null) {
-			$dbc = \core\App::getDb();
-
 			$this->debut_lien = IMGROOT."profil/";
 
 			if ($id_identite != null) {
-				$query = $dbc->select()->from("identite")->where("ID_identite", "=", $id_identite)->get();
-
-				if ((is_array($query)) && (count($query) > 0)) {
-					foreach ($query as $obj) {
-						$this->id_identite = $obj->ID_identite;
-						$this->nom = $obj->nom;
-						$this->prenom = $obj->prenom;
-						$this->mail = $obj->mail;
-						$this->pseudo = $obj->pseudo;
-						$this->mdp = $obj->mdp;
-						$this->valide = $obj->valide;
-						$this->img = $obj->img_profil;
-					}
-				}
+				$this->getInfosMembre($id_identite);
 			}
 		}
 		//------------------------------ fin constructeur -----------------------------------
@@ -70,6 +57,29 @@
 		}
 		public function getErreur() {
 			return $this->erreur;
+		}
+		
+		/**
+		 * @param $id_identite
+		 * function that get all infos of a member
+		 */
+		private function getInfosMembre($id_identite) {
+			$dbc = App::getDb();
+			
+			$query = $dbc->select()->from("identite")->where("ID_identite", "=", $id_identite)->get();
+			
+			if ((is_array($query)) && (count($query) > 0)) {
+				foreach ($query as $obj) {
+					$this->id_identite = $obj->ID_identite;
+					$this->nom = $obj->nom;
+					$this->prenom = $obj->prenom;
+					$this->mail = $obj->mail;
+					$this->pseudo = $obj->pseudo;
+					$this->mdp = $obj->mdp;
+					$this->valide = $obj->valide;
+					$this->img = $obj->img_profil;
+				}
+			}
 		}
 		//------------------------------ fin getter -----------------------------------
 		
