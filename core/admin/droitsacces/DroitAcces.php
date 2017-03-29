@@ -89,19 +89,18 @@
 
 		/**
 		 * @param $id_page
+		 * function that get if user can edit content SEO nav or contenu of the current page
 		 */
 		public function getListeDroitModificationContenu($id_page) {
 			$dbc = App::getDb();
-
-			//on check si il a le droit de modifier ou supprimer cette page
+			
 			$query = $dbc->select()->from("droit_acces_page")
 				->from("liste_droit_acces")
 				->where("droit_acces_page.ID_page", "=", $id_page, "AND")
 				->where("liste_droit_acces.ID_liste_droit_acces", "=", $this->id_liste_droit_acces, "AND")
 				->where("droit_acces_page.ID_liste_droit_acces", "=", "liste_droit_acces.ID_liste_droit_acces", "", true)
 				->get();
-
-			//si on a un resultat
+			
 			if ((is_array($query)) && (count($query) > 0)) {
 				foreach ($query as $obj) {
 					App::setValues(["droit_acces_page" => [
