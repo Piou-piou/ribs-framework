@@ -36,9 +36,8 @@
 		}
 
 		private function setTestConnexion($query, $auth, $page_retour) {
-			if ((is_array($query)) && (count($query) > 0)) {
+			if (count($query) > 0) {
 				foreach ($query as $obj) {
-					//si le compte est archivé on déconnecte la session et le cookie
 					self::setTestParamCompte($obj->valide, $obj->archiver, $page_retour);
 
 					$key = sha1($obj->pseudo.$obj->mdp);
