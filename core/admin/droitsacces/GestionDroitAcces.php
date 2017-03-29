@@ -22,14 +22,11 @@
 		 */
 		private function getListeDroitAccesAdmin() {
 			$dbc = App::getDb();
-
-			//pour affichage de la liste des listes de droit d'acces
-			//récupération des droits d'acces génériques
+			
 			$query = $dbc->select()->from("liste_droit_acces")->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$values = [];
-
 				foreach ($query as $obj) {
 					$values[] = [
 						"id_liste" => $obj->ID_liste_droit_acces,
@@ -39,7 +36,6 @@
 						"nb_user" => $this->getNombreUtilisateurListe($obj->ID_liste_droit_acces),
 					];
 				}
-
 				App::setValues(["liste_droit_acces" => $values]);
 			}
 		}
