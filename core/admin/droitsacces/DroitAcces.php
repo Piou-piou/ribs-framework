@@ -68,12 +68,9 @@
 		 */
 		private function getListeDroitAcces() {
 			$dbc = App::getDb();
-
 			$liste_droit_acces = [];
 
-			$query = $dbc->select()->from("droit_acces")
-				->from("liste_droit_acces")
-				->from("liaison_liste_droit")
+			$query = $dbc->select()->from("droit_acces")->from("liste_droit_acces")->from("liaison_liste_droit")
 				->where("liste_droit_acces.ID_liste_droit_acces", "=", $this->id_liste_droit_acces, "AND")
 				->where("droit_acces.ID_droit_acces", "=", "liaison_liste_droit.ID_droit_acces", "AND", true)
 				->where("liste_droit_acces.ID_liste_droit_acces", "=", "liaison_liste_droit.ID_liste_droit_acces", "", true)
@@ -84,7 +81,6 @@
 					$liste_droit_acces[] = $obj->droit_acces;
 				}
 			}
-			
 			App::setValues(["droit_acces_user" => $liste_droit_acces]);
 			return $liste_droit_acces;
 		}
