@@ -90,7 +90,6 @@
 			$err_meta_description_char = "La description de cette page ne doit pas dépasser 158 caractères";
 			$err_meta_description_egalite = "Cette description est déjà présent en base de données, merci d'en choisir une autre pour optimiser le référencement de votre site";
 			return $this->getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite);
-			
 		}
 		
 		private function getTestTitrePage($titre_page) {
