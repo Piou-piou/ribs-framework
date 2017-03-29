@@ -80,10 +80,12 @@
 		 * fonction qui permet de supprmer un dossier avec toute son abrorescence en fonction d'une URL
 		 */
 		public static function supprimerDossier($url) {
+			$exclude = ["..", "."];
+			
 			if (is_dir($url)) {
 				$objects = scandir($url);
 				foreach ($objects as $object) {
-					if ($object != "." && $object != "..") {
+					if (!in_array($object, $exclude)) {
 						if (filetype($url."/".$object) == "dir") {
 							App::supprimerDossier($url."/".$object);
 						}
