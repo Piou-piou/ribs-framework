@@ -103,7 +103,7 @@
 			$dev_info = [$this->db_type, $this->db_name, $this->db_user, $this->db_pass, $this->db_host];
 
 			$ini = new IniParser();
-			$ini->setModifierConfigIni("on", $dev_info);
+			$ini->setModifierConfigIni($dev_info);
 		}
 		//-------------------------- END SETTER ----------------------------------------------------------------------------//
 	}

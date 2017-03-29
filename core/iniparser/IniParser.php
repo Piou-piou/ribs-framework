@@ -26,20 +26,12 @@
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		/**
-		 * @param $developpment
 		 * @param $dev_info
 		 * fonction pour modifier les infos dans config.ini
 		 */
-		public function setModifierConfigIni($developpement, $dev_info) {
-			if ($developpement == "on") {
-				$developpement = 1;
-			}
-			else {
-				$developpement = 0;
-			}
-
+		public function setModifierConfigIni($dev_info) {
 			$value = "installation = 0
-				developpment = $developpement
+				developpment = 1
 
 				[dev]
 				dev[DB_TYPE] = $dev_info[0]

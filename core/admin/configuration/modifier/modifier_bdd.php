@@ -10,6 +10,6 @@
 		$_POST["db_host_dev"]
 	];
 
-	$ini->setModifierConfigIni($_POST["developpement"], $dev_info);
+	$ini->setModifierConfigIni($dev_info);
 
 	header("location:".ADMWEBROOT."configuration/base-de-donnees");
