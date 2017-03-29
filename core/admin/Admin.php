@@ -184,7 +184,7 @@
 			//test si il y a deja une img
 			$query = $dbc->select("img_profil")->from("identite")->where("ID_identite", "=", $id_identite)->get();
 
-			if ((is_array($query)) && (count($query) > 0)) {
+			if (count($query) > 0) {
 				foreach ($query as $obj) {
 					$oldimg_profil = $obj->img_profil;
 				}
