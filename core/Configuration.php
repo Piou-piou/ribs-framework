@@ -53,8 +53,8 @@
 		public function getCache() {
 			return $this->cache;
 		}
-		public function getDesactiverNavigation(){
-		    return $this->desactiver_navigation;
+		public function getDesactiverNavigation() {
+			return $this->desactiver_navigation;
 		}
 
 		//pour la configuration des comptes

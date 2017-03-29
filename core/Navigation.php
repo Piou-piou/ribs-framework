@@ -161,7 +161,7 @@
 			$dbc = App::getDb();
 
 			if ($this->getLienPageExist($id) === false) {
-				$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre + 1)->into("navigation")->set();
+				$dbc->insert($id, $value_id)->insert("ordre", $this->last_ordre+1)->into("navigation")->set();
 			}
 		}
 

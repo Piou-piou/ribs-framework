@@ -30,11 +30,11 @@
 		
 		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
-		public function getController(){
-		    return $this->controller;
+		public function getController() {
+			return $this->controller;
 		}
-		public function getErreur(){
-		    return $this->erreur;
+		public function getErreur() {
+			return $this->erreur;
 		}
 		
 		/**

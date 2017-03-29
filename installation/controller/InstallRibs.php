@@ -1,6 +1,5 @@
 <?php
 	namespace installation\controller;
-	use core\functions\ChaineCaractere;
 	use core\HTML\flashmessage\FlashMessage;
 	use core\iniparser\IniParser;
 

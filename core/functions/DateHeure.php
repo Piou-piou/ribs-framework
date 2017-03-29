@@ -42,9 +42,9 @@
 		 */
 		public static function Secondeenheure($seconde) {
 			if (is_numeric($seconde)) {
-				$heure = intval($seconde / 3600);
-				$minute = intval(($seconde % 3600) / 60);
-				$seconde = intval(($seconde % 3600) % 60);
+				$heure = intval($seconde/3600);
+				$minute = intval(($seconde%3600)/60);
+				$seconde = intval(($seconde%3600)%60);
 
 				$temps = $heure."h".$minute."m".$seconde;
 				return $temps;

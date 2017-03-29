@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=WEBROOT?>admin/views/template/css/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<?php require_once(ROOT."admin/views/template/js/menu.php");?>
+		<?php require_once(ROOT."admin/views/template/js/menu.php"); ?>
 		
 		<!-- Les librairies utlisées -->
 		<link rel="stylesheet" type="text/css" href="<?=LIBSWEBROOT?>popup/css/style.css">
@@ -17,7 +17,7 @@
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body>
-		<nav class="menu <?php if (($_SESSION["menu_plie".CLEF_SITE] == "deplie") || (!isset($_SESSION["menu_plie".CLEF_SITE]))):?>active<?php endif;?>">
+		<nav class="menu <?php if (($_SESSION["menu_plie".CLEF_SITE] == "deplie") || (!isset($_SESSION["menu_plie".CLEF_SITE]))):?>active<?php endif; ?>">
 			<div class="titre">
 				<h1>Ribs V0.1</h1>
 				<i class="fa fa-bars"></i>
@@ -39,7 +39,7 @@
 										<a href="<?=ADMWEBROOT?>notifications"><i class="fa fa-bell  <?php if ($admin->getNotification() == 1):?> animated infinite swing<?php endif; ?>"></i></a>
 									</div>
 								</div>
-							<?php endif;?>
+							<?php endif; ?>
 							<div class="colonne">
 								<div class="config">
 									<a href="<?=ADMWEBROOT?>configuration/index"><i class="fa fa-gear"></i></a>
@@ -58,7 +58,9 @@
 			<ul>
 				<div class="principal">
 					<?php
-						if (!isset($arr)) $arr = [];
+						if (!isset($arr)) {
+							$arr = [];
+						}
 						echo $twig->render("template/left-navigation.html", array_merge(array_merge(array_merge(array_merge($arr, $constant), $_REQUEST), $_SESSION), $arr_admin));
 					?>
 					

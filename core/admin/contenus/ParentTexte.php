@@ -16,7 +16,9 @@
 			$query = $dbc->select("titre")->from("page")->where("ID_page", "=", $parent)->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) $this->parent_texte = $obj->titre;
+				foreach ($query as $obj) {
+					$this->parent_texte = $obj->titre;
+				}
 			}
 
 			return $this->parent_texte;

@@ -1,5 +1,7 @@
 <?php
-	if (!isset($page_root)) $page_root = "index.php";
+	if (!isset($page_root)) {
+		$page_root = "index.php";
+	}
 
 	//-------------------------- CONSTANTE POUR LES ROUTES ----------------------------------------------------------------------------//
 	//definit le chemin vers la racine du projet (depuis racine serveur web

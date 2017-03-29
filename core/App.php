@@ -84,7 +84,12 @@
 				$objects = scandir($url);
 				foreach ($objects as $object) {
 					if ($object != "." && $object != "..") {
-						if (filetype($url."/".$object) == "dir") App::supprimerDossier($url."/".$object); else unlink($url."/".$object);
+						if (filetype($url."/".$object) == "dir") {
+							App::supprimerDossier($url."/".$object);
+						}
+						else {
+							unlink($url."/".$object);
+						}
 					}
 				}
 				reset($objects);

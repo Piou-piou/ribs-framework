@@ -23,7 +23,7 @@
 		public function getPage() {
 			return $this->page;
 		}
-		public function getModule(){
+		public function getModule() {
 			return $this->module;
 		}
 		public function getController() {
@@ -55,7 +55,7 @@
 		 * Permets de générer l'url pour aller charger la page concernee pour le module blog
 		 * appele également l'actoin à effectur dans la page
 		 */
-		public function getUrl($url, $admin="app") {
+		public function getUrl($url, $admin = "app") {
 			$explode = explode("/", $url);
 			$count = count($explode);
 			$debut_url = "";

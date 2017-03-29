@@ -59,8 +59,8 @@
 		public function getSupprimerPage() {
 			return $this->supprimer_page;
 		}
-		public function getListeDroitsAcces(){
-		    return $this->liste_droits_acces;
+		public function getListeDroitsAcces() {
+			return $this->liste_droits_acces;
 		}
 
 		/**
@@ -80,7 +80,9 @@
 				->get();
 
 			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) $liste_droit_acces[] = $obj->droit_acces;
+				foreach ($query as $obj) {
+					$liste_droit_acces[] = $obj->droit_acces;
+				}
 			}
 			
 			App::setValues(["droit_acces_user" => $liste_droit_acces]);

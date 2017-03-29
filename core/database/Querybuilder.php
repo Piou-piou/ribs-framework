@@ -123,7 +123,9 @@
 		 * @param string $type
 		 */
 		public function orderBy($order, $type = null) {
-			if ($type === null) $type = "ASC";
+			if ($type === null) {
+				$type = "ASC";
+			}
 			
 			$this->order_by = " ORDER BY ".$order." ".$type." ";
 			

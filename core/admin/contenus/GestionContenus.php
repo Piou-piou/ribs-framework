@@ -16,7 +16,11 @@
 		public function getErreur() {
 			return $this->erreur;
 		}
-
+		
+		/**
+		 * @param $parent
+		 * @return int
+		 */
 		private function getOrdrePage($parent) {
 			if (($parent != "") || ($parent != 0)) {
 				$dbc = \core\App::getDb();
@@ -36,7 +40,9 @@
 		private function getParentId($parent) {
 			$dbc = \core\App::getDb();
 
-			if ($parent == "") return 0;
+			if ($parent == "") {
+				return 0;
+			}
 
 			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"', "", true)->get();
 
@@ -50,13 +56,13 @@
 		}
 
 		/**
-		 * @param $nom_table
-		 * @param $nom_id_table
-		 * @param $champ
+		 * @param string $nom_table
+		 * @param string $nom_id_table
+		 * @param string $champ
 		 * @param $value
-		 * @param $limit_char
-		 * @param $err_char
-		 * @param $err_egalite
+		 * @param integer $limit_char
+		 * @param string $err_char
+		 * @param string $err_egalite
 		 * @param null $value_id_table
 		 * @return string
 		 * fonction qui permet de vérifier qu'il n'y ait pas d'erreur dans le champ spécifié ni de doublons
@@ -310,7 +316,7 @@
 
 		/**
 		 * @param string $id
-		 * @param $value_id
+		 * @param string $value_id
 		 * @param integer $affiche
 		 */
 		private function setAjoutLienNavigation($id, $value_id, $affiche) {

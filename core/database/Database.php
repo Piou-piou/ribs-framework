@@ -96,7 +96,9 @@
 					$nb = $obj["nb"];
 				}
 
-				if ((isset($nb)) && ($nb != 0)) return true;
+				if ((isset($nb)) && ($nb != 0)) {
+					return true;
+				}
 			}
 			else {
 				return false;

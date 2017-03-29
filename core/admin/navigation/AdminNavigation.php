@@ -5,13 +5,13 @@
 	use core\HTML\flashmessage\FlashMessage;
 	use core\Navigation;
 
-	class AdminNavigation extends Navigation{
+	class AdminNavigation extends Navigation {
 
 		public function setOrdreNavigation($nav) {
 			$dbc = App::getDb();
 			$count_nav = count($nav);
 
-			for ($i=0 ; $i<$count_nav ; $i++) {
+			for ($i = 0 ; $i < $count_nav ; $i++) {
 				$lien = explode(".", $nav[$i]);
 
 				if ($lien[1] == "page") {
