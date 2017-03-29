@@ -24,9 +24,9 @@
 		 **/
 		public static function Heureenseconde($heure, $minute) {
 			if ((is_numeric($heure)) && (is_numeric($minute))) {
-				$heuresec = $heure * 3600;
-				$minutesec = $minute * 60;
-				$heureseconde = $heuresec + $minutesec;
+				$heuresec = $heure*3600;
+				$minutesec = $minute*60;
+				$heureseconde = $heuresec+$minutesec;
 				return $heureseconde;
 			}
 			else {

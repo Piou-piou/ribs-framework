@@ -17,7 +17,7 @@
 			$chaine = "abcdefghijklmnpqrstuvwxyz0123456789";
 			srand((double)microtime()*1000000);
 			for ($i = 0; $i < $longueur; $i++) {
-				$string .= $chaine[rand() % strlen($chaine)];
+				$string .= $chaine[rand()%strlen($chaine)];
 			}
 			return $string;
 		}

@@ -18,7 +18,7 @@
 		}
 		
 		/**
-		 * @param $parent
+		 * @param integer $parent
 		 * @return int
 		 */
 		private function getOrdrePage($parent) {

@@ -18,7 +18,7 @@
 				
 				$this->page = $page;
 				
-				if (($this->getTestCoreController() === false) && ($this->getTestModuleController()  === false)) {
+				if (($this->getTestCoreController() === false) && ($this->getTestModuleController() === false)) {
 					$this->controller = $this->part."/".$this->page.".php";
 				}
 				

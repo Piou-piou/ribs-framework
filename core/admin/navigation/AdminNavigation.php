@@ -11,7 +11,7 @@
 			$dbc = App::getDb();
 			$count_nav = count($nav);
 
-			for ($i = 0 ; $i < $count_nav ; $i++) {
+			for ($i = 0; $i < $count_nav; $i++) {
 				$lien = explode(".", $nav[$i]);
 
 				if ($lien[1] == "page") {
