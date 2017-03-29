@@ -72,7 +72,6 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$values = [];
-				
 				foreach ($query as $obj) {
 					$values[] = [
 						"id_module" => $obj->ID_module,
@@ -84,7 +83,6 @@
 						"installer" => $obj->installer
 					];
 				}
-				
 				App::setValues(["active_modules" => $values]);
 			}
 		}
