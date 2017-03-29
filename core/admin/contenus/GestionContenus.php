@@ -46,7 +46,7 @@
 
 			$query = $dbc->select("ID_page")->from("page")->where("titre", " LIKE ", '"%'.$parent.'%"', "", true)->get();
 
-			if ((is_array($query)) && (count($query) == 1)) {
+			if (count($query) == 1) {
 				foreach ($query as $obj) {
 					return $obj->ID_page;
 				}
