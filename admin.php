@@ -3,9 +3,7 @@
 	$page = "index";
 
 	require("vendor/autoload.php");
-
-	use \core\Autoloader;
-
+	
 	use \core\auth\Connexion;
 	use \core\admin\Admin;
 	use \core\HTML\flashmessage\FlashMessage;
@@ -44,35 +42,11 @@
 
 
 	//--------------------------------------------- ROUTING -------------------------------------------------------//
-	$find = 'controller/';
-	$pos = strpos($page, $find);
+	$controller = new \core\RouterController($page, "admin");
 	
-	if ($pos !== false) {
-		//recherche savoir si le fichier appele fait parti du core du systeme pour construire le lien
-		$find_core = 'controller/core/';
-		$core = strpos($page, $find_core);
-		
-		//recherche savoir si le fichier appele est un module du systeme pour construire le lien
-		$find_module = 'controller/modules/';
-		$module = strpos($page, $find_module);
-		
-		$explode = explode("/", $page, 2);
-		foreach ($explode as $lien);
-		
-		//si c'est un controleur de base on va cerhcer dans core/admin
-		if ($core !== false) {
-			require_once(ROOT.$lien.".php");
-		}
-		else if ($module !== false) {
-			$explode = explode("/", $lien, 3);
-			
-			require_once(ROOT.$explode[0]."/".$explode[1]."/admin/controller/".$explode[2].".php");
-		}
-		else {
-			require_once("admin/controller/".$lien.".php");
-		}
+	if ($controller->getErreur() === false) {
+		require_once($controller->getController());
 	}
-	//pour la page de login
 	else if ($page == "login") {
 		require("admin/views/template/login_admin.php");
 	}
