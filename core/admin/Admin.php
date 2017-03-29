@@ -74,7 +74,6 @@
 		 */
 		public function getunUser($id_identite) {
 			$dbc = \core\App::getDb();
-
 			$query = $dbc->select()->from("identite")->where("ID_identite", "=", $id_identite);
 
 			if ((is_array($query)) && (count($query) > 0)) {
@@ -128,7 +127,6 @@
 		 */
 		public function setReinitialiserMdp($id_identite) {
 			$dbc = \core\App::getDb();
-
 			$this->getunUser($id_identite);
 
 			if (($this->mail != "") || ($this->mail != null)) {
@@ -137,11 +135,7 @@
 
 				FlashMessage::setFlash("Mot de passe réinitialisé avec succès ! L'utilisateur à reçu un E-mail avec son nouveau mot de passe", "success");
 
-				$dbc->update("mdp", $mdp_encode)
-					->update("last_change_mdp", date("Y-m-d"))
-					->from("identite")
-					->where("ID_identite", "=", $id_identite)
-					->set();
+				$dbc->update("mdp", $mdp_encode)->update("last_change_mdp", date("Y-m-d"))->from("identite")->where("ID_identite", "=", $id_identite)->set();
 
 				$mail = new Mail();
 				$mail->setEnvoyerMail("Réinitialisation de votre E-mail effectuée", "Votre mot de passe a été réinitialisé", $this->mail);
