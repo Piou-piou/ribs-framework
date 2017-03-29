@@ -18,10 +18,7 @@
 				
 				$this->page = $page;
 				
-				if (($this->getTestCoreController() === false) && ($this->getTestModuleController() === false)) {
-					$this->controller = $this->part."/".$this->page.".php";
-				}
-				
+				$this->getLinkController();
 				$this->getTestControllerExist();
 				$this->erreur = false;
 			}
@@ -35,6 +32,15 @@
 		}
 		public function getErreur() {
 			return $this->erreur;
+		}
+		
+		/**
+		 * function that get link of a controller
+		 */
+		private function getLinkController() {
+			if (($this->getTestCoreController() === false) && ($this->getTestModuleController() === false)) {
+				$this->controller = $this->part."/".$this->page.".php";
+			}
 		}
 		
 		/**
