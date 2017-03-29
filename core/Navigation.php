@@ -53,9 +53,7 @@
 		 */
 		private function getLienNavigationPage($id_page) {
 			$dbc = App::getDb();
-
 			$query = $dbc->select()->from("navigation")->from("page")->where("page.ID_page", "=", $id_page, "AND")->where("page.affiche", "=", 1, "AND")->where("page.parent", "=", 0, "AND")->where("navigation.ID_page", "=", "page.ID_page", "", true)->get();
-
 			if (is_array($query) && (count($query) > 0)) {
 				$nav = [];
 				foreach ($query as $obj) {
