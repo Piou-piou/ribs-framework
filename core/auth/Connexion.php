@@ -47,7 +47,7 @@
 						$_SESSION['login'] = $obj->pseudo;
 						$_SESSION["idlogin".CLEF_SITE] = $obj->ID_identite;
 
-						setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time() + 3600 * 24 * 3, "/", "", false, true);
+						setcookie("auth".CLEF_SITE, $obj->ID_identite."-----".$key, time()+3600*24*3, "/", "", false, true);
 
 						return true;
 					}
@@ -177,7 +177,9 @@
 			$dbc = App::getDb();
 			$query = $dbc->select("last_change_mdp")->from("identite")->where("ID_identite", "=", $id_identite)->get();
 			if ((is_array($query)) && (count($query) > 0)) {
-				foreach ($query as $obj) return $obj->last_change_mdp;
+				foreach ($query as $obj) {
+					return $obj->last_change_mdp;
+				}
 			}
 		}
 
@@ -193,7 +195,7 @@
 			$last_change_mdp = mktime(0, 0, 0, $date_array[1], $date_array[2], $date_array[0]);
 			$today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
 
-			if (($today - $last_change_mdp) > 259200) {
+			if (($today-$last_change_mdp) > 259200) {
 				self::setUpdatelastConnexion($id_identite);
 
 				$membre->setMdp($mdp_nonencrypt_tape, $mdp_nonencrypt_tape, $mdp_nonencrypt_tape);
@@ -201,7 +203,7 @@
 
 			if ((isset($remember)) && ($remember != 0)) {
 				setcookie("auth".CLEF_SITE, NULL, -1);
-				setcookie("auth".CLEF_SITE, $id_identite."-----".sha1($membre->getPseudo().$membre->getMdp()), time() + 3600 * 24 * 3, "/", "", false, true);
+				setcookie("auth".CLEF_SITE, $id_identite."-----".sha1($membre->getPseudo().$membre->getMdp()), time()+3600*24*3, "/", "", false, true);
 			}
 		}
 	}
