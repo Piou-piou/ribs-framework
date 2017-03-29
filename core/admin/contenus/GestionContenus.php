@@ -22,7 +22,7 @@
 		 * @return int
 		 */
 		private function getOrdrePage($parent) {
-			if (($parent != "") || ($parent != 0)) {
+			if ($parent != "") {
 				$dbc = \core\App::getDb();
 				$ordre = 1;
 
@@ -151,34 +151,32 @@
 			$err_meta_description = $this->getTestMetaDescription($meta_description);
 			$err_titre_page = $this->getTestTitrePage($titre_page);
 			
-			if ($this->erreur !== true) {
-				//si le fichier n'existe pas et que la copy est ok on insert en bdd
-				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
-					$parent = intval($this->getParentId($parent));
-					$ordre = intval($this->getOrdrePage($parent));
-					$dbc->insert("titre", $titre_page)
-						->insert("url", $url)
-						->insert("meta_description", $meta_description)
-						->insert("balise_title", $balise_title)
-						->insert("ordre", $ordre)
-						->insert("parent", $parent)
-						->insert("affiche", $affiche)
-						->into("page")
-						->set();
-
-					$this->id_page = $dbc->lastInsertId();
-					$this->url = $url;
-					if ($parent == "") {
-						$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
-					}
-				}
-				else {
-					FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
-					$this->erreur = true;
+			if ($this->erreur === true) {
+				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				return false;
+			}
+			
+			if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
+				$parent = intval($this->getParentId($parent));
+				$ordre = intval($this->getOrdrePage($parent));
+				$dbc->insert("titre", $titre_page)
+					->insert("url", $url)
+					->insert("meta_description", $meta_description)
+					->insert("balise_title", $balise_title)
+					->insert("ordre", $ordre)
+					->insert("parent", $parent)
+					->insert("affiche", $affiche)
+					->into("page")
+					->set();
+				
+				$this->id_page = $dbc->lastInsertId();
+				$this->url = $url;
+				if ($parent == "") {
+					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
 				}
 			}
 			else {
-				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
 				$this->erreur = true;
 			}
 		}
