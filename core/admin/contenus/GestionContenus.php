@@ -126,6 +126,18 @@
 			$message = "<ul>".$err_balise_title.$err_url.$err_meta_description.$err_titre_page."</ul>";
 			FlashMessage::setFlash($message);
 		}
+		
+		private function setCreerFichier($new_page) {
+			$page_type = ROOT."config/page_type/page_type.html";
+			
+			if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
+				return true;
+			}
+			
+			FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
+			$this->erreur = true;
+			return false;
+		}
 
 		/**
 		 * fonction qui permet de créer un page
@@ -137,13 +149,10 @@
 		 */
 		public function setCreerPage($balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
-
 			$url = ChaineCaractere::setUrl($url);
 			$nom_page = explode("/", $url);
 			$nom_page = end($nom_page);
-			$page_type = ROOT."config/page_type/page_type.html";
 			$new_page = ROOT."app/views/".$nom_page.".html";
-			
 			$err_balise_title = $this->getTestBaliseTitle($balise_title);
 			$err_url = $this->getTestUrl($url);
 			$err_meta_description = $this->getTestMetaDescription($meta_description);
@@ -154,22 +163,20 @@
 				return false;
 			}
 			
-			if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
-				$parent = intval($this->getParentId($parent));
-				$ordre = intval($this->getOrdrePage($parent));
-				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("meta_description", $meta_description)
-					->insert("balise_title", $balise_title)->insert("ordre", $ordre)->insert("parent", $parent)
-					->insert("affiche", $affiche)->into("page")->set();
-				
-				$this->id_page = $dbc->lastInsertId();
-				$this->url = $url;
-				if ($parent == "") {
-					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
-				}
+			if ($this->setCreerFichier($new_page) === false) {
+				return false;
 			}
-			else {
-				FlashMessage::setFlash("Impossible de créer cette page, veuillez réeseyer dans un moment. Si le problème persiste contactez votre administrateur.");
-				$this->erreur = true;
+			
+			$parent = intval($this->getParentId($parent));
+			$ordre = intval($this->getOrdrePage($parent));
+			$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("meta_description", $meta_description)
+				->insert("balise_title", $balise_title)->insert("ordre", $ordre)->insert("parent", $parent)
+				->insert("affiche", $affiche)->into("page")->set();
+			
+			$this->id_page = $dbc->lastInsertId();
+			$this->url = $url;
+			if ($parent == "") {
+				$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
 			}
 		}
 
@@ -217,7 +224,6 @@
 		 */
 		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
-			
 			$old_url = explode("/", $this->url);
 			$filename = ROOT."app/views/".end($old_url).".html";
 			
@@ -231,7 +237,7 @@
 			$url = ChaineCaractere::setUrl($url);
 			$err_balise_title = $this->getTestBaliseTitle($balise_title, $id_page);
 			$err_url = $this->getTestUrl($url, $id_page);
-			$err_meta_description = $this->getTestMetaDescription($meta_description , $id_page);
+			$err_meta_description = $this->getTestMetaDescription($meta_description, $id_page);
 			$err_titre_page = $this->getTestTitrePage($titre_page, $id_page);
 			
 			if ($this->erreur !== true) {
