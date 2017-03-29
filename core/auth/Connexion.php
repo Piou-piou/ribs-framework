@@ -85,29 +85,27 @@
 					$mdpbdd = Encrypt::setDecryptMdp($obj->mdp, $id);
 				}
 			}
-
-			//verif si num enr = 0
-			if (!isset($id)) {
+			else {
 				FlashMessage::setFlash("Vos identifiants de connexions sont incorrects");
 				header("location:$page_retour_err");
 			}
+
+			//verif si num enr = 0
+			self::setTestParamCompte($valide, $archiver, $page_retour_err);
+			
+			//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
+			if ($mdp == $mdpbdd) {
+				$_SESSION['login'] = $pseudo;
+				$_SESSION["idlogin".CLEF_SITE] = $id;
+				
+				self::setTestChangerMdp($id, $mdp_nonencrypt, $remember);
+				
+				FlashMessage::setFlash("Vous êtes maintenant connecté", "info");
+				header("location:$page_retour");
+			}
 			else {
-				self::setTestParamCompte($valide, $archiver, $page_retour_err);
-
-				//si les mdp sont egaux on redirige ver esace membre sinon ver login avec un mess d'erreur
-				if ($mdp == $mdpbdd) {
-					$_SESSION['login'] = $pseudo;
-					$_SESSION["idlogin".CLEF_SITE] = $id;
-
-					self::setTestChangerMdp($id, $mdp_nonencrypt, $remember);
-
-					FlashMessage::setFlash("Vous êtes maintenant connecté", "info");
-					header("location:$page_retour");
-				}
-				else {
-					FlashMessage::setFlash("Vos identifiants de connexions sont incorrects");
-					header("location:$page_retour_err");
-				}
+				FlashMessage::setFlash("Vos identifiants de connexions sont incorrects");
+				header("location:$page_retour_err");
 			}
 		}
 
