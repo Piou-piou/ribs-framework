@@ -25,7 +25,7 @@
 				$query = $dbc->select()->from("navigation")->where("ID_page", " IS NOT ", "NULL", "", true)->orderBy("ordre")->get();
 			}
 
-			if (is_array($query) && (count($query) > 0)) {
+			if (count($query) > 0) {
 				foreach ($query as $obj) {
 					if ($obj->ID_page === null) {
 						$navigation[] = $this->getLienNavigationModule($obj->ID_module);
