@@ -15,7 +15,6 @@
 		protected $group_by;
 		protected $limit;
 		
-		abstract public function query();
 		abstract public function prepare($req, $value);
 		
 		

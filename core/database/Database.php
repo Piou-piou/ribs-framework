@@ -103,24 +103,6 @@
 			}
 		}
 		//-------------------------- FIN FUNCTION QUI FONT DES REQUETES SUR LA BDD --------------------------------------------//
-
-
-		/**
-		 * tester si une table dans la base donnee existe
-		 * @param string $table definit la table pour laquelle on doit tester l'existance
-		 * @return boolean
-		 */
-		public function TestTableExist($table) {
-			$query = $this->getPdo()->query("SHOW TABLES LIKE '$table'");
-
-			if ($query->rowCount() > 0) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-
 		public function quote($quote) {
 			return $this->getPdo()->quote($quote);
 		}
