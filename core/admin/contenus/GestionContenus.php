@@ -73,6 +73,31 @@
 				return "<li>$err_egalite</li>";
 			}
 		}
+		
+		private function getTestBaliseTitle($balise_title) {
+			$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
+			$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
+			return $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite);
+		}
+		
+		private function getTestUrl($url) {
+			$err_url_char = "L'url ne doit pas dépasser 92 caractères";
+			$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
+			return $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite);
+		}
+		
+		private function getTestMetaDescription($meta_description) {
+			$err_meta_description_char = "La description de cette page ne doit pas dépasser 158 caractères";
+			$err_meta_description_egalite = "Cette description est déjà présent en base de données, merci d'en choisir une autre pour optimiser le référencement de votre site";
+			return $this->getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite);
+			
+		}
+		
+		private function getTestTitrePage($titre_page) {
+			$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
+			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
+			return $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
 
@@ -115,23 +140,12 @@
 
 			$page_type = ROOT."config/page_type/page_type.html";
 			$new_page = ROOT."app/views/".$nom_page.".html";
-
-			$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
-			$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
-			$err_balise_title = $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite);
-
-			$err_url_char = "L'url ne doit pas dépasser 92 caractères";
-			$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
-			$err_url = $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite);
-
-			$err_meta_description_char = "La description de cette page ne doit pas dépasser 158 caractères";
-			$err_meta_description_egalite = "Cette description est déjà présent en base de données, merci d'en choisir une autre pour optimiser le référencement de votre site";
-			$err_meta_description = $this->getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite);
-
-			$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
-			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
-			$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
-
+			
+			$err_balise_title = $this->getTestBaliseTitle($balise_title);
+			$err_url = $this->getTestUrl($url);
+			$err_meta_description = $this->getTestMetaDescription($meta_description);
+			$err_titre_page = $this->getTestTitrePage($titre_page);
+			
 			if ($this->erreur !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				if ((!file_exists($new_page)) && (copy($page_type, $new_page))) {
@@ -174,18 +188,10 @@
 		public function setCreerPageRedirect($balise_title, $url, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
 
-			$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
-			$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
-			$err_balise_title = $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite);
-
-			$err_url_char = "L'url ne doit pas dépasser 92 caractères";
-			$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
-			$err_url = $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite);
-
-			$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
-			$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
-			$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite);
-
+			$err_balise_title = $this->getTestBaliseTitle($balise_title);
+			$err_url = $this->getTestUrl($url);
+			$err_titre_page = $this->getTestTitrePage($titre_page);
+			
 			if ($this->erreur !== true) {
 				//si le fichier n'existe pas et que la copy est ok on insert en bdd
 				$parent = intval($this->getParentId($parent));
@@ -232,23 +238,12 @@
 			if (file_exists($filename) || ($id_page == 1)) {
 				$this->id_page = $id_page;
 				$url = ChaineCaractere::setUrl($url);
-
-				$err_balise_title_char = "Le titre pour le navigateur ne doit pas dépasser 70 caractères";
-				$err_balise_title_egalite = "Ce titre est déjà présent en base de données, merci d'en choisir un autre pour optimiser le référencement de votre site";
-				$err_balise_title = $this->getVerifChamp("page", "ID_page", "balise_title", $balise_title, 70, $err_balise_title_char, $err_balise_title_egalite, $this->id_page);
-
-				$err_url_char = "L'url ne doit pas dépasser 92 caractères";
-				$err_url_egalite = "Cette url est déjà présent en base de données, merci d'en choisir une autre pour ne pas avoir de conflit entre vos pages";
-				$err_url = $this->getVerifChamp("page", "ID_page", "url", $url, 92, $err_url_char, $err_url_egalite, $this->id_page);
-
-				$err_meta_description_char = "La description de cette page ne doit pas dépasser 158 caractères";
-				$err_meta_description_egalite = "Cette description est déjà présent en base de données, merci d'en choisir une autre pour optimiser le référencement de votre site";
-				$err_meta_description = $this->getVerifChamp("page", "ID_page", "meta_description", $meta_description, 158, $err_meta_description_char, $err_meta_description_egalite, $this->id_page);
-
-				$err_titre_page_char = "Le titre de cette page ne doit pas dépasser 50 caractères";
-				$err_titre_page_egalite = "Cette titre de page est déjà présent en base de données, merci d'en choisir un autre pour ne pas avoir de conflit dans votre navigation";
-				$err_titre_page = $this->getVerifChamp("page", "ID_page", "titre", $titre_page, 50, $err_titre_page_char, $err_titre_page_egalite, $this->id_page);
-
+				
+				$err_balise_title = $this->getTestBaliseTitle($balise_title);
+				$err_url = $this->getTestUrl($url);
+				$err_meta_description = $this->getTestMetaDescription($meta_description);
+				$err_titre_page = $this->getTestTitrePage($titre_page);
+				
 				if ($this->erreur !== true) {
 					$new_url = explode("/", $url);
 					$new_filename = ROOT."app/views/".end($new_url).".html";
