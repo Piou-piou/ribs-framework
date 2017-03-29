@@ -27,7 +27,7 @@
 				$ordre = 1;
 
 				$query = $dbc->select("ordre")->from("page")->orderBy("ordre", "DESC")->limit(0, 1)->get();
-				if ((is_array($query)) && (count($query) > 0)) {
+				if (count($query) > 0) {
 					foreach ($query as $obj) {
 						$ordre = $obj->ordre;
 					}
