@@ -58,7 +58,6 @@
 		 */
 		private function getPage($url) {
 			$dbc = \core\App::getDb();
-			
 			$query = $dbc->select()->from("page")->where("url", "=", $url)->get();
 			
 			if (RedirectError::testRedirect404($query, $url) === true) {
@@ -67,7 +66,6 @@
 					if (ChaineCaractere::FindInString($url, "http://") === true) {
 						$redirect = 1;
 					}
-					
 					App::setValues(["contenus" => [
 						"id_page" => $this->id_page = $obj->ID_page,
 						"meta_description" => $this->meta_description = $obj->meta_description,
