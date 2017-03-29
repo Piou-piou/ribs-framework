@@ -16,26 +16,6 @@
 		public function getErreur() {
 			return $this->erreur;
 		}
-		
-		/**
-		 * @param integer $parent
-		 * @return int
-		 */
-		private function getOrdrePage($parent) {
-			if ($parent != "") {
-				$dbc = \core\App::getDb();
-				$ordre = 1;
-
-				$query = $dbc->select("ordre")->from("page")->orderBy("ordre", "DESC")->limit(0, 1)->get();
-				if (count($query) > 0) {
-					foreach ($query as $obj) {
-						$ordre = $obj->ordre;
-					}
-				}
-
-				return $ordre;
-			}
-		}
 
 		private function getParentId($parent) {
 			$dbc = \core\App::getDb();
@@ -168,9 +148,8 @@
 			}
 			
 			$parent = intval($this->getParentId($parent));
-			$ordre = intval($this->getOrdrePage($parent));
 			$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("meta_description", $meta_description)
-				->insert("balise_title", $balise_title)->insert("ordre", $ordre)->insert("parent", $parent)
+				->insert("balise_title", $balise_title)->insert("parent", $parent)
 				->insert("affiche", $affiche)->into("page")->set();
 			
 			$this->id_page = $dbc->lastInsertId();
@@ -195,8 +174,7 @@
 			
 			if ($this->erreur !== true) {
 				$parent = intval($this->getParentId($parent));
-				$ordre = intval($this->getOrdrePage($parent));
-				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("balise_title", $balise_title)->insert("ordre", $ordre)->insert("parent", $parent)->insert("affiche", $affiche)->insert("target", "_blanck")->into("page")->set();
+				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("balise_title", $balise_title)->insert("parent", $parent)->insert("affiche", $affiche)->insert("target", "_blanck")->into("page")->set();
 				$this->id_page = $dbc->lastInsertId();
 				if ($parent == "") {
 					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
@@ -243,9 +221,14 @@
 				rename($filename, $new_filename);
 				
 				$parent = intval($this->getParentId($parent));
-				$dbc->update("titre", $titre_page)->update("url", $url)->update("meta_description", $meta_description)
-					->update("balise_title", $balise_title)->update("parent", $parent)->update("affiche", $affiche)
-					->from("page")->where("ID_page", "=", $id_page, "", true)->set();
+				$dbc->update("titre", $titre_page)
+					->update("url", $url)
+					->update("meta_description", $meta_description)
+					->update("balise_title", $balise_title)
+					->update("parent", $parent)
+					->update("affiche", $affiche)
+					->from("page")->where("ID_page", "=", $id_page, "", true)
+					->set();
 				
 				$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
 				$this->url = $url;
