@@ -189,7 +189,6 @@
 		 */
 		public function setCreerPageRedirect($balise_title, $url, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
-
 			$err_balise_title = $this->getTestBaliseTitle($balise_title);
 			$err_url = $this->getTestUrl($url);
 			$err_titre_page = $this->getTestTitrePage($titre_page);
@@ -197,10 +196,7 @@
 			if ($this->erreur !== true) {
 				$parent = intval($this->getParentId($parent));
 				$ordre = intval($this->getOrdrePage($parent));
-				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("balise_title", $balise_title)
-					->insert("ordre", $ordre)->insert("parent", $parent)->insert("affiche", $affiche)
-					->insert("target", "_blanck")->into("page")->set();
-
+				$dbc->insert("titre", $titre_page)->insert("url", $url)->insert("balise_title", $balise_title)->insert("ordre", $ordre)->insert("parent", $parent)->insert("affiche", $affiche)->insert("target", "_blanck")->into("page")->set();
 				$this->id_page = $dbc->lastInsertId();
 				if ($parent == "") {
 					$this->setAjoutLienNavigation("ID_page", $this->id_page, 1);
