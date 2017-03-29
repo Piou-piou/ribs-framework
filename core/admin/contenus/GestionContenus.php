@@ -107,6 +107,10 @@
 			FlashMessage::setFlash($message);
 		}
 		
+		/**
+		 * @param $new_page
+		 * @return bool
+		 */
 		private function setCreerFichier($new_page) {
 			$page_type = ROOT."config/page_type/page_type.html";
 			

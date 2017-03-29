@@ -34,7 +34,13 @@
 				header("location:$page_retour_err");
 			}
 		}
-
+		
+		/**
+		 * @param $query
+		 * @param $auth
+		 * @param $page_retour
+		 * @return bool
+		 */
 		private function setTestConnexion($query, $auth, $page_retour) {
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
@@ -68,6 +74,7 @@
 			$mdpbdd = "";
 			$valide = "";
 			$archiver = "";
+			$id = 0;
 
 			//recup des donnees
 			$pseudo = $dbc->quote(htmlspecialchars($pseudo));
