@@ -92,17 +92,17 @@
 			}
 
 			if (count($query) > 0) {
+				$nb = 0;
 				foreach ($query as $obj) {
 					$nb = $obj["nb"];
 				}
 
-				if ((isset($nb)) && ($nb != 0)) {
+				if ($nb > 0) {
 					return true;
 				}
 			}
-			else {
-				return false;
-			}
+			
+			return false;
 		}
 		//-------------------------- FIN FUNCTION QUI FONT DES REQUETES SUR LA BDD --------------------------------------------//
 		public function quote($quote) {
