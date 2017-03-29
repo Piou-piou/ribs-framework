@@ -52,7 +52,6 @@
 
 			if ((is_array($query)) && (count($query) > 0)) {
 				$values = [];
-
 				foreach ($query as $obj) {
 					$values[] = [
 						"id_identite" => $obj->ID_identite,
@@ -65,7 +64,6 @@
 						"archiver" => $obj->archiver
 					];
 				}
-				
 				App::setValues(["all_users" => $values]);
 			}
 		}
