@@ -90,16 +90,14 @@
 			else {
 				$query = $this->getPdo()->query("SELECT COUNT($champ) as nb FROM $table WHERE $champ LIKE '$value' AND $id_table != $id");
 			}
-
-			if (count($query) > 0) {
-				$nb = 0;
-				foreach ($query as $obj) {
-					$nb = $obj["nb"];
-				}
-
-				if ($nb > 0) {
-					return true;
-				}
+			
+			$nb = 0;
+			foreach ($query as $obj) {
+				$nb = $obj["nb"];
+			}
+			
+			if ($nb > 0) {
+				return true;
 			}
 			
 			return false;
