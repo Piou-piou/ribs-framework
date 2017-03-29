@@ -23,7 +23,7 @@
 				$params = "";
 
 				$query = $dbc->select("mdp_params")->from("identite")->where("ID_identite", "=", $id_identite)->get();
-				if ((is_array($query)) && (count($query) > 0)) {
+				if (count($query) > 0) {
 					foreach ($query as $obj) {
 						$params = $obj->mdp_params;
 					}
