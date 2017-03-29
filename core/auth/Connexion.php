@@ -76,7 +76,7 @@
 			$query = $dbc->select()->from("identite")->where("pseudo", "=", $pseudo, "", true)->get();
 
 			//aficher query tant que qqch dans $ligne
-			if ((is_array($query)) && (count($query) > 0)) {
+			if (count($query) > 0) {
 				foreach ($query as $obj) {
 					$id = $obj->ID_identite;
 					$pseudo = $obj->pseudo;
