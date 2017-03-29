@@ -23,13 +23,13 @@
 			$config = new Configuration();
 
 			//cela veut dire que l'utilisateur doit obligatoirement etre valider pour avoir acces au site
-			if (($config->getValiderInscription() == 1) && ((isset($valide)) && ($valide != 1))) {
+			if (($config->getValiderInscription() == 1) && ($valide != 1)) {
 				FlashMessage::setFlash("Votre compta n'a encore pas été validé par un administrateur, vous ne pouvez donc pas accéder à ce site, veuillez réesseyer ultérieurement");
 				header("location:$page_retour_err");
 			}
 
 			//si le compte est archiver (bloqué) l'utilisateur ne peut pas se connecter au site
-			if ((isset($archiver)) && ($archiver == 1)) {
+			if ($archiver == 1) {
 				FlashMessage::setFlash("Votre compte a été bloqué par un administrateur, vous ne pouvez donc pas vous connecter à ce site, veuillez réesseyer ultérieurement");
 				header("location:$page_retour_err");
 			}
