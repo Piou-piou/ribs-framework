@@ -8,9 +8,8 @@
 
 	class GestionContenus extends Contenus {
 		use GestionErreurContenus;
-		private $erreur;
-
-
+		
+		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		public function getErreur() {
 			return $this->erreur;

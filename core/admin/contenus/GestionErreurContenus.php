@@ -2,7 +2,12 @@
 	namespace core\admin\contenus;
 	
 	
+	use core\App;
+	use core\HTML\flashmessage\FlashMessage;
+	
 	trait GestionErreurContenus {
+		private $erreur;
+		
 		//-------------------------- GETTER ----------------------------------------------------------------------------//
 		/**
 		 * @param string $nom_table
