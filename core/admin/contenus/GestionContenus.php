@@ -67,16 +67,12 @@
 			$nom_page = explode("/", $url);
 			$nom_page = end($nom_page);
 			$new_page = ROOT."app/views/".$nom_page.".html";
-			$err_balise_title = $this->getTestBaliseTitle($balise_title);
-			$err_url = $this->getTestUrl($url);
-			$err_meta_description = $this->getTestMetaDescription($meta_description);
-			$err_titre_page = $this->getTestTitrePage($titre_page);
+			$this->getTestParam($balise_title, $url, $meta_description, $titre_page);
 			
 			if ($this->erreur === true) {
-				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				$this->setErreurContenus();
 				return false;
 			}
-			
 			if ($this->setCreerFichier($new_page) === false) {
 				return false;
 			}
@@ -102,9 +98,7 @@
 		 */
 		public function setCreerPageRedirect($balise_title, $url, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
-			$err_balise_title = $this->getTestBaliseTitle($balise_title);
-			$err_url = $this->getTestUrl($url);
-			$err_titre_page = $this->getTestTitrePage($titre_page);
+			$this->getTestParam($balise_title, $url, "", $titre_page);
 			
 			if ($this->erreur !== true) {
 				$parent = intval($this->getParentId($parent));
@@ -115,7 +109,7 @@
 				}
 			}
 			else {
-				$this->setErreurContenus($balise_title, $url, "", $titre_page, $parent, $err_balise_title, $err_url, "", $err_titre_page);
+				$this->setErreurContenus();
 				$this->erreur = true;
 			}
 		}
@@ -135,18 +129,14 @@
 			$old_url = explode("/", $this->url);
 			$filename = ROOT."app/views/".end($old_url).".html";
 			
-			if (file_exists($filename) || ($id_page == 1)) {
+			if (((file_exists($filename) || ($id_page == 1))) && ($this->url != $url)) {
 				FlashMessage::setFlash("Impossible de modifier cette page, veuillez contacter votre administrateur pour corriger ce problème");
 				$this->erreur = true;
 				return false;
 			}
 			
 			$this->id_page = $id_page;
-			$url = ChaineCaractere::setUrl($url);
-			$err_balise_title = $this->getTestBaliseTitle($balise_title, $id_page);
-			$err_url = $this->getTestUrl($url, $id_page);
-			$err_meta_description = $this->getTestMetaDescription($meta_description, $id_page);
-			$err_titre_page = $this->getTestTitrePage($titre_page, $id_page);
+			$this->getTestParam($balise_title, $url, $meta_description, $titre_page, $id_page);
 			
 			if ($this->erreur !== true) {
 				$new_url = explode("/", $url);
@@ -168,7 +158,7 @@
 				$this->url = $url;
 			}
 			else {
-				$this->setErreurContenus($balise_title, $url, $meta_description, $titre_page, $parent, $err_balise_title, $err_url, $err_meta_description, $err_titre_page);
+				$this->setErreurContenus();
 			}
 		}
 
