@@ -100,11 +100,10 @@
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
 		private function setErreurContenus() {
-			$_SESSION['balise_title'] = $this->balise_title;
-			$_SESSION['url'] = $this->url;
-			$_SESSION['meta_description'] = $this->meta_description;
-			$_SESSION['titre_page'] = $this->titre_page;
-			$_SESSION['parent'] = $this->parent;
+			$_SESSION['balise_title'] = $this->err_balise_title;
+			$_SESSION['url'] = $this->err_url;
+			$_SESSION['meta_description'] = $this->err_meta_description;
+			$_SESSION['titre_page'] = $this->err_titre_page;
 			$_SESSION['err_modification_contenu'] = true;
 			
 			$message = "<ul>".$this->err_balise_title.$this->err_url.$this->err_meta_description.$this->err_titre_page."</ul>";
