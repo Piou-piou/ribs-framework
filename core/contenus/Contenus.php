@@ -66,17 +66,8 @@
 					if (ChaineCaractere::FindInString($url, "http://") === true) {
 						$redirect = 1;
 					}
-					App::setValues(["contenus" => [
-						"id_page" => $this->id_page = $obj->ID_page,
-						"meta_description" => $this->meta_description = $obj->meta_description,
-						"balise_title" => $this->balise_title = $obj->balise_title,
-						"url" => $this->url = $obj->url,
-						"titre" => $this->titre = $obj->titre,
-						"contenu" => $this->contenu = $obj->contenu,
-						"parent" => $this->parent = $obj->parent,
-						"redirect_page" => $redirect,
-						"bloc_editable" => $obj->bloc_editable
-					]]);
+					
+					$this->setContenu($redirect, $obj);
 				}
 			}
 		}
@@ -85,5 +76,22 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $redirect
+		 * @param $obj
+		 */
+		private function setContenu($redirect, $obj) {
+			App::setValues(["contenus" => [
+				"id_page" => $this->id_page = $obj->ID_page,
+				"meta_description" => $this->meta_description = $obj->meta_description,
+				"balise_title" => $this->balise_title = $obj->balise_title,
+				"url" => $this->url = $obj->url,
+				"titre" => $this->titre = $obj->titre,
+				"contenu" => $this->contenu = $obj->contenu,
+				"parent" => $this->parent = $obj->parent,
+				"redirect_page" => $redirect,
+				"bloc_editable" => $obj->bloc_editable
+			]]);
+		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
