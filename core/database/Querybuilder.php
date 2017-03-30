@@ -12,6 +12,7 @@
 		protected $closure = [];
 		protected $table = [];
 		protected $values = [];
+		protected $datas = [];
 		protected $order_by;
 		protected $group_by;
 		protected $limit;
@@ -257,26 +258,38 @@
 		 * crée les tableau et renvoi la clause where
 		 */
 		private function getWhereConditions() {
-			$values = [];
-			$datas = [];
+			$values = $this->getConditions();
+			$this->getConditionsTable();
 			
+			return [" WHERE ".implode(" ", $this->datas), $values];
+		}
+		
+		/**
+		 * @return array
+		 */
+		private function getConditions() {
 			if ((!empty($this->conditions))) {
 				$values = array_combine(str_replace(".", "", $this->champs_where), $this->value_where);
 				
 				$count = count($this->champs_where);
 				
 				for ($i = 0; $i < $count; $i++) {
-					$datas[] = $this->champs_where[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs_where[$i])." ".$this->closure[$i]." ";
+					$this->datas[] = $this->champs_where[$i]." ".$this->conditions[$i]." :".str_replace(".", "", $this->champs_where[$i])." ".$this->closure[$i]." ";
 				}
+				
+				return $values;
 			}
-			
+		}
+		
+		/**
+		 *
+		 */
+		private function getConditionsTable() {
 			if ((!empty($this->conditions_table))) {
 				foreach ($this->conditions_table as $cond) {
-					$datas[] = $cond;
+					$this->datas[] = $cond;
 				}
 			}
-			
-			return [" WHERE ".implode(" ", $datas), $values];
 		}
 		
 		/**
@@ -294,6 +307,7 @@
 			$this->select_champ = [];
 			$this->champs = [];
 			$this->value = [];
+			$this->datas = [];
 			$this->champs_where = [];
 			$this->value_where = [];
 			$this->conditions = [];
