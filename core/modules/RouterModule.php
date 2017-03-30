@@ -56,8 +56,11 @@
 		 * appele également l'actoin à effectur dans la page
 		 */
 		public function getUrl($url, $admin = "app") {
-			$explode = explode("/", $url); $count = count($explode);
-			$debut_url = ""; $centre_url = "";
+			$explode = explode("/", $url);
+			$count = count($explode);
+			$debut_url = "";
+			$centre_url = "";
+			
 			for ($i = 0; $i < $count; $i++) {
 				if (in_array($explode[$i], $this->getAllModules())) {
 					$this->module = $explode[$i];
@@ -67,8 +70,6 @@
 					$centre_url[] = $explode[$i];
 				}
 			}
-			$centre_url = implode("/", $centre_url);
-			$this->page = $centre_url;
 			$centre_url = $this->setPathFile($debut_url, $centre_url, $admin);
 			$this->admin = $admin;
 			$this->setActionPage();
@@ -108,6 +109,9 @@
 		 * @return array|string
 		 */
 		private function setPathFile($debut_url, $centre_url, $admin) {
+			$centre_url = implode("/", $centre_url);
+			$this->page = $centre_url;
+			
 			if ($centre_url == "") {
 				$this->page = "index";
 			}
