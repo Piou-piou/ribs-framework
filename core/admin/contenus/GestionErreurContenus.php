@@ -99,13 +99,6 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
-		/**
-		 * @param string $url
-		 * @param string $err_balise_title
-		 * @param string $err_url
-		 * @param string $err_meta_description
-		 * @param string $err_titre_page
-		 */
 		private function setErreurContenus() {
 			$_SESSION['balise_title'] = $this->balise_title;
 			$_SESSION['url'] = $this->url;
