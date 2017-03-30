@@ -74,20 +74,7 @@
 			$centre_url = implode("/", $centre_url);
 			$this->page = $centre_url;
 			
-			if ($centre_url == "") {
-				$this->page = "index";
-			}
-			else {
-				$file = ROOT."modules/".$debut_url."/".$admin."/views/".$centre_url;
-				
-				if (!file_exists($file.".html")) {
-					$centre_url = explode("/", $file);
-					$this->parametre = array_pop($centre_url);
-					$this->page = end($centre_url);
-					
-					$centre_url = implode("/", $centre_url);
-				}
-			}
+			$centre_url = $this->setPathFile($debut_url, $centre_url, $admin);
 			
 			$this->admin = $admin;
 			$this->setActionPage();
@@ -120,6 +107,31 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $debut_url
+		 * @param $centre_url
+		 * @param $admin
+		 * @return array|string
+		 */
+		private function setPathFile($debut_url, $centre_url, $admin) {
+			if ($centre_url == "") {
+				$this->page = "index";
+			}
+			else {
+				$file = ROOT."modules/".$debut_url."/".$admin."/views/".$centre_url;
+				
+				if (!file_exists($file.".html")) {
+					$centre_url = explode("/", $file);
+					$this->parametre = array_pop($centre_url);
+					$this->page = end($centre_url);
+					
+					$centre_url = implode("/", $centre_url);
+				}
+			}
+			
+			return $centre_url;
+		}
+		
 		/**
 		 * Fonction qui va se charger en focntion $this->page et de $this->action d'appeler la fonctoin qui va bien
 		 * fontction appelee dans getUrl()
