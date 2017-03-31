@@ -28,7 +28,7 @@
 			$find = 'controller/';
 			$controller = strpos($url, $find);
 
-			if (((is_array($query)) && (count($query) == 1)) || ($controller !== false)) {
+			if ((count($query) == 1) || ($controller !== false)) {
 				return true;
 			}
 			
