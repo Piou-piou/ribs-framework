@@ -15,8 +15,6 @@
 		 */
 		public function __construct($no_module = null) {
 			$dbc = App::getDb();
-			$navigation = [];
-			$last_ordre = "";
 
 			if ($no_module === null) {
 				$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
@@ -26,19 +24,7 @@
 			}
 
 			if (count($query) > 0) {
-				foreach ($query as $obj) {
-					if ($obj->ID_page === null) {
-						$navigation[] = $this->getLienNavigationModule($obj->ID_module);
-					}
-					else {
-						$navigation[] = $this->getLienNavigationPage($obj->ID_page);
-					}
-					$last_ordre = $obj->ordre;
-				}
-
-				$this->last_ordre = $last_ordre;
-				
-				App::setValues(["navigation" => $navigation]);
+				$this->setNavigation($query);
 			}
 		}
 		//-------------------------- END BUILDER ----------------------------------------------------------------------------//
@@ -150,6 +136,30 @@
 		
 		
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		/**
+		 * @param $query
+		 * function that create navigation called in construct
+		 */
+		private function setNavigation($query) {
+			$navigation = [];
+			$last_ordre = "";
+			
+			foreach ($query as $obj) {
+				if ($obj->ID_page === null) {
+					$navigation[] = $this->getLienNavigationModule($obj->ID_module);
+				}
+				else {
+					$navigation[] = $this->getLienNavigationPage($obj->ID_page);
+				}
+				$last_ordre = $obj->ordre;
+			}
+			
+			$this->last_ordre = $last_ordre;
+			
+			App::setValues(["navigation" => $navigation]);
+		}
+		
+		
 		/**
 		 * @param $id
 		 * @param $value_id
