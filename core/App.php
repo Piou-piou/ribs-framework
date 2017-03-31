@@ -84,7 +84,7 @@
 				$files = array_diff(scandir($url), array('.', '..'));
 				
 				foreach ($files as $file) {
-					self::supprimerDossier(realpath($url) . '/' . $file);
+					self::supprimerDossier(realpath($url).'/'.$file);
 				}
 				
 				return rmdir($url);
