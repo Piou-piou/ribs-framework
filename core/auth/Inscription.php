@@ -191,11 +191,9 @@
 				$this->erreur .= "<li>Le champs E-mail doit être une adresse E-mail valide</li>";
 				return false;
 			}
-			else {
-				$this->mail = $value;
-				return true;
-			}
-
+			
+			$this->mail = $value;
+			return true;
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
