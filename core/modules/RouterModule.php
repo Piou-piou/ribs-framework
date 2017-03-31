@@ -102,18 +102,19 @@
 		 */
 		public function getRouteModuleExist($url) {
 			$dbc = \core\App::getDb();
-			$query = $dbc->select()->from("module")->get();
+			$query = $dbc->select()->from("module")->where("activer", "=", 1)->get();
 			
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
 					$test_module = ChaineCaractere::FindInString($url, $obj->url);
-					$module_activer = \core\modules\GestionModule::getModuleActiver($obj->nom_module);
 					
-					if (($test_module === true) && ($module_activer === true)) {
+					if ($test_module === true) {
 						return true;
 					}
 				}
 			}
+			
+			return false;
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 		

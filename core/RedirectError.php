@@ -28,17 +28,16 @@
 			$find = 'controller/';
 			$controller = strpos($url, $find);
 
-			if ((is_array($query)) || ($controller !== false)) {
+			if (((is_array($query)) && (count($query) == 1)) || ($controller !== false)) {
 				return true;
 			}
-			else {
-				$router = new RouterModule();
-
-				if ($router->getRouteModuleExist($url) !== true) {
-					self::Redirect(404);
-				}
-
-				return false;
+			
+			$router = new RouterModule();
+			
+			if ($router->getRouteModuleExist($url) !== true) {
+				self::Redirect(404);
 			}
+			
+			return false;
 		}
 	}
