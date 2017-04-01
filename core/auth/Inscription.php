@@ -107,10 +107,8 @@
 				$this->erreur .= "<li>$erreur_long</li>";
 				return false;
 			}
-			else {
-				$this->$varaible = $value;
-				return true;
-			}
+			$this->$varaible = $value;
+			return true;
 		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
 
