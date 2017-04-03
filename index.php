@@ -67,7 +67,7 @@
 			$loader = new Twig_Loader_Filesystem('app/views');
 			$twig = new Twig_Environment($loader);
 		
-			$arr_page = array_merge(core\App::getValues());
+			$arr_page = \core\App::getValues();
 			$page = end($explode);
 		
 			if (!file_exists(ROOT."app/views/".$page.".html")) {
