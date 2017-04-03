@@ -27,6 +27,12 @@
 			$(document).ready(function() {
 				$("div").each(function() {
 					$(this).removeAttr("contenteditable").blur();
+					$(this).removeAttr("tabindex").blur();
+					$(this).removeAttr("spellcheck").blur();
+					$(this).removeAttr("role").blur();
+					$(this).removeAttr("aria-label").blur();
+					$(this).removeAttr("aria-describedby").blur();
+					$(this).removeAttr("title").blur();
 				})
 			})
 		</script>
