@@ -73,10 +73,11 @@
 			if (!file_exists(ROOT."app/views/".$page.".html")) {
 				\core\RedirectError::Redirect(404);
 			}
+			
+			require("app/controller/initialise_all.php");
 		}
 		
 		if ($cache->setStart() === false) {
-			require("app/controller/initialise_all.php");
 			require("app/views/template/principal.php");
 		}
 		$cache->setEnd();
