@@ -126,10 +126,10 @@
 		 */
 		public function setModifierPage($id_page, $balise_title, $url, $meta_description, $titre_page, $parent, $affiche = 1) {
 			$dbc = \core\App::getDb();
-			$old_url = explode("/", $this->url);
-			$filename = ROOT."app/views/".end($old_url).".html";
+			$new_url = explode("/", $url);
+			$new_filename = ROOT."app/views/".ChaineCaractere::setUrl(end($new_url)).".html";
 			
-			if (((file_exists($filename) || ($id_page == 1))) && ($this->url != $url)) {
+			if ((file_exists($new_filename) || ($id_page == 1)) && ($this->url != $url)) {echo("fdg");
 				FlashMessage::setFlash("Impossible de modifier cette page, veuillez contacter votre administrateur pour corriger ce problème");
 				$this->erreur = true;
 				return false;
@@ -139,14 +139,14 @@
 			$this->getTestParam($balise_title, $url, $meta_description, $titre_page, $id_page);
 			
 			if ($this->erreur !== true) {
-				$new_url = explode("/", $url);
-				$new_filename = ROOT."app/views/".end($new_url).".html";
+				$old_url = explode("/", $this->url);
+				$filename = ROOT."app/views/".end($old_url).".html";
 				
 				rename($filename, $new_filename);
 				
 				$parent = intval($this->getParentId($parent));
 				$dbc->update("titre", $titre_page)
-					->update("url", $url)
+					->update("url", ChaineCaractere::setUrl(end($new_url)))
 					->update("meta_description", $meta_description)
 					->update("balise_title", $balise_title)
 					->update("parent", $parent)
@@ -155,7 +155,7 @@
 					->set();
 				
 				$this->setModifierLienNavigation("ID_page", $id_page, $this->getParentId($parent), $affiche);
-				$this->url = $url;
+				$this->url = ChaineCaractere::setUrl(end($new_url));
 			}
 			else {
 				$this->setErreurContenus();
