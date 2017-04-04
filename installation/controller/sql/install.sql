@@ -47,7 +47,6 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `mail_administrateur` varchar(255) NOT NULL,
   `last_save` date DEFAULT NULL,
   `acces_admin` int(1) DEFAULT '1',
-  `contenu_dynamique` int(1) DEFAULT '1',
   `responsive` int(1) DEFAULT NULL,
   `cache` int(1) DEFAULT NULL,
   `desactiver_navigation` int(1) DEFAULT NULL,
@@ -75,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `configuration_compte` (
 CREATE TABLE IF NOT EXISTS `droit_acces` (
 `ID_droit_acces` int(11) NOT NULL,
   `droit_acces` varchar(255) DEFAULT NULL,
-  `page` varchar(255) DEFAULT NULL,
   `nom_module` varchar(255) DEFAULT NULL,
   `actif` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
@@ -84,14 +82,14 @@ CREATE TABLE IF NOT EXISTS `droit_acces` (
 -- Contenu de la table `droit_acces`
 --
 
-INSERT INTO `droit_acces` (`ID_droit_acces`, `droit_acces`, `page`, `actif`) VALUES
-(1, 'GESTION COMPTES', 'gestion-comptes/index', 1),
-(2, 'GESTION DROIT ACCES', 'gestion-droits-acces/index', 1),
-(3, 'GESTION COMPTES ADMIN', NULL, 1),
-(4, 'GESTION CONTENUS', 'gestion-contenus/index,gestion-contenus/modifier-contenu,gestion-contenus/creer-une-page', 1),
-(5, 'CREATION PAGE', 'gestion-contenus/creer-une-page', 1),
-(7, 'GESTION CONTENU PAGE', NULL, 1),
-(8, 'CREATION COMPTE ADMIN', 'gestion-comptes/index', '1');
+INSERT INTO `droit_acces` (`ID_droit_acces`, `droit_acces`, `actif`) VALUES
+(1, 'GESTION COMPTES', 1),
+(2, 'GESTION DROIT ACCES', 1),
+(3, 'GESTION COMPTES ADMIN', 1),
+(4, 'GESTION CONTENUS', 1),
+(5, 'CREATION PAGE', 1),
+(7, 'GESTION CONTENU PAGE', 1),
+(8, 'CREATION COMPTE ADMIN', 1);
 
 -- --------------------------------------------------------
 
