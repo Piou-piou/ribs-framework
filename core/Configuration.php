@@ -7,7 +7,6 @@
 		private $mail_administrateur; //-> mail de l'administrateur web@clicand.com
 		private $last_save; //-> derniere sauvegarde de la bdd
 		private $acces_admin; //-> si == 1 on a acces à l'admin
-		private $contenu_dynamique; //->savoir si es contenus sont dynamique (stockés in DB)
 		private $cache; //-> si == 1 alors on mets les pages du site en cache
 		private $desactiver_navigation; //-> si == 1 alors on n'affichera pas la nav dans principal.php
 
@@ -47,9 +46,6 @@
 		public function getAccesAdmin() {
 			return $this->acces_admin;
 		}
-		public function getContenusDynamique() {
-			return $this->contenu_dynamique;
-		}
 		public function getCache() {
 			return $this->cache;
 		}
@@ -82,7 +78,6 @@
 						"mail_administrateur" => $this->mail_administrateur = $obj->mail_administrateur,
 						"last_save" => $this->last_save = $obj->last_save,
 						"acces_admin" => $this->acces_admin = $obj->acces_admin,
-						"contenu_dynamique" => $this->contenu_dynamique = $obj->contenu_dynamique,
 						"cache" => $this->cache = $obj->cache,
 						"desactiver_navigation" => $this->desactiver_navigation = $obj->desactiver_navigation
 					];
