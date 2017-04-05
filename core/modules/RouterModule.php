@@ -88,12 +88,26 @@
 			
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
-					$test_module = ChaineCaractere::FindInString($url, $obj->url);
-					
-					if ($test_module === true) {
+					if ($this->getTestUrlExist($url, $obj->url) === true) {
 						return true;
 					}
 				}
+			}
+			
+			return false;
+		}
+		
+		/**
+		 * @param $url
+		 * @param $url_test
+		 * @return bool
+		 */
+		private function getTestUrlExist($url, $url_test) {
+			$test_module = ChaineCaractere::FindInString($url_test, $url);
+			$test_module_1 = ChaineCaractere::FindInString($url_test, explode("/", $url)[0]);
+			
+			if ($test_module === true || $test_module_1 == true) {
+				return true;
 			}
 			
 			return false;
