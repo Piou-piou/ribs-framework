@@ -294,6 +294,7 @@
 			$this->select_champ = [];
 			$this->champs = [];
 			$this->value = [];
+			$this->values = [];
 			$this->champs_where = [];
 			$this->value_where = [];
 			$this->conditions = [];
