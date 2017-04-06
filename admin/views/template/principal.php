@@ -17,7 +17,7 @@
 	</head>
 	<?=\core\HTML\flashmessage\FlashMessage::getFlash(); ?>
 	<body>
-		<nav class="menu <?php if (($_SESSION["menu_plie".CLEF_SITE] == "deplie") || (!isset($_SESSION["menu_plie".CLEF_SITE]))):?>active<?php endif; ?>">
+		<nav class="menu <?php if ((!isset($_SESSION["menu_plie".CLEF_SITE])) || ($_SESSION["menu_plie".CLEF_SITE] == "deplie")):?>active<?php endif; ?>">
 			<div class="titre">
 				<h1>Ribs V0.1</h1>
 				<i class="fa fa-bars"></i>
