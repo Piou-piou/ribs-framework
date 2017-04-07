@@ -92,6 +92,8 @@
 				"redirect_page" => $redirect,
 				"bloc_editable" => $obj->bloc_editable
 			]]);
+			App::setTitle($this->balise_title);
+			App::setDescription($this->meta_description);
 		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<title><?=$arr_page["app"]["contenus"]["balise_title"]?></title>
+		<title><?=\core\App::getTitle()?></title>
 		<meta charset="utf-8">
 		<meta name="description" content="<?=$arr_page["app"]["contenus"]["meta_description"]?>">
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
