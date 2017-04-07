@@ -4,7 +4,7 @@
 
 	class Navigation {
 		private $last_ordre;
-		
+		private $all_page = "1 OR affiche = 0";
 		
 		
 		//-------------------------- BUILDER ----------------------------------------------------------------------------//
@@ -18,9 +18,10 @@
 
 			if ($no_module === null) {
 				$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
+				$this->all_page = 1;
 			}
 			else {
-				$query = $dbc->select()->from("navigation")->where("ID_page", " IS NOT ", "NULL", "", true)->orderBy("ordre")->get();
+				$query = $dbc->select()->from("page")->get();
 			}
 
 			if (count($query) > 0) {
@@ -39,7 +40,7 @@
 		 */
 		private function getLienNavigationPage($id_page) {
 			$dbc = App::getDb();
-			$query = $dbc->select()->from("navigation")->from("page")->where("page.ID_page", "=", $id_page, "AND")->where("page.affiche", "=", 1, "AND")->where("page.parent", "=", 0, "AND")->where("navigation.ID_page", "=", "page.ID_page", "", true)->get();
+			$query = $dbc->select()->from("page")->where("page.ID_page", "=", $id_page, "AND")->where("page.parent", "=", 0, "AND")->where("page.affiche", "=", $this->all_page, "", true)->get();
 			if (is_array($query) && (count($query) > 0)) {
 				$nav = [];
 				foreach ($query as $obj) {
