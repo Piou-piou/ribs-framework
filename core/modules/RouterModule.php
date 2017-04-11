@@ -105,8 +105,9 @@
 		private function getTestUrlExist($url, $url_test) {
 			$test_module = ChaineCaractere::FindInString($url_test, $url);
 			$test_module_1 = ChaineCaractere::FindInString($url_test, explode("/", $url)[0]);
+			$test_module_2 = ChaineCaractere::FindInString($url_test, explode("/", $url)[1]);
 			
-			if ($test_module === true || $test_module_1 === true) {
+			if ($test_module === true || $test_module_1 === true || $test_module_2 === true) {
 				return true;
 			}
 			
