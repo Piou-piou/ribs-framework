@@ -18,7 +18,7 @@
 
 			if ($no_module === null) {
 				$query = $dbc->select()->from("navigation")->orderBy("ordre")->get();
-				$this->all_page = 1;
+				$this->all_page = "1";
 			}
 			else {
 				$query = $dbc->select()->from("page")->get();
