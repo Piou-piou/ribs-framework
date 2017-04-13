@@ -7,6 +7,7 @@
 	{% include("gestion-droits-acces/header.html") %}
 	<link rel="stylesheet" type="text/css" href="{{LIBSWEBROOT}}checkbox/css/style.css">
 	<script src="{{LIBSWEBROOT}}checkbox/js/anim.js"></script>
+	{% include("gestion-droits-acces/js/check_droit.html") %}
 	
 	<div class="inner">
 		<div class="contenu modifier-contenu gestion-comptes configuration">
@@ -24,8 +25,8 @@
 							<td>{{ i.droit_acces }}</td>
 							<td>{{ i.nom_module }}</td>
 							<td>
-								<label for="required_connection" class="checkbox-perso switched">
-									<input type="checkbox" class="valide" id="required_connection" {% if i.droit_acces in app.droit_acces_liste %}checked{%   endif %}>
+								<label for="droit-{{ i.id_droit_acces }}-{{ app.id_liste }}" class="checkbox-perso switched">
+									<input type="checkbox" class="valide" id="droit-{{ i.id_droit_acces }}-{{ app.id_liste }}" {% if i.droit_acces in app.droit_acces_liste %}checked{%   endif %}>
 								</label>
 							</td>
 						</tr>

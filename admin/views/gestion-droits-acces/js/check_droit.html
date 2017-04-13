@@ -1,0 +1,26 @@
+<script>
+	$(document).ready(function() {
+	    //to check or uncheck a comment
+		$(".valide").click(function () {
+		    var id_string = $(this).attr("id");
+		    var id_droit = id_string.split("-")[1];
+		    var id_liste = id_string.split("-")[2];
+		    var checked = 0;
+			
+		    if ($(this).is(":checked")) {
+		        checked = 1;
+		    }
+      
+		    console.log("id_droit ->"+id_droit+" ---- id_liste ->"+id_liste+" ----- checked"+checked);
+		    
+            $.ajax({
+                method: 'POST',
+                url:"{{ADMWEBROOT}}controller/core/admin/droitsacces/gestion_liste/edit_right.php",
+                data: "id_droit="+id_droit+"&id_liste="+id_liste+"&checked="+checked,
+                success: function(data){
+                    $("body").prepend(data);
+                }
+            });
+        });
+	});
+</script>

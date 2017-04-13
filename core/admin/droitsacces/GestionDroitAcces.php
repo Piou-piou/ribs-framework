@@ -2,7 +2,8 @@
 	namespace core\admin\droitsacces;
 
 	use core\App;
-
+	use core\HTML\flashmessage\FlashMessage;
+	
 	class GestionDroitAcces extends DroitAcces {
 		use GetDetailListeAcces;
 		
@@ -96,9 +97,10 @@
 				foreach ($query as $obj) {
 					$values[] = $this->getNomDroitAcces($obj->ID_droit_acces);
 					$nom_liste = $obj->nom_liste;
+					$id_liste = $obj->ID_liste_droit_acces;
 				}
 				
-				App::setValues(["droit_acces_liste" => $values, "nom_liste" => $nom_liste]);
+				App::setValues(["droit_acces_liste" => $values, "nom_liste" => $nom_liste, "id_liste" => $id_liste]);
 				$this->getAllDroitAcces();
 			}
 		}
@@ -107,5 +109,20 @@
 
 
 		//-------------------------- SETTER ----------------------------------------------------------------------------//
+		public function setGestionDroitAccesListe($id_droit_acces, $id_liste, $activer) {
+			$dbc = App::getDb();
+			
+			if ($activer == 1) {
+				$dbc->insert("ID_droit_acces", $id_droit_acces)->insert("ID_liste_droit_acces", $id_liste)
+					->into("liaison_liste_droit")->set();
+				FlashMessage::setFlash("Le droit d'acces a bien été ajouté", "success");
+				return true;
+			}
+			
+			$dbc->delete()->from("liaison_liste_droit")->where("ID_liste_droit_acces", "=", $id_liste, "AND")
+				->where("ID_droit_acces", "=", $id_droit_acces)->del();
+			FlashMessage::setFlash("Le droit d'acces a bien été supprimé", "success");
+			return true;
+		}
 		//-------------------------- FIN SETTER ----------------------------------------------------------------------------//
 	}
