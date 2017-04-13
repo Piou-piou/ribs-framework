@@ -13,6 +13,10 @@
 	if ($page == "gestion-droits-acces/index" || $page == "gestion-droits-acces/liste-droits-acces") {
 		$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
 	}
+	if ($page == "gestion-droits-acces/modifier-liste") {
+		$gestion_droit_acces = new \core\admin\droitsacces\GestionDroitAcces();
+		$gestion_droit_acces->getDroiAccesListe($_GET['id_liste']);
+	}
 	//---------- fin partie pour les droite d'acces ------------------------------------//
 
 
@@ -105,3 +109,7 @@
 	}
 	//---------- fin actif pour la configuration des bases de données ------------------------------------//
 	$arr_admin = \core\App::getValues();
+	
+	echo("<pre>");
+	print_r($arr_admin);
+	echo("</pre>");
