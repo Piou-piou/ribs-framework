@@ -95,9 +95,10 @@
 			if (count($query) > 0) {
 				foreach ($query as $obj) {
 					$values[] = $this->getNomDroitAcces($obj->ID_droit_acces);
+					$nom_liste = $obj->nom_liste;
 				}
 				
-				App::setValues(["droit_acces_liste" => $values]);
+				App::setValues(["droit_acces_liste" => $values, "nom_liste" => $nom_liste]);
 				$this->getAllDroitAcces();
 			}
 		}
