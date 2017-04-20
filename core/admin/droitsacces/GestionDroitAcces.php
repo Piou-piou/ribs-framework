@@ -69,6 +69,7 @@
 			$query = $dbc->select()->from("droit_acces")->get();
 			
 			if (count($query) > 0) {
+				$values = [];
 				foreach ($query as $obj) {
 					$values[] = [
 						"id_droit_acces" => $obj->ID_droit_acces,
@@ -94,6 +95,7 @@
 				->get();
 			
 			if (count($query) > 0) {
+				$values = []; $nom_liste = ""; $id_liste = "";
 				foreach ($query as $obj) {
 					$values[] = $this->getNomDroitAcces($obj->ID_droit_acces);
 					$nom_liste = $obj->nom_liste;
