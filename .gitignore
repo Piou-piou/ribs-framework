@@ -17,3 +17,4 @@ modules/*
 node_modules/*
 .ftppass
 path_srv.json
+app/views/template/css/style\.css

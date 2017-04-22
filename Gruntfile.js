@@ -32,6 +32,19 @@ module.exports = function(grunt) {
                 localSep: '/',
                 concurrency: 4,
                 progress: true
+            },
+            'ribs-server': {
+                auth: {
+                    host: path_srv.server.dest.host,
+                    port: 22,
+                    authKey: 'key1'
+                },
+                src: path_srv.local.path_ribs_css,
+                dest: path_srv.server.dest.path_ribs_css,
+                serverSep: '/',
+                localSep: '/',
+                concurrency: 4,
+                progress: true
             }
         },
         sync: {
@@ -50,6 +63,10 @@ module.exports = function(grunt) {
             styles: {
                 files: '**/*.scss', // tous les fichiers Sass de n'importe quel dossier
                 tasks: ['sass:dist']
+            },
+            css: {
+                files: "**/*.css",
+                tasks: ["sftp-deploy:ribs-server"]
             }
         }
 	});
