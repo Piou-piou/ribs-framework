@@ -124,6 +124,17 @@
 
 			$mailer->send($mail);
 		}
+		
+		/**
+		 * @return int
+		 */
+		public static function getIdIdentite() {
+			if (isset($_SESSION['idlogin'.CLEF_SITE])) {
+				return $_SESSION['idlogin'.CLEF_SITE];
+			}
+			
+			return 0;
+		}
 		//-------------------------- FIN GETTER ----------------------------------------------------------------------------//
     
     
